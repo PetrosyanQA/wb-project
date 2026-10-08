@@ -34,11 +34,13 @@ HOSTS = {
     "feedbacks":   "https://feedbacks-api.wildberries.ru",
     "marketplace": "https://marketplace-api.wildberries.ru",
     "discounts":   "https://discounts-prices-api.wildberries.ru",
+    "finance":     "https://finance-api.wildberries.ru",
 }
 
 # Նվազագույն ինտերվալ վայրկյաններով (WB-ի պաշտոնական լիմիտներից, պահուստով)
 THROTTLE = {
     "/api/v1/tariffs/commission": 62.0,
+    "/api/finance/v1/sales-reports": 62.0,
     "/api/v1/tariffs/box": 1.5,
     "/api/v1/tariffs/pallet": 1.5,
     "/api/v1/tariffs/return": 1.5,
@@ -80,12 +82,12 @@ def rub(value: Any, default: float = 0.0) -> float:
 
 HOST_BIT = {                       # ո՞ր բիթն է պետք տվյալ հոսթի համար
     "content": 1, "analytics": 2, "discounts": 3, "marketplace": 4,
-    "stats": 5, "advert": 6, "feedbacks": 7, "supplies": 10,
+    "stats": 5, "advert": 6, "feedbacks": 7, "supplies": 10, "finance": 13,
     "common": None,                # Тарифы՝ աշխատում է ցանկացած թոքենով
 }
 BIT_NAME = {1: "Контент", 2: "Аналитика", 3: "Цены и скидки", 4: "Маркетплейс",
             5: "Статистика", 6: "Продвижение", 7: "Вопросы и отзывы",
-            10: "Поставки", 30: "только чтение"}
+            10: "Поставки", 13: "Финансы", 30: "только чтение"}
 
 
 def token_bits(token: str) -> dict:
@@ -284,11 +286,17 @@ class WBSellerClient:
                             {"dateFrom": date_from, "flag": flag}, ttl=3600)
 
     def report_detail_by_period(self, date_from: str, date_to: str, rrdid: int = 0,
-                                limit: int = 100_000) -> Any:
-        """Ֆինանսական դետալիզացիա (реализация) — փաստացի ծախսերի ճշմարտությունը."""
-        return self.request("GET", "stats", "/api/v5/supplier/reportDetailByPeriod",
-                            {"dateFrom": date_from, "dateTo": date_to, "rrdid": rrdid,
-                             "limit": limit}, ttl=3600)
+                                limit: int = 100_000, period: str = "weekly") -> Any:
+        """Детализация отчётов реализации — фактические удержания WB.
+
+        Старый GET statistics-api /api/v5/supplier/reportDetailByPeriod отключён (release-notes id=498, 404 с
+        2026-10). Новый: POST finance-api /api/finance/v1/sales-reports/detailed, токен категории «Финансы»
+        (бит 13), 1 запрос/мин. Поля в camelCase: retailPriceWithDisc, retailAmount, spp, commissionPercent,
+        ppvzSalesCommission, vw, vwNds, forPay, docTypeName, nmId.
+        """
+        return self.request("POST", "finance", "/api/finance/v1/sales-reports/detailed",
+                            body={"dateFrom": date_from, "dateTo": date_to, "limit": limit,
+                                  "rrdId": rrdid, "period": period}, ttl=3600)
 
     # ---------------------------------------------------------- АНАЛИТИКА
     def funnel(self, nm_ids: list[int], d1: str, d2: str, page: int = 1,

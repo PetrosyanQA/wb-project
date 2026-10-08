@@ -31,7 +31,7 @@ def weekly(cards, field, weeks=(1, 2, 3, 4, 6, 8, 12, 16)):
 
 def main() -> None:
     C = json.load(open(CARDS, encoding="utf-8"))
-    G = {"win": [c for c in C if c["group"] == "win"], "ctl": [c for c in C if c["group"] == "ctl"]}
+    G = {g: [c for c in C if c["group"] == g] for g in ("win", "mid", "ctl")}
     S = {"n": {g: len(v) for g, v in G.items()},
          "n_by_niche": {f"{n} {nm}": {g: sum(1 for c in G[g] if c["niche"] == n) for g in G}
                         for n, nm in sorted({(c["niche"], c["niche_name"]) for c in C})}}

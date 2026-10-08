@@ -7,7 +7,9 @@
 Выборка из products500 июля 2026 (top-500 по выручке) каждой ниши:
   новичок  = sku_first_date 2025-06-01 … 2026-05-31;
   победитель = новичок в top-100 по выручке (до 12, не больше 3 карточек на продавца);
-  контроль = новичок с рангом ≥ 250 и минимальными продажами (до 8).
+  контроль = новичок с рангом ≥ 250 и минимальными продажами (до 8) — почти все переоценены (2–7 × медианы);
+  середняк = новичок с рангом ≥ 150, цена покупателя 0.6–1.6 × медианы top-100, минимальные продажи (до 6) —
+             «честная» группа сравнения при НОРМАЛЬНОЙ цене (добавлена 2026-10-08).
 ⚠️ Карточки совсем без продаж в top-500 не попадают → контроль = «слабые новички», а не «нулевые».
 Ряд by_period: d1 = старт − 14 дней (не раньше 2025-05-15), d2 = вчера. Готовые ряды (777 daily_long, 2486 top100/daily)
 переиспользуются, если покрывают старт карточки.
@@ -19,6 +21,7 @@ import collections
 import datetime as dt
 import json
 import os
+import statistics as st
 import sys
 import time
 
@@ -27,7 +30,7 @@ RUN = "2026-10-08"
 D2 = "2026-10-07"
 OUT = f"data/raw/saleflow/{RUN}/launch"
 SAMPLE = f"data/processed/launch_sample_{RUN}.json"
-NICHES = {
+NICHES = {  # имя + products500 по умолчанию (снимок июля 2026); новые ниши — просто добавить id, путь найдёт datastore
     777: ("Держатели в авто", "data/raw/saleflow/2026-10-05/dna/777/products500_2026-07.json"),
     2486: ("Катушки рыболовные", "data/raw/saleflow/2026-10-07/strategy2486/products500_2026-07.json"),
     249: ("Эспандеры", "data/raw/saleflow/2026-10-07/newcomer/249/products500_2026-07.json"),
@@ -36,9 +39,21 @@ NICHES = {
     1520: ("Ключницы", "data/raw/saleflow/2026-10-05/dna/1520/products500_2026-07.json"),
     731: ("Игрушки для животных", "data/raw/saleflow/2026-10-05/dna/731/products500_2026-07.json"),
 }
-OLD_DAILY = ["data/raw/saleflow/2026-10-07/strategy777/daily_long/{}.json",
-             "data/raw/saleflow/2026-10-07/strategy2486/top100/daily/{}.json"]
-N_WIN, N_CTL, PER_SELLER = 12, 8, 3
+
+
+def products_path(niche: int) -> str:
+    """Закреплённый снимок, если он есть; иначе самый свежий products500 ниши из каталога (src.datastore)."""
+    pinned = NICHES.get(niche, (None, None))[1]
+    if pinned and os.path.exists(pinned):
+        return pinned
+    from src.datastore import latest
+    p = latest(niche, "products500")
+    if not p:
+        raise SystemExit(f"нет products500 для ниши {niche} — сначала собрать (strategy_collect --step core)")
+    return p
+
+
+N_WIN, N_CTL, N_MID, PER_SELLER = 12, 8, 6, 3
 
 
 def rows(path: str) -> list[dict]:
@@ -53,16 +68,21 @@ def is_new(p: dict) -> bool:
 
 def select() -> dict:
     out = {}
-    for n, (name, path) in NICHES.items():
-        R = rows(path)
+    for n, (name, _) in NICHES.items():
+        R = rows(products_path(n))
         win, per = [], collections.Counter()
         for p in R[:100]:
             if is_new(p) and per[p.get("seller")] < PER_SELLER and len(win) < N_WIN:
                 win.append(p); per[p.get("seller")] += 1
         ctl = sorted([p for p in R[250:] if is_new(p)], key=lambda p: p.get("sales") or 0)[:N_CTL]
+        p50 = st.median([p["final_price_average"] for p in R[:100] if p.get("final_price_average")])
+        taken = {p["id"] for p in win + ctl}
+        mid = sorted([p for p in R[150:] if is_new(p) and p["id"] not in taken and p.get("final_price_average")
+                      and 0.6 <= p["final_price_average"] / p50 <= 1.6], key=lambda p: p.get("sales") or 0)[:N_MID]
         rank = {p["id"]: i + 1 for i, p in enumerate(R)}
-        out[n] = {"name": name, "win": [slim(p, rank) for p in win], "ctl": [slim(p, rank) for p in ctl]}
-        print(f"{n} {name}: победителей {len(win)}, контроль {len(ctl)}")
+        out[n] = {"name": name, "win": [slim(p, rank) for p in win], "ctl": [slim(p, rank) for p in ctl],
+                  "mid": [slim(p, rank) for p in mid]}
+        print(f"{n} {name}: победителей {len(win)}, контроль {len(ctl)}, середняков {len(mid)}")
     os.makedirs(os.path.dirname(SAMPLE), exist_ok=True)
     json.dump(out, open(SAMPLE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("→", SAMPLE)
@@ -75,13 +95,12 @@ def slim(p: dict, rank: dict) -> dict:
 
 
 def existing(sku: int, start: str) -> str | None:
-    """Готовый ряд годится, если начинается не позже старта карточки."""
-    for pat in OLD_DAILY:
-        f = pat.format(sku)
-        if os.path.exists(f):
-            d = json.load(open(f, encoding="utf-8"))
-            if d and min(r["data"] for r in d) <= start:
-                return f
+    """Готовый ряд (любой сбор из каталога) годится, если начинается не позже старта карточки."""
+    from src.datastore import daily_files
+    for f in daily_files(sku):
+        d = json.load(open(f, encoding="utf-8"))
+        if isinstance(d, list) and d and min(r["data"] for r in d if isinstance(r, dict) and r.get("data")) <= start:
+            return f
     return None
 
 
@@ -92,7 +111,7 @@ def series_path(niche: int, sku: int) -> str:
 def todo(sample: dict) -> list[tuple[str, dict]]:
     L = []
     for n, s in sample.items():
-        for p in s["win"] + s["ctl"]:
+        for p in s["win"] + s["ctl"] + s.get("mid", []):
             start = p["sku_first_date"][:10]
             if existing(p["id"], start) or os.path.exists(series_path(int(n), p["id"])):
                 continue

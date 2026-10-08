@@ -312,6 +312,13 @@ python3 -m src.saleflow ingest - --tool items --note "Дом/Хранение 30
   дописывать причину в INDEX; `src/export_pdf.py` находит их и в архиве.
 - `wb_algorithm/` — как работает алгоритм WB по данным (`python -m src.wb_algo`) + маркетинг-калькулятор 777
   (`python -m src.marketing777`). Новые выводы об алгоритме дописывать туда, в «Փոփոխությունների պատմություն».
+- `src/MODULES.md` — карта модулей (рабочие / исследование / снимки / архив). Тесты: `python -m unittest discover -s tests` —
+  запускать после любых правок расчётов.
+- Сопровождение: `wb_watch commission` (ежемесячно), `fresh_collect --watch` + `competitor_watch`, `weekly_report`, `ledger`,
+  `backup` (еженедельно; задачи в «Scheduled»). Saleflow с 2026-08 отдаёт неполные продажи/остатки — использовать ≤ 2026-07-31.
+- Финотчёт WB: старый `/api/v5/supplier/reportDetailByPeriod` отключён → `finance-api /api/finance/v1/sales-reports/detailed`
+  (токен категории «Финансы», бит 13).
+- Git: коммитить код/конфиги/md-отчёты; `.env`, `.mcp.json`, `data/raw` — никогда.
 - `docs/DATA_CATALOG.md` — что сохранено по каждой нише. После нового сбора: `python -m src.catalog`.
 - В новом коде брать данные через `src/datastore.py` (`files(777, "daily")`, `latest(777, "products500")`,
   `daily(sku)`), а не жёсткими путями. Сырые файлы в `data/raw/saleflow/<дата>/…` не перемещать — на них ссылается старый код.

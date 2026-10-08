@@ -204,16 +204,16 @@ def events(rows: list[dict]) -> dict:
 
 def main() -> None:
     sample = json.load(open(SAMPLE, encoding="utf-8"))
-    from src.launch_collect import NICHES, rows as prod_rows
+    from src.launch_collect import products_path, rows as prod_rows
     cards = []
     for n, s in sample.items():
         n = int(n)
-        P = [p for p in prod_rows(NICHES[n][1]) if p.get("final_price_average")]
+        P = [p for p in prod_rows(products_path(n)) if p.get("final_price_average")]
         pr = sorted(p["final_price_average"] for p in P)
         p25 = pr[len(pr) // 4] if pr else None
         p50_top = med([p["final_price_average"] for p in P[:100]])       # медиана цены покупателя top-100 ниши
-        for grp in ("win", "ctl"):
-            for p in s[grp]:
+        for grp in ("win", "ctl", "mid"):
+            for p in s.get(grp, []):
                 rows = load(n, p)
                 if not rows:
                     continue

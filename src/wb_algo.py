@@ -52,8 +52,14 @@ def panel() -> dict[int, dict]:
     return {k: v for k, v in best.items() if len(v["rows"]) >= 30}
 
 
-# ── 1. Драйверы: OLS с фиксированным эффектом карточки (demeaning), без numpy ──────────────────────────────
+# ── 1. Драйверы: OLS с фиксированным эффектом карточки (demeaning); numpy, иначе Гаусс ──────────────────────────────
 def ols(X: list[list[float]], y: list[float]) -> list[float] | None:
+    try:                                                   # быстрый путь (numpy в requirements.txt)
+        import numpy as np
+        b, *_ = np.linalg.lstsq(np.asarray(X, float), np.asarray(y, float), rcond=None)
+        return [float(v) for v in b]
+    except ImportError:
+        pass
     k = len(X[0])
     A = [[sum(X[i][a] * X[i][b] for i in range(len(X))) for b in range(k)] for a in range(k)]
     v = [sum(X[i][a] * y[i] for i in range(len(X))) for a in range(k)]
