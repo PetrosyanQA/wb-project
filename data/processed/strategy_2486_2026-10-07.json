@@ -1,0 +1,5749 @@
+{
+ "niche": 2486,
+ "name": "Катушки рыболовные",
+ "run": "2026-10-07",
+ "overview": {
+  "rev_30d": 158771075,
+  "sales_30d": 113200,
+  "rev_90d": 561302034,
+  "sales_90d": 407612,
+  "sellers_total": 2969,
+  "sellers_with_sells": 650,
+  "items": 121627,
+  "items_with_sells": 6553,
+  "aov": 1403,
+  "rev_12m": 1715725266,
+  "sales_12m": 1240656,
+  "sales_12m_prev": 780135,
+  "yoy_12m_sales": 59.0,
+  "peak_month": "06",
+  "trough_month": "01",
+  "peak_cur": "2026-06",
+  "peak_prev": "2025-06",
+  "trough_to_peak_pct": 44,
+  "yoy_peak_sales": 53.7,
+  "yoy_peak_rev": 19.5,
+  "yoy_jul_sales": 14.2,
+  "yoy_h1_sales": 47.5,
+  "yoy_jul_sellers_ws": 10.9,
+  "yoy_jul_items_ws": 30.1,
+  "method_break": {
+   "2025-08": [
+    97219,
+    0,
+    4446,
+    558
+   ],
+   "2025-09": [
+    101668,
+    113271,
+    6672,
+    708
+   ],
+   "2025-10": [
+    94787,
+    79617,
+    9923,
+    830
+   ]
+  },
+  "season_index": {
+   "01": 66,
+   "02": 81,
+   "03": 93,
+   "04": 117,
+   "05": 141,
+   "06": 149,
+   "07": 125,
+   "08": 114,
+   "09": 95,
+   "10": 83,
+   "11": 72,
+   "12": 70
+  },
+  "series": {
+   "2024-09": [
+    59677,
+    72.8,
+    3489,
+    447,
+    0
+   ],
+   "2024-10": [
+    46515,
+    60.3,
+    3340,
+    465,
+    0
+   ],
+   "2024-11": [
+    36175,
+    47.3,
+    3178,
+    437,
+    0
+   ],
+   "2024-12": [
+    39878,
+    51.8,
+    3114,
+    464,
+    0
+   ],
+   "2025-01": [
+    37103,
+    52.1,
+    2888,
+    442,
+    0
+   ],
+   "2025-02": [
+    48917,
+    66.8,
+    3140,
+    427,
+    0
+   ],
+   "2025-03": [
+    65867,
+    86.1,
+    3716,
+    458,
+    0
+   ],
+   "2025-04": [
+    80702,
+    102.4,
+    3467,
+    432,
+    0
+   ],
+   "2025-05": [
+    99016,
+    128.7,
+    4538,
+    527,
+    0
+   ],
+   "2025-06": [
+    99845,
+    172.8,
+    5041,
+    566,
+    0
+   ],
+   "2025-07": [
+    99135,
+    135.1,
+    5036,
+    586,
+    0
+   ],
+   "2025-08": [
+    97219,
+    130.8,
+    4446,
+    558,
+    0
+   ],
+   "2025-09": [
+    101668,
+    129.9,
+    6672,
+    708,
+    113271
+   ],
+   "2025-10": [
+    94787,
+    132.8,
+    9923,
+    830,
+    79617
+   ],
+   "2025-11": [
+    86364,
+    111.8,
+    8609,
+    793,
+    71306
+   ],
+   "2025-12": [
+    78208,
+    107.6,
+    7677,
+    756,
+    64475
+   ],
+   "2026-01": [
+    74852,
+    99.1,
+    7279,
+    727,
+    54107
+   ],
+   "2026-02": [
+    89330,
+    127.0,
+    8232,
+    789,
+    68821
+   ],
+   "2026-03": [
+    92146,
+    140.2,
+    8205,
+    790,
+    68981
+   ],
+   "2026-04": [
+    118470,
+    175.2,
+    8875,
+    823,
+    88345
+   ],
+   "2026-05": [
+    140914,
+    196.1,
+    9092,
+    823,
+    106735
+   ],
+   "2026-06": [
+    153498,
+    206.4,
+    9104,
+    818,
+    129458
+   ],
+   "2026-07": [
+    113200,
+    158.8,
+    6553,
+    650,
+    109928
+   ],
+   "2026-08": [
+    57352,
+    102.4,
+    6766,
+    754,
+    57134
+   ],
+   "2026-09": [
+    30658,
+    50.3,
+    5265,
+    691,
+    31451
+   ]
+  }
+ },
+ "top20": [
+  {
+   "n": 1,
+   "id": 213920076,
+   "name": "Катушка для спиннинга рыбалки безынерционная 3000",
+   "brand": "Admiral original",
+   "seller": "ИП Лаврущева Марина Александровна",
+   "type": "спиннинговая 2000–4000 · металл+запасная шпуля",
+   "revenue": 2050131,
+   "sales": 1598,
+   "price": 1458,
+   "old_price": 3100,
+   "discount": 53,
+   "spp": 30,
+   "buyer_price": 1283,
+   "rating": 5,
+   "comments": 3091,
+   "pics": 12,
+   "video": true,
+   "rich": true,
+   "pos_med": 90.5,
+   "ads_pct": 95,
+   "oos_days": 0,
+   "start": "2024-02-29",
+   "growth": 2.76
+  },
+  {
+   "n": 2,
+   "id": 504109542,
+   "name": "Катушка для спиннинга рыболовная безынерционная для рыбалки",
+   "brand": "YOUNIC",
+   "seller": "ООО Синай",
+   "type": "спиннинговая 2000–4000 · металл",
+   "revenue": 1627406,
+   "sales": 2175,
+   "price": 990,
+   "old_price": 2000,
+   "discount": 51,
+   "spp": 32,
+   "buyer_price": 748,
+   "rating": 5,
+   "comments": 1252,
+   "pics": 7,
+   "video": false,
+   "rich": false,
+   "pos_med": 132,
+   "ads_pct": 5,
+   "oos_days": 62,
+   "start": "2025-09-04",
+   "growth": 87.0
+  },
+  {
+   "n": 3,
+   "id": 385598503,
+   "name": "Катушка для спиннинга 3000 для рыбалки фидера",
+   "brand": "Ну ты и Щука",
+   "seller": "ИП Фомичев Д С",
+   "type": "спиннинговая 2000–4000 · металл",
+   "revenue": 1571949,
+   "sales": 682,
+   "price": 2697,
+   "old_price": 6600,
+   "discount": 60,
+   "spp": 33,
+   "buyer_price": 2305,
+   "rating": 5,
+   "comments": 2584,
+   "pics": 14,
+   "video": true,
+   "rich": true,
+   "pos_med": 62.5,
+   "ads_pct": 100,
+   "oos_days": 0,
+   "start": "2025-04-16",
+   "growth": 1.18
+  },
+  {
+   "n": 4,
+   "id": 497533536,
+   "name": "Катушка для рыбалки карповая LASER GA",
+   "brand": "Kaida",
+   "seller": "ИП Камалетдинов Р Х",
+   "type": "с байтраннером (фидер/карп) · металл+запасная шпуля",
+   "revenue": 1482335,
+   "sales": 543,
+   "price": 3218,
+   "old_price": 4990,
+   "discount": 36,
+   "spp": 33,
+   "buyer_price": 2730,
+   "rating": 5,
+   "comments": 490,
+   "pics": 6,
+   "video": true,
+   "rich": false,
+   "pos_med": 85.5,
+   "ads_pct": 88,
+   "oos_days": 11,
+   "start": "2025-08-26",
+   "growth": 1.32
+  },
+  {
+   "n": 5,
+   "id": 162194496,
+   "name": "Катушка для спиннинга для рыбалки кобра фидерная",
+   "brand": "FISHWISH",
+   "seller": "ИП Рудаков А С",
+   "type": "спиннинговая 2000–4000 · запасная шпуля+набор 2+ шт",
+   "revenue": 1279592,
+   "sales": 1353,
+   "price": 1204,
+   "old_price": 1700,
+   "discount": 30,
+   "spp": 32,
+   "buyer_price": 946,
+   "rating": 5,
+   "comments": 20290,
+   "pics": 15,
+   "video": false,
+   "rich": true,
+   "pos_med": 55,
+   "ads_pct": 98,
+   "oos_days": 2,
+   "start": "2023-05-25",
+   "growth": 0.73
+  },
+  {
+   "n": 6,
+   "id": 234416359,
+   "name": "Катушка карповая фидерная 8000",
+   "brand": "Fish&Master",
+   "seller": "ИП Адамов А Н",
+   "type": "с байтраннером (фидер/карп) · металл+запасная шпуля",
+   "revenue": 1253010,
+   "sales": 445,
+   "price": 3595,
+   "old_price": 7786,
+   "discount": 54,
+   "spp": 33,
+   "buyer_price": 2816,
+   "rating": 5,
+   "comments": 291,
+   "pics": 12,
+   "video": false,
+   "rich": true,
+   "pos_med": 93,
+   "ads_pct": 79,
+   "oos_days": 2,
+   "start": "2024-06-03",
+   "growth": 5.86
+  },
+  {
+   "n": 7,
+   "id": 449646548,
+   "name": "Катушка для фидера на удочку с байтранером 6000",
+   "brand": "Fish&Master",
+   "seller": "ИП Адамов А Н",
+   "type": "с байтраннером (фидер/карп) · металл+запасная шпуля",
+   "revenue": 1165731,
+   "sales": 695,
+   "price": 1799,
+   "old_price": 6425,
+   "discount": 72,
+   "spp": 33,
+   "buyer_price": 1677,
+   "rating": 5,
+   "comments": 494,
+   "pics": 13,
+   "video": false,
+   "rich": true,
+   "pos_med": 103.5,
+   "ads_pct": 92,
+   "oos_days": 6,
+   "start": "2025-06-26",
+   "growth": 15.11
+  },
+  {
+   "n": 8,
+   "id": 337482401,
+   "name": "Катушка для спиннинга безынерционная для рыбалки 7000",
+   "brand": "GadgetON",
+   "seller": "ИП Гурбанов Р Р",
+   "type": "крупная 5000+ (фидер/карп/море) · металл",
+   "revenue": 1055018,
+   "sales": 772,
+   "price": 1591,
+   "old_price": 5550,
+   "discount": 72,
+   "spp": 31,
+   "buyer_price": 1367,
+   "rating": 5,
+   "comments": 1182,
+   "pics": 19,
+   "video": true,
+   "rich": false,
+   "pos_med": 124,
+   "ads_pct": 79,
+   "oos_days": 0,
+   "start": "2025-04-11",
+   "growth": 1.64
+  },
+  {
+   "n": 9,
+   "id": 808295786,
+   "name": "Катушка рыболовная SA3000 для спиннинга и фидера",
+   "brand": "SOKUDO",
+   "seller": "Лёвочкин Максим Павлович",
+   "type": "спиннинговая 2000–4000 · запасная шпуля",
+   "revenue": 1035306,
+   "sales": 792,
+   "price": 1536,
+   "old_price": 5950,
+   "discount": 75,
+   "spp": 31,
+   "buyer_price": 1307,
+   "rating": 5,
+   "comments": 12114,
+   "pics": 12,
+   "video": true,
+   "rich": true,
+   "pos_med": 116.0,
+   "ads_pct": 98,
+   "oos_days": 0,
+   "start": "2026-02-20",
+   "growth": 2.86
+  },
+  {
+   "n": 10,
+   "id": 214048955,
+   "name": "Катушка для спиннинга рыбалки безынерционная 4000",
+   "brand": "Admiral original",
+   "seller": "ИП Лаврущева Марина Александровна",
+   "type": "спиннинговая 2000–4000 · металл+запасная шпуля",
+   "revenue": 1024904,
+   "sales": 784,
+   "price": 1415,
+   "old_price": 3200,
+   "discount": 56,
+   "spp": 31,
+   "buyer_price": 1307,
+   "rating": 5,
+   "comments": 1841,
+   "pics": 12,
+   "video": true,
+   "rich": true,
+   "pos_med": 107,
+   "ads_pct": 93,
+   "oos_days": 0,
+   "start": "2024-03-02",
+   "growth": 3.04
+  },
+  {
+   "n": 11,
+   "id": 331083189,
+   "name": "Катушка для фидера на удочку с байтранером 5000",
+   "brand": "Fish&Master",
+   "seller": "ИП Адамов А Н",
+   "type": "с байтраннером (фидер/карп) · металл+запасная шпуля",
+   "revenue": 968972,
+   "sales": 643,
+   "price": 1797,
+   "old_price": 6090,
+   "discount": 71,
+   "spp": 32,
+   "buyer_price": 1507,
+   "rating": 5,
+   "comments": 686,
+   "pics": 14,
+   "video": false,
+   "rich": true,
+   "pos_med": 90.5,
+   "ads_pct": 94,
+   "oos_days": 6,
+   "start": "2025-03-10",
+   "growth": 8.81
+  },
+  {
+   "n": 12,
+   "id": 225655939,
+   "name": "Катушка рыболовная для спиннинга фидера",
+   "brand": "Kaida",
+   "seller": "ИП Шарафутдинов Р К",
+   "type": "с байтраннером (фидер/карп) · металл+запасная шпуля",
+   "revenue": 930452,
+   "sales": 584,
+   "price": 1594,
+   "old_price": 4000,
+   "discount": 61,
+   "spp": 32,
+   "buyer_price": 1593,
+   "rating": 5,
+   "comments": 1528,
+   "pics": 6,
+   "video": true,
+   "rich": false,
+   "pos_med": 78.5,
+   "ads_pct": 88,
+   "oos_days": 0,
+   "start": "2024-04-26",
+   "growth": 1.53
+  },
+  {
+   "n": 13,
+   "id": 174474573,
+   "name": "Катушка для спиннинга Prestige 800 микроджиг, мормышинг",
+   "brand": "DAYO",
+   "seller": "Рыбалкамаркет",
+   "type": "ультралайт ≤ 1500 · металл",
+   "revenue": 908586,
+   "sales": 537,
+   "price": 1947,
+   "old_price": 5535,
+   "discount": 65,
+   "spp": 32,
+   "buyer_price": 1692,
+   "rating": 5,
+   "comments": 1906,
+   "pics": 4,
+   "video": false,
+   "rich": false,
+   "pos_med": 107,
+   "ads_pct": 89,
+   "oos_days": 6,
+   "start": "2023-08-26",
+   "growth": 1.58
+  },
+  {
+   "n": 14,
+   "id": 230972823,
+   "name": "Катушка для спиннинга рыболовная безынерционная для рыбалки",
+   "brand": "My fishing store",
+   "seller": "ИП Бондарева М Д",
+   "type": "спиннинговая 2000–4000 · металл+запасная шпуля+леска/шнур",
+   "revenue": 884344,
+   "sales": 903,
+   "price": 1240,
+   "old_price": 2500,
+   "discount": 51,
+   "spp": 33,
+   "buyer_price": 979,
+   "rating": 5,
+   "comments": 7709,
+   "pics": 11,
+   "video": true,
+   "rich": true,
+   "pos_med": 89.0,
+   "ads_pct": 75,
+   "oos_days": 0,
+   "start": "2024-05-23",
+   "growth": 0.74
+  },
+  {
+   "n": 15,
+   "id": 154772145,
+   "name": "Катушка для спиннинга безынерционная 3000",
+   "brand": "Рыбак Всемогущий",
+   "seller": "ИП Цыганова А Я",
+   "type": "спиннинговая 2000–4000 · леска/шнур",
+   "revenue": 869865,
+   "sales": 577,
+   "price": 1864,
+   "old_price": 7868,
+   "discount": 77,
+   "spp": 32,
+   "buyer_price": 1508,
+   "rating": 5,
+   "comments": 852,
+   "pics": 17,
+   "video": true,
+   "rich": true,
+   "pos_med": 109.5,
+   "ads_pct": 67,
+   "oos_days": 28,
+   "start": "2023-04-05",
+   "growth": 1.92
+  },
+  {
+   "n": 16,
+   "id": 98975716,
+   "name": "Катушка для спиннинга безынерционная 3000",
+   "brand": "Рыбак Всемогущий",
+   "seller": "ИП Цыганова А Я",
+   "type": "спиннинговая 2000–4000 · запасная шпуля",
+   "revenue": 843784,
+   "sales": 398,
+   "price": 2753,
+   "old_price": 12035,
+   "discount": 78,
+   "spp": 33,
+   "buyer_price": 2120,
+   "rating": 5,
+   "comments": 7042,
+   "pics": 18,
+   "video": false,
+   "rich": true,
+   "pos_med": 111,
+   "ads_pct": 87,
+   "oos_days": 22,
+   "start": "2022-09-10",
+   "growth": 1.73
+  },
+  {
+   "n": 17,
+   "id": 208462270,
+   "name": "Катушка для спиннинга для рыбалки и фидера с байтранером",
+   "brand": "Kaida",
+   "seller": "ИП Рудаков А С",
+   "type": "с байтраннером (фидер/карп)",
+   "revenue": 839887,
+   "sales": 663,
+   "price": 1514,
+   "old_price": 4002,
+   "discount": 63,
+   "spp": 31,
+   "buyer_price": 1267,
+   "rating": 5,
+   "comments": 6304,
+   "pics": 12,
+   "video": false,
+   "rich": false,
+   "pos_med": 84.0,
+   "ads_pct": 99,
+   "oos_days": 2,
+   "start": "2024-02-06",
+   "growth": 1.35
+  },
+  {
+   "n": 18,
+   "id": 874089316,
+   "name": "Катушка для спиннинга для рыбалки 3000",
+   "brand": "Менабикс",
+   "seller": "ИП Воронин И А",
+   "type": "спиннинговая 2000–4000 · запасная шпуля",
+   "revenue": 836555,
+   "sales": 839,
+   "price": 1235,
+   "old_price": 4001,
+   "discount": 70,
+   "spp": 33,
+   "buyer_price": 997,
+   "rating": 5,
+   "comments": 516,
+   "pics": 9,
+   "video": false,
+   "rich": false,
+   "pos_med": 46.5,
+   "ads_pct": 67,
+   "oos_days": 30,
+   "start": "2026-04-08",
+   "growth": 9.64
+  },
+  {
+   "n": 19,
+   "id": 228779629,
+   "name": "Катушка для спиннинга безынерционная для рыбалки 3000",
+   "brand": "Skiico",
+   "seller": "ИП Менский Эдуард Анатольевич",
+   "type": "спиннинговая 2000–4000 · металл",
+   "revenue": 833240,
+   "sales": 646,
+   "price": 1510,
+   "old_price": 5230,
+   "discount": 72,
+   "spp": 30,
+   "buyer_price": 1290,
+   "rating": 5,
+   "comments": 1673,
+   "pics": 19,
+   "video": true,
+   "rich": true,
+   "pos_med": 99.5,
+   "ads_pct": 93,
+   "oos_days": 0,
+   "start": "2024-05-13",
+   "growth": 1.32
+  },
+  {
+   "n": 20,
+   "id": 390175351,
+   "name": "Катушка для спиннинга рыболовная безынерционная для рыбалки",
+   "brand": "",
+   "seller": "ИП Чепурных М А",
+   "type": "спиннинговая 2000–4000 · металл+запасная шпуля+леска/шнур",
+   "revenue": 827812,
+   "sales": 347,
+   "price": 2753,
+   "old_price": 8603,
+   "discount": 68,
+   "spp": 33,
+   "buyer_price": 2386,
+   "rating": 5,
+   "comments": 7236,
+   "pics": 28,
+   "video": true,
+   "rich": true,
+   "pos_med": 141.0,
+   "ads_pct": 100,
+   "oos_days": 3,
+   "start": "2025-04-14",
+   "growth": 2.03
+  }
+ ],
+ "keywords": {
+  "top50": [
+   {
+    "q": "катушка для спиннинга",
+    "cluster": "катушка для спиннинга",
+    "freq_year": 1053293,
+    "freq_30d": 72137,
+    "results": 28770,
+    "items_niche": 1992,
+    "deficit": 2.51,
+    "freq_peak": 134760,
+    "results_peak": 33271,
+    "deficit_peak": 4.05
+   },
+   {
+    "q": "рыбалка",
+    "cluster": "рыбалка",
+    "freq_year": 577857,
+    "freq_30d": 32007,
+    "results": 11171,
+    "items_niche": 426,
+    "deficit": 2.87,
+    "freq_peak": 58018,
+    "results_peak": 12449,
+    "deficit_peak": 4.66
+   },
+   {
+    "q": "удочка",
+    "cluster": "удочка",
+    "freq_year": 471038,
+    "freq_30d": 42806,
+    "results": 11428,
+    "items_niche": 77,
+    "deficit": 3.75,
+    "freq_peak": 90030,
+    "results_peak": 15327,
+    "deficit_peak": 5.87
+   },
+   {
+    "q": "катана",
+    "cluster": "katana",
+    "freq_year": 449939,
+    "freq_30d": 22069,
+    "results": 6582,
+    "items_niche": 20,
+    "deficit": 3.35,
+    "freq_peak": 30731,
+    "results_peak": 5629,
+    "deficit_peak": 5.46
+   },
+   {
+    "q": "для рыбалки",
+    "cluster": "рыболовные",
+    "freq_year": 412838,
+    "freq_30d": 21187,
+    "results": 8510,
+    "items_niche": 380,
+    "deficit": 2.49,
+    "freq_peak": 47780,
+    "results_peak": 11816,
+    "deficit_peak": 4.04
+   },
+   {
+    "q": "катушка",
+    "cluster": "катушка",
+    "freq_year": 377881,
+    "freq_30d": 31464,
+    "results": 16428,
+    "items_niche": 2290,
+    "deficit": 1.92,
+    "freq_peak": 45846,
+    "results_peak": 13388,
+    "deficit_peak": 3.42
+   },
+   {
+    "q": "катушка для рыбалки",
+    "cluster": "катушка для рыбалки",
+    "freq_year": 322232,
+    "freq_30d": 14187,
+    "results": 740,
+    "items_niche": 2442,
+    "deficit": 19.17,
+    "freq_peak": 48452,
+    "results_peak": 1438,
+    "deficit_peak": 33.69
+   },
+   {
+    "q": "набор для рыбалки",
+    "cluster": "рыболовные наборы",
+    "freq_year": 235545,
+    "freq_30d": 13726,
+    "results": 5951,
+    "items_niche": 66,
+    "deficit": 2.31,
+    "freq_peak": 31017,
+    "results_peak": 7814,
+    "deficit_peak": 3.97
+   },
+   {
+    "q": "все для рыбалки",
+    "cluster": "все для рыбалки",
+    "freq_year": 193739,
+    "freq_30d": 9790,
+    "results": 2900,
+    "items_niche": 43,
+    "deficit": 3.38,
+    "freq_peak": 25143,
+    "results_peak": 3443,
+    "deficit_peak": 7.3
+   },
+   {
+    "q": "фидер",
+    "cluster": "фидер",
+    "freq_year": 178278,
+    "freq_30d": 10946,
+    "results": 4658,
+    "items_niche": 252,
+    "deficit": 2.35,
+    "freq_peak": 27623,
+    "results_peak": 7372,
+    "deficit_peak": 3.75
+   },
+   {
+    "q": "всё для рыбалки",
+    "cluster": "все для рыбалки",
+    "freq_year": 172934,
+    "freq_30d": 9790,
+    "results": 2900,
+    "items_niche": 444,
+    "deficit": 3.38,
+    "freq_peak": 25243,
+    "results_peak": 3443,
+    "deficit_peak": 7.33
+   },
+   {
+    "q": "рыболовные снасти",
+    "cluster": "рыбные снасти",
+    "freq_year": 155264,
+    "freq_30d": 8483,
+    "results": 1234,
+    "items_niche": 176,
+    "deficit": 6.87,
+    "freq_peak": 16941,
+    "results_peak": 1510,
+    "deficit_peak": 11.22
+   },
+   {
+    "q": "катушка для фидера",
+    "cluster": "катушка для фидера",
+    "freq_year": 148499,
+    "freq_30d": 8133,
+    "results": 1796,
+    "items_niche": 1609,
+    "deficit": 4.53,
+    "freq_peak": 23329,
+    "results_peak": 4126,
+    "deficit_peak": 5.65
+   },
+   {
+    "q": "удочки",
+    "cluster": "удочка",
+    "freq_year": 143858,
+    "freq_30d": 12586,
+    "results": 2182,
+    "items_niche": 75,
+    "deficit": 5.77,
+    "freq_peak": 23987,
+    "results_peak": 2750,
+    "deficit_peak": 8.72
+   },
+   {
+    "q": "катушка для спиннинга 3000",
+    "cluster": "катушка для спиннинга 3000",
+    "freq_year": 137561,
+    "freq_30d": 15740,
+    "results": 7006,
+    "items_niche": 1194,
+    "deficit": 2.25,
+    "freq_peak": 12748,
+    "results_peak": 3259,
+    "deficit_peak": 3.91
+   },
+   {
+    "q": "рыболовный набор",
+    "cluster": "рыболовные наборы",
+    "freq_year": 122556,
+    "freq_30d": 7550,
+    "results": 1972,
+    "items_niche": 68,
+    "deficit": 3.83,
+    "freq_peak": 14998,
+    "results_peak": 2255,
+    "deficit_peak": 6.65
+   },
+   {
+    "q": "снасти для рыбалки",
+    "cluster": "рыбные снасти",
+    "freq_year": 103311,
+    "freq_30d": 6852,
+    "results": 1712,
+    "items_niche": 178,
+    "deficit": 4.0,
+    "freq_peak": 13909,
+    "results_peak": 2445,
+    "deficit_peak": 5.69
+   },
+   {
+    "q": "для рыбалки подарок мужчине",
+    "cluster": "для рыбалки подарок мужчине",
+    "freq_year": 101636,
+    "freq_30d": 3506,
+    "results": 209,
+    "items_niche": 95,
+    "deficit": 16.78,
+    "freq_peak": 5242,
+    "results_peak": 227,
+    "deficit_peak": 23.09
+   },
+   {
+    "q": "мультипликаторная катушка",
+    "cluster": "катушка мультипликаторная",
+    "freq_year": 99412,
+    "freq_30d": 10587,
+    "results": 5584,
+    "items_niche": 1072,
+    "deficit": 1.9,
+    "freq_peak": 10821,
+    "results_peak": 3292,
+    "deficit_peak": 3.29
+   },
+   {
+    "q": "катушка для зимней рыбалки",
+    "cluster": "катушка для зимней рыбалки",
+    "freq_year": 93506,
+    "freq_30d": 1130,
+    "results": 443,
+    "items_niche": 1654,
+    "deficit": 2.55,
+    "freq_peak": 416,
+    "results_peak": 113,
+    "deficit_peak": 3.68
+   },
+   {
+    "q": "катушка для спиннинга 2000",
+    "cluster": "катушка для спиннинга 2000",
+    "freq_year": 74182,
+    "freq_30d": 6438,
+    "results": 3182,
+    "items_niche": 1134,
+    "deficit": 2.02,
+    "freq_peak": 6968,
+    "results_peak": 2155,
+    "deficit_peak": 3.23
+   },
+   {
+    "q": "зимняя рыбалка",
+    "cluster": "зимняя рыбалка",
+    "freq_year": 73778,
+    "freq_30d": 3152,
+    "results": 1658,
+    "items_niche": 120,
+    "deficit": 1.9,
+    "freq_peak": 393,
+    "results_peak": 124,
+    "deficit_peak": 3.17
+   },
+   {
+    "q": "рыбалка летняя",
+    "cluster": "летняя рыбалка",
+    "freq_year": 65288,
+    "freq_30d": 1124,
+    "results": 108,
+    "items_niche": 274,
+    "deficit": 10.41,
+    "freq_peak": 6659,
+    "results_peak": 787,
+    "deficit_peak": 8.46
+   },
+   {
+    "q": "удочка для рыбалки летняя",
+    "cluster": "рыболовные удочки летние",
+    "freq_year": 60360,
+    "freq_30d": 78,
+    "results": 165,
+    "items_niche": 20,
+    "deficit": 0.47,
+    "freq_peak": 2573,
+    "results_peak": 590,
+    "deficit_peak": 4.36
+   },
+   {
+    "q": "катушка мультипликаторная",
+    "cluster": "катушка мультипликаторная",
+    "freq_year": 59795,
+    "freq_30d": 5661,
+    "results": 3200,
+    "items_niche": 1070,
+    "deficit": 1.77,
+    "freq_peak": 6980,
+    "results_peak": 2598,
+    "deficit_peak": 2.69
+   },
+   {
+    "q": "удочки для рыбалки летние",
+    "cluster": "рыболовные удочки летние",
+    "freq_year": 59778,
+    "freq_30d": 854,
+    "results": 37,
+    "items_niche": 30,
+    "deficit": 23.08,
+    "freq_peak": 12752,
+    "results_peak": 147,
+    "deficit_peak": 86.75
+   },
+   {
+    "q": "товары для рыбалки",
+    "cluster": "рыболовные товары",
+    "freq_year": 56547,
+    "freq_30d": 2740,
+    "results": 1155,
+    "items_niche": 306,
+    "deficit": 2.37,
+    "freq_peak": 5694,
+    "results_peak": 1146,
+    "deficit_peak": 4.97
+   },
+   {
+    "q": "для рыбалки товары",
+    "cluster": "рыболовные товары",
+    "freq_year": 54526,
+    "freq_30d": 3287,
+    "results": 8,
+    "items_niche": 306,
+    "deficit": 410.88,
+    "freq_peak": 8658,
+    "results_peak": 8,
+    "deficit_peak": 1082.25
+   },
+   {
+    "q": "катушка для удочки",
+    "cluster": "катушка для спиннинга",
+    "freq_year": 54335,
+    "freq_30d": 2528,
+    "results": 6168,
+    "items_niche": 1991,
+    "deficit": 0.41,
+    "freq_peak": 10698,
+    "results_peak": 14786,
+    "deficit_peak": 0.72
+   },
+   {
+    "q": "для зимней рыбалки",
+    "cluster": "для зимней рыбалки",
+    "freq_year": 53881,
+    "freq_30d": 1884,
+    "results": 1050,
+    "items_niche": 132,
+    "deficit": 1.79,
+    "freq_peak": 285,
+    "results_peak": 93,
+    "deficit_peak": 3.06
+   },
+   {
+    "q": "катушки",
+    "cluster": "катушка",
+    "freq_year": 53565,
+    "freq_30d": 4490,
+    "results": 1449,
+    "items_niche": 2274,
+    "deficit": 3.1,
+    "freq_peak": 5566,
+    "results_peak": 915,
+    "deficit_peak": 6.08
+   },
+   {
+    "q": "катушка для спиннинга 4000",
+    "cluster": "катушка для спиннинга 4000",
+    "freq_year": 52788,
+    "freq_30d": 4420,
+    "results": 2912,
+    "items_niche": 1278,
+    "deficit": 1.52,
+    "freq_peak": 5768,
+    "results_peak": 1959,
+    "deficit_peak": 2.94
+   },
+   {
+    "q": "фидер для рыбалки",
+    "cluster": "фидер рыболовный",
+    "freq_year": 50656,
+    "freq_30d": 2608,
+    "results": 980,
+    "items_niche": 162,
+    "deficit": 2.66,
+    "freq_peak": 9840,
+    "results_peak": 1771,
+    "deficit_peak": 5.56
+   },
+   {
+    "q": "все для рыбалки летом",
+    "cluster": "все для рыбалки летом",
+    "freq_year": 49489,
+    "freq_30d": 1312,
+    "results": 3,
+    "items_niche": 256,
+    "deficit": 437.33,
+    "freq_peak": 6557,
+    "results_peak": 2,
+    "deficit_peak": 3278.5
+   },
+   {
+    "q": "рыбак всемогущий",
+    "cluster": "рыбак всемогущий",
+    "freq_year": 47874,
+    "freq_30d": 6586,
+    "results": 2068,
+    "items_niche": 71,
+    "deficit": 3.18,
+    "freq_peak": 10396,
+    "results_peak": 854,
+    "deficit_peak": 12.17
+   },
+   {
+    "q": "катушки для спиннинга",
+    "cluster": "катушка для спиннинга",
+    "freq_year": 47580,
+    "freq_30d": 3460,
+    "results": 820,
+    "items_niche": 1986,
+    "deficit": 4.22,
+    "freq_peak": 4063,
+    "results_peak": 670,
+    "deficit_peak": 6.06
+   },
+   {
+    "q": "катушка для спиннинга 5000",
+    "cluster": "катушка для спиннинга 5000",
+    "freq_year": 45127,
+    "freq_30d": 3689,
+    "results": 1376,
+    "items_niche": 972,
+    "deficit": 2.68,
+    "freq_peak": 4908,
+    "results_peak": 1054,
+    "deficit_peak": 4.66
+   },
+   {
+    "q": "катушка на спиннинг",
+    "cluster": "катушка для спиннинга",
+    "freq_year": 44912,
+    "freq_30d": 3371,
+    "results": 3047,
+    "items_niche": 1956,
+    "deficit": 1.11,
+    "freq_peak": 6163,
+    "results_peak": 6183,
+    "deficit_peak": 1.0
+   },
+   {
+    "q": "ультралайт",
+    "cluster": "ультралайт",
+    "freq_year": 44777,
+    "freq_30d": 4173,
+    "results": 1955,
+    "items_niche": 99,
+    "deficit": 2.13,
+    "freq_peak": 5959,
+    "results_peak": 1262,
+    "deficit_peak": 4.72
+   },
+   {
+    "q": "фидерная снасть",
+    "cluster": "фидерные снасти",
+    "freq_year": 44625,
+    "freq_30d": 3036,
+    "results": 159,
+    "items_niche": 79,
+    "deficit": 19.09,
+    "freq_peak": 10236,
+    "results_peak": 223,
+    "deficit_peak": 45.9
+   },
+   {
+    "q": "спиннинг для мормышинга",
+    "cluster": "спиннинг для мормышинга",
+    "freq_year": 41802,
+    "freq_30d": 1911,
+    "results": 1507,
+    "items_niche": 56,
+    "deficit": 1.27,
+    "freq_peak": 4340,
+    "results_peak": 1714,
+    "deficit_peak": 2.53
+   },
+   {
+    "q": "рыболовные товары",
+    "cluster": "рыболовные товары",
+    "freq_year": 41094,
+    "freq_30d": 996,
+    "results": 272,
+    "items_niche": 345,
+    "deficit": 3.66,
+    "freq_peak": 2881,
+    "results_peak": 176,
+    "deficit_peak": 16.37
+   },
+   {
+    "q": "катушка рыболовная",
+    "cluster": "катушка для рыбалки",
+    "freq_year": 40498,
+    "freq_30d": 2245,
+    "results": 3052,
+    "items_niche": 2446,
+    "deficit": 0.74,
+    "freq_peak": 6333,
+    "results_peak": 2954,
+    "deficit_peak": 2.14
+   },
+   {
+    "q": "катушки для рыбалки",
+    "cluster": "катушка для рыбалки",
+    "freq_year": 39970,
+    "freq_30d": 1909,
+    "results": 265,
+    "items_niche": 2440,
+    "deficit": 7.2,
+    "freq_peak": 7230,
+    "results_peak": 506,
+    "deficit_peak": 14.29
+   },
+   {
+    "q": "катушка для спиннинга 1000",
+    "cluster": "катушка для спиннинга 1000",
+    "freq_year": 38540,
+    "freq_30d": 2262,
+    "results": 796,
+    "items_niche": 1095,
+    "deficit": 2.84,
+    "freq_peak": 3224,
+    "results_peak": 468,
+    "deficit_peak": 6.89
+   },
+   {
+    "q": "мормышинг спиннинг",
+    "cluster": "мормышинг спиннинг",
+    "freq_year": 37705,
+    "freq_30d": 3575,
+    "results": 1686,
+    "items_niche": 34,
+    "deficit": 2.12,
+    "freq_peak": 6285,
+    "results_peak": 1302,
+    "deficit_peak": 4.83
+   },
+   {
+    "q": "кастинговый спиннинг",
+    "cluster": "спиннинг",
+    "freq_year": 35928,
+    "freq_30d": 3266,
+    "results": 1248,
+    "items_niche": 129,
+    "deficit": 2.62,
+    "freq_peak": 4322,
+    "results_peak": 1817,
+    "deficit_peak": 2.38
+   },
+   {
+    "q": "катушка карповая",
+    "cluster": "катушка карповая",
+    "freq_year": 35760,
+    "freq_30d": 1987,
+    "results": 1689,
+    "items_niche": 1445,
+    "deficit": 1.18,
+    "freq_peak": 4241,
+    "results_peak": 2921,
+    "deficit_peak": 1.45
+   },
+   {
+    "q": "катушка для спиннинга мультипликаторная",
+    "cluster": "мультипликаторная катушка для спиннинга",
+    "freq_year": 35567,
+    "freq_30d": 3310,
+    "results": 740,
+    "items_niche": 795,
+    "deficit": 4.47,
+    "freq_peak": 4492,
+    "results_peak": 592,
+    "deficit_peak": 7.59
+   },
+   {
+    "q": "катушка кобра",
+    "cluster": "катушка кобра",
+    "freq_year": 35340,
+    "freq_30d": 2472,
+    "results": 848,
+    "items_niche": 668,
+    "deficit": 2.92,
+    "freq_peak": 4444,
+    "results_peak": 881,
+    "deficit_peak": 5.04
+   }
+  ],
+  "gap": [
+   {
+    "q": "катушка для спиннинга мультипликаторная",
+    "cluster": "мультипликаторная катушка для спиннинга",
+    "freq_year": 35567,
+    "freq_30d": 3310,
+    "results": 740,
+    "items_niche": 795,
+    "deficit": 4.47,
+    "freq_peak": 4492,
+    "results_peak": 592,
+    "deficit_peak": 7.59
+   },
+   {
+    "q": "катушка для спиннинга 1000",
+    "cluster": "катушка для спиннинга 1000",
+    "freq_year": 38540,
+    "freq_30d": 2262,
+    "results": 796,
+    "items_niche": 1095,
+    "deficit": 2.84,
+    "freq_peak": 3224,
+    "results_peak": 468,
+    "deficit_peak": 6.89
+   },
+   {
+    "q": "катушка для ультралайта",
+    "cluster": "катушку для ультралайта",
+    "freq_year": 16810,
+    "freq_30d": 1263,
+    "results": 551,
+    "items_niche": 798,
+    "deficit": 2.29,
+    "freq_peak": 2157,
+    "results_peak": 341,
+    "deficit_peak": 6.33
+   },
+   {
+    "q": "катушка для поплавочной удочки",
+    "cluster": "катушка для поплавочной удочки",
+    "freq_year": 14499,
+    "freq_30d": 732,
+    "results": 271,
+    "items_niche": 1176,
+    "deficit": 2.7,
+    "freq_peak": 2448,
+    "results_peak": 389,
+    "deficit_peak": 6.29
+   },
+   {
+    "q": "катушки для спиннинга",
+    "cluster": "катушка для спиннинга",
+    "freq_year": 47580,
+    "freq_30d": 3460,
+    "results": 820,
+    "items_niche": 1986,
+    "deficit": 4.22,
+    "freq_peak": 4063,
+    "results_peak": 670,
+    "deficit_peak": 6.06
+   },
+   {
+    "q": "спиннинг рыбак всемогущий",
+    "cluster": "рыбак всемогущий спиннинг",
+    "freq_year": 11436,
+    "freq_30d": 2548,
+    "results": 936,
+    "items_niche": 35,
+    "deficit": 2.72,
+    "freq_peak": 2620,
+    "results_peak": 440,
+    "deficit_peak": 5.95
+   },
+   {
+    "q": "удочка спиннинг",
+    "cluster": "удочка спиннинг",
+    "freq_year": 21748,
+    "freq_30d": 3234,
+    "results": 611,
+    "items_niche": 98,
+    "deficit": 5.29,
+    "freq_peak": 3389,
+    "results_peak": 586,
+    "deficit_peak": 5.78
+   },
+   {
+    "q": "катушка для фидера 4000",
+    "cluster": "катушка для фидера 4000",
+    "freq_year": 19116,
+    "freq_30d": 1010,
+    "results": 297,
+    "items_niche": 1202,
+    "deficit": 3.4,
+    "freq_peak": 2649,
+    "results_peak": 478,
+    "deficit_peak": 5.54
+   },
+   {
+    "q": "мормышинг спиннинг",
+    "cluster": "мормышинг спиннинг",
+    "freq_year": 37705,
+    "freq_30d": 3575,
+    "results": 1686,
+    "items_niche": 34,
+    "deficit": 2.12,
+    "freq_peak": 6285,
+    "results_peak": 1302,
+    "deficit_peak": 4.83
+   },
+   {
+    "q": "ультралайт",
+    "cluster": "ультралайт",
+    "freq_year": 44777,
+    "freq_30d": 4173,
+    "results": 1955,
+    "items_niche": 99,
+    "deficit": 2.13,
+    "freq_peak": 5959,
+    "results_peak": 1262,
+    "deficit_peak": 4.72
+   },
+   {
+    "q": "катушка для спиннинга 5000",
+    "cluster": "катушка для спиннинга 5000",
+    "freq_year": 45127,
+    "freq_30d": 3689,
+    "results": 1376,
+    "items_niche": 972,
+    "deficit": 2.68,
+    "freq_peak": 4908,
+    "results_peak": 1054,
+    "deficit_peak": 4.66
+   },
+   {
+    "q": "набор для спиннинга",
+    "cluster": "набор для спиннинга",
+    "freq_year": 11182,
+    "freq_30d": 1279,
+    "results": 634,
+    "items_niche": 61,
+    "deficit": 2.02,
+    "freq_peak": 2826,
+    "results_peak": 615,
+    "deficit_peak": 4.6
+   },
+   {
+    "q": "катушка 3000 для спиннинга",
+    "cluster": "катушка для спиннинга 3000",
+    "freq_year": 13312,
+    "freq_30d": 946,
+    "results": 625,
+    "items_niche": 1147,
+    "deficit": 1.51,
+    "freq_peak": 2214,
+    "results_peak": 492,
+    "deficit_peak": 4.5
+   },
+   {
+    "q": "рыбак всемогущий спиннинг",
+    "cluster": "рыбак всемогущий спиннинг",
+    "freq_year": 12426,
+    "freq_30d": 2180,
+    "results": 1398,
+    "items_niche": 35,
+    "deficit": 1.56,
+    "freq_peak": 3027,
+    "results_peak": 692,
+    "deficit_peak": 4.37
+   },
+   {
+    "q": "катушка 2000",
+    "cluster": "катушка 2000",
+    "freq_year": 26803,
+    "freq_30d": 2324,
+    "results": 1508,
+    "items_niche": 1292,
+    "deficit": 1.54,
+    "freq_peak": 3503,
+    "results_peak": 861,
+    "deficit_peak": 4.07
+   },
+   {
+    "q": "катушка для спиннинга",
+    "cluster": "катушка для спиннинга",
+    "freq_year": 1053293,
+    "freq_30d": 72137,
+    "results": 28770,
+    "items_niche": 1992,
+    "deficit": 2.51,
+    "freq_peak": 134760,
+    "results_peak": 33271,
+    "deficit_peak": 4.05
+   },
+   {
+    "q": "катушка для спиннинга 3000",
+    "cluster": "катушка для спиннинга 3000",
+    "freq_year": 137561,
+    "freq_30d": 15740,
+    "results": 7006,
+    "items_niche": 1194,
+    "deficit": 2.25,
+    "freq_peak": 12748,
+    "results_peak": 3259,
+    "deficit_peak": 3.91
+   },
+   {
+    "q": "катушка 3000",
+    "cluster": "катушка 3000",
+    "freq_year": 26613,
+    "freq_30d": 2155,
+    "results": 1561,
+    "items_niche": 1468,
+    "deficit": 1.38,
+    "freq_peak": 3352,
+    "results_peak": 922,
+    "deficit_peak": 3.64
+   },
+   {
+    "q": "спиннинг розовый",
+    "cluster": "спиннинг розовый",
+    "freq_year": 12213,
+    "freq_30d": 1431,
+    "results": 770,
+    "items_niche": 20,
+    "deficit": 1.86,
+    "freq_peak": 2936,
+    "results_peak": 821,
+    "deficit_peak": 3.58
+   },
+   {
+    "q": "катушка для спиннинга ультралайт",
+    "cluster": "катушка для спиннинга ультралайт",
+    "freq_year": 26595,
+    "freq_30d": 2694,
+    "results": 1265,
+    "items_niche": 706,
+    "deficit": 2.13,
+    "freq_peak": 4454,
+    "results_peak": 1255,
+    "deficit_peak": 3.55
+   }
+  ],
+  "n_rel": 2930
+ },
+ "positions": {
+  "213920076": {
+   "катушка ryobi": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 347,
+    "found": 114287
+   },
+   "катушка адмирал": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 316,
+    "found": 114287
+   },
+   "катушка для рыбалки": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 14187,
+    "found": 57277
+   },
+   "катушки": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 4490,
+    "found": 114287
+   },
+   "катушка 1500": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 346,
+    "found": 114287
+   },
+   "катушка shimano": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 2403,
+    "found": 114287
+   },
+   "катушки для рыбалки": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 1909,
+    "found": 57277
+   },
+   "катушки рыболовные": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 407,
+    "found": 57277
+   },
+   "катушка рыболовная": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 2245,
+    "found": 57277
+   },
+   "спиннинговые катушки": {
+    "pos": 8,
+    "org": null,
+    "ad": 8,
+    "freq": 59,
+    "found": 75558
+   },
+   "рыболовные катушки": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 1557,
+    "found": 57277
+   },
+   "катушка": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 31464,
+    "found": 114174
+   },
+   "рыболовная катушка": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 993,
+    "found": 57277
+   },
+   "катушки рыболовные для рыбалки": {
+    "pos": 7,
+    "org": null,
+    "ad": 7,
+    "freq": 0,
+    "found": 129495
+   },
+   "катушки для спиннинга 3000": {
+    "pos": 14,
+    "org": 88,
+    "ad": 5,
+    "freq": 243,
+    "found": 15443
+   },
+   "катушка для рыбалки 3000": {
+    "pos": 22,
+    "org": 135,
+    "ad": 4,
+    "freq": 343,
+    "found": 19314
+   },
+   "катушка на спиннинг 3000": {
+    "pos": 41,
+    "org": 154,
+    "ad": 5,
+    "freq": 518,
+    "found": 15588
+   },
+   "катушка 3000 для спиннинга": {
+    "pos": 40,
+    "org": 160,
+    "ad": 5,
+    "freq": 946,
+    "found": 15588
+   },
+   "подарок рыбаку": {
+    "pos": 48,
+    "org": null,
+    "ad": 48,
+    "freq": 2196,
+    "found": 115737
+   },
+   "подарок для рыбака": {
+    "pos": 48,
+    "org": null,
+    "ad": 48,
+    "freq": 891,
+    "found": 115737
+   },
+   "подарки для рыбака": {
+    "pos": 51,
+    "org": null,
+    "ad": 51,
+    "freq": 65,
+    "found": 151719
+   },
+   "подарки рыбаку": {
+    "pos": 44,
+    "org": null,
+    "ad": 44,
+    "freq": 0,
+    "found": 151719
+   },
+   "рыбаку подарок": {
+    "pos": 47,
+    "org": null,
+    "ad": 47,
+    "freq": 73,
+    "found": 151719
+   },
+   "катушка для фидера 3000": {
+    "pos": 182,
+    "org": 184,
+    "ad": 24,
+    "freq": 480,
+    "found": 5556
+   },
+   "катушка рыболовная 3000": {
+    "pos": 12,
+    "org": 55,
+    "ad": 5,
+    "freq": 290,
+    "found": 19122
+   },
+   "катушка для спиннинга 3000": {
+    "pos": 40,
+    "org": 152,
+    "ad": 5,
+    "freq": 15740,
+    "found": 15588
+   },
+   "катушка спиннинговая": {
+    "pos": 10,
+    "org": 289,
+    "ad": 8,
+    "freq": 478,
+    "found": 56201
+   },
+   "катушка 3000": {
+    "pos": 159,
+    "org": 170,
+    "ad": 30,
+    "freq": 2155,
+    "found": 19585
+   },
+   "удочка фидерная": {
+    "pos": 72,
+    "org": null,
+    "ad": 72,
+    "freq": 567,
+    "found": 33408
+   },
+   "фидерная удочка": {
+    "pos": 74,
+    "org": null,
+    "ad": 74,
+    "freq": 1036,
+    "found": 33408
+   },
+   "катушка для рыбалки безынерционная 3000": {
+    "pos": 73,
+    "org": 73,
+    "ad": null,
+    "freq": 0,
+    "found": 18027
+   },
+   "катушка на спининг": {
+    "pos": 11,
+    "org": 289,
+    "ad": 8,
+    "freq": 1438,
+    "found": 56201
+   },
+   "катушка на спиннинг": {
+    "pos": 11,
+    "org": 289,
+    "ad": 8,
+    "freq": 3371,
+    "found": 56201
+   },
+   "катушка для спининга": {
+    "pos": 11,
+    "org": 289,
+    "ad": 8,
+    "freq": 1944,
+    "found": 56201
+   },
+   "катушка на удочку": {
+    "pos": 11,
+    "org": 289,
+    "ad": 8,
+    "freq": 1051,
+    "found": 56201
+   },
+   "катушка для спиннинга": {
+    "pos": 11,
+    "org": 289,
+    "ad": 8,
+    "freq": 72137,
+    "found": 56201
+   },
+   "катушки для спиннинга": {
+    "pos": 11,
+    "org": 289,
+    "ad": 9,
+    "freq": 3460,
+    "found": 56201
+   },
+   "катушка для удочки": {
+    "pos": 11,
+    "org": 289,
+    "ad": 9,
+    "freq": 2528,
+    "found": 56201
+   },
+   "катушка для спиннинга 3000 металлическая": {
+    "pos": 72,
+    "org": 72,
+    "ad": null,
+    "freq": 0,
+    "found": 8993
+   },
+   "катушка для рыбалки на удочку": {
+    "pos": 90,
+    "org": 106,
+    "ad": 42,
+    "freq": 1271,
+    "found": 33568
+   },
+   "катушки на спиннинг": {
+    "pos": 12,
+    "org": 289,
+    "ad": 8,
+    "freq": 511,
+    "found": 56201
+   },
+   "спиннинговая катушка": {
+    "pos": 11,
+    "org": 289,
+    "ad": 8,
+    "freq": 332,
+    "found": 56201
+   },
+   "фидерная катушка": {
+    "pos": 171,
+    "org": 191,
+    "ad": 72,
+    "freq": 1027,
+    "found": 14012
+   },
+   "катушка на фидер": {
+    "pos": 171,
+    "org": 191,
+    "ad": 72,
+    "freq": 481,
+    "found": 14012
+   },
+   "катушки для фидера": {
+    "pos": 171,
+    "org": 191,
+    "ad": 72,
+    "freq": 729,
+    "found": 14012
+   },
+   "катушка для фидера": {
+    "pos": 171,
+    "org": 191,
+    "ad": 72,
+    "freq": 8133,
+    "found": 14012
+   },
+   "катушка фидерная": {
+    "pos": 171,
+    "org": 191,
+    "ad": 72,
+    "freq": 1189,
+    "found": 14012
+   },
+   "катушка для поплавочной удочки": {
+    "pos": 163,
+    "org": 179,
+    "ad": 26,
+    "freq": 732,
+    "found": 17014
+   },
+   "катушка для рыбалки на удочку поплавочную": {
+    "pos": 165,
+    "org": 182,
+    "ad": 26,
+    "freq": 489,
+    "found": 17014
+   },
+   "катушка для удочки поплавочной": {
+    "pos": 165,
+    "org": 182,
+    "ad": 26,
+    "freq": 824,
+    "found": 17014
+   },
+   "шпуля для катушки": {
+    "pos": 130,
+    "org": 168,
+    "ad": 36,
+    "freq": 434,
+    "found": 34034
+   },
+   "катушка для рыбалки безынерционная": {
+    "pos": 166,
+    "org": 231,
+    "ad": 38,
+    "freq": 778,
+    "found": 33536
+   },
+   "для рыбы": {
+    "pos": 208,
+    "org": null,
+    "ad": 208,
+    "freq": 570,
+    "found": 111287
+   },
+   "рыболовная катушка для спиннинга": {
+    "pos": 217,
+    "org": 251,
+    "ad": 57,
+    "freq": 724,
+    "found": 33497
+   },
+   "катушка безынерционная": {
+    "pos": 176,
+    "org": 281,
+    "ad": 18,
+    "freq": 1270,
+    "found": 56631
+   },
+   "для спиннинга аксессуары": {
+    "pos": 116,
+    "org": 275,
+    "ad": 36,
+    "freq": 330,
+    "found": 34841
+   },
+   "катушка для спиннинга с леской": {
+    "pos": 45,
+    "org": null,
+    "ad": 45,
+    "freq": 376,
+    "found": 25883
+   },
+   "набор для рыбака": {
+    "pos": 184,
+    "org": null,
+    "ad": 184,
+    "freq": 737,
+    "found": 113051
+   },
+   "леска для катушки": {
+    "pos": 60,
+    "org": null,
+    "ad": 60,
+    "freq": 134,
+    "found": 177351
+   },
+   "рыболовные товары аксессуары": {
+    "pos": 18,
+    "org": null,
+    "ad": 18,
+    "freq": 0,
+    "found": 487676
+   },
+   "рыбацкий набор": {
+    "pos": 184,
+    "org": null,
+    "ad": 184,
+    "freq": 1001,
+    "found": 113051
+   },
+   "удочка на карпа": {
+    "pos": 90,
+    "org": null,
+    "ad": 90,
+    "freq": 329,
+    "found": 14877
+   },
+   "рыбалка фидер катушка": {
+    "pos": 32,
+    "org": null,
+    "ad": 32,
+    "freq": 0,
+    "found": 24366
+   },
+   "для рыбака подарок": {
+    "pos": 48,
+    "org": null,
+    "ad": 48,
+    "freq": 112,
+    "found": 151719
+   },
+   "аксессуары для рыбалки летней": {
+    "pos": 186,
+    "org": null,
+    "ad": 186,
+    "freq": 117,
+    "found": 54512
+   },
+   "все для рыбалки летом": {
+    "pos": 166,
+    "org": null,
+    "ad": 166,
+    "freq": 1580,
+    "found": 35220
+   },
+   "катушка для рыбалки с леской": {
+    "pos": 38,
+    "org": null,
+    "ad": 38,
+    "freq": 51,
+    "found": 70989
+   },
+   "катушка для карпового удилища": {
+    "pos": 39,
+    "org": null,
+    "ad": 39,
+    "freq": 192,
+    "found": 16516
+   },
+   "удилище карповое": {
+    "pos": 65,
+    "org": null,
+    "ad": 65,
+    "freq": 1950,
+    "found": 56093
+   },
+   "фидерные катушки": {
+    "pos": 40,
+    "org": null,
+    "ad": 40,
+    "freq": 175,
+    "found": 20665
+   },
+   "катушка карповая": {
+    "pos": 46,
+    "org": null,
+    "ad": 46,
+    "freq": 2190,
+    "found": 17880
+   },
+   "рыболовные товары": {
+    "pos": 209,
+    "org": null,
+    "ad": 209,
+    "freq": 837,
+    "found": 120107
+   },
+   "рыболовные товары спининги": {
+    "pos": 65,
+    "org": null,
+    "ad": 65,
+    "freq": 0,
+    "found": 551202
+   },
+   "рыболовный набор подарочный летний": {
+    "pos": 213,
+    "org": null,
+    "ad": 213,
+    "freq": 0,
+    "found": 32000
+   },
+   "удочка для фидера": {
+    "pos": 54,
+    "org": null,
+    "ad": 54,
+    "freq": 0,
+    "found": 69731
+   },
+   "катушка безынерционная для спиннинга": {
+    "pos": 34,
+    "org": null,
+    "ad": 34,
+    "freq": 0,
+    "found": 51524
+   },
+   "катушка рыболовная безынерционная": {
+    "pos": 23,
+    "org": null,
+    "ad": 23,
+    "freq": 234,
+    "found": 48413
+   },
+   "котушка": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 353,
+    "found": 113166
+   },
+   "катушка с леской": {
+    "pos": 104,
+    "org": null,
+    "ad": 104,
+    "freq": 689,
+    "found": 32680
+   },
+   "катушка рыболовная для спиннинга": {
+    "pos": 32,
+    "org": null,
+    "ad": 32,
+    "freq": 0,
+    "found": 96828
+   },
+   "удилище на карпа": {
+    "pos": 60,
+    "org": null,
+    "ad": 60,
+    "freq": 114,
+    "found": 67484
+   },
+   "адмирал": {
+    "pos": 121,
+    "org": null,
+    "ad": 121,
+    "freq": 1634,
+    "found": 18839
+   },
+   "рыбак": {
+    "pos": 46,
+    "org": null,
+    "ad": 46,
+    "freq": 504,
+    "found": 115523
+   },
+   "рибана": {
+    "pos": 272,
+    "org": null,
+    "ad": 272,
+    "freq": 1192,
+    "found": 10996
+   },
+   "катушка 200": {
+    "pos": 59,
+    "org": null,
+    "ad": 59,
+    "freq": 343,
+    "found": 25800
+   },
+   "охота товары": {
+    "pos": 196,
+    "org": null,
+    "ad": 196,
+    "freq": 546,
+    "found": 115176
+   },
+   "катушка рыболовная для удочки": {
+    "pos": 84,
+    "org": 84,
+    "ad": null,
+    "freq": 0,
+    "found": 108546
+   },
+   "товары для рыбалки летом": {
+    "pos": 226,
+    "org": null,
+    "ad": 226,
+    "freq": 482,
+    "found": 116730
+   },
+   "для рыбака": {
+    "pos": 193,
+    "org": null,
+    "ad": 193,
+    "freq": 603,
+    "found": 38504
+   },
+   "катушка для карповой рыбалки": {
+    "pos": 40,
+    "org": null,
+    "ad": 40,
+    "freq": 0,
+    "found": 21707
+   },
+   "удочки летняя рыбалки с катушкой": {
+    "pos": 69,
+    "org": null,
+    "ad": 69,
+    "freq": 0,
+    "found": 44748
+   },
+   "катушка безынерционная 3000": {
+    "pos": 169,
+    "org": 207,
+    "ad": 19,
+    "freq": 252,
+    "found": 17559
+   },
+   "катушка рыболовная для фидера": {
+    "pos": 32,
+    "org": null,
+    "ad": 32,
+    "freq": 0,
+    "found": 24366
+   },
+   "катушка для удочки безынерционная": {
+    "pos": 26,
+    "org": null,
+    "ad": 26,
+    "freq": 121,
+    "found": 37437
+   },
+   "рыбалка летняя аксессуары": {
+    "pos": 65,
+    "org": null,
+    "ad": 65,
+    "freq": 803,
+    "found": 32785
+   },
+   "удочка карповая": {
+    "pos": 89,
+    "org": null,
+    "ad": 89,
+    "freq": 422,
+    "found": 14877
+   },
+   "удочка спортивный товар": {
+    "pos": 63,
+    "org": null,
+    "ad": 63,
+    "freq": 0,
+    "found": 410933
+   },
+   "штуки для рыбалки": {
+    "pos": 281,
+    "org": null,
+    "ad": 281,
+    "freq": 761,
+    "found": 37385
+   },
+   "карповые удилища": {
+    "pos": 67,
+    "org": null,
+    "ad": 67,
+    "freq": 1143,
+    "found": 56093
+   },
+   "охота и рыбалка аксессуары": {
+    "pos": 87,
+    "org": null,
+    "ad": 87,
+    "freq": 0,
+    "found": 1239323
+   },
+   "катушка для фидерной удочки": {
+    "pos": 66,
+    "org": null,
+    "ad": 66,
+    "freq": 0,
+    "found": 20685
+   },
+   "купить рыболовную катушку": {
+    "pos": 8,
+    "org": null,
+    "ad": 8,
+    "freq": 0,
+    "found": 127286
+   },
+   "товары для рыбалки": {
+    "pos": 245,
+    "org": null,
+    "ad": 245,
+    "freq": 2874,
+    "found": 119931
+   },
+   "карповое удилище": {
+    "pos": 66,
+    "org": null,
+    "ad": 66,
+    "freq": 7580,
+    "found": 56093
+   },
+   "катушка на удочку поплавочную": {
+    "pos": 195,
+    "org": 195,
+    "ad": null,
+    "freq": 312,
+    "found": 13845
+   },
+   "карповые катушки": {
+    "pos": 48,
+    "org": null,
+    "ad": 48,
+    "freq": 560,
+    "found": 17880
+   },
+   "катушка для спиннинга 3000 безынерционная": {
+    "pos": 153,
+    "org": 153,
+    "ad": null,
+    "freq": 299,
+    "found": 10351
+   },
+   "катушка спиннинговая 3000": {
+    "pos": 10,
+    "org": 79,
+    "ad": 5,
+    "freq": 146,
+    "found": 15376
+   },
+   "рыбаков": {
+    "pos": 44,
+    "org": null,
+    "ad": 44,
+    "freq": 0,
+    "found": 395857
+   },
+   "рыбаку": {
+    "pos": 33,
+    "org": null,
+    "ad": 33,
+    "freq": 303,
+    "found": 115523
+   },
+   "все для рыбалки фидерной": {
+    "pos": 160,
+    "org": null,
+    "ad": 160,
+    "freq": 472,
+    "found": 34037
+   },
+   "для охоты аксессуары": {
+    "pos": 270,
+    "org": null,
+    "ad": 270,
+    "freq": 325,
+    "found": 35762
+   },
+   "карповая удочка": {
+    "pos": 88,
+    "org": null,
+    "ad": 88,
+    "freq": 535,
+    "found": 14877
+   },
+   "аксессуары для охоты": {
+    "pos": 254,
+    "org": null,
+    "ad": 254,
+    "freq": 295,
+    "found": 35762
+   },
+   "рыбалка летняя": {
+    "pos": 156,
+    "org": null,
+    "ad": 156,
+    "freq": 1756,
+    "found": 114969
+   },
+   "рыболовные товары со скидкой": {
+    "pos": 49,
+    "org": null,
+    "ad": 49,
+    "freq": 0,
+    "found": 602020
+   },
+   "рыбалка катушка": {
+    "pos": 8,
+    "org": null,
+    "ad": 8,
+    "freq": 0,
+    "found": 127286
+   },
+   "рыбалка аксессуары": {
+    "pos": 99,
+    "org": null,
+    "ad": 99,
+    "freq": 360,
+    "found": 34986
+   },
+   "карповая катушка": {
+    "pos": 48,
+    "org": null,
+    "ad": 48,
+    "freq": 1555,
+    "found": 17880
+   },
+   "распродажа рыбалка": {
+    "pos": 34,
+    "org": null,
+    "ad": 34,
+    "freq": 0,
+    "found": 3765697
+   },
+   "охота и рыбалка": {
+    "pos": 235,
+    "org": null,
+    "ad": 235,
+    "freq": 633,
+    "found": 289054
+   },
+   "катушки на удочку для рыбалки": {
+    "pos": 62,
+    "org": 84,
+    "ad": 16,
+    "freq": 0,
+    "found": 108546
+   },
+   "для рыбалки товары": {
+    "pos": 245,
+    "org": null,
+    "ad": 245,
+    "freq": 3480,
+    "found": 119931
+   },
+   "катушка с леской для рыбалки": {
+    "pos": 55,
+    "org": null,
+    "ad": 55,
+    "freq": 362,
+    "found": 32280
+   },
+   "рыбалка на спиннинг": {
+    "pos": 182,
+    "org": null,
+    "ad": 182,
+    "freq": 345,
+    "found": 35390
+   },
+   "спиннинг удилище": {
+    "pos": 178,
+    "org": null,
+    "ad": 178,
+    "freq": 296,
+    "found": 80603
+   },
+   "для спиннинга": {
+    "pos": 147,
+    "org": null,
+    "ad": 147,
+    "freq": 547,
+    "found": 35799
+   },
+   "все для рыбалки подарок": {
+    "pos": 97,
+    "org": null,
+    "ad": 97,
+    "freq": 170,
+    "found": 35332
+   },
+   "катушка рыболовная карповая": {
+    "pos": 40,
+    "org": null,
+    "ad": 40,
+    "freq": 41,
+    "found": 21707
+   },
+   "катушка рыболовная фидерная": {
+    "pos": 32,
+    "org": null,
+    "ad": 32,
+    "freq": 0,
+    "found": 24366
+   },
+   "удилище спиннинг": {
+    "pos": 96,
+    "org": null,
+    "ad": 96,
+    "freq": 196,
+    "found": 404141
+   }
+  },
+  "228779629": {
+   "катушки для спиннинга 3000": {
+    "pos": 10,
+    "org": 44,
+    "ad": 6,
+    "freq": 243,
+    "found": 15443
+   },
+   "фидерная катушка": {
+    "pos": 25,
+    "org": 132,
+    "ad": 8,
+    "freq": 1027,
+    "found": 14012
+   },
+   "катушка на фидер": {
+    "pos": 26,
+    "org": 130,
+    "ad": 8,
+    "freq": 481,
+    "found": 14012
+   },
+   "катушка для фидера": {
+    "pos": 25,
+    "org": 123,
+    "ad": 8,
+    "freq": 8133,
+    "found": 14012
+   },
+   "катушки для фидера": {
+    "pos": 25,
+    "org": 130,
+    "ad": 8,
+    "freq": 729,
+    "found": 14012
+   },
+   "катушка фидерная": {
+    "pos": 25,
+    "org": 130,
+    "ad": 8,
+    "freq": 1189,
+    "found": 14012
+   },
+   "спиннинговые катушки": {
+    "pos": 13,
+    "org": 75,
+    "ad": 9,
+    "freq": 59,
+    "found": 75558
+   },
+   "катушка для спиннинга 3000 япония": {
+    "pos": 30,
+    "org": 30,
+    "ad": null,
+    "freq": 0,
+    "found": 1819
+   },
+   "катушки рыболовные": {
+    "pos": 15,
+    "org": 207,
+    "ad": 9,
+    "freq": 407,
+    "found": 57277
+   },
+   "катушки для рыбалки": {
+    "pos": 17,
+    "org": 229,
+    "ad": 9,
+    "freq": 1909,
+    "found": 57277
+   },
+   "катушка для рыбалки": {
+    "pos": 18,
+    "org": 229,
+    "ad": 9,
+    "freq": 14187,
+    "found": 57277
+   },
+   "рыболовная катушка": {
+    "pos": 17,
+    "org": 229,
+    "ad": 9,
+    "freq": 993,
+    "found": 57277
+   },
+   "катушка рыболовная": {
+    "pos": 14,
+    "org": 219,
+    "ad": 9,
+    "freq": 2245,
+    "found": 57277
+   },
+   "рыболовные катушки": {
+    "pos": 19,
+    "org": 229,
+    "ad": 9,
+    "freq": 1557,
+    "found": 57277
+   },
+   "катушки рыболовные для рыбалки": {
+    "pos": 9,
+    "org": null,
+    "ad": 9,
+    "freq": 0,
+    "found": 129495
+   },
+   "катушка на спиннинг 3000": {
+    "pos": 45,
+    "org": 136,
+    "ad": 6,
+    "freq": 518,
+    "found": 15588
+   },
+   "катушка 3000 для спиннинга": {
+    "pos": 46,
+    "org": 136,
+    "ad": 6,
+    "freq": 946,
+    "found": 15588
+   },
+   "катушка для троллинга": {
+    "pos": 122,
+    "org": 122,
+    "ad": null,
+    "freq": 350,
+    "found": 5043
+   },
+   "катушка 3000": {
+    "pos": 37,
+    "org": 121,
+    "ad": 8,
+    "freq": 2155,
+    "found": 19585
+   },
+   "катушка для спиннинга 3000": {
+    "pos": 49,
+    "org": 131,
+    "ad": 6,
+    "freq": 15740,
+    "found": 15588
+   },
+   "катушка для рыбалки 3000": {
+    "pos": 50,
+    "org": 126,
+    "ad": 8,
+    "freq": 343,
+    "found": 19314
+   },
+   "для катушек": {
+    "pos": 35,
+    "org": null,
+    "ad": 35,
+    "freq": 0,
+    "found": 822333
+   },
+   "катушка для фидера 3000": {
+    "pos": 93,
+    "org": 93,
+    "ad": null,
+    "freq": 480,
+    "found": 5556
+   },
+   "катушка для спиннинга 3000 металлическая": {
+    "pos": 49,
+    "org": 49,
+    "ad": null,
+    "freq": 0,
+    "found": 8993
+   },
+   "катушка спиннинговая 3000": {
+    "pos": 54,
+    "org": 70,
+    "ad": 3,
+    "freq": 161,
+    "found": 15443
+   },
+   "катушка безынерционная 3000": {
+    "pos": 51,
+    "org": 94,
+    "ad": 6,
+    "freq": 262,
+    "found": 17625
+   },
+   "катушка на спиннинг на щуку": {
+    "pos": 35,
+    "org": 109,
+    "ad": 9,
+    "freq": 412,
+    "found": 11207
+   },
+   "катушка рыболовная 3000": {
+    "pos": 58,
+    "org": 66,
+    "ad": 6,
+    "freq": 290,
+    "found": 19122
+   },
+   "катушка для рыбалки безынерционная": {
+    "pos": 85,
+    "org": 85,
+    "ad": null,
+    "freq": 778,
+    "found": 33536
+   },
+   "катушка для рыбалки безынерционная 3000": {
+    "pos": 64,
+    "org": 64,
+    "ad": null,
+    "freq": 0,
+    "found": 18027
+   },
+   "катушка рыболовная безынерционная": {
+    "pos": 61,
+    "org": 61,
+    "ad": null,
+    "freq": 86,
+    "found": 60022
+   },
+   "карп": {
+    "pos": 84,
+    "org": null,
+    "ad": 84,
+    "freq": 742,
+    "found": 60846
+   },
+   "удочка карповая": {
+    "pos": 150,
+    "org": null,
+    "ad": 150,
+    "freq": 400,
+    "found": 15055
+   },
+   "удочка на карпа": {
+    "pos": 150,
+    "org": null,
+    "ad": 150,
+    "freq": 309,
+    "found": 15055
+   },
+   "карповая удочка": {
+    "pos": 151,
+    "org": null,
+    "ad": 151,
+    "freq": 534,
+    "found": 15055
+   },
+   "рыбалка подарок": {
+    "pos": 87,
+    "org": null,
+    "ad": 87,
+    "freq": 0,
+    "found": 400668
+   },
+   "рыболовная катушка для спиннинга": {
+    "pos": 50,
+    "org": 194,
+    "ad": 11,
+    "freq": 724,
+    "found": 33497
+   },
+   "катушка спиннинговая": {
+    "pos": 38,
+    "org": 182,
+    "ad": 8,
+    "freq": 478,
+    "found": 56201
+   },
+   "катушка на щуку": {
+    "pos": 112,
+    "org": 112,
+    "ad": null,
+    "freq": 369,
+    "found": 12310
+   },
+   "катушка ryobi": {
+    "pos": 18,
+    "org": 248,
+    "ad": 6,
+    "freq": 347,
+    "found": 114287
+   },
+   "катушки": {
+    "pos": 23,
+    "org": 258,
+    "ad": 6,
+    "freq": 4490,
+    "found": 114287
+   },
+   "катушка для спининга": {
+    "pos": 42,
+    "org": 194,
+    "ad": 8,
+    "freq": 1944,
+    "found": 56201
+   },
+   "катушки для спиннинга": {
+    "pos": 43,
+    "org": 198,
+    "ad": 8,
+    "freq": 3460,
+    "found": 56201
+   },
+   "катушка на удочку": {
+    "pos": 41,
+    "org": 198,
+    "ad": 8,
+    "freq": 1051,
+    "found": 56201
+   },
+   "катушка на спиннинг": {
+    "pos": 43,
+    "org": 198,
+    "ad": 8,
+    "freq": 3371,
+    "found": 56201
+   },
+   "катушка для удочки": {
+    "pos": 43,
+    "org": 187,
+    "ad": 8,
+    "freq": 2528,
+    "found": 56201
+   },
+   "катушка для спиннинга": {
+    "pos": 45,
+    "org": 188,
+    "ad": 8,
+    "freq": 72137,
+    "found": 56201
+   },
+   "катушка на спининг": {
+    "pos": 42,
+    "org": 198,
+    "ad": 8,
+    "freq": 1438,
+    "found": 56201
+   },
+   "катушка адмирал": {
+    "pos": 22,
+    "org": 257,
+    "ad": 6,
+    "freq": 316,
+    "found": 114287
+   },
+   "катушка 1500": {
+    "pos": 23,
+    "org": 257,
+    "ad": 6,
+    "freq": 346,
+    "found": 114287
+   },
+   "катушка shimano": {
+    "pos": 23,
+    "org": 257,
+    "ad": 6,
+    "freq": 2403,
+    "found": 114287
+   },
+   "катушки на спиннинг": {
+    "pos": 44,
+    "org": 200,
+    "ad": 8,
+    "freq": 511,
+    "found": 56201
+   },
+   "спиннинговая катушка": {
+    "pos": 42,
+    "org": 195,
+    "ad": 8,
+    "freq": 332,
+    "found": 56201
+   },
+   "катушка": {
+    "pos": 23,
+    "org": 260,
+    "ad": 6,
+    "freq": 31464,
+    "found": 114174
+   },
+   "катушка для рыбалки на удочку": {
+    "pos": 204,
+    "org": 204,
+    "ad": null,
+    "freq": 1271,
+    "found": 33568
+   },
+   "шпуля для катушки": {
+    "pos": 292,
+    "org": 292,
+    "ad": null,
+    "freq": 434,
+    "found": 34034
+   },
+   "рыбалка на спиннинг": {
+    "pos": 294,
+    "org": 294,
+    "ad": null,
+    "freq": 377,
+    "found": 35939
+   },
+   "катушка безынерционная": {
+    "pos": 282,
+    "org": 282,
+    "ad": null,
+    "freq": 1270,
+    "found": 56640
+   },
+   "удочки летняя рыбалки с катушкой": {
+    "pos": 57,
+    "org": null,
+    "ad": 57,
+    "freq": 0,
+    "found": 32453
+   },
+   "катушка рыболовная для фидера": {
+    "pos": 10,
+    "org": null,
+    "ad": 10,
+    "freq": 0,
+    "found": 25495
+   },
+   "карповые удилища": {
+    "pos": 95,
+    "org": null,
+    "ad": 95,
+    "freq": 1113,
+    "found": 56969
+   },
+   "катушка для спиннинга японская": {
+    "pos": 40,
+    "org": 40,
+    "ad": null,
+    "freq": 19,
+    "found": 4559
+   },
+   "товары для отдыха на даче": {
+    "pos": 288,
+    "org": null,
+    "ad": 288,
+    "freq": 0,
+    "found": 34858
+   },
+   "удочка для рыбалки фидерная": {
+    "pos": 100,
+    "org": null,
+    "ad": 100,
+    "freq": 0,
+    "found": 32077
+   },
+   "удочка спортивный товар": {
+    "pos": 40,
+    "org": null,
+    "ad": 40,
+    "freq": 0,
+    "found": 384453
+   },
+   "для рыбалки зимней подарок": {
+    "pos": 16,
+    "org": null,
+    "ad": 16,
+    "freq": 0,
+    "found": 184965
+   },
+   "все для рыбалки на карпа": {
+    "pos": 53,
+    "org": null,
+    "ad": 53,
+    "freq": 141,
+    "found": 266382
+   },
+   "катушка для фидерной удочки": {
+    "pos": 14,
+    "org": null,
+    "ad": 14,
+    "freq": 0,
+    "found": 21547
+   },
+   "купить рыболовную катушку": {
+    "pos": 5,
+    "org": null,
+    "ad": 5,
+    "freq": 0,
+    "found": 104769
+   },
+   "для рыбалки зимней": {
+    "pos": 20,
+    "org": null,
+    "ad": 20,
+    "freq": 0,
+    "found": 114021
+   },
+   "безынерционная катушка для зимней рыбалки": {
+    "pos": 4,
+    "org": null,
+    "ad": 4,
+    "freq": 0,
+    "found": 14565
+   },
+   "рыбалка катушка": {
+    "pos": 5,
+    "org": null,
+    "ad": 5,
+    "freq": 0,
+    "found": 104769
+   },
+   "котушка": {
+    "pos": 11,
+    "org": 213,
+    "ad": 6,
+    "freq": 353,
+    "found": 113203
+   },
+   "удочка для летней": {
+    "pos": 76,
+    "org": null,
+    "ad": 76,
+    "freq": 0,
+    "found": 79464
+   },
+   "распродажа рыбалка": {
+    "pos": 23,
+    "org": null,
+    "ad": 23,
+    "freq": 0,
+    "found": 3576595
+   },
+   "охота рыбалка": {
+    "pos": 44,
+    "org": null,
+    "ad": 44,
+    "freq": 0,
+    "found": 6698609
+   },
+   "катушка на сома": {
+    "pos": 141,
+    "org": 141,
+    "ad": null,
+    "freq": 309,
+    "found": 5329
+   },
+   "фидерные катушки": {
+    "pos": 48,
+    "org": 90,
+    "ad": 5,
+    "freq": 185,
+    "found": 21545
+   },
+   "удилище карповое": {
+    "pos": 95,
+    "org": null,
+    "ad": 95,
+    "freq": 1786,
+    "found": 56969
+   },
+   "рыбалка фидер катушка": {
+    "pos": 10,
+    "org": null,
+    "ad": 10,
+    "freq": 0,
+    "found": 24018
+   },
+   "рыболовные товары со скидкой": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 0,
+    "found": 634632
+   },
+   "туризм рыбалка охота": {
+    "pos": 75,
+    "org": null,
+    "ad": 75,
+    "freq": 0,
+    "found": 254454
+   },
+   "товары для отдыха и туризма": {
+    "pos": 172,
+    "org": null,
+    "ad": 172,
+    "freq": 0,
+    "found": 58044
+   },
+   "фидерная удочка для рыбалки": {
+    "pos": 100,
+    "org": null,
+    "ad": 100,
+    "freq": 0,
+    "found": 32077
+   },
+   "удилище спиннинг": {
+    "pos": 60,
+    "org": null,
+    "ad": 60,
+    "freq": 149,
+    "found": 334075
+   },
+   "удочка фидерная для рыбалки": {
+    "pos": 100,
+    "org": null,
+    "ad": 100,
+    "freq": 0,
+    "found": 32077
+   },
+   "для похода и туризма": {
+    "pos": 173,
+    "org": null,
+    "ad": 173,
+    "freq": 1158,
+    "found": 36036
+   },
+   "рыбалка удочки": {
+    "pos": 68,
+    "org": null,
+    "ad": 68,
+    "freq": 0,
+    "found": 388042
+   },
+   "все для туризма и отдыха": {
+    "pos": 167,
+    "org": null,
+    "ad": 167,
+    "freq": 58,
+    "found": 58514
+   },
+   "катушка рыболовная фидерная": {
+    "pos": 10,
+    "org": null,
+    "ad": 10,
+    "freq": 0,
+    "found": 25495
+   },
+   "спиннинг удилище": {
+    "pos": 72,
+    "org": null,
+    "ad": 72,
+    "freq": 296,
+    "found": 80015
+   },
+   "карповое удилище": {
+    "pos": 94,
+    "org": null,
+    "ad": 94,
+    "freq": 7124,
+    "found": 56969
+   },
+   "катушка для спиннинга 3000 безынерционная": {
+    "pos": 97,
+    "org": 97,
+    "ad": null,
+    "freq": 299,
+    "found": 10351
+   },
+   "удочка для фидерной рыбалки": {
+    "pos": 216,
+    "org": null,
+    "ad": 216,
+    "freq": 297,
+    "found": 32740
+   },
+   "катушка рыболовная для зимней рыбалки": {
+    "pos": 8,
+    "org": null,
+    "ad": 8,
+    "freq": 0,
+    "found": 15114
+   },
+   "для рыбы": {
+    "pos": 272,
+    "org": null,
+    "ad": 272,
+    "freq": 525,
+    "found": 112620
+   },
+   "катушка рыболовная для спиннинга": {
+    "pos": 6,
+    "org": null,
+    "ad": 6,
+    "freq": 0,
+    "found": 100157
+   },
+   "охота на рыбу": {
+    "pos": 91,
+    "org": null,
+    "ad": 91,
+    "freq": 0,
+    "found": 3257258
+   },
+   "охота товары": {
+    "pos": 140,
+    "org": null,
+    "ad": 140,
+    "freq": 697,
+    "found": 116637
+   },
+   "все для туризма и рыбалки": {
+    "pos": 83,
+    "org": null,
+    "ad": 83,
+    "freq": 0,
+    "found": 450121
+   },
+   "удочка для рыбалки с катушкой": {
+    "pos": 52,
+    "org": null,
+    "ad": 52,
+    "freq": 175,
+    "found": 109283
+   },
+   "всё для рыбалки на щуку": {
+    "pos": 16,
+    "org": null,
+    "ad": 16,
+    "freq": 416,
+    "found": 33963
+   },
+   "удочка фидер": {
+    "pos": 161,
+    "org": null,
+    "ad": 161,
+    "freq": 700,
+    "found": 33243
+   },
+   "японская катушка": {
+    "pos": 59,
+    "org": 59,
+    "ad": null,
+    "freq": 0,
+    "found": 9229
+   }
+  },
+  "808295786": {
+   "катушка для фидера 3000": {
+    "pos": 74,
+    "org": 122,
+    "ad": 4,
+    "freq": 480,
+    "found": 5563
+   },
+   "катушка безынерционная 3000": {
+    "pos": 22,
+    "org": 96,
+    "ad": 6,
+    "freq": 262,
+    "found": 17625
+   },
+   "катушка спиннинговая 3000": {
+    "pos": 34,
+    "org": 66,
+    "ad": 10,
+    "freq": 161,
+    "found": 15443
+   },
+   "катушка для спиннинга 3000": {
+    "pos": 64,
+    "org": 93,
+    "ad": 10,
+    "freq": 15740,
+    "found": 15443
+   },
+   "катушка 3000 для спиннинга": {
+    "pos": 68,
+    "org": 102,
+    "ad": 10,
+    "freq": 946,
+    "found": 15452
+   },
+   "катушка рыболовная 3000": {
+    "pos": 79,
+    "org": 79,
+    "ad": null,
+    "freq": 290,
+    "found": 19122
+   },
+   "катушка для рыбалки 3000": {
+    "pos": 202,
+    "org": 202,
+    "ad": null,
+    "freq": 343,
+    "found": 19121
+   },
+   "катушка 3000": {
+    "pos": 98,
+    "org": 162,
+    "ad": 4,
+    "freq": 2155,
+    "found": 19517
+   },
+   "катушки": {
+    "pos": 182,
+    "org": 182,
+    "ad": null,
+    "freq": 4490,
+    "found": 114498
+   },
+   "катушка адмирал": {
+    "pos": 182,
+    "org": 182,
+    "ad": null,
+    "freq": 316,
+    "found": 114498
+   },
+   "катушка 1500": {
+    "pos": 182,
+    "org": 182,
+    "ad": null,
+    "freq": 346,
+    "found": 114498
+   },
+   "катушка shimano": {
+    "pos": 182,
+    "org": 182,
+    "ad": null,
+    "freq": 2403,
+    "found": 114498
+   },
+   "катушка": {
+    "pos": 189,
+    "org": 189,
+    "ad": null,
+    "freq": 31464,
+    "found": 114252
+   },
+   "катушка на щуку": {
+    "pos": 236,
+    "org": 236,
+    "ad": null,
+    "freq": 369,
+    "found": 11951
+   },
+   "катушка для фидера": {
+    "pos": 246,
+    "org": 246,
+    "ad": null,
+    "freq": 8133,
+    "found": 14044
+   },
+   "катушка фидерная": {
+    "pos": 246,
+    "org": 246,
+    "ad": null,
+    "freq": 1189,
+    "found": 14044
+   },
+   "фидерная катушка": {
+    "pos": 246,
+    "org": 246,
+    "ad": null,
+    "freq": 1027,
+    "found": 14044
+   },
+   "катушки для фидера": {
+    "pos": 246,
+    "org": 246,
+    "ad": null,
+    "freq": 729,
+    "found": 14044
+   },
+   "катушка на фидер": {
+    "pos": 246,
+    "org": 246,
+    "ad": null,
+    "freq": 481,
+    "found": 14044
+   },
+   "катушка для удочки": {
+    "pos": 259,
+    "org": 259,
+    "ad": null,
+    "freq": 2528,
+    "found": 56392
+   },
+   "катушка на спининг": {
+    "pos": 256,
+    "org": 256,
+    "ad": null,
+    "freq": 1438,
+    "found": 56392
+   },
+   "катушки на спиннинг": {
+    "pos": 259,
+    "org": 259,
+    "ad": null,
+    "freq": 511,
+    "found": 56392
+   },
+   "катушки для спиннинга": {
+    "pos": 257,
+    "org": 257,
+    "ad": null,
+    "freq": 3460,
+    "found": 56392
+   },
+   "спиннинговая катушка": {
+    "pos": 259,
+    "org": 259,
+    "ad": null,
+    "freq": 332,
+    "found": 56392
+   },
+   "катушка на спиннинг": {
+    "pos": 258,
+    "org": 258,
+    "ad": null,
+    "freq": 3371,
+    "found": 56392
+   },
+   "катушка для спининга": {
+    "pos": 256,
+    "org": 256,
+    "ad": null,
+    "freq": 1944,
+    "found": 56392
+   },
+   "катушка спиннинговая": {
+    "pos": 257,
+    "org": 257,
+    "ad": null,
+    "freq": 478,
+    "found": 56392
+   },
+   "катушка для спиннинга": {
+    "pos": 258,
+    "org": 258,
+    "ad": null,
+    "freq": 72137,
+    "found": 56392
+   },
+   "катушка на удочку": {
+    "pos": 262,
+    "org": 262,
+    "ad": null,
+    "freq": 1051,
+    "found": 56392
+   },
+   "спиннинг удочка": {
+    "pos": 226,
+    "org": null,
+    "ad": 226,
+    "freq": 303,
+    "found": 80769
+   },
+   "котушка": {
+    "pos": 183,
+    "org": 183,
+    "ad": null,
+    "freq": 359,
+    "found": 112252
+   },
+   "удочка для летней": {
+    "pos": 90,
+    "org": null,
+    "ad": 90,
+    "freq": 0,
+    "found": 100748
+   },
+   "катушки для спиннинга 3000": {
+    "pos": 33,
+    "org": 58,
+    "ad": 14,
+    "freq": 241,
+    "found": 15415
+   },
+   "катушки для рыбалки": {
+    "pos": 254,
+    "org": 254,
+    "ad": null,
+    "freq": 2411,
+    "found": 56595
+   },
+   "катушка для рыбалки": {
+    "pos": 254,
+    "org": 254,
+    "ad": null,
+    "freq": 15641,
+    "found": 56595
+   },
+   "карповая удочка": {
+    "pos": 103,
+    "org": null,
+    "ad": 103,
+    "freq": 573,
+    "found": 14671
+   },
+   "спиннинг на карпа": {
+    "pos": 182,
+    "org": null,
+    "ad": 182,
+    "freq": 320,
+    "found": 14396
+   },
+   "катушка рыболовная для фидера": {
+    "pos": 38,
+    "org": null,
+    "ad": 38,
+    "freq": 0,
+    "found": 22152
+   },
+   "карповые удилища": {
+    "pos": 57,
+    "org": null,
+    "ad": 57,
+    "freq": 1143,
+    "found": 56095
+   },
+   "катушка на спиннинг 3000": {
+    "pos": 69,
+    "org": 100,
+    "ad": 10,
+    "freq": 519,
+    "found": 15385
+   },
+   "охота и рыбалка": {
+    "pos": 283,
+    "org": null,
+    "ad": 283,
+    "freq": 702,
+    "found": 294504
+   },
+   "рыболовные комплекты": {
+    "pos": 264,
+    "org": null,
+    "ad": 264,
+    "freq": 0,
+    "found": 112254
+   },
+   "набор для спиннинга": {
+    "pos": 254,
+    "org": null,
+    "ad": 254,
+    "freq": 1414,
+    "found": 32901
+   },
+   "катушка с леской для рыбалки": {
+    "pos": 206,
+    "org": null,
+    "ad": 206,
+    "freq": 383,
+    "found": 32806
+   },
+   "рыболовные катушки": {
+    "pos": 254,
+    "org": 254,
+    "ad": null,
+    "freq": 906,
+    "found": 56595
+   },
+   "спиннинг удилище": {
+    "pos": 158,
+    "org": null,
+    "ad": 158,
+    "freq": 296,
+    "found": 80603
+   },
+   "для спиннинга": {
+    "pos": 155,
+    "org": null,
+    "ad": 155,
+    "freq": 539,
+    "found": 35804
+   },
+   "удочка с катушкой": {
+    "pos": 120,
+    "org": null,
+    "ad": 120,
+    "freq": 927,
+    "found": 56128
+   },
+   "катушки рыболовные": {
+    "pos": 254,
+    "org": 254,
+    "ad": null,
+    "freq": 373,
+    "found": 56595
+   },
+   "фидерный набор": {
+    "pos": 226,
+    "org": null,
+    "ad": 226,
+    "freq": 762,
+    "found": 33419
+   },
+   "фидер на карпа": {
+    "pos": 59,
+    "org": null,
+    "ad": 59,
+    "freq": 0,
+    "found": 81987
+   },
+   "спиннинг карповый": {
+    "pos": 185,
+    "org": null,
+    "ad": 185,
+    "freq": 418,
+    "found": 14396
+   },
+   "катушка рыболовная фидерная": {
+    "pos": 38,
+    "org": null,
+    "ad": 38,
+    "freq": 0,
+    "found": 22152
+   },
+   "товары для охоты": {
+    "pos": 143,
+    "org": null,
+    "ad": 143,
+    "freq": 733,
+    "found": 115656
+   },
+   "набор для спининга": {
+    "pos": 254,
+    "org": null,
+    "ad": 254,
+    "freq": 486,
+    "found": 32901
+   },
+   "набор для фидера": {
+    "pos": 226,
+    "org": null,
+    "ad": 226,
+    "freq": 325,
+    "found": 33419
+   },
+   "все для спиннинговой рыбалки": {
+    "pos": 43,
+    "org": null,
+    "ad": 43,
+    "freq": 0,
+    "found": 633426
+   },
+   "набор для рыбака": {
+    "pos": 178,
+    "org": null,
+    "ad": 178,
+    "freq": 730,
+    "found": 113405
+   },
+   "удочка на карпа": {
+    "pos": 104,
+    "org": null,
+    "ad": 104,
+    "freq": 356,
+    "found": 14671
+   },
+   "карп": {
+    "pos": 134,
+    "org": null,
+    "ad": 134,
+    "freq": 740,
+    "found": 60754
+   },
+   "рыбацкий набор": {
+    "pos": 177,
+    "org": null,
+    "ad": 177,
+    "freq": 940,
+    "found": 113405
+   },
+   "рыбалка на щуку": {
+    "pos": 48,
+    "org": null,
+    "ad": 48,
+    "freq": 309,
+    "found": 35291
+   },
+   "рыбалка фидер катушка": {
+    "pos": 38,
+    "org": null,
+    "ad": 38,
+    "freq": 0,
+    "found": 22152
+   },
+   "для ловли рыбы": {
+    "pos": 88,
+    "org": null,
+    "ad": 88,
+    "freq": 146,
+    "found": 111198
+   },
+   "катушка безынерционная для спиннинга": {
+    "pos": 26,
+    "org": null,
+    "ad": 26,
+    "freq": 0,
+    "found": 48335
+   },
+   "катушка с леской": {
+    "pos": 170,
+    "org": null,
+    "ad": 170,
+    "freq": 759,
+    "found": 33516
+   },
+   "удилище карповое": {
+    "pos": 56,
+    "org": null,
+    "ad": 56,
+    "freq": 1950,
+    "found": 56095
+   },
+   "новинки для рыбалки": {
+    "pos": 22,
+    "org": null,
+    "ad": 22,
+    "freq": 0,
+    "found": 35513
+   },
+   "комплект для рыбалки": {
+    "pos": 212,
+    "org": null,
+    "ad": 212,
+    "freq": 455,
+    "found": 113824
+   },
+   "катушка для спиннинга 3000 япония": {
+    "pos": 22,
+    "org": 22,
+    "ad": 3,
+    "freq": 0,
+    "found": 1820
+   },
+   "рыболовные товары спининги": {
+    "pos": 73,
+    "org": null,
+    "ad": 73,
+    "freq": 0,
+    "found": 519162
+   },
+   "катушка для спиннинга японская": {
+    "pos": 50,
+    "org": 53,
+    "ad": 7,
+    "freq": 19,
+    "found": 4541
+   },
+   "удилище рыболовное": {
+    "pos": 80,
+    "org": null,
+    "ad": 80,
+    "freq": 0,
+    "found": 435230
+   },
+   "удочка спининг": {
+    "pos": 228,
+    "org": null,
+    "ad": 228,
+    "freq": 688,
+    "found": 80769
+   },
+   "катушка безынерционная": {
+    "pos": 37,
+    "org": null,
+    "ad": 37,
+    "freq": 1625,
+    "found": 51778
+   },
+   "удочка спиннинг с катушкой": {
+    "pos": 189,
+    "org": null,
+    "ad": 189,
+    "freq": 534,
+    "found": 33362
+   },
+   "катушка для рыбалки безынерционная 3000": {
+    "pos": 58,
+    "org": 86,
+    "ad": 31,
+    "freq": 0,
+    "found": 17523
+   },
+   "катушка для спиннинга с леской": {
+    "pos": 186,
+    "org": null,
+    "ad": 186,
+    "freq": 442,
+    "found": 23803
+   },
+   "катушка рыболовная карповая": {
+    "pos": 41,
+    "org": null,
+    "ad": 41,
+    "freq": 62,
+    "found": 20004
+   },
+   "катушка рыболовная": {
+    "pos": 254,
+    "org": 254,
+    "ad": null,
+    "freq": 2395,
+    "found": 56595
+   },
+   "удочка фидерная": {
+    "pos": 32,
+    "org": null,
+    "ad": 32,
+    "freq": 712,
+    "found": 32848
+   },
+   "распродажа рыбалка": {
+    "pos": 47,
+    "org": null,
+    "ad": 47,
+    "freq": 0,
+    "found": 3639601
+   },
+   "шпуля для катушки": {
+    "pos": 41,
+    "org": null,
+    "ad": 41,
+    "freq": 370,
+    "found": 32925
+   },
+   "рыболовная катушка для спиннинга": {
+    "pos": 148,
+    "org": 148,
+    "ad": null,
+    "freq": 769,
+    "found": 33168
+   },
+   "удочка спиннинг": {
+    "pos": 228,
+    "org": null,
+    "ad": 228,
+    "freq": 2954,
+    "found": 80769
+   },
+   "удочки спиннинг": {
+    "pos": 226,
+    "org": null,
+    "ad": 226,
+    "freq": 331,
+    "found": 80769
+   },
+   "все для рыбалки фидерной": {
+    "pos": 130,
+    "org": null,
+    "ad": 130,
+    "freq": 445,
+    "found": 34479
+   },
+   "набор фидерной рыбалки": {
+    "pos": 90,
+    "org": null,
+    "ad": 90,
+    "freq": 491,
+    "found": 33268
+   },
+   "катушка для карпового удилища": {
+    "pos": 81,
+    "org": null,
+    "ad": 81,
+    "freq": 241,
+    "found": 15523
+   },
+   "карповое удилище": {
+    "pos": 56,
+    "org": null,
+    "ad": 56,
+    "freq": 7580,
+    "found": 56095
+   },
+   "набор для фидерной рыбалки": {
+    "pos": 170,
+    "org": null,
+    "ad": 170,
+    "freq": 446,
+    "found": 33570
+   },
+   "удочка для фидера": {
+    "pos": 28,
+    "org": null,
+    "ad": 28,
+    "freq": 0,
+    "found": 67775
+   },
+   "фидерная удочка": {
+    "pos": 32,
+    "org": null,
+    "ad": 32,
+    "freq": 1189,
+    "found": 32848
+   },
+   "для рыбы": {
+    "pos": 275,
+    "org": null,
+    "ad": 275,
+    "freq": 520,
+    "found": 112743
+   },
+   "катушка для спиннинга 3000 безынерционная": {
+    "pos": 243,
+    "org": 272,
+    "ad": 25,
+    "freq": 299,
+    "found": 10351
+   },
+   "катушка 500": {
+    "pos": 144,
+    "org": null,
+    "ad": 144,
+    "freq": 530,
+    "found": 8524
+   },
+   "охота товары": {
+    "pos": 215,
+    "org": null,
+    "ad": 215,
+    "freq": 677,
+    "found": 115155
+   },
+   "катушка рыболовная для спиннинга": {
+    "pos": 51,
+    "org": null,
+    "ad": 51,
+    "freq": 0,
+    "found": 89738
+   },
+   "катушка ryobi": {
+    "pos": 184,
+    "org": 184,
+    "ad": null,
+    "freq": 341,
+    "found": 114267
+   },
+   "для катушек": {
+    "pos": 53,
+    "org": null,
+    "ad": 53,
+    "freq": 0,
+    "found": 705002
+   },
+   "удочка фидер": {
+    "pos": 155,
+    "org": null,
+    "ad": 155,
+    "freq": 556,
+    "found": 32396
+   },
+   "все для охоты": {
+    "pos": 57,
+    "org": null,
+    "ad": 57,
+    "freq": 885,
+    "found": 116218
+   },
+   "удилище на карпа": {
+    "pos": 49,
+    "org": null,
+    "ad": 49,
+    "freq": 114,
+    "found": 67484
+   },
+   "рыбалка щука": {
+    "pos": 52,
+    "org": null,
+    "ad": 52,
+    "freq": 0,
+    "found": 410394
+   },
+   "фидер удочка": {
+    "pos": 86,
+    "org": null,
+    "ad": 86,
+    "freq": 126,
+    "found": 55907
+   },
+   "рыболовная катушка": {
+    "pos": 254,
+    "org": 254,
+    "ad": null,
+    "freq": 1050,
+    "found": 56595
+   },
+   "катушка для карповой рыбалки": {
+    "pos": 41,
+    "org": null,
+    "ad": 41,
+    "freq": 0,
+    "found": 20004
+   },
+   "катушка для спиннинга 3000 металлическая": {
+    "pos": 24,
+    "org": 69,
+    "ad": 8,
+    "freq": 0,
+    "found": 8988
+   },
+   "удочка карповая": {
+    "pos": 99,
+    "org": null,
+    "ad": 99,
+    "freq": 400,
+    "found": 14759
+   },
+   "удочка спортивный товар": {
+    "pos": 55,
+    "org": null,
+    "ad": 55,
+    "freq": 0,
+    "found": 410933
+   },
+   "всё для рыбалки на щуку": {
+    "pos": 90,
+    "org": null,
+    "ad": 90,
+    "freq": 371,
+    "found": 33672
+   },
+   "японская катушка": {
+    "pos": 51,
+    "org": 54,
+    "ad": 8,
+    "freq": 0,
+    "found": 12829
+   },
+   "удилище для рыбалки": {
+    "pos": 100,
+    "org": null,
+    "ad": 100,
+    "freq": 0,
+    "found": 435230
+   },
+   "катушка для фидерной удочки": {
+    "pos": 22,
+    "org": null,
+    "ad": 22,
+    "freq": 0,
+    "found": 23430
+   },
+   "удочка для рыбалки спиннинг": {
+    "pos": 220,
+    "org": null,
+    "ad": 220,
+    "freq": 427,
+    "found": 80769
+   },
+   "удочки летняя рыбалки с катушкой": {
+    "pos": 76,
+    "org": null,
+    "ad": 76,
+    "freq": 0,
+    "found": 42892
+   },
+   "спиннинг для рыбалки летней": {
+    "pos": 63,
+    "org": null,
+    "ad": 63,
+    "freq": 0,
+    "found": 124839
+   },
+   "рыбалка спиннинг": {
+    "pos": 50,
+    "org": null,
+    "ad": 50,
+    "freq": 180,
+    "found": 445695
+   },
+   "катушка на спиннинг на щуку": {
+    "pos": 47,
+    "org": null,
+    "ad": 47,
+    "freq": 311,
+    "found": 7401
+   }
+  }
+ },
+ "prices": {
+  "before_spp": {
+   "min": 465,
+   "med": 1734.5,
+   "mean": 2149,
+   "max": 6985
+  },
+  "buyer": {
+   "min": 343,
+   "med": 1577,
+   "mean": 1875,
+   "max": 7755
+  },
+  "segments": {
+   "2026-07": [
+    {
+     "range": "40-356",
+     "items": 4866,
+     "iws": 190,
+     "sales": 5183,
+     "rev": 1099474,
+     "share": 0.7,
+     "rev_per_iws": 5787,
+     "comp_index": 4426
+    },
+    {
+     "range": "356-520",
+     "items": 4844,
+     "iws": 428,
+     "sales": 4976,
+     "rev": 1517805,
+     "share": 1.0,
+     "rev_per_iws": 3546,
+     "comp_index": 3191
+    },
+    {
+     "range": "520-723",
+     "items": 4861,
+     "iws": 315,
+     "sales": 5221,
+     "rev": 2536828,
+     "share": 1.6,
+     "rev_per_iws": 8053,
+     "comp_index": 1916
+    },
+    {
+     "range": "723-922",
+     "items": 4867,
+     "iws": 354,
+     "sales": 4871,
+     "rev": 3341683,
+     "share": 2.1,
+     "rev_per_iws": 9440,
+     "comp_index": 1456
+    },
+    {
+     "range": "922-1082",
+     "items": 4837,
+     "iws": 296,
+     "sales": 5691,
+     "rev": 4329653,
+     "share": 2.7,
+     "rev_per_iws": 14627,
+     "comp_index": 1117
+    },
+    {
+     "range": "1082-1255",
+     "items": 4875,
+     "iws": 372,
+     "sales": 12457,
+     "rev": 12103097,
+     "share": 7.6,
+     "rev_per_iws": 32535,
+     "comp_index": 403
+    },
+    {
+     "range": "1255-1428",
+     "items": 4860,
+     "iws": 416,
+     "sales": 10654,
+     "rev": 11387285,
+     "share": 7.2,
+     "rev_per_iws": 27373,
+     "comp_index": 427
+    },
+    {
+     "range": "1428-1609",
+     "items": 4830,
+     "iws": 517,
+     "sales": 21507,
+     "rev": 27147544,
+     "share": 17.1,
+     "rev_per_iws": 52510,
+     "comp_index": 178
+    },
+    {
+     "range": "1609-1790",
+     "items": 4868,
+     "iws": 437,
+     "sales": 10201,
+     "rev": 14009264,
+     "share": 8.8,
+     "rev_per_iws": 32058,
+     "comp_index": 347
+    },
+    {
+     "range": "1790-2040",
+     "items": 4853,
+     "iws": 397,
+     "sales": 8468,
+     "rev": 14362256,
+     "share": 9.0,
+     "rev_per_iws": 36177,
+     "comp_index": 338
+    },
+    {
+     "range": "2040-2301",
+     "items": 4854,
+     "iws": 388,
+     "sales": 4728,
+     "rev": 9131479,
+     "share": 5.8,
+     "rev_per_iws": 23535,
+     "comp_index": 532
+    },
+    {
+     "range": "2301-2620",
+     "items": 4869,
+     "iws": 391,
+     "sales": 4128,
+     "rev": 8780944,
+     "share": 5.5,
+     "rev_per_iws": 22458,
+     "comp_index": 554
+    },
+    {
+     "range": "2620-2948",
+     "items": 4831,
+     "iws": 337,
+     "sales": 5930,
+     "rev": 13784226,
+     "share": 8.7,
+     "rev_per_iws": 40903,
+     "comp_index": 350
+    },
+    {
+     "range": "2948-3291",
+     "items": 4858,
+     "iws": 249,
+     "sales": 2688,
+     "rev": 7130936,
+     "share": 4.5,
+     "rev_per_iws": 28638,
+     "comp_index": 681
+    },
+    {
+     "range": "3291-3705",
+     "items": 4852,
+     "iws": 278,
+     "sales": 1864,
+     "rev": 5704171,
+     "share": 3.6,
+     "rev_per_iws": 20519,
+     "comp_index": 851
+    },
+    {
+     "range": "3705-4109",
+     "items": 4864,
+     "iws": 306,
+     "sales": 1570,
+     "rev": 5376245,
+     "share": 3.4,
+     "rev_per_iws": 17569,
+     "comp_index": 905
+    },
+    {
+     "range": "4109-4781",
+     "items": 4849,
+     "iws": 217,
+     "sales": 967,
+     "rev": 3813534,
+     "share": 2.4,
+     "rev_per_iws": 17574,
+     "comp_index": 1272
+    },
+    {
+     "range": "4781-5590",
+     "items": 4865,
+     "iws": 144,
+     "sales": 638,
+     "rev": 2873924,
+     "share": 1.8,
+     "rev_per_iws": 19958,
+     "comp_index": 1693
+    },
+    {
+     "range": "5590-6557",
+     "items": 4846,
+     "iws": 143,
+     "sales": 549,
+     "rev": 3015793,
+     "share": 1.9,
+     "rev_per_iws": 21089,
+     "comp_index": 1607
+    },
+    {
+     "range": "6557-7509",
+     "items": 4851,
+     "iws": 123,
+     "sales": 336,
+     "rev": 2156586,
+     "share": 1.4,
+     "rev_per_iws": 17533,
+     "comp_index": 2249
+    },
+    {
+     "range": "7509-8459",
+     "items": 4855,
+     "iws": 88,
+     "sales": 222,
+     "rev": 1543413,
+     "share": 1.0,
+     "rev_per_iws": 17539,
+     "comp_index": 3146
+    },
+    {
+     "range": "8459-9613",
+     "items": 4858,
+     "iws": 47,
+     "sales": 120,
+     "rev": 955975,
+     "share": 0.6,
+     "rev_per_iws": 20340,
+     "comp_index": 5082
+    },
+    {
+     "range": "9613-13427",
+     "items": 4856,
+     "iws": 79,
+     "sales": 180,
+     "rev": 1886134,
+     "share": 1.2,
+     "rev_per_iws": 23875,
+     "comp_index": 2575
+    },
+    {
+     "range": "13427-23369",
+     "items": 4851,
+     "iws": 37,
+     "sales": 44,
+     "rev": 573747,
+     "share": 0.4,
+     "rev_per_iws": 15507,
+     "comp_index": 8455
+    },
+    {
+     "range": "23369-10881360",
+     "items": 4836,
+     "iws": 4,
+     "sales": 7,
+     "rev": 209079,
+     "share": 0.1,
+     "rev_per_iws": 52270,
+     "comp_index": 23130
+    }
+   ],
+   "30d": [
+    {
+     "range": "40-379",
+     "items": 5556,
+     "iws": 257,
+     "sales": 2240,
+     "rev": 747096,
+     "share": 2.1,
+     "rev_per_iws": 2907,
+     "comp_index": 7437
+    },
+    {
+     "range": "379-559",
+     "items": 5518,
+     "iws": 262,
+     "sales": 969,
+     "rev": 480805,
+     "share": 1.3,
+     "rev_per_iws": 1835,
+     "comp_index": 11477
+    },
+    {
+     "range": "559-773",
+     "items": 5522,
+     "iws": 273,
+     "sales": 1087,
+     "rev": 770210,
+     "share": 2.1,
+     "rev_per_iws": 2821,
+     "comp_index": 7169
+    },
+    {
+     "range": "773-968",
+     "items": 5538,
+     "iws": 303,
+     "sales": 1655,
+     "rev": 1501539,
+     "share": 4.1,
+     "rev_per_iws": 4956,
+     "comp_index": 3688
+    },
+    {
+     "range": "968-1090",
+     "items": 5535,
+     "iws": 215,
+     "sales": 1361,
+     "rev": 1473139,
+     "share": 4.1,
+     "rev_per_iws": 6852,
+     "comp_index": 3757
+    },
+    {
+     "range": "1090-1227",
+     "items": 5531,
+     "iws": 214,
+     "sales": 964,
+     "rev": 1172040,
+     "share": 3.2,
+     "rev_per_iws": 5477,
+     "comp_index": 4719
+    },
+    {
+     "range": "1227-1397",
+     "items": 5517,
+     "iws": 295,
+     "sales": 2415,
+     "rev": 3202367,
+     "share": 8.8,
+     "rev_per_iws": 10855,
+     "comp_index": 1723
+    },
+    {
+     "range": "1397-1574",
+     "items": 5527,
+     "iws": 251,
+     "sales": 2010,
+     "rev": 2830551,
+     "share": 7.8,
+     "rev_per_iws": 11277,
+     "comp_index": 1953
+    },
+    {
+     "range": "1574-1762",
+     "items": 5557,
+     "iws": 310,
+     "sales": 1769,
+     "rev": 2859296,
+     "share": 7.9,
+     "rev_per_iws": 9224,
+     "comp_index": 1943
+    },
+    {
+     "range": "1762-1968",
+     "items": 5516,
+     "iws": 319,
+     "sales": 2166,
+     "rev": 3709211,
+     "share": 10.2,
+     "rev_per_iws": 11628,
+     "comp_index": 1487
+    },
+    {
+     "range": "1968-2216",
+     "items": 5547,
+     "iws": 273,
+     "sales": 1447,
+     "rev": 2667220,
+     "share": 7.4,
+     "rev_per_iws": 9770,
+     "comp_index": 2080
+    },
+    {
+     "range": "2216-2480",
+     "items": 5502,
+     "iws": 209,
+     "sales": 812,
+     "rev": 1774837,
+     "share": 4.9,
+     "rev_per_iws": 8492,
+     "comp_index": 3100
+    },
+    {
+     "range": "2480-2828",
+     "items": 5809,
+     "iws": 232,
+     "sales": 1029,
+     "rev": 2507710,
+     "share": 6.9,
+     "rev_per_iws": 10809,
+     "comp_index": 2316
+    },
+    {
+     "range": "2828-3181",
+     "items": 5464,
+     "iws": 151,
+     "sales": 822,
+     "rev": 2291893,
+     "share": 6.3,
+     "rev_per_iws": 15178,
+     "comp_index": 2384
+    },
+    {
+     "range": "3181-3577",
+     "items": 5313,
+     "iws": 154,
+     "sales": 554,
+     "rev": 1757670,
+     "share": 4.9,
+     "rev_per_iws": 11413,
+     "comp_index": 3023
+    },
+    {
+     "range": "3577-4114",
+     "items": 5532,
+     "iws": 154,
+     "sales": 282,
+     "rev": 973880,
+     "share": 2.7,
+     "rev_per_iws": 6324,
+     "comp_index": 5680
+    },
+    {
+     "range": "4114-4765",
+     "items": 5548,
+     "iws": 125,
+     "sales": 260,
+     "rev": 1049212,
+     "share": 2.9,
+     "rev_per_iws": 8394,
+     "comp_index": 5288
+    },
+    {
+     "range": "4765-5581",
+     "items": 5509,
+     "iws": 108,
+     "sales": 183,
+     "rev": 901806,
+     "share": 2.5,
+     "rev_per_iws": 8350,
+     "comp_index": 6109
+    },
+    {
+     "range": "5581-6373",
+     "items": 6546,
+     "iws": 71,
+     "sales": 94,
+     "rev": 528824,
+     "share": 1.5,
+     "rev_per_iws": 7448,
+     "comp_index": 12378
+    },
+    {
+     "range": "6373-7220",
+     "items": 4515,
+     "iws": 51,
+     "sales": 88,
+     "rev": 564846,
+     "share": 1.6,
+     "rev_per_iws": 11075,
+     "comp_index": 7993
+    },
+    {
+     "range": "7220-8184",
+     "items": 5529,
+     "iws": 51,
+     "sales": 69,
+     "rev": 509715,
+     "share": 1.4,
+     "rev_per_iws": 9994,
+     "comp_index": 10847
+    },
+    {
+     "range": "8184-10112",
+     "items": 5529,
+     "iws": 64,
+     "sales": 78,
+     "rev": 698966,
+     "share": 1.9,
+     "rev_per_iws": 10921,
+     "comp_index": 7910
+    },
+    {
+     "range": "10112-13781",
+     "items": 5532,
+     "iws": 39,
+     "sales": 63,
+     "rev": 710662,
+     "share": 2.0,
+     "rev_per_iws": 18222,
+     "comp_index": 7784
+    },
+    {
+     "range": "13781-24158",
+     "items": 5528,
+     "iws": 20,
+     "sales": 22,
+     "rev": 341565,
+     "share": 0.9,
+     "rev_per_iws": 17078,
+     "comp_index": 16184
+    },
+    {
+     "range": "24158-10881360",
+     "items": 5514,
+     "iws": 5,
+     "sales": 5,
+     "rev": 196662,
+     "share": 0.5,
+     "rev_per_iws": 39332,
+     "comp_index": 28038
+    }
+   ]
+  },
+  "clean": {
+   "kept": 476,
+   "dropped": 24,
+   "dropped_pct": 4.8,
+   "reasons": {
+    "գին ≫ մեդիան (комплект/оптом)": 15,
+    "գին ≪ մեդիան (պարագա)": 9
+   },
+   "suspicious": false
+  }
+ },
+ "content": {
+  "n": 20,
+  "title_words": [
+   [
+    "для",
+    28
+   ],
+   [
+    "катушка",
+    20
+   ],
+   [
+    "спиннинга",
+    16
+   ],
+   [
+    "рыбалки",
+    12
+   ],
+   [
+    "безынерционная",
+    9
+   ],
+   [
+    "3000",
+    6
+   ],
+   [
+    "фидера",
+    6
+   ],
+   [
+    "рыболовная",
+    5
+   ],
+   [
+    "байтранером",
+    3
+   ],
+   [
+    "карповая",
+    2
+   ],
+   [
+    "фидерная",
+    2
+   ],
+   [
+    "удочку",
+    2
+   ],
+   [
+    "laser",
+    1
+   ],
+   [
+    "кобра",
+    1
+   ],
+   [
+    "8000",
+    1
+   ],
+   [
+    "6000",
+    1
+   ],
+   [
+    "7000",
+    1
+   ],
+   [
+    "sa3000",
+    1
+   ],
+   [
+    "4000",
+    1
+   ],
+   [
+    "5000",
+    1
+   ],
+   [
+    "prestige",
+    1
+   ],
+   [
+    "800",
+    1
+   ],
+   [
+    "микроджиг",
+    1
+   ],
+   [
+    "мормышинг",
+    1
+   ]
+  ],
+  "pains": [
+   [
+    "металл (шпуля / корпус / шестерни)",
+    17
+   ],
+   [
+    "плавный / тихий ход",
+    14
+   ],
+   [
+    "лёгкая / вес",
+    13
+   ],
+   [
+    "подшипники (число)",
+    11
+   ],
+   [
+    "фрикцион / тормоз, кг",
+    11
+   ],
+   [
+    "подарок",
+    11
+   ],
+   [
+    "передаточное число / скорость",
+    7
+   ],
+   [
+    "гарантия",
+    6
+   ],
+   [
+    "ручка: складная / левая-правая / на резьбе",
+    4
+   ],
+   [
+    "антиреверс / мгновенный стоп",
+    4
+   ],
+   [
+    "запасная шпуля",
+    2
+   ],
+   [
+    "леска / шнур в комплекте",
+    1
+   ]
+  ],
+  "pics_med_top20": 12.0,
+  "video_top20": 11,
+  "rich_top20": 13,
+  "pics_med_top100": 13.0,
+  "video_top100": 62,
+  "rich_top100": 60,
+  "titles": [
+   "Катушка для спиннинга рыбалки безынерционная 3000",
+   "Катушка для спиннинга рыболовная безынерционная для рыбалки",
+   "Катушка для спиннинга 3000 для рыбалки фидера",
+   "Катушка для рыбалки карповая LASER GA",
+   "Катушка для спиннинга для рыбалки кобра фидерная",
+   "Катушка карповая фидерная 8000",
+   "Катушка для фидера на удочку с байтранером 6000",
+   "Катушка для спиннинга безынерционная для рыбалки 7000",
+   "Катушка рыболовная SA3000 для спиннинга и фидера",
+   "Катушка для спиннинга рыбалки безынерционная 4000",
+   "Катушка для фидера на удочку с байтранером 5000",
+   "Катушка рыболовная для спиннинга фидера",
+   "Катушка для спиннинга Prestige 800 микроджиг, мормышинг",
+   "Катушка для спиннинга рыболовная безынерционная для рыбалки",
+   "Катушка для спиннинга безынерционная 3000",
+   "Катушка для спиннинга безынерционная 3000",
+   "Катушка для спиннинга для рыбалки и фидера с байтранером",
+   "Катушка для спиннинга для рыбалки 3000",
+   "Катушка для спиннинга безынерционная для рыбалки 3000",
+   "Катушка для спиннинга рыболовная безынерционная для рыбалки"
+  ]
+ },
+ "complaints": {
+  "per_sku": {
+   "162194496": {
+    "reviews": 3289,
+    "neg365": 109,
+    "neg_pct": 3.3,
+    "top": [
+     [
+      "ломается механизм/шестерни (быстро выходит из строя)",
+      25
+     ],
+     [
+      "ручка: крепление/болты/люфт",
+      18
+     ],
+     [
+      "хлипкий пластик/материал",
+      11
+     ]
+    ]
+   },
+   "213920076": {
+    "reviews": 831,
+    "neg365": 22,
+    "neg_pct": 2.6,
+    "top": [
+     [
+      "укладка лески/зазор/дужка",
+      7
+     ],
+     [
+      "подшипники: меньше заявленного/втулки",
+      5
+     ],
+     [
+      "хлипкий пластик/материал",
+      3
+     ]
+    ]
+   },
+   "228779629": {
+    "reviews": 642,
+    "neg365": 30,
+    "neg_pct": 4.7,
+    "top": [
+     [
+      "ручка: крепление/болты/люфт",
+      6
+     ],
+     [
+      "укладка лески/зазор/дужка",
+      4
+     ],
+     [
+      "ломается механизм/шестерни (быстро выходит из строя)",
+      3
+     ]
+    ]
+   },
+   "385598503": {
+    "reviews": 1102,
+    "neg365": 24,
+    "neg_pct": 2.2,
+    "top": [
+     [
+      "ломается механизм/шестерни (быстро выходит из строя)",
+      5
+     ],
+     [
+      "укладка лески/зазор/дужка",
+      4
+     ],
+     [
+      "ручка: крепление/болты/люфт",
+      3
+     ]
+    ]
+   },
+   "504109542": {
+    "reviews": 510,
+    "neg365": 40,
+    "neg_pct": 7.8,
+    "top": [
+     [
+      "подшипники: меньше заявленного/втулки",
+      5
+     ],
+     [
+      "укладка лески/зазор/дужка",
+      3
+     ],
+     [
+      "хлипкий пластик/материал",
+      3
+     ]
+    ]
+   },
+   "808295786": {
+    "reviews": 193,
+    "neg365": 24,
+    "neg_pct": 12.4,
+    "top": [
+     [
+      "ручка: крепление/болты/люфт",
+      3
+     ],
+     [
+      "подшипники: меньше заявленного/втулки",
+      2
+     ],
+     [
+      "брак/некомплект при получении",
+      2
+     ]
+    ]
+   }
+  },
+  "total_neg": 249,
+  "themes": [
+   [
+    "ломается механизм/шестерни (быстро выходит из строя)",
+    36,
+    14
+   ],
+   [
+    "ручка: крепление/болты/люфт",
+    33,
+    13
+   ],
+   [
+    "укладка лески/зазор/дужка",
+    28,
+    11
+   ],
+   [
+    "подшипники: меньше заявленного/втулки",
+    24,
+    10
+   ],
+   [
+    "хлипкий пластик/материал",
+    20,
+    8
+   ],
+   [
+    "брак/некомплект при получении",
+    11,
+    4
+   ]
+  ],
+  "quotes": {
+   "ломается механизм/шестерни (быстро выходит из строя)": [
+    "Не возможно зафиксировать леску туго крутится",
+    "После первой рыбалки, одна катушка сломалась в креплении, вторая заклинила в процессе вываживания и ремонту не подлежит. Полный отстой. Ожид",
+    "Заказывали 2 катушки, одна сломалась после первой поездки на рыбалку, вторая еще держится)"
+   ],
+   "укладка лески/зазор/дужка": [
+    "Не возможно зафиксировать леску туго крутится",
+    "Сомнительные катушки. Мотают рывками, более менее крупную рыбу или вес даже не пробуйте выматывать без работы Бланком. Охарактеризовал бы её",
+    "Катушка хорошая но приехала с погнутой дужкой одна из них"
+   ],
+   "ручка: крепление/болты/люфт": [
+    "Катушка рабочая, правда после второго использования отвалился фиксатор ручки. Видимо плохо приклеил продавец.",
+    "Ручка сломалась после первого раза",
+    "Разваливаются ручки сразу ***"
+   ],
+   "хлипкий пластик/материал": [
+    "Крайне слабая катушка. За такую цену не рекомендую.",
+    "К сожалению, катушка развалилась после второй рыбалки. На рыбу, больше килограмма не подходит. Слабая. Вторая ещё держится.",
+    "Не стоит покупать, вроде не дорого а ещё и 2 катушки, кажется что надо брать, класс, а на самом деле они слабые, плохие, в первый день слома"
+   ],
+   "подшипники: меньше заявленного/втулки": [
+    "смазки почти нет!!! подшипник всего 1, а не 6 как заявлено!!! ручки отвалились почти сразу же!!! НЕ РЕКОМЕНДУЮ К ПОКУПКЕ",
+    "смазки почти нет!!! подшипник всего 1, а не 6 как заявлено!!! ручки отвалились почти сразу же!!! НЕ РЕКОМЕНДУЮ К ПОКУПКЕ",
+    "Не пытайте иллюзий,о качестве этих катушек.Потшибников там нет вообще,эт бюджетный вариант,какое-то время послужат,в целом брать можно."
+   ],
+   "брак/некомплект при получении": [
+    "Пришло с браком, ручка не крепитесь в катушке. Оформлен возврат, деньги вернули",
+    "Одна из двух брак, шпуля бьёт",
+    "Пришли с треснутыми шпулями и одна плохо коутилась"
+   ]
+  }
+ },
+ "barriers": {
+  "reviews_top10_med": 1546.5,
+  "reviews_seg_med": 1757.0,
+  "reviews_top100_min": 36,
+  "new_cards_in_top100": 27,
+  "new_cards_share": 22.1,
+  "ads_med_top100": 75.0,
+  "winner": {
+   "id": 808295786,
+   "first_sale": "2026-03-01",
+   "day10": "2026-03-31",
+   "day30": "2026-06-13",
+   "reviews_at_10": 10602,
+   "reviews_at_30": 10964,
+   "series_len": 371
+  }
+ },
+ "concentration": {
+  "niche_rev_jul": 158771075,
+  "sellers_rows": 200,
+  "top1_seller": "ИП Цыганова А Я",
+  "top1_niche_pct": 5.1,
+  "top10_niche_pct": 34.5,
+  "top1_niche_pct_est": 4.2,
+  "top10_niche_pct_est": 27.8,
+  "top100_sellers": 32,
+  "top1_top100_pct": 12.6,
+  "top10_top100_pct": 61.5,
+  "top3_cards_one_seller": false,
+  "top3_sellers": [
+   "ИП Лаврущева Марина Александровна",
+   "ООО Синай",
+   "ИП Фомичев Д С"
+  ],
+  "top_sellers": [
+   [
+    "ИП Цыганова А Я",
+    8077604,
+    25
+   ],
+   [
+    "ИП Шарафутдинов Р К",
+    7060590,
+    77
+   ],
+   [
+    "ИП Рудаков А С",
+    7042815,
+    45
+   ],
+   [
+    "ИП Камалетдинов Р Х",
+    6017071,
+    42
+   ],
+   [
+    "ИП Дмитриева М Д",
+    5602072,
+    24
+   ],
+   [
+    "ИП Лёвочкин М П",
+    4979284,
+    29
+   ],
+   [
+    "ИП Лаврущева Марина Александровна",
+    4692705,
+    23
+   ],
+   [
+    "ИП Чепурных М А",
+    3897782,
+    27
+   ],
+   [
+    "ИП Козырева Е С",
+    3740100,
+    154
+   ],
+   [
+    "ИП Кирилова Н М",
+    3724618,
+    20
+   ]
+  ]
+ },
+ "yoy_check": {
+  "months": [
+   "2025-06",
+   "2026-06"
+  ],
+  "queries_prev": 2174,
+  "queries_cur": 1656,
+  "matched": 1121,
+  "sum_prev_all": 734476,
+  "sum_cur_all": 846983,
+  "yoy_all_pct": 15.3,
+  "sum_prev_matched": 651243,
+  "sum_cur_matched": 720012,
+  "yoy_matched_pct": 10.6,
+  "top_queries": [
+   [
+    "катушка для спиннинга",
+    128220,
+    134760,
+    5.1
+   ],
+   [
+    "катушка для рыбалки",
+    67665,
+    48452,
+    -28.4
+   ],
+   [
+    "катушка",
+    40755,
+    45846,
+    12.5
+   ],
+   [
+    "катушка для фидера",
+    19795,
+    23329,
+    17.9
+   ],
+   [
+    "катушка для спиннинга 3000",
+    7990,
+    12748,
+    59.5
+   ],
+   [
+    "мультипликаторная катушка",
+    9615,
+    10821,
+    12.5
+   ],
+   [
+    "катушка для удочки",
+    7320,
+    10698,
+    46.1
+   ],
+   [
+    "катушка для спиннинга 2000",
+    7040,
+    6968,
+    -1.0
+   ],
+   [
+    "катушка на спиннинг",
+    7320,
+    6163,
+    -15.8
+   ],
+   [
+    "катушка мультипликаторная",
+    5785,
+    6980,
+    20.7
+   ],
+   [
+    "катушка рыболовная",
+    6260,
+    6333,
+    1.2
+   ],
+   [
+    "катушки для рыбалки",
+    4795,
+    7230,
+    50.8
+   ],
+   [
+    "катушки",
+    6420,
+    5566,
+    -13.3
+   ],
+   [
+    "катушки для спиннинга",
+    7765,
+    4063,
+    -47.7
+   ],
+   [
+    "катушка кобра",
+    5965,
+    4444,
+    -25.5
+   ]
+  ],
+  "sales_yoy_pct": 53.7,
+  "sales_est_cur": 129458,
+  "sales_prev": 99845
+ },
+ "entry_curves": {
+  "cohort": 27,
+  "with_daily": 27,
+  "percentiles": {
+   "1": {
+    "n": 27,
+    "p25": 1.7,
+    "p50": 2.8,
+    "p75": 5.8
+   },
+   "2": {
+    "n": 19,
+    "p25": 2.2,
+    "p50": 5.5,
+    "p75": 8.1
+   },
+   "3": {
+    "n": 15,
+    "p25": 2.3,
+    "p50": 3.9,
+    "p75": 5.0
+   },
+   "4": {
+    "n": 8,
+    "p25": 3.8,
+    "p50": 4.9,
+    "p75": 6.7
+   },
+   "5": {
+    "n": 8,
+    "p25": 3.1,
+    "p50": 7.0,
+    "p75": 11.7
+   }
+  },
+  "cards": [
+   {
+    "id": 808295786,
+    "start": "2026-02-20",
+    "first_sale": "2026-03-01",
+    "months": 5,
+    "curve": [
+     1.72,
+     8.12,
+     5.04,
+     12.28,
+     21.2
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 874089316,
+    "start": "2026-04-08",
+    "first_sale": "2026-04-18",
+    "months": 3,
+    "curve": [
+     14.94,
+     14.45,
+     24.48
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 808295787,
+    "start": "2026-02-20",
+    "first_sale": "2026-02-25",
+    "months": 5,
+    "curve": [
+     1.51,
+     5.78,
+     3.92,
+     8.32,
+     13.36
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 748796951,
+    "start": "2026-01-19",
+    "first_sale": "2026-01-20",
+    "months": 6,
+    "curve": [
+     2.43,
+     4.23,
+     2.93,
+     4.07,
+     4.65,
+     7.55
+    ],
+    "segment": "с байтраннером (фидер/карп)"
+   },
+   {
+    "id": 1052860189,
+    "start": "2026-06-02",
+    "first_sale": "2026-06-03",
+    "months": 1,
+    "curve": [
+     9.8
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 997290578,
+    "start": "2026-04-30",
+    "first_sale": "2026-05-19",
+    "months": 2,
+    "curve": [
+     0.89,
+     3.23
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 1053412969,
+    "start": "2026-06-02",
+    "first_sale": "2026-06-03",
+    "months": 1,
+    "curve": [
+     6.38
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 1063970593,
+    "start": "2026-05-27",
+    "first_sale": "2026-06-01",
+    "months": 2,
+    "curve": [
+     4.68,
+     8.11
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 874087405,
+    "start": "2026-04-08",
+    "first_sale": "2026-04-09",
+    "months": 3,
+    "curve": [
+     12.56,
+     7.87,
+     14.83
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 1151063036,
+    "start": "2026-06-25",
+    "first_sale": "2026-06-25",
+    "months": 1,
+    "curve": [
+     6.37
+    ],
+    "segment": "мультипликатор / байткастинг"
+   },
+   {
+    "id": 1061412452,
+    "start": "2026-06-01",
+    "first_sale": "2026-06-04",
+    "months": 1,
+    "curve": [
+     2.51
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 881928659,
+    "start": "2026-06-10",
+    "first_sale": "2026-06-13",
+    "months": 1,
+    "curve": [
+     4.5
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 808295788,
+    "start": "2026-02-20",
+    "first_sale": "2026-03-03",
+    "months": 5,
+    "curve": [
+     3.58,
+     10.4,
+     8.13,
+     6.73,
+     6.96
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 679181512,
+    "start": "2026-05-03",
+    "first_sale": "2026-05-13",
+    "months": 2,
+    "curve": [
+     2.06,
+     6.71
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 758326915,
+    "start": "2026-02-16",
+    "first_sale": "2026-02-18",
+    "months": 5,
+    "curve": [
+     3.73,
+     1.25,
+     0.71,
+     3.8,
+     11.65
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 684356652,
+    "start": "2026-04-09",
+    "first_sale": "2026-04-13",
+    "months": 3,
+    "curve": [
+     4.16,
+     9.03,
+     6.96
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 1110637798,
+    "start": "2026-06-08",
+    "first_sale": "2026-06-09",
+    "months": 1,
+    "curve": [
+     2.77
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 1061412451,
+    "start": "2026-06-01",
+    "first_sale": "2026-06-03",
+    "months": 1,
+    "curve": [
+     4.77
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 594045774,
+    "start": "2025-11-07",
+    "first_sale": "2025-11-09",
+    "months": 8,
+    "curve": [
+     0.79,
+     2.14,
+     1.52,
+     3.25,
+     2.08,
+     0.68,
+     2.51,
+     2.71
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 684307251,
+    "start": "2026-06-02",
+    "first_sale": "2026-06-03",
+    "months": 1,
+    "curve": [
+     6.55
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 714378021,
+    "start": "2025-12-19",
+    "first_sale": "2025-12-21",
+    "months": 7,
+    "curve": [
+     0.91,
+     3.7,
+     4.44,
+     4.93,
+     3.12,
+     1.97,
+     3.39
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 961245781,
+    "start": "2026-05-30",
+    "first_sale": "2026-06-01",
+    "months": 2,
+    "curve": [
+     1.59,
+     5.49
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 613556051,
+    "start": "2026-04-07",
+    "first_sale": "2026-04-11",
+    "months": 3,
+    "curve": [
+     2.42,
+     2.22,
+     2.26
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 984929735,
+    "start": "2026-04-26",
+    "first_sale": "2026-05-02",
+    "months": 3,
+    "curve": [
+     1.37,
+     1.7,
+     2.69
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 930175550,
+    "start": "2026-04-09",
+    "first_sale": "2026-04-13",
+    "months": 3,
+    "curve": [
+     5.84,
+     5.67,
+     4.77
+    ],
+    "segment": "крупная 5000+ (фидер/карп/море)"
+   },
+   {
+    "id": 613556050,
+    "start": "2026-04-07",
+    "first_sale": "2026-04-12",
+    "months": 3,
+    "curve": [
+     2.31,
+     1.32,
+     1.43
+    ],
+    "segment": "спиннинговая 2000–4000"
+   },
+   {
+    "id": 551223325,
+    "start": "2025-10-02",
+    "first_sale": "2025-10-08",
+    "months": 9,
+    "curve": [
+     2.69,
+     3.33,
+     1.29,
+     1.01,
+     0.0,
+     0.0,
+     0.37,
+     1.54,
+     1.52
+    ],
+    "segment": "с байтраннером (фидер/карп)"
+   }
+  ]
+ },
+ "price_basis": {
+  "n": 100,
+  "avg_vs_rev_per_unit_dev_med_pct": 0.0,
+  "final_vs_start_x_discount_med": 1.016,
+  "spp_realized_med_pct": 15.4,
+  "spp_avg_reported_med_pct": 33.0,
+  "seller_price_med": 1667.5,
+  "buyer_price_med": 1507
+ },
+ "segments": [
+  {
+   "segment": "спиннинговая 2000–4000",
+   "n": 42,
+   "rev": 25871029,
+   "share": 46.4,
+   "rev_per_card": 615977,
+   "price_med": 1578.0,
+   "buyer_med": 1354,
+   "sales_med": 329.5,
+   "new": 10,
+   "rating_med": 5.0,
+   "buyout_med": 79.0
+  },
+  {
+   "segment": "с байтраннером (фидер/карп)",
+   "n": 22,
+   "rev": 14368418,
+   "share": 25.8,
+   "rev_per_card": 653110,
+   "price_med": 2087.5,
+   "buyer_med": 2019,
+   "sales_med": 286.5,
+   "new": 2,
+   "rating_med": 5.0,
+   "buyout_med": 79.0
+  },
+  {
+   "segment": "крупная 5000+ (фидер/карп/море)",
+   "n": 26,
+   "rev": 10976286,
+   "share": 19.7,
+   "rev_per_card": 422165,
+   "price_med": 1632.0,
+   "buyer_med": 1312,
+   "sales_med": 294.5,
+   "new": 14,
+   "rating_med": 5.0,
+   "buyout_med": 79.0
+  },
+  {
+   "segment": "мультипликатор / байткастинг",
+   "n": 6,
+   "rev": 2254451,
+   "share": 4.0,
+   "rev_per_card": 375742,
+   "price_med": 1658.0,
+   "buyer_med": 1302,
+   "sales_med": 269.5,
+   "new": 1,
+   "rating_med": 5.0,
+   "buyout_med": 78.0
+  },
+  {
+   "segment": "ультралайт ≤ 1500",
+   "n": 4,
+   "rev": 2250753,
+   "share": 4.0,
+   "rev_per_card": 562688,
+   "price_med": 1811.5,
+   "buyer_med": 1663,
+   "sales_med": 399.0,
+   "new": 0,
+   "rating_med": 5.0,
+   "buyout_med": 79.0
+  }
+ ],
+ "newcomer_levels": {
+  "band": [
+   1304,
+   1797
+  ],
+  "n_new_top500": 31,
+  "rank500_per_day": 2.8,
+  "p25": 2.0,
+  "p50": 3.1,
+  "p75": 5.1,
+  "winners_plateau_p50": 6.0,
+  "shape": [
+   0.47,
+   0.92,
+   0.92,
+   0.92,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "season_jul": 125
+ },
+ "newcomer_levels_all": {
+  "band": null,
+  "n_new_top500": 109,
+  "rank500_per_day": 2.8,
+  "p25": 1.2,
+  "p50": 1.9,
+  "p75": 3.6,
+  "winners_plateau_p50": 6.0,
+  "shape": [
+   0.47,
+   0.92,
+   0.92,
+   0.92,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "season_jul": 125
+ },
+ "product": {
+  "name": "катушка безынерционная 3000: металлическая шпуля, 5+1 реальных подшипников, металлическая ручка на резьбе, запасная шпуля",
+  "price": 1590,
+  "yuan": 20,
+  "vol": 1.8,
+  "kg": 0.45,
+  "buyout": 79.0,
+  "commission": 21.0,
+  "buyer_price": 1345
+ },
+ "econ": {
+  "старт ДРР 25%": {
+   "price": 1590,
+   "commission": 333.9,
+   "logistics_with_returns": 125.52,
+   "storage": 8.91,
+   "goods_cost_full": 427.45,
+   "ads": 397.5,
+   "tax": 95.4,
+   "net_profit": 198.26,
+   "net_margin_pct": 12.5,
+   "roi_on_goods_pct": 46.4,
+   "breakeven_price": 1176.95,
+   "yuan": 20
+  },
+  "база ДРР 15%": {
+   "price": 1590,
+   "commission": 333.9,
+   "logistics_with_returns": 125.52,
+   "storage": 8.91,
+   "goods_cost_full": 427.45,
+   "ads": 238.5,
+   "tax": 95.4,
+   "net_profit": 357.26,
+   "net_margin_pct": 22.5,
+   "roi_on_goods_pct": 83.6,
+   "breakeven_price": 974.02,
+   "yuan": 20
+  },
+  "зрелость ДРР 10%": {
+   "price": 1590,
+   "commission": 333.9,
+   "logistics_with_returns": 125.52,
+   "storage": 8.91,
+   "goods_cost_full": 427.45,
+   "ads": 159.0,
+   "tax": 95.4,
+   "net_profit": 436.76,
+   "net_margin_pct": 27.5,
+   "roi_on_goods_pct": 102.2,
+   "breakeven_price": 896.72,
+   "yuan": 20
+  },
+  "цена −15%": {
+   "price": 1352,
+   "commission": 283.92,
+   "logistics_with_returns": 125.52,
+   "storage": 8.91,
+   "goods_cost_full": 427.45,
+   "ads": 202.8,
+   "tax": 81.12,
+   "net_profit": 219.22,
+   "net_margin_pct": 16.2,
+   "roi_on_goods_pct": 51.3,
+   "breakeven_price": 974.02,
+   "yuan": 20
+  },
+  "СПП-сценарий (от цены покупателя 1345 ₽)": {
+   "price": 1345,
+   "commission": 282.45,
+   "logistics_with_returns": 125.52,
+   "storage": 8.91,
+   "goods_cost_full": 427.45,
+   "ads": 201.75,
+   "tax": 80.7,
+   "net_profit": 215.16,
+   "net_margin_pct": 16.0,
+   "roi_on_goods_pct": 50.3,
+   "breakeven_price": 974.02,
+   "yuan": 20
+  },
+  "max_cost_rub": 401,
+  "max_yuan": 23.6,
+  "cargo_extra_rub": 0,
+  "fixed_month_rub": 10000,
+  "breakeven_units_month": 28,
+  "tariffs_source": "WB API, 2026-10-04 (СЦ Ереван)"
+ }
+}

@@ -1,0 +1,124 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Լոգիստիկ սցենարներ՝ «որտեղի՞ց ենք վաճառում». Կարդում է src/xborder.py։
+# Ամեն սցենար = (1) WB տարիֆներ՝ merge config/unit_economics.yaml-ի վրա,
+#               (2) ներկրման երթուղի՝ override config/landed_cost.yaml-ի վրա,
+#               (3) կոմիսիա՝ fbo | fbs; աղբյուր՝ cabinet (AM կաբինետի API) | dump (Saleflow՝ ՌԴ վաճառողներ)։
+#               ⚠️ ՌԴ դրույքները մինչև +19 п.п. բարձր են AM կաբինետից (Термосы 38.5% vs 19.5%)։
+# ՓԱՍՏ = WB API / ЦБ РФ; ԵՆԹԱԴՐՈՒԹՅՈՒՆ = վեբ-աղբյուր կամ գնահատական — ճշտել գնանշումով։
+# ─────────────────────────────────────────────────────────────────────────────
+
+scenarios:
+
+  AM:
+    label: "Армянский кабинет → СЦ Ереван (FBO), товар из Китая"
+    commission: fbo
+    commission_source: cabinet   # ՓԱՍՏ՝ քո կաբինետի WB API /api/v1/tariffs/commission
+    tariffs_file: config/tariffs_auto.yaml   # ՓԱՍՏ՝ WB API, СЦ Ереван 71.3 / 21.7 ₽ (коэф 155% ներառված)
+    landed: {}                                # config/landed_cost.yaml as is՝ Китай → Ереван
+    access: "витрина РФ для товаров из Китая — последняя очередь восстановления (не проверено)"
+
+  RU_FBO:
+    label: "ИП/ООО в РФ → склад WB в РФ (FBO), карго Китай → Москва"
+    commission: fbo
+    commission_source: dump   # Saleflow/MPStats commision_* = ставки WB для РФ-продавцов
+    tariffs:
+      # ՓԱՍՏ՝ բազային ցանց 46 / 14 ₽ (WB API, Ташкент коэф 100%); < 1 լ աստիճանները 23–32 ₽
+      # (guruseller.ru/logs-wildberries-2025 — համընկնում է config/unit_economics.yaml-ի հետ)։
+      logistics:
+        warehouse_coef: 1.75     # ԵՆԹԱԴՐՈՒԹՅՈՒՆ՝ Электросталь FBW 175% (guruseller.ru); տատանվում է 1.0–2.0+
+      storage:
+        warehouse_coef: 1.75
+    landed:
+      # ԵՆԹԱԴՐՈՒԹՅՈՒՆ՝ карго «под ключ» Китай → Москва, авто 18–25 դ.՝ $1.6–4/կգ, տաможня ներառված
+      # (transitgroup.ru/uslugi/dostavka-iz-kitaya/kargo, online-cargo.com). Վերցնում ենք $3.0՝ փոքր партия-ի համար։
+      freight:
+        rates_usd_per_kg: {truck: 3.0}
+        mode: truck
+      customs:
+        duty_pct: 0.0            # карго «под ключ»՝ տուրքը ներառված է սակագնում
+        vat_pct: 0.0             # ⚠️ «սպիտակ» ներկրման դեպքում +20% НДС + տուրք → տես RU_FBO_WHITE
+        broker_fee_usd: 0
+        customs_fee_usd: 0
+    one_off_usd: 0               # ИП/ООО РФ-ի գրանցման ծախսը՝ ճշտել (ՀՀ քաղաքացու համար՝ ԵԱՏՄ կարգ)
+    access: "нужен российский ИП/ООО и счёт в РФ; карго без ДТ — риск при проверке происхождения"
+
+  RU_FBO_WHITE:
+    label: "ИП/ООО в РФ → склад WB в РФ (FBO), «белый» импорт"
+    commission: fbo
+    commission_source: dump   # Saleflow/MPStats commision_* = ставки WB для РФ-продавцов
+    tariffs:
+      logistics: {warehouse_coef: 1.75}
+      storage: {warehouse_coef: 1.75}
+    landed:
+      freight:
+        rates_usd_per_kg: {truck: 1.6}   # ԵՆԹԱԴՐՈՒԹՅՈՒՆ՝ авто от $1.6/կգ (transitgroup.ru), առանց «под ключ»
+        mode: truck
+      customs:
+        duty_pct: 8.0            # ԵԱՏՄ ЕТТ միջին, ճշտել ТН ВЭД-ով
+        vat_pct: 20.0            # НДС РФ ներմուծման պահին (УСН-ով չի վերադարձվում)
+    access: "нужен российский ИП/ООО, ВЭД-контракт, брокер"
+
+  RU_FBS:
+    label: "Армянский кабинет → «Свой склад РФ» (FBS через фулфилмент), товар из Китая"
+    commission: fbs
+    commission_source: cabinet   # ՓԱՍՏ՝ քո կաբինետի WB API /api/v1/tariffs/commission
+    tariffs:
+      # ՓԱՍՏ՝ WB API tariffs/box «Свой склад РФ»՝ boxDeliveryMarketplace 78.2 / 23.8 ₽, коэф 170% ներառված
+      logistics:
+        tiers_under_1l: {0.2: 78.2, 0.4: 78.2, 0.6: 78.2, 0.8: 78.2, 1.0: 78.2}
+        first_liter_over_1l: 78.2
+        extra_liter: 23.8
+        warehouse_coef: 1.0
+      storage:
+        per_liter_per_day: 0.0   # FBS՝ WB-ն պահեստավորում չի գանձում
+      acceptance_per_liter: 0.0
+      operations:
+        first_mile_rub: 65       # ԵՆԹԱԴՐՈՒԹՅՈՒՆ՝ фулфилмент FBS «сборка и доставка от 65 ₽ за заказ» (sostav.ru/blogs/292167/98921)
+    landed:
+      freight:
+        rates_usd_per_kg: {truck: 3.0}   # նույնը, ինչ RU_FBO-ում
+        mode: truck
+      customs: {duty_pct: 0.0, vat_pct: 0.0, broker_fee_usd: 0, customs_fee_usd: 0}
+    access: "⚠️ «серое» карго — только для сравнения; армянский кабинет, товар физически в РФ"
+
+  RU_FBS_EAEU:
+    label: "Армянский кабинет → растаможка в РА → Ереван–Москва → фулфилмент → «Свой склад РФ» (FBS), легально"
+    commission: fbs
+    commission_source: cabinet   # ՓԱՍՏ՝ քո կաբինետի WB API /api/v1/tariffs/commission (kgvpMarketplace)
+    tariffs:
+      logistics:                 # ՓԱՍՏ՝ «Свой склад РФ» 78.2 / 23.8 ₽, коэф 170% ներառված
+        tiers_under_1l: {0.2: 78.2, 0.4: 78.2, 0.6: 78.2, 0.8: 78.2, 1.0: 78.2}
+        first_liter_over_1l: 78.2
+        extra_liter: 23.8
+        warehouse_coef: 1.0
+      storage:
+        per_liter_per_day: 0.0
+      acceptance_per_liter: 0.0
+      operations:
+        first_mile_rub: 65       # ԵՆԹԱԴՐՈՒԹՅՈՒՆ՝ фулфилмент «от 65 ₽ за заказ» (sostav.ru/blogs/292167/98921)
+    landed:
+      # Չինաստան → Երևան + ՀՀ մաքսազերծում՝ ինչպես AM (config/landed_cost.yaml)
+      post_customs:
+        # ԵՆԹԱԴՐՈՒԹՅՈՒՆ՝ сборный груз Ереван → Москва 46–150 ₽/кг, 5–6 дн, минимум ≈ 2 300 ₽
+        # (maintransport.ru/transportnye-kompanii/moskva/erevan, cargoexpress.am, tlkregion.ru); վերցնում ենք ≈ 100 ₽/կգ
+        usd_per_kg: 1.2
+        min_charge_usd: 28
+    access: "ЕАЭС-товар (растаможен в РА) → в РФ без таможни; с 20.04.2026 — доп. контроль ввоза через ЕАЭС; нужны декларация ЕАЭС и документы растаможки"
+
+  AM_MADE:
+    label: "Армянский кабинет → СЦ Ереван (FBO), товар армянского производства"
+    commission: fbo
+    commission_source: cabinet   # ՓԱՍՏ՝ քո կաբինետի WB API /api/v1/tariffs/commission
+    tariffs_file: config/tariffs_auto.yaml
+    local_cost: true             # Չինաստան չկա → հաշվում ենք max տեղական գնման գինը ₽-ով
+    access: "первая очередь восстановления витрины РФ («Сделано в Армении»), нужен СТ-1"
+
+# Ինչ ենք համարում «անցավ»՝ բոլոր 3 սցենարներում (база, цена −15%, выкуп −15 п.п.)
+stress:
+  price_drop_pct: 15
+  buyout_drop_pp: 15
+  drr_pct: 15
+units_per_batch: 200
+# k = медианная цена ₽ / (max ¥ × cny_to_rub). Որքան փոքր, այնքան լավ։
+k_good: 6          # k ≤ 6 → 🟢 (գործարանը կարող է ստանալ ≥ 1/6 մանրածախ գնի)
+k_ok: 9            # 6 < k ≤ 9 → 🟡; > 9 → 🔴 (կամ max ¥ չկա)

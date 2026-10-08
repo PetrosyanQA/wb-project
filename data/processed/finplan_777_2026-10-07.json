@@ -1,0 +1,775 @@
+{
+ "niche": 777,
+ "start": "2026-12",
+ "season": [
+  113,
+  93,
+  109,
+  102,
+  102,
+  104,
+  100,
+  92,
+  90,
+  91,
+  102,
+  98
+ ],
+ "batch": 300,
+ "product": {
+  "name": "вакуумно-магнитный держатель, совместимый с MagSafe",
+  "price": 1590,
+  "yuan": 18,
+  "vol": 0.4,
+  "kg": 0.15,
+  "buyout": 84.6,
+  "commission": 20.0,
+  "buyer_price": 1000
+ },
+ "runs": [
+  {
+   "name": "пессимистичный (P25 новичков top-500)",
+   "start": {
+    "образцы (2 шт × 3 поставщика + доставка)": 5000,
+    "контент: фото, инфографика, видео": 15000,
+    "WB «Отзывы за баллы» (30 отзывов × 100 ₽)": 3000,
+    "реклама: предоплата первых 2 недель": 15000,
+    "партия 1: 300 шт × 392 ₽ (товар+упаковка+ФФ+брак)": 117729
+   },
+   "invest": 155729,
+   "budget": 166960,
+   "rows": [
+    {
+     "month": 1,
+     "orders_day": 1.0,
+     "sold": 25,
+     "lost": 0,
+     "revenue": 39216,
+     "profit": -2905,
+     "cum_profit": -2905,
+     "bought": 0,
+     "stock_end": 275,
+     "cash_end": 18022
+    },
+    {
+     "month": 2,
+     "orders_day": 1.4,
+     "sold": 34,
+     "lost": 0,
+     "revenue": 54793,
+     "profit": -87,
+     "cum_profit": -2992,
+     "bought": 0,
+     "stock_end": 241,
+     "cash_end": 31482
+    },
+    {
+     "month": 3,
+     "orders_day": 1.6,
+     "sold": 40,
+     "lost": 0,
+     "revenue": 64220,
+     "profit": 8040,
+     "cum_profit": 5048,
+     "bought": 0,
+     "stock_end": 200,
+     "cash_end": 55400
+    },
+    {
+     "month": 4,
+     "orders_day": 1.5,
+     "sold": 38,
+     "lost": 0,
+     "revenue": 60095,
+     "profit": 6882,
+     "cum_profit": 11930,
+     "bought": 0,
+     "stock_end": 163,
+     "cash_end": 77140
+    },
+    {
+     "month": 5,
+     "orders_day": 1.6,
+     "sold": 41,
+     "lost": 0,
+     "revenue": 65858,
+     "profit": 8501,
+     "cum_profit": 20431,
+     "bought": 0,
+     "stock_end": 121,
+     "cash_end": 101923
+    },
+    {
+     "month": 6,
+     "orders_day": 1.7,
+     "sold": 42,
+     "lost": 0,
+     "revenue": 67149,
+     "profit": 8863,
+     "cum_profit": 29295,
+     "bought": 0,
+     "stock_end": 79,
+     "cash_end": 127388
+    },
+    {
+     "month": 7,
+     "orders_day": 1.6,
+     "sold": 41,
+     "lost": 0,
+     "revenue": 64567,
+     "profit": 8138,
+     "cum_profit": 37433,
+     "bought": 100,
+     "stock_end": 38,
+     "cash_end": 112247
+    },
+    {
+     "month": 8,
+     "orders_day": 1.5,
+     "sold": 37,
+     "lost": 0,
+     "revenue": 59401,
+     "profit": 6687,
+     "cum_profit": 44119,
+     "bought": 0,
+     "stock_end": 101,
+     "cash_end": 133620
+    },
+    {
+     "month": 9,
+     "orders_day": 1.4,
+     "sold": 37,
+     "lost": 0,
+     "revenue": 58110,
+     "profit": 6324,
+     "cum_profit": 50444,
+     "bought": 0,
+     "stock_end": 65,
+     "cash_end": 154311
+    },
+    {
+     "month": 10,
+     "orders_day": 1.5,
+     "sold": 37,
+     "lost": 0,
+     "revenue": 58756,
+     "profit": 6506,
+     "cum_profit": 56949,
+     "bought": 100,
+     "stock_end": 28,
+     "cash_end": 136101
+    },
+    {
+     "month": 11,
+     "orders_day": 1.6,
+     "sold": 41,
+     "lost": 0,
+     "revenue": 65858,
+     "profit": 8501,
+     "cum_profit": 65450,
+     "bought": 0,
+     "stock_end": 86,
+     "cash_end": 160884
+    },
+    {
+     "month": 12,
+     "orders_day": 1.6,
+     "sold": 40,
+     "lost": 0,
+     "revenue": 63275,
+     "profit": 7775,
+     "cum_profit": 73225,
+     "bought": 0,
+     "stock_end": 46,
+     "cash_end": 184303
+    }
+   ],
+   "payback": null,
+   "roi": {
+    "3": 3,
+    "6": 19,
+    "12": 47
+   },
+   "unit_launch": {
+    "profit": 287.66,
+    "goods": 392.43,
+    "cash_in": 680.7699999999999
+   },
+   "unit_base": {
+    "profit": 446.66,
+    "goods": 392.43,
+    "cash_in": 839.7699999999999
+   },
+   "min_cash": 18022,
+   "lost_units": 0,
+   "batch": 300
+  },
+  {
+   "name": "реалистичный (P50 новичков top-500)",
+   "start": {
+    "образцы (2 шт × 3 поставщика + доставка)": 5000,
+    "контент: фото, инфографика, видео": 15000,
+    "WB «Отзывы за баллы» (30 отзывов × 100 ₽)": 3000,
+    "реклама: предоплата первых 2 недель": 15000,
+    "партия 1: 300 шт × 392 ₽ (товар+упаковка+ФФ+брак)": 117729
+   },
+   "invest": 155729,
+   "budget": 166960,
+   "rows": [
+    {
+     "month": 1,
+     "orders_day": 2.5,
+     "sold": 63,
+     "lost": 0,
+     "revenue": 100777,
+     "profit": 8232,
+     "cum_profit": 8232,
+     "bought": 0,
+     "stock_end": 237,
+     "cash_end": 44379
+    },
+    {
+     "month": 2,
+     "orders_day": 3.5,
+     "sold": 88,
+     "lost": 0,
+     "revenue": 139985,
+     "profit": 15326,
+     "cum_profit": 23558,
+     "bought": 0,
+     "stock_end": 149,
+     "cash_end": 94315
+    },
+    {
+     "month": 3,
+     "orders_day": 4.1,
+     "sold": 103,
+     "lost": 0,
+     "revenue": 164068,
+     "profit": 36090,
+     "cum_profit": 59648,
+     "bought": 100,
+     "stock_end": 45,
+     "cash_end": 131725
+    },
+    {
+     "month": 4,
+     "orders_day": 3.8,
+     "sold": 97,
+     "lost": 0,
+     "revenue": 153532,
+     "profit": 33130,
+     "cum_profit": 92778,
+     "bought": 100,
+     "stock_end": 49,
+     "cash_end": 163571
+    },
+    {
+     "month": 5,
+     "orders_day": 4.2,
+     "sold": 106,
+     "lost": 0,
+     "revenue": 168761,
+     "profit": 37408,
+     "cum_profit": 130186,
+     "bought": 100,
+     "stock_end": 43,
+     "cash_end": 203461
+    },
+    {
+     "month": 6,
+     "orders_day": 4.3,
+     "sold": 108,
+     "lost": 0,
+     "revenue": 172070,
+     "profit": 38338,
+     "cum_profit": 168523,
+     "bought": 100,
+     "stock_end": 34,
+     "cash_end": 245098
+    },
+    {
+     "month": 7,
+     "orders_day": 4.1,
+     "sold": 104,
+     "lost": 0,
+     "revenue": 165452,
+     "profit": 36479,
+     "cum_profit": 205002,
+     "bought": 100,
+     "stock_end": 30,
+     "cash_end": 283240
+    },
+    {
+     "month": 8,
+     "orders_day": 3.8,
+     "sold": 96,
+     "lost": 0,
+     "revenue": 152216,
+     "profit": 32760,
+     "cum_profit": 237762,
+     "bought": 100,
+     "stock_end": 35,
+     "cash_end": 314391
+    },
+    {
+     "month": 9,
+     "orders_day": 3.7,
+     "sold": 94,
+     "lost": 0,
+     "revenue": 148907,
+     "profit": 31831,
+     "cum_profit": 269593,
+     "bought": 100,
+     "stock_end": 41,
+     "cash_end": 343794
+    },
+    {
+     "month": 10,
+     "orders_day": 3.7,
+     "sold": 95,
+     "lost": 0,
+     "revenue": 150562,
+     "profit": 32295,
+     "cum_profit": 301888,
+     "bought": 100,
+     "stock_end": 46,
+     "cash_end": 374071
+    },
+    {
+     "month": 11,
+     "orders_day": 4.2,
+     "sold": 106,
+     "lost": 0,
+     "revenue": 168761,
+     "profit": 37408,
+     "cum_profit": 339297,
+     "bought": 100,
+     "stock_end": 40,
+     "cash_end": 413961
+    },
+    {
+     "month": 12,
+     "orders_day": 4.0,
+     "sold": 102,
+     "lost": 0,
+     "revenue": 162143,
+     "profit": 35549,
+     "cum_profit": 374846,
+     "bought": 0,
+     "stock_end": 38,
+     "cash_end": 489598
+    }
+   ],
+   "payback": 6,
+   "roi": {
+    "3": 38,
+    "6": 108,
+    "12": 241
+   },
+   "unit_launch": {
+    "profit": 287.66,
+    "goods": 392.43,
+    "cash_in": 680.7699999999999
+   },
+   "unit_base": {
+    "profit": 446.66,
+    "goods": 392.43,
+    "cash_in": 839.7699999999999
+   },
+   "min_cash": 44379,
+   "lost_units": 0,
+   "batch": 300
+  },
+  {
+   "name": "оптимистичный (P50 победителей top-100)",
+   "start": {
+    "образцы (2 шт × 3 поставщика + доставка)": 5000,
+    "контент: фото, инфографика, видео": 15000,
+    "WB «Отзывы за баллы» (30 отзывов × 100 ₽)": 3000,
+    "реклама: предоплата первых 2 недель": 15000,
+    "партия 1: 300 шт × 392 ₽ (товар+упаковка+ФФ+брак)": 117729
+   },
+   "invest": 155729,
+   "budget": 166960,
+   "rows": [
+    {
+     "month": 1,
+     "orders_day": 14.6,
+     "sold": 300,
+     "lost": 70,
+     "revenue": 477000,
+     "profit": 76298,
+     "cum_profit": 76298,
+     "bought": 524,
+     "stock_end": 0,
+     "cash_end": 0
+    },
+    {
+     "month": 2,
+     "orders_day": 20.2,
+     "sold": 513,
+     "lost": 0,
+     "revenue": 816265,
+     "profit": 137677,
+     "cum_profit": 213975,
+     "bought": 712,
+     "stock_end": 10,
+     "cash_end": 60140
+    },
+    {
+     "month": 3,
+     "orders_day": 23.7,
+     "sold": 602,
+     "lost": 0,
+     "revenue": 956697,
+     "profit": 258754,
+     "cum_profit": 472729,
+     "bought": 555,
+     "stock_end": 120,
+     "cash_end": 337499
+    },
+    {
+     "month": 4,
+     "orders_day": 22.2,
+     "sold": 563,
+     "lost": 0,
+     "revenue": 895258,
+     "profit": 241494,
+     "cum_profit": 714223,
+     "bought": 630,
+     "stock_end": 113,
+     "cash_end": 553166
+    },
+    {
+     "month": 5,
+     "orders_day": 24.4,
+     "sold": 619,
+     "lost": 0,
+     "revenue": 983755,
+     "profit": 266355,
+     "cum_profit": 980578,
+     "bought": 633,
+     "stock_end": 124,
+     "cash_end": 814228
+    },
+    {
+     "month": 6,
+     "orders_day": 24.9,
+     "sold": 631,
+     "lost": 0,
+     "revenue": 1003044,
+     "profit": 271773,
+     "cum_profit": 1252351,
+     "bought": 602,
+     "stock_end": 126,
+     "cash_end": 1097857
+    },
+    {
+     "month": 7,
+     "orders_day": 23.9,
+     "sold": 607,
+     "lost": 0,
+     "revenue": 964465,
+     "profit": 260936,
+     "cum_profit": 1513287,
+     "bought": 548,
+     "stock_end": 121,
+     "cash_end": 1382057
+    },
+    {
+     "month": 8,
+     "orders_day": 22.0,
+     "sold": 558,
+     "lost": 0,
+     "revenue": 887308,
+     "profit": 239261,
+     "cum_profit": 1752548,
+     "bought": 543,
+     "stock_end": 112,
+     "cash_end": 1627411
+    },
+    {
+     "month": 9,
+     "orders_day": 21.5,
+     "sold": 546,
+     "lost": 0,
+     "revenue": 868019,
+     "profit": 233842,
+     "cum_profit": 1986390,
+     "bought": 553,
+     "stock_end": 109,
+     "cash_end": 1858768
+    },
+    {
+     "month": 10,
+     "orders_day": 21.7,
+     "sold": 552,
+     "lost": 0,
+     "revenue": 877663,
+     "profit": 236552,
+     "cum_profit": 2222942,
+     "bought": 632,
+     "stock_end": 110,
+     "cash_end": 2064273
+    },
+    {
+     "month": 11,
+     "orders_day": 24.4,
+     "sold": 619,
+     "lost": 0,
+     "revenue": 983755,
+     "profit": 266355,
+     "cum_profit": 2489297,
+     "bought": 590,
+     "stock_end": 124,
+     "cash_end": 2342475
+    },
+    {
+     "month": 12,
+     "orders_day": 23.4,
+     "sold": 594,
+     "lost": 0,
+     "revenue": 945176,
+     "profit": 255517,
+     "cum_profit": 2744814,
+     "bought": 0,
+     "stock_end": 119,
+     "cash_end": 2831676
+    }
+   ],
+   "payback": 2,
+   "roi": {
+    "3": 304,
+    "6": 804,
+    "12": 1763
+   },
+   "unit_launch": {
+    "profit": 287.66,
+    "goods": 392.43,
+    "cash_in": 680.7699999999999
+   },
+   "unit_base": {
+    "profit": 446.66,
+    "goods": 392.43,
+    "cash_in": 839.7699999999999
+   },
+   "min_cash": 0,
+   "lost_units": 70,
+   "batch": 300
+  },
+  {
+   "name": "реалистичный, удержания от цены покупателя 1000 ₽",
+   "start": {
+    "образцы (2 шт × 3 поставщика + доставка)": 5000,
+    "контент: фото, инфографика, видео": 15000,
+    "WB «Отзывы за баллы» (30 отзывов × 100 ₽)": 3000,
+    "реклама: предоплата первых 2 недель": 15000,
+    "партия 1: 300 шт × 392 ₽ (товар+упаковка+ФФ+брак)": 117729
+   },
+   "invest": 155729,
+   "budget": 166960,
+   "rows": [
+    {
+     "month": 1,
+     "orders_day": 2.5,
+     "sold": 63,
+     "lost": 0,
+     "revenue": 63381,
+     "profit": -10091,
+     "cum_profit": -10091,
+     "bought": 0,
+     "stock_end": 237,
+     "cash_end": 26056
+    },
+    {
+     "month": 2,
+     "orders_day": 3.5,
+     "sold": 88,
+     "lost": 0,
+     "revenue": 88041,
+     "profit": -10127,
+     "cum_profit": -20218,
+     "bought": 0,
+     "stock_end": 149,
+     "cash_end": 50539
+    },
+    {
+     "month": 3,
+     "orders_day": 4.1,
+     "sold": 103,
+     "lost": 0,
+     "revenue": 103187,
+     "profit": 170,
+     "cum_profit": -20048,
+     "bought": 100,
+     "stock_end": 45,
+     "cash_end": 52030
+    },
+    {
+     "month": 4,
+     "orders_day": 3.8,
+     "sold": 97,
+     "lost": 0,
+     "revenue": 96561,
+     "profit": -483,
+     "cum_profit": -20531,
+     "bought": 100,
+     "stock_end": 49,
+     "cash_end": 50263
+    },
+    {
+     "month": 5,
+     "orders_day": 4.2,
+     "sold": 106,
+     "lost": 0,
+     "revenue": 106139,
+     "profit": 461,
+     "cum_profit": -20070,
+     "bought": 100,
+     "stock_end": 43,
+     "cash_end": 53205
+    },
+    {
+     "month": 6,
+     "orders_day": 4.3,
+     "sold": 108,
+     "lost": 0,
+     "revenue": 108220,
+     "profit": 666,
+     "cum_profit": -19404,
+     "bought": 100,
+     "stock_end": 34,
+     "cash_end": 57171
+    },
+    {
+     "month": 7,
+     "orders_day": 4.1,
+     "sold": 104,
+     "lost": 0,
+     "revenue": 104058,
+     "profit": 256,
+     "cum_profit": -19148,
+     "bought": 100,
+     "stock_end": 30,
+     "cash_end": 59090
+    },
+    {
+     "month": 8,
+     "orders_day": 3.8,
+     "sold": 96,
+     "lost": 0,
+     "revenue": 95733,
+     "profit": -565,
+     "cum_profit": -19712,
+     "bought": 100,
+     "stock_end": 35,
+     "cash_end": 56916
+    },
+    {
+     "month": 9,
+     "orders_day": 3.7,
+     "sold": 94,
+     "lost": 0,
+     "revenue": 93652,
+     "profit": -770,
+     "cum_profit": -20482,
+     "bought": 100,
+     "stock_end": 41,
+     "cash_end": 53719
+    },
+    {
+     "month": 10,
+     "orders_day": 3.7,
+     "sold": 95,
+     "lost": 0,
+     "revenue": 94693,
+     "profit": -667,
+     "cum_profit": -21149,
+     "bought": 100,
+     "stock_end": 46,
+     "cash_end": 51034
+    },
+    {
+     "month": 11,
+     "orders_day": 4.2,
+     "sold": 106,
+     "lost": 0,
+     "revenue": 106139,
+     "profit": 461,
+     "cum_profit": -20688,
+     "bought": 100,
+     "stock_end": 40,
+     "cash_end": 53976
+    },
+    {
+     "month": 12,
+     "orders_day": 4.0,
+     "sold": 102,
+     "lost": 0,
+     "revenue": 101977,
+     "profit": 51,
+     "cum_profit": -20637,
+     "bought": 0,
+     "stock_end": 38,
+     "cash_end": 94115
+    }
+   ],
+   "payback": null,
+   "roi": {
+    "3": -13,
+    "6": -12,
+    "12": -13
+   },
+   "unit_launch": {
+    "profit": -1.44,
+    "goods": 392.43,
+    "cash_in": 391.66999999999996
+   },
+   "unit_base": {
+    "profit": 98.56,
+    "goods": 392.43,
+    "cash_in": 491.66999999999996
+   },
+   "min_cash": 26056,
+   "lost_units": 0,
+   "batch": 300
+  }
+ ],
+ "start_sensitivity": {
+  "2026-11": {
+   "payback": 6,
+   "roi": {
+    "3": 36,
+    "6": 107,
+    "12": 241
+   },
+   "min_cash": 38652,
+   "lost_units": 0
+  },
+  "2027-01": {
+   "payback": 6,
+   "roi": {
+    "3": 37,
+    "6": 106,
+    "12": 243
+   },
+   "min_cash": 36742,
+   "lost_units": 0
+  }
+ },
+ "month_names": [
+  "дек",
+  "янв",
+  "фев",
+  "мар",
+  "апр",
+  "май",
+  "июн",
+  "июл",
+  "авг",
+  "сен",
+  "окт",
+  "ноя"
+ ]
+}

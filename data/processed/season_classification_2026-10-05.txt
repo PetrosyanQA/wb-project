@@ -1,0 +1,769 @@
+# Принципиальная классификация (ТЗ v2, шаг 5). Экспертная оценка Claude, 2026-10-05.
+# Формат: id  Док Увер ключ  [Габ Увер ключ  Асс Увер ключ  [Доступность]]
+# Док: G=🟢 отказное, Y=🟡 декларация, R=🔴 удалить. Габ: M=МГТ, S=СГТ, K=КГТ(удалить). Асс: G/Y/R.
+# Увер: H=Выс, M=Сред, L=Низ. Ключи пояснений — в src/season_niches.py (EXPL). Доступность по умолчанию G.
+# --- Автоаксессуары / автозапчасти
+8146 R H el
+934 G M auto  M H soft  Y M func
+4210 R H el
+763 R H el
+3702 G H auto  M H small  R M spec
+777 G M auto  M H small  G M design2
+8969 R H el
+1507 G H auto  M M box  Y M func
+931 Y M autokit  M M box  Y M func
+7021 G M tool  M M heavy  Y M func
+4700 G H auto  M H soft  Y M func
+4753 G H acc  M H small  G H design
+7877 R H el
+1588 R H el
+782 G H auto  M H soft  Y M func
+2267 G H text  M H soft  G M design2
+2718 R H el
+2012 R H el
+2840 G M auto  M H small  R M spec
+2111 G H auto  M M soft  R M spec
+2397 R H el
+4788 R H el
+809 G M auto  M H small  R M spec
+2950 G H dec  M H small  G H design
+4803 G H auto  M H soft  R M spec
+2712 G H auto  M M box  Y M func
+2011 Y M auto18  M M box  R H spec
+8081 R H motor
+5873 Y H auto18  M M heavy  R H spec
+5822 Y H auto18  M H small  R H spec
+# --- Аксессуары
+454 G M acc  M H small  G H design
+287 G M text  M H soft  G H design
+208 Y M lp  M H soft  G H design
+316 Y M lp  M H small  G H design
+63 G H acc  M H small  G H design
+6594 G M acc  M H small  G H design
+136 Y H lp  M H small  G H design
+303 Y M lp  M H small  G H design
+305 Y M lp  M H soft  G H design
+52 Y H lp  M H small  G H design
+1381 Y M lp  M H small  G H design
+1017 G M acc  M H small  G M design2
+985 G M text  M H soft  G H design
+229 Y M lp  M H soft  G H design
+1422 G H dec  M H small  G H design
+342 G H acc  M H small  G H design
+58 Y M lp  M H soft  G H design
+226 Y M lp  M H soft  G M design2
+56 Y M lp  M H soft  G H design
+278 Y M lp  M H small  G M design2
+1255 Y M lp  M H small  G M design2
+64 Y M lp  M H small  G M design2
+51 Y H lp  M H small  G M design2
+138 Y H lp  M H soft  G H design
+1187 Y M lp  M H soft  G H design
+50 Y H lp  M H soft  G H design
+8986 Y M lp  M H soft  G H design
+841 G H acc  M H small  G H design
+60 Y M watch  M H small  G H design
+57 Y M lp  M H soft  G H design
+2761 G H acc  M H small  G H design
+# --- Аксессуары для волос / обуви / малышей
+383 G H acc  M H small  G H design
+1859 G H acc  M H small  Y M func
+1857 G H acc  M H small  G M design2
+296 G H acc  M H small  G H design
+1856 G H acc  M H small  G M design2
+1860 G H acc  M H small  G M design2
+1853 G H acc  M H small  G H design
+1855 G H acc  M H small  G H design
+1852 G H acc  M H small  R M spec
+501 G H acc  M H small  G H design
+4786 Y H baby  M H small  G H design
+584 G M acc  M H small  Y M func
+1442 G H acc  M H small  G H design
+# --- Аксессуары для электроники
+2560 R M el
+1151 R H el
+4058 Y H food  M H small  Y M func
+7567 Y L elmix  M H small  Y M func
+1650 R M el
+844 Y L elmix  M H box  Y M func
+518 R H el
+5547 G H plast  M H small  Y M func
+2709 G H plast  M H small  G M design2
+1407 R H el
+4349 R H el
+765 R H el
+3716 G H plast  M H small  G M design2
+1571 G H plast  M H small  R H spec
+5256 R H el
+519 Y M elY  M H small  R H spec
+1027 R H el
+2922 G M plast  M M heavy  Y M func
+2823 G M plast  M M heavy  R M spec
+3161 R H el
+624 R H el
+1004 R M el
+466 Y M elY  M H small  Y M func
+4255 G M plast  M H small  R M spec
+2436 Y M elY  M H small  R H spec
+6931 R H el
+3095 G H plast  M H small  G M design2
+1495 R H el
+3049 R H el
+794 R M el
+785 R H el
+3061 R H el
+2833 Y M elY  M H small  Y M func
+4288 Y M lp  M H soft  G M design2
+1003 G M optic  M M box  Y M brand
+3656 G H plast  M H small  G M design2
+2913 G H plast  M H small  G H design
+1357 G H plast  M H soft  G H design
+1352 G H plast  M H small  G H design
+390 G H plast  M H small  G H design
+7646 G H plast  M H small  G H design
+4680 G M plast  M M box  Y M func
+5376 G M plast  S M long  Y M func
+792 R H el
+846 R H el
+# --- Белье (fashion, выкуп ≥ 65%)
+478 G M acc  M H small  Y M func
+252 Y M lpchz  M H soft  G H design
+218 Y M lpchz  M H soft  G H design
+213 Y M lpchz  M H soft  G M design2
+212 Y M lpchz  M H soft  G H design
+497 Y M lp  M H small  Y M func
+2693 Y M lpchz  M H soft  Y M func
+2687 Y M lpchz  M H soft  Y M func
+133 Y M lpchz  M H soft  G H design
+214 Y M lpchz  M H soft  G M design2
+4739 Y H baby  M H soft  G M design2
+4738 Y H baby  M H soft  G H design
+# --- Бижутерия
+201 G M acc  M H small  G H design
+297 G M acc  M H small  G H design
+295 G M acc  M H small  G H design
+1688 G M acc  M H small  G H design
+1559 G M acc  M H small  G H design
+202 G M acc  M H small  G H design
+24 G M acc  M H small  G H design
+8551 G M acc  M H small  G H design
+298 G M acc  M H small  G H design
+203 G M acc  M H small  G H design
+301 G M acc  M H small  G H design
+293 G M acc  M H small  G H design
+1784 G M acc  M H small  G M design2
+1689 G M acc  M H small  G H design
+957 G M acc  M H small  G H design
+# --- Все для садоводства
+7182 Y H elY  M H box  G M design2
+7237 G H plast  M H box  Y M func  Y
+3535 G M plast  M H small  Y M func  Y
+1199 R M motor
+# --- Декор интерьера
+2380 Y M elY  M H box  G M design2
+2090 G L incense  M H small  G M design2
+223 G H dec  M M box  G H design
+374 G H dec  M M box  G H design
+1477 G H dec  M H small  G H design
+234 G H dec  M H box  G H design
+3825 Y M elY  M H box  Y M func
+800 G H dec  M H small  G H design
+4749 G H dec  M H small  G H design
+3750 G H dec  M H small  G H design
+1879 G H tool  M M box  Y M func
+944 G H dec  M H small  G H design
+2650 Y M cut  M M box  G M design2
+2089 R M perfume
+9008 G H book  M H small  G H design
+4397 G H dec  M H small  G H design
+5101 G H dec  M H small  G H design
+272 G H dec  M H box  G H design
+3016 G H dec  M H small  G H design
+4139 G M plast  M H small  G M design2
+5866 G H book  M H small  G H design
+1793 G H dec  M H small  G H design
+270 G M dec  M H small  G H design
+224 G H dec  M H box  G H design
+912 Y M elY  M H small  Y M func
+236 G H dec  M H box  G H design
+235 G H book  M H box  G H design
+28 G H dec  M H box  G H design
+2521 G M dec  M H box  G H design
+196 Y M elY  M H box  G H design
+3552 G H dec  M H small  G H design
+27 G H dec  M H box  G H design
+# --- Для праздника
+4308 G M dec  M H small  G M design2
+4920 G H dec  M H small  G H design
+4919 G H dec  M H box  G H design
+1344 G H dec  M H small  G H design
+273 G H dec  M M box  G H design
+264 Y H elY  M H box  G H design
+2824 Y H chem  M H small  Y M func
+5727 G H dec  M H small  G M design2
+263 G H dec  M H small  Y M func
+6483 G M dec  M H small  G M design2
+260 G M dec  M M box  Y M func
+262 G H dec  M H small  G H design
+1539 G M dec  M H small  G H design
+2829 G M dec  M H small  G H design
+976 G M dec  M H small  G H design
+2830 Y M kids  M H small  G H design
+2831 G M dec  M H small  G H design
+2827 G M dec  M H small  G H design
+2834 G M dec  M H small  G H design
+2828 G M dec  M H small  G M design2
+6176 G H dec  M H small  G H design
+3094 G H dec  M H small  G M design2
+4918 G H dec  M H small  G H design
+261 G H dec  M H small  Y M func
+716 G M dec  M H small  G H design
+1815 G M dec  M H small  G H design
+3200 G H dec  M H small  Y M func
+380 G M text  M H soft  G H design
+1833 Y H food  M H small  G M design2
+340 G H book  M H small  G H design
+8749 R H pyro
+2556 G L giftbox  M H box  G H design
+948 G H dec  M H box  G H design
+947 G H dec  M H small  G H design
+3738 G H plast  M H box  Y M func
+5504 G M dec  M H small  G M design2
+9083 G H dec  S M long  G H design
+3199 Y M chem  M H small  R M spec
+265 G H dec  M H small  G H design
+4441 G M dec  M H box  G H design
+2946 G H dec  M H small  G H design
+4301 Y H elY  M M box  G M design2
+9038 Y M elY  M H box  G H design
+776 R M pyro
+# --- Игрушки
+2620 R M el
+77 Y H kids  M H small  G H design
+2918 G M dec  M H small  G M design2
+4245 Y H kids  K H big  Y M func
+2874 Y H kids  M H box  G H design
+1065 Y M kids  M H small  G H design
+3594 Y H kids  S M furn  Y M func
+1023 R M el
+2438 R M el
+2311 Y H kids  S L var  Y M func
+715 Y H kids  M H box  G M design2
+121 R M el
+1042 Y M kids  M H box  G M design2
+741 Y H kids  M H soft  G H design
+267 Y H kids  M H box  G H design
+1039 Y H kids  M H soft  G H design
+1067 R M el
+1026 R M el
+126 Y H kids  M H box  G M design2
+124 Y M kids  M H box  G H design
+5392 Y H kids  M H box  G M design2
+1038 Y H kids  M H box  G M design2
+80 Y L kidsmix  M H box  G M design2
+5393 Y H kids  M M box  G M design2
+5415 Y H kids  M H small  G H design
+2547 Y H kids  M H small  G H design
+227 Y H kids  M H small  G H design
+2095 R H el
+1034 Y H baby  M H small  G H design
+115 Y H kids  M H box  G M design2
+1251 Y H kids  M M box  G M design2
+2178 Y H kids  M M box  Y M func
+1052 Y H kids  M H small  Y M func
+3544 Y H baby  M H small  G H design
+1462 Y H baby  M H soft  G H design
+117 Y H kids  M H box  G H design
+945 Y H kids  M H box  G H design
+1032 Y H kids  M H small  G M design2
+125 Y H kids  M H box  G H design
+1024 Y H kids  M M box  G M design2
+1145 Y H kids  M H small  Y M func
+87 Y M kids  M H small  G H design
+5100 Y H kids  M H box  G M design2
+1028 Y H kids  M H small  G H design
+1029 Y H kids  M H small  Y M func
+268 Y H kids  M H soft  G H design
+1056 Y H kids  M H small  G M design2
+2619 Y H kids  M H box  G H design
+120 Y H kids  M H box  G H design
+1040 Y H baby  M H small  Y M func
+5109 Y H kids  M H soft  G H design
+118 Y H kids  M H box  G H design
+3057 Y H baby  M H small  G M design2
+310 Y H baby  M H small  G H design
+3842 Y L kidsmix  M H box  G M design2
+1585 Y H kids  M H soft  G M design2
+1257 Y L kids  M L var  Y L func
+123 R H el
+122 R M el
+1043 Y L kidsmix  M H box  G M design2
+2763 Y M kids  M H box  G H design
+2792 Y H kids  M H small  Y M func
+1036 Y H baby  M H small  G M design2
+1396 Y H kids  M H box  G M design2
+7007 Y H kids  K M big  Y M func
+3119 Y H baby  M H soft  G M design2
+5945 Y H kids  M H box  G H design
+291 Y H kids  M H small  G H design
+4677 Y M kids  M H small  G M design2
+2040 R M el
+3120 Y H baby  M H soft  Y M func
+3059 Y H kids  M H small  G M design2
+1031 Y H kids  M H small  G M design2
+# --- Канцелярские товары
+3194 G H book  M H box  G M design2
+719 Y M school  M H small  G H design
+661 G M stat  M H small  G H design
+3182 G H stat  M M heavy  R H spec
+1366 Y M school  M H box  Y M func
+662 G H stat  M H small  G H design
+469 G H stat  M H small  G H design
+1191 Y M school  M H small  G H design
+580 Y M school  M H small  G M design2
+759 G M stat  M H small  Y M func
+712 G H stat  M H small  R H spec
+1480 G H stat  M H small  R M spec
+717 Y H chem  M H small  Y M func
+579 Y M school  M H small  G M design2
+4143 G M stat  M H small  G H design
+333 G H stat  M H box  G M design2
+311 Y M school  M H small  G H design
+6359 G H stat  M H small  G H design
+713 Y H school  M H small  Y M func
+317 Y M school  M H small  G M design2
+720 G H stat  M H small  G H design
+4943 G M stat  M H small  Y M func
+574 Y M school  M H small  G M design2
+578 Y M school  M H small  Y M func
+576 Y M school  M H small  Y M func
+# --- Книжная продукция
+2964 G H book  M H small  G H design
+3455 G H book  M H small  G H design
+397 G H book  M H small  G H design
+6710 G M book  M H small  G H design
+744 G H book  M H small  G H design
+4146 G H book  M H small  G H design
+3647 G H book  M H small  G M design2
+381 G H book  M H small  G H design
+5322 G H book  M H small  G H design
+4961 G H book  M H small  G H design
+8261 G H book  M H small  G H design
+1134 G H book  M H small  G H design
+840 G M book  M H small  G H design
+338 G H book  M H small  G H design
+# --- Мебель
+1128 G M text  M H soft  Y M func
+4890 Y M furn  S M long  Y M func
+7618 Y M furn  S M furn  G M design2
+7597 Y H furn  K H big  G M design2
+7606 Y H furn  S M furn  G M design2
+2271 Y H furn  S M furn  Y M func
+7650 Y H furn  K M big  Y M func
+7649 Y H furn  K M big  Y M func
+1900 Y H furn  M M box  G M design2
+7623 Y M furn  S M soft  G H design
+8830 Y H furn  K H big  G M design2
+3854 Y H furn  K M big  Y M func
+2113 Y M furn  S M soft  G H design
+7696 Y H furn  M M chair  Y M func
+4806 Y H furn  M M chair  Y M func
+7697 Y H furn  M M chair  Y M func
+8270 Y M furn  M M box  Y M func
+8350 Y H furn  S M furn  Y M func
+# --- Одежда
+2649 Y M lpchz  M H soft  G H design
+1869 Y M lp  M H soft  G M design2
+4616 Y H baby  M H soft  G H design
+4648 Y H baby  M H soft  G M design2
+# --- Отделочные материалы
+7302 Y H build  M M heavy  R H spec
+6255 Y M build  M M box  R M spec
+5382 Y M build  S M long  Y M func
+3767 Y M build  S M long  G M design2
+7683 G M plast  M H small  R H spec
+3148 G M plast  M H small  R H spec
+# --- Посуда и инвентарь
+1774 Y H food  M H small  Y M func
+1437 Y M furn  S M furn  G M design2
+817 Y H food  M H box  G H design
+1802 Y H food  M H box  G M design2
+1494 Y H food  M H small  G H design
+881 Y H food  M H box  G H design
+3528 Y H food  M H small  G H design
+992 Y H food  M H small  R M spec
+2789 Y H food  M H box  Y M func
+1786 Y H food  M H small  G M design2
+1273 Y H food  M H box  G H design
+1825 Y H food  M H box  G M design2
+1476 G M dec  M H box  G M design2
+1271 Y M food  M H box  Y M func
+6785 Y H food  M H box  Y M func
+7080 Y H food  M H box  G H design
+6498 Y M food  M H small  G M design2
+854 Y H food  M H small  G M design2
+1813 Y H food  M H small  G M design2
+876 Y H food  M H box  G M design2
+1821 Y H food  M M heavy  Y M func
+1306 Y H food  M H small  Y M func
+3104 Y H food  M H small  G M design2
+1817 Y H food  M M heavy  Y M func
+823 Y H food  M H box  Y M func
+5634 Y H food  M H small  R M spec
+3728 Y H food  M H small  R M spec
+4304 Y M food  M H small  G M design2
+1919 Y H food  M H small  G M design2
+820 Y H food  M H box  G M design2
+1018 Y H food  M H box  G H design
+2023 Y H food  M H box  Y M func
+1808 Y H food  M H box  G H design
+852 Y H food  M H box  G M design2
+812 Y H food  M H small  G H design
+1371 Y H food  M H small  Y M func
+825 Y H food  M H box  G M design2
+2841 Y H food  M H small  G H design
+7637 Y H food  M H small  G M design2
+1771 Y H food  M H small  Y M func
+1787 Y H food  M H small  G M design2
+1788 Y H food  M H small  G M design2
+1773 Y H food  M H small  Y M func
+2289 Y M food  M H box  Y M func
+2518 Y H food  M M box  Y M func
+1350 Y H food  M H box  Y M func
+831 Y H food  M H small  G M design2
+988 Y H food  M H small  G M design2
+1019 Y H food  M H box  G H design
+1775 Y H food  M H small  R M spec
+878 Y H food  M H box  G M design2
+994 Y H food  M H small  R M spec
+1812 Y H food  M H small  Y M func
+1914 Y H food  M H box  G H design
+4560 Y H food  M H box  Y M func
+3683 Y H food  M H small  Y M func
+830 Y H food  M H box  G M design2
+849 Y H food  M H box  G H design
+1766 Y H food  M H box  G M design2
+2232 Y H food  M M heavy  Y M func
+829 Y H food  M H box  G M design2
+2285 Y H cut  M H small  Y M func
+811 Y H cut  M H small  G M design2
+1785 Y H food  M H small  G M design2
+1308 Y H cut  M H small  Y M func
+3778 Y H cut  M H box  Y M func
+1506 Y M food  M H small  G M design2
+5501 Y H food  M H small  R M spec
+1020 Y H food  M H small  G H design
+828 Y H food  M H box  G H design
+1386 G M dec  M H box  G M design2
+2749 Y M food  M H small  G M design2
+879 G M plast  M H box  G M design2
+822 G M plast  M H small  G H design
+1829 Y M food  M H small  G M design2
+2003 G M plast  M H small  G H design
+1512 Y M food  M H box  G H design
+1761 Y H food  M H box  Y M func
+7476 Y H food  M H box  G H design
+990 Y H food  M H small  R M spec
+993 Y H food  M H small  G M design2
+997 Y H food  M H box  Y M func
+824 Y H food  M H box  G H design
+3571 Y H food  M H small  R M spec
+882 Y H food  M H box  G H design
+848 Y H food  M H box  G H design
+877 G H dec  M H small  G H design
+4882 R M el
+199 Y H food  M H small  G H design
+851 Y H food  M M box  G H design
+1325 Y H food  M H small  Y M func
+323 Y H food  M H small  R M spec
+1364 Y H food  M H box  Y M func
+1296 Y H food  M H small  Y M func
+704 Y H food  M H box  Y M func
+1822 Y H food  M H box  Y M func
+816 Y H food  M H small  G M design2
+873 Y H food  M H box  G H design
+5621 Y H food  M H box  G H design
+1792 Y H food  M H small  G H design
+1041 Y H food  M H box  G M design2
+6356 Y M food  M H box  Y M func
+821 Y H food  M H box  G H design
+1801 G M dec  M H box  G H design
+827 Y H food  M H small  Y M func
+1274 Y H food  M H small  G H design
+511 Y H food  M H box  G M design2
+2309 Y H food  M H box  Y M func
+1830 Y H food  M H box  G M design2
+986 Y M cut  M H small  Y M func
+995 Y H food  M H small  G M design2
+1205 Y H food  M H small  G H design
+996 Y H food  M H box  Y M func
+2302 Y H food  M H small  G H design
+813 Y H food  M H box  G M design2
+1345 Y H food  M H small  G M design2
+833 Y H food  M H box  Y M func
+832 Y H food  M H box  G H design
+1021 Y H food  M H box  G M design2
+839 Y H food  M H box  G M design2
+2144 Y H food  M H box  G H design
+1804 Y H food  M H small  Y M func
+3662 Y H food  M H small  R M spec
+1776 Y H food  M H small  R M spec
+998 Y M food  M H small  G M design2
+587 Y H food  M H small  R M spec
+# --- Музыкальные инструменты
+3328 G M music  M M box  Y M func
+7027 G H music  M H box  G M design2
+4895 G H music  M H small  G M design2
+3348 R H el
+2974 R H el
+3332 G H music  M M box  R M spec
+3368 G H music  M H box  G H design
+3331 G H music  M M soft  Y M func
+# --- Религия и эзотерика
+4432 G H dec  M H small  G H design
+955 G H dec  M H small  G H design
+# --- Рукоделие
+6422 G M craft  M H small  G H design
+4954 G H craft  M H small  G M design2
+4011 G M craft  M H small  Y M func
+2746 G H craft  M H small  G H design
+2580 Y M chem  M H small  Y M func
+3950 G M craft  M H small  R M spec
+4144 G M craft  M H small  G H design
+1363 G M craft  M M box  Y M func
+803 R M el
+339 G H craft  M H small  G H design
+2861 G H craft  M H small  G H design
+328 Y M kids  M H small  G H design
+804 Y M kids  M H small  G H design
+119 Y M kids  M H small  G H design
+6035 Y M kids  M H small  G M design2
+1254 G M craft  M H small  G M design2
+6015 G H craft  M H small  G M design2
+4959 G H craft  M H small  G M design2
+6006 G H craft  M H small  R M spec
+6010 G H craft  M H small  R M spec
+3638 G M craft  M H box  Y M func
+4987 G H craft  M H small  G M design2
+2567 G H craft  M M box  Y M func
+6041 G H craft  M H small  G H design
+4152 Y H chem  M H small  Y M func
+# --- Ручной инструмент
+2258 Y M elY  M H small  Y M func
+2030 R H el
+9085 R H el
+559 Y H cut  M H small  G M design2
+655 G M tool  M M heavy  Y M func
+2294 G H tool  M H small  Y M func
+2054 R H el
+2191 R H el
+2192 G M tool  M H small  R H spec
+2072 Y M lp  M H soft  Y M func
+2704 G H plast  M H box  Y M func
+# --- Садовые инструменты
+2350 G H tool  S M long  Y M func
+7243 G M tool  S M long  Y M func
+1730 G M dec  M H small  Y M func
+# --- Сантехника / Спецодежда
+7688 Y H water  M H small  R H spec
+3803 Y M water  M H small  R H spec
+1016 Y M water  M H small  Y M func
+2333 Y M lp  M H soft  R H spec
+# --- Спортивные аксессуары
+477 Y M body  M H small  R M spec
+4704 G H text  M H soft  G M design2
+1780 Y M lp  M H soft  G M design2
+274 Y M lp  M H soft  G M design2
+459 G M sport  M H box  Y M func
+569 G M sport  M H box  Y M func
+838 G M sport  M H small  G M design2
+1981 G H sport  M H soft  G M design2
+4652 G M sport  M H small  G M design2
+2021 Y M lp  M H soft  G M design2
+2925 G H sport  M H small  Y M func
+5498 Y M lp  M H soft  Y M func
+7640 Y M lp  M H soft  G H design
+2511 G H sport  S M long  Y M func
+2860 G H sport  M H small  G M design2
+1783 Y M helmet  M H box  Y M func
+5006 G H plast  M H box  Y M func
+# --- Спортивный товар
+4581 G M fish  M H small  G M design2
+2162 G H sport  K H big  Y M func
+538 Y H kids  M M box  Y M func
+4298 R H motor
+506 G M optic  M H box  Y M brand
+535 G H sport  M H box  Y M func
+384 Y H food  M H small  G H design
+1851 G M sport  M H soft  G M design2
+1574 G H sport  S M long  Y M func
+855 G H sport  M M heavy  Y M func
+1582 G H sport  M M heavy  R M spec
+1295 R H el
+5905 Y L chem  M H small  Y M func
+2680 G H sport  M M heavy  Y M func
+5279 Y M cut  M H box  Y M func
+3134 G H sport  M M box  Y M func
+3563 G H fish  M H small  Y M func
+247 G H sport  S M long  Y M func
+129 G M sport  M H box  Y M func
+3821 G H sport  M M box  Y M func
+4209 Y M cut  S M long  R M spec
+2488 G H sport  M H small  R M spec
+920 G H sport  M H box  G M design2
+4374 G H sport  K M big  Y M func
+4376 Y H kids  S M long  Y M func
+2175 G H sport  S M long  Y M func
+5218 G M optic  M H small  Y M brand
+2490 G H fish  M H small  G M design2
+1302 G H sport  M H box  G M design2
+591 G M text  M H small  G M design2
+2499 G M fish  M H box  Y M func
+3520 Y H food  M H box  Y M func
+498 G M sport  M M soft  G H design
+1686 G H sport  M M box  Y M func
+5519 R H weapon
+1326 G H text  M H soft  G H design
+2416 R M chz
+5005 G H fish  M H small  G M design2
+5338 G M sport  M M box  Y M func
+6413 G H sport  S M long  Y M func
+485 G H sport  M M box  G M design2
+4261 Y M kids  S M long  Y M func
+489 G H sport  K H big  Y M func
+5746 G H sport  K H big  Y M func
+592 Y M furn  M M box  Y M func
+588 Y L furn  M H box  Y M func
+475 G M sport  S L var  Y M func
+1759 G H sport  M M box  Y M func
+441 G H sport  M H small  Y M func
+504 R M el
+6583 Y M kids  M M box  G H design
+4498 Y M kids  K H big  Y M func
+2237 Y H food  M H small  G M design2
+6781 G H sport  K M big  R M spec
+# --- Строительные материалы
+4097 G H tool  M H small  R H spec
+1517 G H tool  M H small  R H spec
+# --- Текстиль для дома
+1154 G M text  M H soft  G H design
+5146 G M text  M M soft  G H design
+1625 G M text  M H soft  G H design
+7707 G M text  M H soft  Y M func
+2317 G M text  M H soft  G H design
+7161 Y M lp  S M long  G H design
+1492 G H dec  M H small  G H design
+1358 G M text  M H small  G M design2
+1536 R M chz
+743 Y L lpchz  M H soft  Y M func
+319 Y L lp  M H soft  Y M func
+321 Y L lp  M H soft  G H design
+1795 G M text  M H small  G H design
+336 Y L lp  M H soft  Y M func
+5317 G M text  M H soft  R M spec
+570 G M text  M H soft  G H design
+1136 G M text  M H soft  G H design
+1182 Y L lp  M H soft  G H design
+254 R M chz
+1626 R M chz
+197 R H chz
+401 G M text  M H small  G H design
+509 R M chz
+231 R H chz
+402 G M text  M H soft  G H design
+1249 G M text  M H soft  G M design2
+1479 G M text  M H soft  G H design
+# --- Товары для взрослых
+5067 R H el
+5118 R H el
+5026 G M adult  M H small  G M design2
+2607 Y M lp  M H soft  G H design
+2909 Y M chem  M H small  Y M func
+4751 G H book  M H box  G H design
+5156 G M adult  M H box  G H design
+5298 Y M lp  M H soft  G H design
+# --- Товары для животных
+495 G M pet  M M box  Y M func
+3318 G M pet  S M furn  Y M func
+3276 Y M chem  M H small  R M spec
+3230 G H pet  M M box  G M design2
+731 G H pet  M H small  G H design
+2938 G H pet  M M box  Y M func
+3263 G H pet  M H soft  G H design
+874 G H pet  M H box  G H design
+1666 G H pet  M H soft  G H design
+941 G H pet  M H soft  G H design
+1125 G H pet  M M box  Y M func
+1126 G M pet  M H small  G H design
+3269 Y M chem  M H small  R M spec
+732 G H pet  M H small  G M design2
+3477 G H pet  S M long  Y M func
+3271 Y M chem  M H small  R M spec
+932 G M pet  M M box  R H spec
+726 G H pet  M M box  G M design2
+2935 G M pet  M H box  R H spec
+3235 G M pet  M H small  G M design2
+3004 G H pet  M H soft  G H design
+2996 G H pet  M H soft  G H design
+1009 G H pet  M H soft  G H design
+# --- Товары для малышей
+888 Y H baby  M H small  Y M func
+5001 Y H baby  M H small  G M design2
+999 Y H baby  M H box  G M design2
+2014 Y H baby  M M box  Y M func
+897 Y H baby  M H small  Y M func
+889 Y H baby  M H small  G H design
+5916 Y H baby  M H small  Y M func
+2160 Y H furn  S M furn  G M design2
+853 Y H baby  M H soft  G H design
+814 Y H baby  M M box  R H spec
+890 Y H baby  M H small  G M design2
+3604 R H chz
+387 Y H baby  M H small  G H design
+892 Y H baby  M H small  G M design2
+891 Y H baby  M H small  R M spec
+1892 Y H baby  M M box  Y M func
+# --- Товары для отдыха и кемпинга
+1843 G M text  M H small  G M design2
+8417 G H sport  K H big  Y M func
+1842 Y M water  M M box  Y M func
+2010 G M dec  M M box  R M spec
+1877 G H plast  S M furn  Y M func
+1835 G H text  M H small  G M design2
+539 Y H food  M M heavy  Y M func
+602 Y M food  S L var  Y M func
+1002 G M text  M H box  G M design2
+1831 Y H food  M M box  Y M func
+1267 G H plast  M H soft  Y M func
+7208 G H dec  M M box  G H design
+7238 Y M food  M M heavy  Y M func
+1627 R M chz
+7050 Y H food  M H box  Y M func
+503 Y H food  M M box  R M spec
+2313 G H plast  M M heavy  Y M func
+705 Y H food  M M box  R M spec
+1838 Y M lp  M H small  G H design
+# --- Хозяйственные товары
+2457 Y H food  M H small  R H spec
+1794 Y M food  M H small  R M spec
+847 G H plast  M H small  G H design
+1203 G H plast  M H small  G M design2
+5930 G H plast  S M long  Y M func
+1593 G H plast  M H box  G M design2
+1543 G H plast  M H box  G H design
+5287 G M plast  M H small  R H spec
+913 G M plast  M H small  R H spec
+2552 Y H food  M H small  R H spec
+2435 Y H food  M H small  R H spec
+1594 G H plast  M M box  Y M func
+# --- Хранение вещей
+2814 G H dec  M H box  G H design
+1447 G H dec  M H small  G H design
+1520 G H dec  M H small  G H design
+3979 G H plast  M M box  R H spec
+2591 G H text  M H small  G M design2
+# --- Шины / Шторы
+7063 R H tire
+6214 G H plast  M H small  G M design2
+1620 G M text  M H soft  G H design
+1617 G M text  M H soft  G H design

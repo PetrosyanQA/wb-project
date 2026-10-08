@@ -1,0 +1,129 @@
+{
+ "run": "2026-10-07",
+ "a": 777,
+ "b": 2486,
+ "gates": {
+  "777": {
+   "Документы: нет ЧЗ (need_kiz) у top-100": true,
+   "≤ 1 л": true,
+   "Маржа ≥ 18% и ROI ≥ 60% при медиане до СПП": false,
+   "≥ 150 шт на карточку (медиана top-100)": true,
+   "top-1 продавец ≤ 25% (top-100)": true,
+   "Исправимая жалоба ≥ 12%": true
+  },
+  "2486": {
+   "Документы: нет ЧЗ (need_kiz) у top-100": true,
+   "≤ 1 л": false,
+   "Маржа ≥ 18% и ROI ≥ 60% при медиане до СПП": true,
+   "≥ 150 шт на карточку (медиана top-100)": true,
+   "top-1 продавец ≤ 25% (top-100)": true,
+   "Исправимая жалоба ≥ 12%": true
+  }
+ },
+ "e78": {
+  "777": {
+   "price_s": 690,
+   "price_b": 489,
+   "yuan78": 8.8,
+   "cost": 150,
+   "margin": 11.0,
+   "roi": 32.7,
+   "profit": 75.94,
+   "margin_b": -8.7,
+   "yuan_max": 6.1,
+   "vol_assumed": false,
+   "ue": {
+    "price": 690.0,
+    "commission": 138.0,
+    "acquiring": 0.0,
+    "logistics_with_returns": 93.38,
+    "storage": 4.95,
+    "acceptance": 0.68,
+    "wb_costs_total": 237.01,
+    "payout_from_wb": 452.99,
+    "goods_cost_full": 232.15,
+    "ads": 103.5,
+    "tax": 41.4,
+    "net_profit": 75.94,
+    "net_margin_pct": 11.0,
+    "roi_on_goods_pct": 32.7,
+    "breakeven_price": 561.27
+   }
+  },
+  "2486": {
+   "price_s": 1668,
+   "price_b": 1411,
+   "yuan78": 21.4,
+   "cost": 363,
+   "margin": 22.7,
+   "roi": 83.7,
+   "profit": 378.08,
+   "margin_b": 16.2,
+   "yuan_max": 25.2,
+   "vol_assumed": false,
+   "ue": {
+    "price": 1667.5,
+    "commission": 350.18,
+    "acquiring": 0.0,
+    "logistics_with_returns": 125.52,
+    "storage": 8.91,
+    "acceptance": 3.06,
+    "wb_costs_total": 487.66,
+    "payout_from_wb": 1179.84,
+    "goods_cost_full": 451.58,
+    "ads": 250.12,
+    "tax": 100.05,
+    "net_profit": 378.08,
+    "net_margin_pct": 22.7,
+    "roi_on_goods_pct": 83.7,
+    "breakeven_price": 1015.63
+   }
+  }
+ },
+ "sales_med": {
+  "777": 1029.0,
+  "2486": 265.0
+ },
+ "docs": {
+  "777": {
+   "cards": 100,
+   "need_kiz": 0,
+   "with_certificate": 59
+  },
+  "2486": {
+   "cards": 100,
+   "need_kiz": 0,
+   "with_certificate": 34
+  }
+ },
+ "sequencing": {
+  "пессимистичный": {
+   "cash_m2": 31482,
+   "cash_m3": 55400,
+   "need": 144862,
+   "ok": false,
+   "first_month": 9
+  },
+  "реалистичный": {
+   "cash_m2": 94315,
+   "cash_m3": 131725,
+   "need": 144862,
+   "ok": false,
+   "first_month": 4
+  },
+  "оптимистичный": {
+   "cash_m2": 60140,
+   "cash_m3": 337499,
+   "need": 144862,
+   "ok": false,
+   "first_month": 3
+  },
+  "СПП-сценарий": {
+   "cash_m2": 50539,
+   "cash_m3": 52030,
+   "need": 144862,
+   "ok": false,
+   "first_month": null
+  }
+ }
+}

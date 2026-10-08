@@ -1,0 +1,18 @@
+_source: WB Seller API /api/v1/tariffs/box + /commission
+_synced_at: '2026-10-04'
+_warehouse: СЦ Ереван
+_delivery_coef_included_pct: 155
+_storage_coef_included_pct: 155
+logistics:
+  tiers_under_1l:
+    0.2: 71.3
+    0.4: 71.3
+    0.6: 71.3
+    0.8: 71.3
+    1.0: 71.3
+  first_liter_over_1l: 71.3
+  extra_liter: 21.7
+  warehouse_coef: 1.0
+storage:
+  per_liter_per_day: 0.11
+  warehouse_coef: 1.0

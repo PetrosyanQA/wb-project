@@ -1,0 +1,23 @@
+# секреты — НИКОГДА не коммитить
+.env
+.mcp.json
+.claude/settings.local.json
+
+# окружение и кэш
+.venv/
+__pycache__/
+*.pyc
+data/cache/
+data/cache_wb/
+data/history.db
+
+# сырые ответы API (1.4 ГБ) — бэкап через `python -m src.backup`, не через git
+data/raw/
+data/CATALOG.json
+
+# тяжёлые производные отчётов (md/xlsx — в git)
+reports/**/*.pdf
+reports/**/*.html
+reports/pdf_parts/
+wb_algorithm/*.pdf
+wb_algorithm/*.html

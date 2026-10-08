@@ -1,0 +1,167 @@
+{
+ "2025-05": {
+  "card_days": 38,
+  "commission_fbs_med": 0.0,
+  "commission_fbo_med": 0.0,
+  "ads_days_pct": 0,
+  "promo_days_pct": 0,
+  "search_words_from_ads_pct": null,
+  "seller_discount_med": 0.0,
+  "warehouses_med": null,
+  "external_ads_days_pct": 0
+ },
+ "2025-06": {
+  "card_days": 247,
+  "commission_fbs_med": 11.5,
+  "commission_fbo_med": 11.5,
+  "ads_days_pct": 30.0,
+  "promo_days_pct": 22.7,
+  "search_words_from_ads_pct": 56.0,
+  "seller_discount_med": 27,
+  "warehouses_med": 1.0,
+  "external_ads_days_pct": 0.81
+ },
+ "2025-07": {
+  "card_days": 622,
+  "commission_fbs_med": 21.5,
+  "commission_fbo_med": 21.5,
+  "ads_days_pct": 46.9,
+  "promo_days_pct": 36.0,
+  "search_words_from_ads_pct": 54.7,
+  "seller_discount_med": 54.0,
+  "warehouses_med": 2,
+  "external_ads_days_pct": 0.96
+ },
+ "2025-08": {
+  "card_days": 976,
+  "commission_fbs_med": 21.5,
+  "commission_fbo_med": 21.5,
+  "ads_days_pct": 53.1,
+  "promo_days_pct": 36.6,
+  "search_words_from_ads_pct": 48.3,
+  "seller_discount_med": 54.0,
+  "warehouses_med": 2.0,
+  "external_ads_days_pct": 0.82
+ },
+ "2025-09": {
+  "card_days": 1481,
+  "commission_fbs_med": 22.5,
+  "commission_fbo_med": 21.5,
+  "ads_days_pct": 52.1,
+  "promo_days_pct": 43.7,
+  "search_words_from_ads_pct": 44.3,
+  "seller_discount_med": 62,
+  "warehouses_med": 3,
+  "external_ads_days_pct": 1.89
+ },
+ "2025-10": {
+  "card_days": 5431,
+  "commission_fbs_med": 25,
+  "commission_fbo_med": 21.5,
+  "ads_days_pct": 37.9,
+  "promo_days_pct": 38.3,
+  "search_words_from_ads_pct": 32.1,
+  "seller_discount_med": 63,
+  "warehouses_med": 4,
+  "external_ads_days_pct": 0.74
+ },
+ "2025-11": {
+  "card_days": 5467,
+  "commission_fbs_med": 31,
+  "commission_fbo_med": 27.5,
+  "ads_days_pct": 31.4,
+  "promo_days_pct": 39.3,
+  "search_words_from_ads_pct": 30.7,
+  "seller_discount_med": 65,
+  "warehouses_med": 4,
+  "external_ads_days_pct": 0.59
+ },
+ "2025-12": {
+  "card_days": 6087,
+  "commission_fbs_med": 31,
+  "commission_fbo_med": 27.5,
+  "ads_days_pct": 33.5,
+  "promo_days_pct": 35.5,
+  "search_words_from_ads_pct": 31.9,
+  "seller_discount_med": 64,
+  "warehouses_med": 5,
+  "external_ads_days_pct": 0.64
+ },
+ "2026-01": {
+  "card_days": 6366,
+  "commission_fbs_med": 31.0,
+  "commission_fbo_med": 27.5,
+  "ads_days_pct": 33.0,
+  "promo_days_pct": 35.8,
+  "search_words_from_ads_pct": 28.2,
+  "seller_discount_med": 66.0,
+  "warehouses_med": 4,
+  "external_ads_days_pct": 0.91
+ },
+ "2026-02": {
+  "card_days": 6030,
+  "commission_fbs_med": 31.0,
+  "commission_fbo_med": 27.5,
+  "ads_days_pct": 39.1,
+  "promo_days_pct": 45.2,
+  "search_words_from_ads_pct": 30.1,
+  "seller_discount_med": 67.0,
+  "warehouses_med": 4,
+  "external_ads_days_pct": 1.51
+ },
+ "2026-03": {
+  "card_days": 6956,
+  "commission_fbs_med": 31.0,
+  "commission_fbo_med": 27.5,
+  "ads_days_pct": 45.6,
+  "promo_days_pct": 46.7,
+  "search_words_from_ads_pct": 36.1,
+  "seller_discount_med": 65.0,
+  "warehouses_med": 5.0,
+  "external_ads_days_pct": 1.12
+ },
+ "2026-04": {
+  "card_days": 9411,
+  "commission_fbs_med": 30,
+  "commission_fbo_med": 26.5,
+  "ads_days_pct": 59.7,
+  "promo_days_pct": 50.2,
+  "search_words_from_ads_pct": 47.2,
+  "seller_discount_med": 67,
+  "warehouses_med": 6.0,
+  "external_ads_days_pct": 1.7
+ },
+ "2026-05": {
+  "card_days": 10113,
+  "commission_fbs_med": 30,
+  "commission_fbo_med": 26.5,
+  "ads_days_pct": 57.3,
+  "promo_days_pct": 49.7,
+  "search_words_from_ads_pct": 51.0,
+  "seller_discount_med": 69,
+  "warehouses_med": 6.0,
+  "external_ads_days_pct": 2.7
+ },
+ "2026-06": {
+  "card_days": 9870,
+  "commission_fbs_med": 30.0,
+  "commission_fbo_med": 26.5,
+  "ads_days_pct": 72.3,
+  "promo_days_pct": 56.3,
+  "search_words_from_ads_pct": 56.6,
+  "seller_discount_med": 72.0,
+  "warehouses_med": 6,
+  "external_ads_days_pct": 4.21
+ },
+ "2026-07": {
+  "card_days": 10199,
+  "commission_fbs_med": 40,
+  "commission_fbo_med": 35.5,
+  "ads_days_pct": 75.4,
+  "promo_days_pct": 50.6,
+  "search_words_from_ads_pct": 59.1,
+  "seller_discount_med": 72,
+  "warehouses_med": 5.0,
+  "external_ads_days_pct": 5.54
+ }
+}
