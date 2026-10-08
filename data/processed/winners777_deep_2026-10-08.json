@@ -1,0 +1,2456 @@
+{
+ "demand_by_month": {
+  "2024-12": {
+   "прочее": 634759,
+   "ВСЕГО": 897490,
+   "магнитный": 179350,
+   "с зарядкой": 29169,
+   "присоска/вакуум": 16934,
+   "воздуховод": 18729,
+   "зажим": 1838,
+   "MagSafe": 16711
+  },
+  "2025-09": {
+   "прочее": 748256,
+   "ВСЕГО": 1010626,
+   "магнитный": 161088,
+   "с зарядкой": 33892,
+   "воздуховод": 23667,
+   "присоска/вакуум": 19477,
+   "зажим": 1944,
+   "MagSafe": 22302
+  },
+  "2025-10": {
+   "прочее": 743056,
+   "ВСЕГО": 982711,
+   "магнитный": 149263,
+   "воздуховод": 21802,
+   "с зарядкой": 30151,
+   "присоска/вакуум": 16744,
+   "зажим": 1338,
+   "MagSafe": 20357
+  },
+  "2025-11": {
+   "магнитный": 146742,
+   "ВСЕГО": 782839,
+   "прочее": 540256,
+   "присоска/вакуум": 18056,
+   "воздуховод": 21136,
+   "с зарядкой": 30282,
+   "зажим": 1329,
+   "MagSafe": 25038
+  },
+  "2025-12": {
+   "прочее": 534765,
+   "ВСЕГО": 785023,
+   "магнитный": 146919,
+   "с зарядкой": 37808,
+   "присоска/вакуум": 19120,
+   "зажим": 1632,
+   "воздуховод": 20565,
+   "MagSafe": 24214
+  },
+  "2026-01": {
+   "магнитный": 137628,
+   "ВСЕГО": 670821,
+   "прочее": 441997,
+   "с зарядкой": 32023,
+   "зажим": 1109,
+   "присоска/вакуум": 17545,
+   "воздуховод": 14261,
+   "MagSafe": 26258
+  },
+  "2026-02": {
+   "магнитный": 151741,
+   "ВСЕГО": 1082047,
+   "прочее": 828789,
+   "с зарядкой": 32985,
+   "присоска/вакуум": 26002,
+   "воздуховод": 16844,
+   "зажим": 1247,
+   "MagSafe": 24439
+  },
+  "2026-03": {
+   "магнитный": 140403,
+   "ВСЕГО": 984108,
+   "прочее": 751149,
+   "с зарядкой": 25772,
+   "зажим": 906,
+   "воздуховод": 17428,
+   "присоска/вакуум": 27412,
+   "MagSafe": 21038
+  },
+  "2026-04": {
+   "магнитный": 129991,
+   "ВСЕГО": 1017260,
+   "прочее": 810778,
+   "с зарядкой": 17251,
+   "воздуховод": 15166,
+   "присоска/вакуум": 24460,
+   "MagSafe": 19386,
+   "зажим": 228
+  },
+  "2026-05": {
+   "магнитный": 112612,
+   "ВСЕГО": 1042505,
+   "прочее": 862622,
+   "с зарядкой": 15947,
+   "присоска/вакуум": 18559,
+   "воздуховод": 15668,
+   "MagSafe": 16931,
+   "зажим": 166
+  },
+  "2026-06": {
+   "магнитный": 117157,
+   "ВСЕГО": 1080458,
+   "прочее": 889826,
+   "с зарядкой": 18738,
+   "воздуховод": 16751,
+   "присоска/вакуум": 19730,
+   "MagSafe": 18092,
+   "зажим": 164
+  },
+  "2026-07": {
+   "прочее": 813324,
+   "ВСЕГО": 967213,
+   "магнитный": 95577,
+   "с зарядкой": 16559,
+   "присоска/вакуум": 16533,
+   "воздуховод": 12698,
+   "MagSafe": 12522,
+   "зажим": 0
+  },
+  "2026-08": {
+   "магнитный": 69516,
+   "ВСЕГО": 688565,
+   "прочее": 577152,
+   "с зарядкой": 11433,
+   "воздуховод": 8848,
+   "присоска/вакуум": 13615,
+   "MagSafe": 8001,
+   "зажим": 0
+  }
+ },
+ "winners": [
+  {
+   "id": 485786521,
+   "name": "Магнитный держатель для телефона в машину",
+   "seller": "ИП Андреев С В",
+   "start": "2025-09-08",
+   "entry_month": "2025-09",
+   "segment": "присоска/вакуум",
+   "jul_rank": 2,
+   "jul_sales_day": 85.5,
+   "launch": "органика",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 54.7,
+    "top10_share_pct": 32.8,
+    "sellers_top100": 59,
+    "new_cards_top100_4m": 9,
+    "seg_cards_top100": 3,
+    "seg_revenue_share_pct": 2.9,
+    "seg_price_med_buyer": 646.2,
+    "seg_leaders": [
+     {
+      "id": 441406948,
+      "name": "Держатель для телефона в машину вакуумный маг",
+      "seller": "ИП Цветкова Т Н",
+      "buyer_price": 914.74,
+      "sales": 1073,
+      "rating": 5,
+      "comments": 93
+     },
+     {
+      "id": 397439115,
+      "name": "Вакуумный держатель для телефона в машину маг",
+      "seller": "ИП Аль Самак Б М",
+      "buyer_price": 646.25,
+      "sales": 563,
+      "rating": 5,
+      "comments": 336
+     },
+     {
+      "id": 264729116,
+      "name": "Магнитный держатель для телефона в машину на ",
+      "seller": "ИП Бракар Д Г",
+      "buyer_price": 625.86,
+      "sales": 368,
+      "rating": 5,
+      "comments": 253
+     }
+    ],
+    "price_med_top100_buyer": 467.8
+   },
+   "entry_price_buyer_w1": 1040,
+   "price_vs_seg_median": 1.61,
+   "demand_seg_entry": 19477,
+   "demand_seg_plus3": 19120,
+   "card": {
+    "mount": "магнит; присоска",
+    "material": "abs-пластик; PC; TPE",
+    "kit": "прозрачный стикер для шероховатых поверхностей - 2 шт; Магнитное кольцо 4 шт; Магнитный держатель 1шт; Очищающие салфетки 1шт; коробка; инструкция; стикер для шероховатых поверхностей - 1 шт",
+    "weight": "0.136 кг",
+    "color": "черный; серый металлик; серый",
+    "photos": 20,
+    "video": true,
+    "rich": true,
+    "desc_len": 964
+   },
+   "incumbent_complaints_before_entry": [
+    {
+     "id": 397439115,
+     "reviews": 42,
+     "neg": 2,
+     "neg_pct": 4.8,
+     "themes": {}
+    }
+   ],
+   "own_reviews": {
+    "reviews": 693,
+    "neg": 6,
+    "neg_pct": 0.9,
+    "themes": {
+     "магнит слабый / телефон падает": 33
+    }
+   },
+   "seller_cards_top500_at_entry": 0,
+   "seller_cards_top500_jul": 1,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 6,
+     "50": 35,
+     "100": 156
+    },
+    "w1_8_sales": [
+     5.14,
+     10.71,
+     7.29,
+     7.71,
+     3.86,
+     2,
+     2,
+     2.14
+    ],
+    "w1_8_ads": [
+     0,
+     100,
+     100,
+     100,
+     86,
+     71,
+     100,
+     100
+    ],
+    "w1_8_promo": [
+     86,
+     100,
+     71,
+     100,
+     100,
+     57,
+     0,
+     0
+    ],
+    "w1_8_price": [
+     1040,
+     961,
+     976,
+     1012,
+     1023,
+     1023,
+     983,
+     994
+    ],
+    "w1_8_wh": [
+     6,
+     6,
+     7,
+     5,
+     5,
+     5,
+     4,
+     3
+    ],
+    "breakouts": [
+     {
+      "date": "2026-01-13",
+      "day": 126,
+      "sales_before": 0.1,
+      "sales_after": 5.6,
+      "price_before": 1457.0,
+      "price_at": 1353.0,
+      "ads_before": 0,
+      "ads_at": 86,
+      "promo_before": 0,
+      "promo_at": 14,
+      "reviews_before": 46,
+      "reviews_at": 48,
+      "words_before": 0.0,
+      "words_at": 336.5,
+      "pos_before": 0.0,
+      "pos_at": 85.0,
+      "wh_before": 0.0,
+      "wh_at": 1.0,
+      "oos_before": 14
+     },
+     {
+      "date": "2026-03-28",
+      "day": 200,
+      "sales_before": 5.6,
+      "sales_after": 12,
+      "price_before": 1449.0,
+      "price_at": 1492.0,
+      "ads_before": 79,
+      "ads_at": 50,
+      "promo_before": 29,
+      "promo_at": 71,
+      "reviews_before": 173,
+      "reviews_at": 195,
+      "words_before": 28.0,
+      "words_at": 144.0,
+      "pos_before": 96.0,
+      "pos_at": 81.0,
+      "wh_before": 5.0,
+      "wh_at": 4.0,
+      "oos_before": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": 487711855,
+   "name": "Держатель для телефона в машину на вакуумной присоске",
+   "seller": "ИП Хива Ш",
+   "start": "2025-08-23",
+   "entry_month": "2025-08",
+   "segment": "присоска/вакуум",
+   "jul_rank": 3,
+   "jul_sales_day": 217.1,
+   "launch": "органика",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 79.8,
+    "top10_share_pct": 36.3,
+    "sellers_top100": 55,
+    "new_cards_top100_4m": 8,
+    "seg_cards_top100": 2,
+    "seg_revenue_share_pct": 0.9,
+    "seg_price_med_buyer": 1071.9,
+    "seg_leaders": [
+     {
+      "id": 388807630,
+      "name": "Держатель для телефона в машину вакуумный маг",
+      "seller": "ИП Цветкова Т Н",
+      "buyer_price": 1744.52,
+      "sales": 208,
+      "rating": 5,
+      "comments": 82
+     },
+     {
+      "id": 234386632,
+      "name": "Держатель для телефона в машину на присоске",
+      "seller": "ИП Муртазаев Р Н",
+      "buyer_price": 399.24,
+      "sales": 883,
+      "rating": 5,
+      "comments": 703
+     }
+    ],
+    "price_med_top100_buyer": 526.6
+   },
+   "entry_price_buyer_w1": 554,
+   "price_vs_seg_median": 0.52,
+   "demand_seg_entry": null,
+   "demand_seg_plus3": null,
+   "card": {
+    "mount": "присоски; магниты",
+    "material": "abs-пластик; металл; силикон",
+    "kit": "Держатель для телефона в машину вакуумной присоске; 2 magsafe кольца; 1 салфетка для обезжиривания; упаковочная коробка; 1 основа для неровных поверхностей",
+    "weight": "0.6 кг",
+    "color": "черный",
+    "photos": 22,
+    "video": true,
+    "rich": false,
+    "desc_len": 1287
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 3808,
+    "neg": 171,
+    "neg_pct": 4.5,
+    "themes": {
+     "магнит слабый / телефон падает": 27,
+     "сломался / качество": 12,
+     "присоска/основа отклеивается": 6,
+     "через чехол не держит": 5,
+     "шарнир болтается": 4
+    }
+   },
+   "seller_cards_top500_at_entry": 3,
+   "seller_cards_top500_jul": 13,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 12,
+     "50": 21,
+     "100": 30
+    },
+    "w1_8_sales": [
+     3.14,
+     18.57,
+     24.86,
+     58.14,
+     68.86,
+     34.86,
+     74.43,
+     26
+    ],
+    "w1_8_ads": [
+     14,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100
+    ],
+    "w1_8_promo": [
+     57,
+     100,
+     100,
+     100,
+     100,
+     100,
+     86,
+     86
+    ],
+    "w1_8_price": [
+     554,
+     514,
+     447,
+     423,
+     436,
+     419,
+     395,
+     389
+    ],
+    "w1_8_wh": [
+     7,
+     9,
+     9,
+     11,
+     12,
+     10,
+     5,
+     1
+    ],
+    "breakouts": [
+     {
+      "date": "2025-09-27",
+      "day": 21,
+      "sales_before": 21.7,
+      "sales_after": 58.1,
+      "price_before": 549.5,
+      "price_at": 447.0,
+      "ads_before": 7,
+      "ads_at": 100,
+      "promo_before": 29,
+      "promo_at": 100,
+      "reviews_before": 0,
+      "reviews_at": 50,
+      "words_before": 38.0,
+      "words_at": 825.5,
+      "pos_before": 195.5,
+      "pos_at": 88.0,
+      "wh_before": 2.0,
+      "wh_at": 10.0,
+      "oos_before": 5
+     },
+     {
+      "date": "2025-11-21",
+      "day": 76,
+      "sales_before": 43.1,
+      "sales_after": 125.9,
+      "price_before": 371.5,
+      "price_at": 435.0,
+      "ads_before": 100,
+      "ads_at": 100,
+      "promo_before": 93,
+      "promo_at": 100,
+      "reviews_before": 454,
+      "reviews_at": 757,
+      "words_before": 984.0,
+      "words_at": 823.5,
+      "pos_before": 73.5,
+      "pos_at": 74.5,
+      "wh_before": 7.0,
+      "wh_at": 8.0,
+      "oos_before": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": 566117039,
+   "name": "Держатель для телефона в машину",
+   "seller": "ИП Мусаев Р Р",
+   "start": "2025-10-27",
+   "entry_month": "2025-10",
+   "segment": "присоска/вакуум",
+   "jul_rank": 10,
+   "jul_sales_day": 114.1,
+   "launch": "реклама/трафик с 1-й недели",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 52.9,
+    "top10_share_pct": 37.6,
+    "sellers_top100": 49,
+    "new_cards_top100_4m": 12,
+    "seg_cards_top100": 3,
+    "seg_revenue_share_pct": 1.4,
+    "seg_price_med_buyer": 693.1,
+    "seg_leaders": [
+     {
+      "id": 397439115,
+      "name": "Вакуумный держатель для телефона в машину маг",
+      "seller": "ИП Аль Самак Б М",
+      "buyer_price": 693.13,
+      "sales": 426,
+      "rating": 5,
+      "comments": 475
+     },
+     {
+      "id": 412290930,
+      "name": "Держатель для телефона в машину на присоске",
+      "seller": "ИП Савинов Виталий Александрович",
+      "buyer_price": 406.56,
+      "sales": 565,
+      "rating": 5,
+      "comments": 666
+     },
+     {
+      "id": 485617984,
+      "name": "Держатель для телефона вакуумный магнитный",
+      "seller": "ИП Бардышкин Владислав Вадимович",
+      "buyer_price": 785.05,
+      "sales": 291,
+      "rating": 5,
+      "comments": 32
+     }
+    ],
+    "price_med_top100_buyer": 473.9
+   },
+   "entry_price_buyer_w1": 508.0,
+   "price_vs_seg_median": 0.73,
+   "demand_seg_entry": 16744,
+   "demand_seg_plus3": 17545,
+   "card": {
+    "mount": "зажим; вакуумная присоска",
+    "material": "Прочный ABS- пластик; ABS+PS+силикон; многослойная силиконовая присоска",
+    "kit": "Держатель автомобильный",
+    "weight": "0.24 кг",
+    "color": "черный",
+    "photos": 9,
+    "video": true,
+    "rich": false,
+    "desc_len": 985
+   },
+   "incumbent_complaints_before_entry": [
+    {
+     "id": 397439115,
+     "reviews": 124,
+     "neg": 4,
+     "neg_pct": 3.2,
+     "themes": {
+      "магнит слабый / телефон падает": 25
+     }
+    }
+   ],
+   "own_reviews": {
+    "reviews": 1575,
+    "neg": 60,
+    "neg_pct": 3.8,
+    "themes": {
+     "магнит слабый / телефон падает": 37,
+     "присоска/основа отклеивается": 8,
+     "шарнир болтается": 2
+    }
+   },
+   "seller_cards_top500_at_entry": 0,
+   "seller_cards_top500_jul": 3,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 7,
+     "50": 15,
+     "100": 29
+    },
+    "w1_8_sales": [
+     9,
+     9,
+     34.14,
+     57.14,
+     78.14,
+     84.71,
+     112.57,
+     146.71
+    ],
+    "w1_8_ads": [
+     86,
+     100,
+     100,
+     100,
+     100,
+     100,
+     14,
+     57
+    ],
+    "w1_8_promo": [
+     0,
+     0,
+     0,
+     71,
+     0,
+     57,
+     100,
+     100
+    ],
+    "w1_8_price": [
+     508.0,
+     517,
+     518,
+     486,
+     420,
+     434,
+     406,
+     401
+    ],
+    "w1_8_wh": [
+     5,
+     6,
+     6,
+     6,
+     4,
+     4,
+     5,
+     6
+    ],
+    "breakouts": [
+     {
+      "date": "2025-11-17",
+      "day": 21,
+      "sales_before": 21.6,
+      "sales_after": 57.1,
+      "price_before": 0.0,
+      "price_at": 507.0,
+      "ads_before": 43,
+      "ads_at": 100,
+      "promo_before": 0,
+      "promo_at": 36,
+      "reviews_before": 5,
+      "reviews_at": 61,
+      "words_before": 0.0,
+      "words_at": 152.5,
+      "pos_before": 0.0,
+      "pos_at": 30.5,
+      "wh_before": 0.0,
+      "wh_at": 6.0,
+      "oos_before": 8
+     },
+     {
+      "date": "2026-02-18",
+      "day": 114,
+      "sales_before": 7.1,
+      "sales_after": 16,
+      "price_before": 398.0,
+      "price_at": 430.0,
+      "ads_before": 7,
+      "ads_at": 14,
+      "promo_before": 100,
+      "promo_at": 36,
+      "reviews_before": 1241,
+      "reviews_at": 1473,
+      "words_before": 818.0,
+      "words_at": 336.5,
+      "pos_before": 45.0,
+      "pos_at": 173.5,
+      "wh_before": 5.0,
+      "wh_at": 0.0,
+      "oos_before": 0
+     },
+     {
+      "date": "2026-05-30",
+      "day": 215,
+      "sales_before": 0,
+      "sales_after": 10.1,
+      "price_before": 776.0,
+      "price_at": 776.0,
+      "ads_before": 0,
+      "ads_at": 14,
+      "promo_before": 0,
+      "promo_at": 0,
+      "reviews_before": 1860,
+      "reviews_at": 1885,
+      "words_before": 0.0,
+      "words_at": 0.0,
+      "pos_before": 0.0,
+      "pos_at": 0.0,
+      "wh_before": 0.0,
+      "wh_at": 0.0,
+      "oos_before": 14
+     }
+    ]
+   }
+  },
+  {
+   "id": 711948064,
+   "name": "Держатель для телефона в машину с зарядкой",
+   "seller": "ИП Мусаев Р Р",
+   "start": "2026-01-13",
+   "entry_month": "2026-01",
+   "segment": "с зарядкой",
+   "jul_rank": 11,
+   "jul_sales_day": 35.2,
+   "launch": "медленный старт с рекламой",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 58.9,
+    "top10_share_pct": 29.8,
+    "sellers_top100": 57,
+    "new_cards_top100_4m": 15,
+    "seg_cards_top100": 21,
+    "seg_revenue_share_pct": 19.7,
+    "seg_price_med_buyer": 1375.6,
+    "seg_leaders": [
+     {
+      "id": 343101935,
+      "name": "Магнитный держатель magsafe для телефона с бы",
+      "seller": "ИП Хива Ш",
+      "buyer_price": 854.45,
+      "sales": 1737,
+      "rating": 5,
+      "comments": 2281
+     },
+     {
+      "id": 172714102,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ИП Вобликова Алена Николаевна",
+      "buyer_price": 1402.21,
+      "sales": 671,
+      "rating": 5,
+      "comments": 4114
+     },
+     {
+      "id": 54565558,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ООО Гарант Инвест",
+      "buyer_price": 1880.6,
+      "sales": 490,
+      "rating": 5,
+      "comments": 2386
+     }
+    ],
+    "price_med_top100_buyer": 418.3
+   },
+   "entry_price_buyer_w1": 2075,
+   "price_vs_seg_median": 1.51,
+   "demand_seg_entry": 32023,
+   "demand_seg_plus3": 17251,
+   "card": {
+    "mount": "Крючок; присоска",
+    "material": "abs-пластик; алюминий; металл",
+    "kit": "держатель; присоска; крючок; Коннектор Type-C; Lightning; microUSB; кабель для зарядки",
+    "weight": "0.325 кг",
+    "color": "черный",
+    "photos": 9,
+    "video": true,
+    "rich": false,
+    "desc_len": 1542
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 599,
+    "neg": 38,
+    "neg_pct": 6.3,
+    "themes": {
+     "сломался / качество": 18,
+     "магнит слабый / телефон падает": 8,
+     "присоска/основа отклеивается": 5,
+     "через чехол не держит": 3,
+     "шарнир болтается": 3
+    }
+   },
+   "seller_cards_top500_at_entry": 2,
+   "seller_cards_top500_jul": 3,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 10,
+     "50": 21,
+     "100": 36
+    },
+    "w1_8_sales": [
+     5.71,
+     16.57,
+     23.86,
+     37,
+     48.14,
+     44.43,
+     16.43,
+     5.14
+    ],
+    "w1_8_ads": [
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     29
+    ],
+    "w1_8_promo": [
+     0,
+     100,
+     29,
+     0,
+     100,
+     100,
+     100,
+     71
+    ],
+    "w1_8_price": [
+     2075,
+     1630,
+     1656,
+     1799,
+     1984,
+     2166,
+     2038,
+     1937
+    ],
+    "w1_8_wh": [
+     6,
+     7,
+     7,
+     7,
+     6,
+     3,
+     3,
+     0
+    ],
+    "breakouts": [
+     {
+      "date": "2026-06-01",
+      "day": 139,
+      "sales_before": 0,
+      "sales_after": 6,
+      "price_before": 2022.0,
+      "price_at": 2022.0,
+      "ads_before": 0,
+      "ads_at": 29,
+      "promo_before": 0,
+      "promo_at": 14,
+      "reviews_before": 274,
+      "reviews_at": 276,
+      "words_before": 0.0,
+      "words_at": 0.0,
+      "pos_before": 0.0,
+      "pos_at": 0.0,
+      "wh_before": 0.0,
+      "wh_at": 0.0,
+      "oos_before": 14
+     },
+     {
+      "date": "2026-06-29",
+      "day": 167,
+      "sales_before": 9.7,
+      "sales_after": 22.6,
+      "price_before": 1427.0,
+      "price_at": 1350.5,
+      "ads_before": 79,
+      "ads_at": 100,
+      "promo_before": 57,
+      "promo_at": 86,
+      "reviews_before": 297,
+      "reviews_at": 320,
+      "words_before": 119.5,
+      "words_at": 74.0,
+      "pos_before": 35.0,
+      "pos_at": 94.5,
+      "wh_before": 6.0,
+      "wh_at": 9.0,
+      "oos_before": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": 781165823,
+   "name": "Magsafe держатель для телефона в машину с быстрой зарядкой",
+   "seller": "ИП Белый Б Б",
+   "start": "2026-01-31",
+   "entry_month": "2026-01",
+   "segment": "с зарядкой",
+   "jul_rank": 18,
+   "jul_sales_day": 27.6,
+   "launch": "реклама/трафик с 1-й недели",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 58.9,
+    "top10_share_pct": 29.8,
+    "sellers_top100": 57,
+    "new_cards_top100_4m": 15,
+    "seg_cards_top100": 21,
+    "seg_revenue_share_pct": 19.7,
+    "seg_price_med_buyer": 1375.6,
+    "seg_leaders": [
+     {
+      "id": 343101935,
+      "name": "Магнитный держатель magsafe для телефона с бы",
+      "seller": "ИП Хива Ш",
+      "buyer_price": 854.45,
+      "sales": 1737,
+      "rating": 5,
+      "comments": 2281
+     },
+     {
+      "id": 172714102,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ИП Вобликова Алена Николаевна",
+      "buyer_price": 1402.21,
+      "sales": 671,
+      "rating": 5,
+      "comments": 4114
+     },
+     {
+      "id": 54565558,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ООО Гарант Инвест",
+      "buyer_price": 1880.6,
+      "sales": 490,
+      "rating": 5,
+      "comments": 2386
+     }
+    ],
+    "price_med_top100_buyer": 418.3
+   },
+   "entry_price_buyer_w1": 927,
+   "price_vs_seg_median": 0.67,
+   "demand_seg_entry": 32023,
+   "demand_seg_plus3": 17251,
+   "card": {
+    "mount": "клейкая основа",
+    "material": "металлопластик; металл; пластик",
+    "kit": "Держатель с беспроводной зарядкой MagSafe 15W; салфетка 1шт; кольцо для магсейф 3шт; провод Type-C; коробка; русское руководство по эксплуатации",
+    "weight": "0.22 кг",
+    "color": "черный; серый; темный металл; металл; серый металлик",
+    "photos": null,
+    "video": false,
+    "rich": false,
+    "desc_len": 1998
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 325,
+    "neg": 36,
+    "neg_pct": 11.1,
+    "themes": {
+     "магнит слабый / телефон падает": 22,
+     "сломался / качество": 11,
+     "через чехол не держит": 6,
+     "присоска/основа отклеивается": 3
+    }
+   },
+   "seller_cards_top500_at_entry": 0,
+   "seller_cards_top500_jul": 3,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 10,
+     "50": 16,
+     "100": 24
+    },
+    "w1_8_sales": [
+     10.29,
+     32.57,
+     30.57,
+     5.71,
+     1.57,
+     0.71,
+     0.14,
+     0
+    ],
+    "w1_8_ads": [
+     100,
+     100,
+     71,
+     86,
+     14,
+     14,
+     0,
+     0
+    ],
+    "w1_8_promo": [
+     0,
+     100,
+     57,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "w1_8_price": [
+     927,
+     942,
+     1054,
+     1030,
+     1061,
+     1061.0,
+     1061,
+     1061.0
+    ],
+    "w1_8_wh": [
+     1,
+     1,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "breakouts": [
+     {
+      "date": "2026-04-11",
+      "day": 67,
+      "sales_before": 0,
+      "sales_after": 6.1,
+      "price_before": 1061.0,
+      "price_at": 1061.0,
+      "ads_before": 0,
+      "ads_at": 36,
+      "promo_before": 0,
+      "promo_at": 0,
+      "reviews_before": 140,
+      "reviews_at": 145,
+      "words_before": 0.0,
+      "words_at": 0.0,
+      "pos_before": 0.0,
+      "pos_at": 0.0,
+      "wh_before": 0.0,
+      "wh_at": 0.0,
+      "oos_before": 14
+     }
+    ]
+   }
+  },
+  {
+   "id": 494403950,
+   "name": "Магнитный держатель для телефона в машину на присоске",
+   "seller": "ИП Бракар Д Г",
+   "start": "2025-11-17",
+   "entry_month": "2025-11",
+   "segment": "присоска/вакуум",
+   "jul_rank": 22,
+   "jul_sales_day": 42.6,
+   "launch": "медленный старт с рекламой",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 48.0,
+    "top10_share_pct": 31.5,
+    "sellers_top100": 51,
+    "new_cards_top100_4m": 17,
+    "seg_cards_top100": 4,
+    "seg_revenue_share_pct": 4.2,
+    "seg_price_med_buyer": 436.8,
+    "seg_leaders": [
+     {
+      "id": 487711855,
+      "name": "Держатель для телефона в машину на вакуумной ",
+      "seller": "ИП Хива Ш",
+      "buyer_price": 419.3,
+      "sales": 2350,
+      "rating": 5,
+      "comments": 948
+     },
+     {
+      "id": 70531787,
+      "name": "Держатель для телефона в машину на присоске с",
+      "seller": "ООО Индиго",
+      "buyer_price": 434.98,
+      "sales": 1217,
+      "rating": 5,
+      "comments": 14319
+     },
+     {
+      "id": 397439115,
+      "name": "Вакуумный держатель для телефона в машину маг",
+      "seller": "ИП Аль Самак Б М",
+      "buyer_price": 650.59,
+      "sales": 398,
+      "rating": 5,
+      "comments": 637
+     }
+    ],
+    "price_med_top100_buyer": 440.7
+   },
+   "entry_price_buyer_w1": 744,
+   "price_vs_seg_median": 1.7,
+   "demand_seg_entry": 18056,
+   "demand_seg_plus3": 26002,
+   "card": {
+    "mount": "присоски; магниты",
+    "material": "abs-пластик; карбон; металл",
+    "kit": "магнитная пластина; Автомобильный держатель магнитный MagSafe",
+    "weight": "0.146 кг",
+    "color": "черный муар; карбон",
+    "photos": 14,
+    "video": true,
+    "rich": false,
+    "desc_len": 831
+   },
+   "incumbent_complaints_before_entry": [
+    {
+     "id": 487711855,
+     "reviews": 345,
+     "neg": 10,
+     "neg_pct": 2.9,
+     "themes": {
+      "магнит слабый / телефон падает": 20,
+      "сломался / качество": 10
+     }
+    }
+   ],
+   "own_reviews": {
+    "reviews": 197,
+    "neg": 19,
+    "neg_pct": 9.6,
+    "themes": {
+     "магнит слабый / телефон падает": 26,
+     "через чехол не держит": 5
+    }
+   },
+   "seller_cards_top500_at_entry": 4,
+   "seller_cards_top500_jul": 14,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 23,
+     "50": 69,
+     "100": 69
+    },
+    "w1_8_sales": [
+     2.14,
+     5.71,
+     4.71,
+     6.43,
+     8,
+     12.43,
+     10.57,
+     6
+    ],
+    "w1_8_ads": [
+     100,
+     100,
+     100,
+     100,
+     100,
+     43,
+     0,
+     0
+    ],
+    "w1_8_promo": [
+     0,
+     86,
+     100,
+     100,
+     100,
+     14,
+     71,
+     100
+    ],
+    "w1_8_price": [
+     744,
+     737,
+     764,
+     733,
+     696,
+     676,
+     717,
+     750
+    ],
+    "w1_8_wh": [
+     1,
+     4,
+     4,
+     5,
+     6,
+     5,
+     2,
+     3
+    ],
+    "breakouts": [
+     {
+      "date": "2025-12-29",
+      "day": 30,
+      "sales_before": 5.4,
+      "sales_after": 10.9,
+      "price_before": 744.0,
+      "price_at": 715.5,
+      "ads_before": 100,
+      "ads_at": 100,
+      "promo_before": 57,
+      "promo_at": 93,
+      "reviews_before": 3,
+      "reviews_at": 14,
+      "words_before": 521.5,
+      "words_at": 497.5,
+      "pos_before": 113.5,
+      "pos_at": 133.5,
+      "wh_before": 4.0,
+      "wh_at": 5.0,
+      "oos_before": 0
+     },
+     {
+      "date": "2026-03-07",
+      "day": 98,
+      "sales_before": 1,
+      "sales_after": 5.9,
+      "price_before": 787.0,
+      "price_at": 818.0,
+      "ads_before": 0,
+      "ads_at": 14,
+      "promo_before": 0,
+      "promo_at": 36,
+      "reviews_before": 1463,
+      "reviews_at": 1576,
+      "words_before": 0.0,
+      "words_at": 122.5,
+      "pos_before": 0.0,
+      "pos_at": 89.0,
+      "wh_before": 0.0,
+      "wh_at": 1.0,
+      "oos_before": 13
+     },
+     {
+      "date": "2026-07-06",
+      "day": 219,
+      "sales_before": 21.7,
+      "sales_after": 47.9,
+      "price_before": 793.5,
+      "price_at": 734.0,
+      "ads_before": 100,
+      "ads_at": 100,
+      "promo_before": 93,
+      "promo_at": 86,
+      "reviews_before": 2649,
+      "reviews_at": 1806,
+      "words_before": 352.0,
+      "words_at": 140.0,
+      "pos_before": 65.0,
+      "pos_at": 59.0,
+      "wh_before": 13.0,
+      "wh_at": 14.0,
+      "oos_before": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": 754848733,
+   "name": "Держатель для телефона в машину магнитный",
+   "seller": "ООО Индиго",
+   "start": "2026-01-12",
+   "entry_month": "2026-01",
+   "segment": "магнитный",
+   "jul_rank": 25,
+   "jul_sales_day": 60.4,
+   "launch": "сильный старт без рекламы",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 58.9,
+    "top10_share_pct": 29.8,
+    "sellers_top100": 57,
+    "new_cards_top100_4m": 15,
+    "seg_cards_top100": 22,
+    "seg_revenue_share_pct": 18.8,
+    "seg_price_med_buyer": 227.7,
+    "seg_leaders": [
+     {
+      "id": 100464950,
+      "name": "Держатель для телефона в машину магнитный",
+      "seller": "ООО Индиго",
+      "buyer_price": 382.7,
+      "sales": 3143,
+      "rating": 5,
+      "comments": 57838
+     },
+     {
+      "id": 15387158,
+      "name": "Держатель для телефона в машину магнитный",
+      "seller": "ИП Мазманова Бела Артюшовна",
+      "buyer_price": 305.7,
+      "sales": 3757,
+      "rating": 5,
+      "comments": 97492
+     },
+     {
+      "id": 232805123,
+      "name": "Магнитный держатель для телефона",
+      "seller": "ИП Прокин Р В",
+      "buyer_price": 482.94,
+      "sales": 2331,
+      "rating": 5,
+      "comments": 8023
+     }
+    ],
+    "price_med_top100_buyer": 418.3
+   },
+   "entry_price_buyer_w1": 421.0,
+   "price_vs_seg_median": 1.85,
+   "demand_seg_entry": 137628,
+   "demand_seg_plus3": 129991,
+   "card": {
+    "mount": "магниты",
+    "material": "abs-пластик; силикон",
+    "kit": "магнитный держатель для телефона в машину - 1 шт.; Металлические пластины - 2 шт.",
+    "weight": "0.093 кг",
+    "color": "черный; графит",
+    "photos": 11,
+    "video": true,
+    "rich": true,
+    "desc_len": 1758
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 1457,
+    "neg": 30,
+    "neg_pct": 2.1,
+    "themes": {
+     "магнит слабый / телефон падает": 23,
+     "через чехол не держит": 7,
+     "сломался / качество": 7,
+     "присоска/основа отклеивается": 3,
+     "шарнир болтается": 3
+    }
+   },
+   "seller_cards_top500_at_entry": 1,
+   "seller_cards_top500_jul": 9,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 4,
+     "50": 4,
+     "100": 4
+    },
+    "w1_8_sales": [
+     8,
+     49.71,
+     79,
+     99.29,
+     95.14,
+     98.14,
+     64,
+     48.57
+    ],
+    "w1_8_ads": [
+     29,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100
+    ],
+    "w1_8_promo": [
+     0,
+     0,
+     0,
+     0,
+     100,
+     100,
+     100,
+     100
+    ],
+    "w1_8_price": [
+     421.0,
+     414,
+     411,
+     426,
+     401,
+     428,
+     481,
+     497
+    ],
+    "w1_8_wh": [
+     0,
+     3,
+     8,
+     12,
+     12,
+     13,
+     15,
+     15
+    ],
+    "breakouts": [
+     {
+      "date": "2026-06-05",
+      "day": 144,
+      "sales_before": 23.6,
+      "sales_after": 49.3,
+      "price_before": 486.0,
+      "price_at": 396.5,
+      "ads_before": 100,
+      "ads_at": 100,
+      "promo_before": 100,
+      "promo_at": 100,
+      "reviews_before": 105393,
+      "reviews_at": 14263,
+      "words_before": 139.0,
+      "words_at": 281.0,
+      "pos_before": 44.5,
+      "pos_at": 80.5,
+      "wh_before": 10.0,
+      "wh_at": 13.0,
+      "oos_before": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": 754971905,
+   "name": "Держатель для iPhone и Android в машину c зарядкой",
+   "seller": "ИП Мусаев Р Р",
+   "start": "2026-02-09",
+   "entry_month": "2026-02",
+   "segment": "с зарядкой",
+   "jul_rank": 30,
+   "jul_sales_day": 18,
+   "launch": "медленный старт с рекламой",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 73.5,
+    "top10_share_pct": 30.3,
+    "sellers_top100": 59,
+    "new_cards_top100_4m": 18,
+    "seg_cards_top100": 20,
+    "seg_revenue_share_pct": 22.5,
+    "seg_price_med_buyer": 1390.0,
+    "seg_leaders": [
+     {
+      "id": 711948064,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ИП Мусаев Р Р",
+      "buyer_price": 1972.88,
+      "sales": 1049,
+      "rating": 5,
+      "comments": 158
+     },
+     {
+      "id": 172714102,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ИП Вобликова Алена Николаевна",
+      "buyer_price": 1363.25,
+      "sales": 1310,
+      "rating": 5,
+      "comments": 4305
+     },
+     {
+      "id": 343101935,
+      "name": "Магнитный держатель magsafe для телефона с бы",
+      "seller": "ИП Хива Ш",
+      "buyer_price": 914.66,
+      "sales": 1692,
+      "rating": 5,
+      "comments": 2545
+     }
+    ],
+    "price_med_top100_buyer": 500.0
+   },
+   "entry_price_buyer_w1": 1913,
+   "price_vs_seg_median": 1.38,
+   "demand_seg_entry": 32985,
+   "demand_seg_plus3": 15947,
+   "card": {
+    "mount": "присоски; крючки",
+    "material": "abs-пластик; алюминий; металл",
+    "kit": "Держатель для телефона; присоска; крючок; Коннекторы - 3шт.; usb кабель для зарядки; инструкция; Оригинальная коробка",
+    "weight": "0.33 кг",
+    "color": "черный",
+    "photos": 9,
+    "video": false,
+    "rich": false,
+    "desc_len": 1815
+   },
+   "incumbent_complaints_before_entry": [
+    {
+     "id": 711948064,
+     "reviews": 62,
+     "neg": 1,
+     "neg_pct": 1.6,
+     "themes": {
+      "сломался / качество": 100
+     }
+    }
+   ],
+   "own_reviews": {
+    "reviews": 425,
+    "neg": 26,
+    "neg_pct": 6.1,
+    "themes": {
+     "сломался / качество": 8,
+     "магнит слабый / телефон падает": 8
+    }
+   },
+   "seller_cards_top500_at_entry": 2,
+   "seller_cards_top500_jul": 3,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 14,
+     "50": 33,
+     "100": 55
+    },
+    "w1_8_sales": [
+     2,
+     13.29,
+     8.29,
+     11.29,
+     11.71,
+     14.86,
+     14.71,
+     24.14
+    ],
+    "w1_8_ads": [
+     71,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100
+    ],
+    "w1_8_promo": [
+     0,
+     0,
+     86,
+     100,
+     86,
+     100,
+     100,
+     100
+    ],
+    "w1_8_price": [
+     1913,
+     1840,
+     1835,
+     1631,
+     1538,
+     1529,
+     1529,
+     1529
+    ],
+    "w1_8_wh": [
+     7,
+     7,
+     8,
+     7,
+     8,
+     9,
+     9,
+     9
+    ],
+    "breakouts": [
+     {
+      "date": "2026-06-16",
+      "day": 127,
+      "sales_before": 0.8,
+      "sales_after": 5.4,
+      "price_before": 1529.0,
+      "price_at": 1401.5,
+      "ads_before": 0,
+      "ads_at": 57,
+      "promo_before": 50,
+      "promo_at": 29,
+      "reviews_before": 266,
+      "reviews_at": 278,
+      "words_before": 31.5,
+      "words_at": 39.0,
+      "pos_before": 43.0,
+      "pos_at": 75.0,
+      "wh_before": 0.0,
+      "wh_at": 6.0,
+      "oos_before": 9
+     }
+    ]
+   }
+  },
+  {
+   "id": 574180943,
+   "name": "Держатель для телефона в машину магнитный подарок мужчине",
+   "seller": "ИП Гончаренко Г С",
+   "start": "2025-10-20",
+   "entry_month": "2025-10",
+   "segment": "магнитный",
+   "jul_rank": 32,
+   "jul_sales_day": 79.7,
+   "launch": "отзывы/выкупы (≥ 50 за 21 день)",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 52.9,
+    "top10_share_pct": 37.6,
+    "sellers_top100": 49,
+    "new_cards_top100_4m": 12,
+    "seg_cards_top100": 17,
+    "seg_revenue_share_pct": 16.5,
+    "seg_price_med_buyer": 341.3,
+    "seg_leaders": [
+     {
+      "id": 15387158,
+      "name": "Магнитный держатель для телефона в машину",
+      "seller": "ИП Мазманова Бела Артюшовна",
+      "buyer_price": 311.98,
+      "sales": 8021,
+      "rating": 5,
+      "comments": 88456
+     },
+     {
+      "id": 85413598,
+      "name": "Магнитный держатель для телефона в машину",
+      "seller": "ИП Мазманова Бела Артюшовна",
+      "buyer_price": 423.33,
+      "sales": 2347,
+      "rating": 5,
+      "comments": 15913
+     },
+     {
+      "id": 232805123,
+      "name": "Магнитный держатель для телефона",
+      "seller": "ИП Прокин Р В",
+      "buyer_price": 517.5,
+      "sales": 1393,
+      "rating": 5,
+      "comments": 6749
+     }
+    ],
+    "price_med_top100_buyer": 473.9
+   },
+   "entry_price_buyer_w1": 266,
+   "price_vs_seg_median": 0.78,
+   "demand_seg_entry": 149263,
+   "demand_seg_plus3": 137628,
+   "card": {
+    "mount": "магниты; клейкая основа",
+    "material": "abs-пластик; силикон",
+    "kit": "Автомобильный держатель; металлическая пластина",
+    "weight": "0.08 кг",
+    "color": "черный",
+    "photos": 13,
+    "video": true,
+    "rich": true,
+    "desc_len": 1076
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 1806,
+    "neg": 35,
+    "neg_pct": 1.9,
+    "themes": {
+     "магнит слабый / телефон падает": 37,
+     "присоска/основа отклеивается": 6,
+     "через чехол не держит": 3
+    }
+   },
+   "seller_cards_top500_at_entry": 1,
+   "seller_cards_top500_jul": 2,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 10,
+     "50": 12,
+     "100": 16
+    },
+    "w1_8_sales": [
+     6.14,
+     59.14,
+     62.29,
+     20.29,
+     56.14,
+     80.29,
+     93,
+     164.14
+    ],
+    "w1_8_ads": [
+     0,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     100
+    ],
+    "w1_8_promo": [
+     0,
+     86,
+     100,
+     100,
+     43,
+     14,
+     100,
+     100
+    ],
+    "w1_8_price": [
+     266,
+     294,
+     294,
+     283,
+     302,
+     313,
+     296,
+     203
+    ],
+    "w1_8_wh": [
+     0,
+     10,
+     9,
+     9,
+     10,
+     4,
+     7,
+     9
+    ],
+    "breakouts": [
+     {
+      "date": "2025-11-23",
+      "day": 34,
+      "sales_before": 35.5,
+      "sales_after": 71.9,
+      "price_before": 294.0,
+      "price_at": 309.0,
+      "ads_before": 93,
+      "ads_at": 100,
+      "promo_before": 86,
+      "promo_at": 29,
+      "reviews_before": 130,
+      "reviews_at": 312,
+      "words_before": 466.0,
+      "words_at": 514.0,
+      "pos_before": 29.5,
+      "pos_at": 70.5,
+      "wh_before": 10.0,
+      "wh_at": 8.5,
+      "oos_before": 0
+     },
+     {
+      "date": "2026-03-25",
+      "day": 156,
+      "sales_before": 11.1,
+      "sales_after": 27.9,
+      "price_before": 298.0,
+      "price_at": 315.5,
+      "ads_before": 86,
+      "ads_at": 29,
+      "promo_before": 100,
+      "promo_at": 71,
+      "reviews_before": 3586,
+      "reviews_at": 3858,
+      "words_before": 826.5,
+      "words_at": 339.0,
+      "pos_before": 104.5,
+      "pos_at": 159.0,
+      "wh_before": 3.5,
+      "wh_at": 1.5,
+      "oos_before": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": 477875417,
+   "name": "Держатель для телефона в машину с Беспроводной Зарядкой",
+   "seller": "ИП Белый Б Б",
+   "start": "2025-08-06",
+   "entry_month": "2025-08",
+   "segment": "с зарядкой",
+   "jul_rank": 34,
+   "jul_sales_day": 14.7,
+   "launch": "медленный старт с рекламой",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 79.8,
+    "top10_share_pct": 36.3,
+    "sellers_top100": 55,
+    "new_cards_top100_4m": 8,
+    "seg_cards_top100": 14,
+    "seg_revenue_share_pct": 15.8,
+    "seg_price_med_buyer": 1386.7,
+    "seg_leaders": [
+     {
+      "id": 343101935,
+      "name": "Магнитный держатель magsafe для телефона с бы",
+      "seller": "ИП Хива Ш",
+      "buyer_price": 1100.66,
+      "sales": 1998,
+      "rating": 5,
+      "comments": 780
+     },
+     {
+      "id": 172714102,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ИП Вобликова Алена Николаевна",
+      "buyer_price": 1352.33,
+      "sales": 1161,
+      "rating": 5,
+      "comments": 3345
+     },
+     {
+      "id": 54565558,
+      "name": "Держатель для телефона в машину с зарядкой",
+      "seller": "ООО Гарант Инвест",
+      "buyer_price": 2148.23,
+      "sales": 701,
+      "rating": 5,
+      "comments": 1947
+     }
+    ],
+    "price_med_top100_buyer": 526.6
+   },
+   "entry_price_buyer_w1": 1257,
+   "price_vs_seg_median": 0.91,
+   "demand_seg_entry": null,
+   "demand_seg_plus3": null,
+   "card": {
+    "mount": "На панель; на стекло；На вентиляционном отверстии",
+    "material": "abs-пластик; алюминий; металл",
+    "kit": "Lightning(Apple) - 1шт; крепление в дефлектор- 1шт; Крепление присоска - 1шт; Кабель зарядки - 2шт; Держатель - 1шт; Коннектор Type C- 1шт; Micro USB - 1шт",
+    "weight": "0.4 кг",
+    "color": "серебристый; черный",
+    "photos": 12,
+    "video": true,
+    "rich": false,
+    "desc_len": 1852
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 300,
+    "neg": 23,
+    "neg_pct": 7.7,
+    "themes": {
+     "магнит слабый / телефон падает": 13,
+     "через чехол не держит": 4
+    }
+   },
+   "seller_cards_top500_at_entry": 0,
+   "seller_cards_top500_jul": 3,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 18,
+     "50": 47,
+     "100": 92
+    },
+    "w1_8_sales": [
+     1.57,
+     8,
+     5.43,
+     6.57,
+     8.86,
+     6.29,
+     3,
+     2.29
+    ],
+    "w1_8_ads": [
+     100,
+     100,
+     100,
+     100,
+     43,
+     0,
+     0,
+     0
+    ],
+    "w1_8_promo": [
+     100,
+     100,
+     100,
+     100,
+     100,
+     100,
+     57,
+     71
+    ],
+    "w1_8_price": [
+     1257,
+     1215,
+     1556,
+     1191,
+     1102,
+     1496,
+     1920,
+     2255
+    ],
+    "w1_8_wh": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     2
+    ],
+    "breakouts": [
+     {
+      "date": "2025-10-23",
+      "day": 74,
+      "sales_before": 1.1,
+      "sales_after": 5,
+      "price_before": 2208.5,
+      "price_at": 2160.0,
+      "ads_before": 0,
+      "ads_at": 43,
+      "promo_before": 64,
+      "promo_at": 0,
+      "reviews_before": 63,
+      "reviews_at": 72,
+      "words_before": 168.5,
+      "words_at": 25.5,
+      "pos_before": 204.5,
+      "pos_at": 101.5,
+      "wh_before": 2.0,
+      "wh_at": 0.5,
+      "oos_before": 0
+     },
+     {
+      "date": "2025-11-28",
+      "day": 110,
+      "sales_before": 6.7,
+      "sales_after": 18.4,
+      "price_before": 1106.0,
+      "price_at": 1361.0,
+      "ads_before": 100,
+      "ads_at": 57,
+      "promo_before": 7,
+      "promo_at": 71,
+      "reviews_before": 107,
+      "reviews_at": 153,
+      "words_before": 444.5,
+      "words_at": 466.5,
+      "pos_before": 121.0,
+      "pos_at": 155.0,
+      "wh_before": 1.0,
+      "wh_at": 3.0,
+      "oos_before": 0
+     },
+     {
+      "date": "2026-03-25",
+      "day": 227,
+      "sales_before": 0.5,
+      "sales_after": 5,
+      "price_before": 1541.0,
+      "price_at": 1443.0,
+      "ads_before": 29,
+      "ads_at": 93,
+      "promo_before": 0,
+      "promo_at": 14,
+      "reviews_before": 371,
+      "reviews_at": 394,
+      "words_before": 4.5,
+      "words_at": 527.5,
+      "pos_before": 24.0,
+      "pos_at": 63.5,
+      "wh_before": 0.0,
+      "wh_at": 3.5,
+      "oos_before": 9
+     }
+    ]
+   }
+  },
+  {
+   "id": 848123346,
+   "name": "Держатель для телефона в машину в воздуховод",
+   "seller": "ООО Индиго",
+   "start": "2026-04-16",
+   "entry_month": "2026-04",
+   "segment": "воздуховод",
+   "jul_rank": 35,
+   "jul_sales_day": 48.9,
+   "launch": "склейка (отзывы с 1-го дня)",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 79.3,
+    "top10_share_pct": 34.5,
+    "sellers_top100": 59,
+    "new_cards_top100_4m": 26,
+    "seg_cards_top100": 10,
+    "seg_revenue_share_pct": 9.1,
+    "seg_price_med_buyer": 439.6,
+    "seg_leaders": [
+     {
+      "id": 15387167,
+      "name": "Держатель для телефона в машину в воздуховод",
+      "seller": "ИП Мазманова Бела Артюшовна",
+      "buyer_price": 725.19,
+      "sales": 2079,
+      "rating": 5,
+      "comments": 28563
+     },
+     {
+      "id": 85413598,
+      "name": "Держатель для телефона в машину магнитный в в",
+      "seller": "ИП Мазманова Бела Артюшовна",
+      "buyer_price": 420.45,
+      "sales": 3130,
+      "rating": 5,
+      "comments": 147430
+     },
+     {
+      "id": 178230606,
+      "name": "Держатель для телефона в машину в воздуховод",
+      "seller": "ИП Савинов Виталий Александрович",
+      "buyer_price": 460.84,
+      "sales": 2806,
+      "rating": 5,
+      "comments": 59154
+     }
+    ],
+    "price_med_top100_buyer": 527.7
+   },
+   "entry_price_buyer_w1": 710.0,
+   "price_vs_seg_median": 1.62,
+   "demand_seg_entry": 15166,
+   "demand_seg_plus3": 12698,
+   "card": {
+    "mount": "крючки; зажимы",
+    "material": "abs-пластик; поликарбонат",
+    "kit": "крепление для телефона в авто; фирменная упаковка",
+    "weight": "0.148 кг",
+    "color": "черный",
+    "photos": 10,
+    "video": true,
+    "rich": true,
+    "desc_len": 1485
+   },
+   "incumbent_complaints_before_entry": [],
+   "own_reviews": {
+    "reviews": 551,
+    "neg": 12,
+    "neg_pct": 2.2,
+    "themes": {
+     "магнит слабый / телефон падает": 42,
+     "шарнир болтается": 8
+    }
+   },
+   "seller_cards_top500_at_entry": 7,
+   "seller_cards_top500_jul": 9,
+   "tactics": {
+    "reviews_day0": 103023,
+    "days_to": {
+     "10": 0,
+     "50": 0,
+     "100": 0
+    },
+    "w1_8_sales": [
+     15.57,
+     18.43,
+     18,
+     12.43,
+     12.86,
+     12.14,
+     25.14,
+     42
+    ],
+    "w1_8_ads": [
+     71,
+     100,
+     100,
+     100,
+     86,
+     57,
+     100,
+     100
+    ],
+    "w1_8_promo": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     100,
+     100,
+     100
+    ],
+    "w1_8_price": [
+     710.0,
+     712,
+     698,
+     706,
+     666,
+     605,
+     394,
+     397
+    ],
+    "w1_8_wh": [
+     2,
+     5,
+     11,
+     13,
+     13,
+     15,
+     16,
+     14
+    ],
+    "breakouts": [
+     {
+      "date": "2026-05-29",
+      "day": 42,
+      "sales_before": 12.5,
+      "sales_after": 25.1,
+      "price_before": 700.5,
+      "price_at": 505.0,
+      "ads_before": 100,
+      "ads_at": 79,
+      "promo_before": 0,
+      "promo_at": 100,
+      "reviews_before": 104945,
+      "reviews_at": 14132,
+      "words_before": 86.5,
+      "words_at": 133.5,
+      "pos_before": 23.5,
+      "pos_at": 60.0,
+      "wh_before": 12.0,
+      "wh_at": 16.0,
+      "oos_before": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": 740582525,
+   "name": "Магнитный автомобильного держатель для телефона",
+   "seller": "ООО Технология Цзунчжоу",
+   "start": "2026-02-25",
+   "entry_month": "2026-02",
+   "segment": "присоска/вакуум",
+   "jul_rank": 41,
+   "jul_sales_day": 57.3,
+   "launch": "отзывы/выкупы (≥ 50 за 21 день)",
+   "market": {
+    "snapshot": true,
+    "top100_revenue_mln": 73.5,
+    "top10_share_pct": 30.3,
+    "sellers_top100": 59,
+    "new_cards_top100_4m": 18,
+    "seg_cards_top100": 8,
+    "seg_revenue_share_pct": 9.8,
+    "seg_price_med_buyer": 469.0,
+    "seg_leaders": [
+     {
+      "id": 487711855,
+      "name": "Держатель для телефона в машину на вакуумной ",
+      "seller": "ИП Хива Ш",
+      "buyer_price": 506.19,
+      "sales": 6059,
+      "rating": 5,
+      "comments": 3473
+     },
+     {
+      "id": 568445324,
+      "name": "Автодержатель для телефона на присоске в авто",
+      "seller": "ООО МК Реал КЭР",
+      "buyer_price": 292.16,
+      "sales": 3924,
+      "rating": 5,
+      "comments": 694
+     },
+     {
+      "id": 565463116,
+      "name": "Автомобильный держатель для телефона с присос",
+      "seller": "ООО МК Реал КЭР",
+      "buyer_price": 188.53,
+      "sales": 3637,
+      "rating": 5,
+      "comments": 1215
+     }
+    ],
+    "price_med_top100_buyer": 500.0
+   },
+   "entry_price_buyer_w1": 313,
+   "price_vs_seg_median": 0.67,
+   "demand_seg_entry": 26002,
+   "demand_seg_plus3": 18559,
+   "card": {
+    "mount": "вакуум; Притягательный",
+    "material": "Алюминиевый сплав; abs-пластик",
+    "kit": "держатель телефона на магните; Металлическое кольцо для телефона; диск-постамент для установки; шестигранник настойка; сухая салфетка, влажная салфетка.",
+    "weight": "0.11 кг",
+    "color": "черный матовый; серо-черный",
+    "photos": 9,
+    "video": true,
+    "rich": true,
+    "desc_len": 1718
+   },
+   "incumbent_complaints_before_entry": [
+    {
+     "id": 487711855,
+     "reviews": 1406,
+     "neg": 51,
+     "neg_pct": 3.6,
+     "themes": {
+      "магнит слабый / телефон падает": 20,
+      "сломался / качество": 12,
+      "присоска/основа отклеивается": 6,
+      "шарнир болтается": 2
+     }
+    }
+   ],
+   "own_reviews": {
+    "reviews": 331,
+    "neg": 64,
+    "neg_pct": 19.3,
+    "themes": {
+     "магнит слабый / телефон падает": 36,
+     "присоска/основа отклеивается": 9,
+     "через чехол не держит": 8,
+     "шарнир болтается": 3,
+     "сломался / качество": 2
+    }
+   },
+   "seller_cards_top500_at_entry": 0,
+   "seller_cards_top500_jul": 1,
+   "tactics": {
+    "reviews_day0": 0,
+    "days_to": {
+     "10": 13,
+     "50": 19,
+     "100": 26
+    },
+    "w1_8_sales": [
+     7.57,
+     68.57,
+     82.57,
+     56,
+     45.86,
+     27,
+     3.29,
+     2.71
+    ],
+    "w1_8_ads": [
+     43,
+     0,
+     14,
+     100,
+     100,
+     71,
+     0,
+     0
+    ],
+    "w1_8_promo": [
+     0,
+     43,
+     71,
+     43,
+     100,
+     100,
+     29,
+     43
+    ],
+    "w1_8_price": [
+     313,
+     313,
+     413,
+     437,
+     395,
+     339,
+     267,
+     267
+    ],
+    "w1_8_wh": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    "breakouts": [
+     {
+      "date": "2026-06-04",
+      "day": 93,
+      "sales_before": 0.1,
+      "sales_after": 5.1,
+      "price_before": 246.0,
+      "price_at": 246.0,
+      "ads_before": 0,
+      "ads_at": 14,
+      "promo_before": 0,
+      "promo_at": 0,
+      "reviews_before": 254,
+      "reviews_at": 271,
+      "words_before": 0.0,
+      "words_at": 0.0,
+      "pos_before": 0.0,
+      "pos_at": 0.0,
+      "wh_before": 0.0,
+      "wh_at": 0.0,
+      "oos_before": 12
+     }
+    ]
+   }
+  }
+ ],
+ "markets": {
+  "2025-08": {
+   "segments_cards": {
+    "прочее": 52,
+    "с зарядкой": 14,
+    "воздуховод": 5,
+    "MagSafe": 6,
+    "магнитный": 21,
+    "присоска/вакуум": 2
+   },
+   "segments_rev_pct": {
+    "прочее": 54.8,
+    "магнитный": 16.9,
+    "с зарядкой": 15.8,
+    "MagSafe": 5.8,
+    "воздуховод": 5.8,
+    "присоска/вакуум": 0.9
+   },
+   "price_med_buyer": 526.6,
+   "top10_share_pct": 36.3
+  },
+  "2025-09": {
+   "segments_cards": {
+    "прочее": 47,
+    "MagSafe": 8,
+    "магнитный": 17,
+    "воздуховод": 6,
+    "с зарядкой": 19,
+    "присоска/вакуум": 3
+   },
+   "segments_rev_pct": {
+    "прочее": 51.2,
+    "с зарядкой": 16.3,
+    "магнитный": 15.4,
+    "MagSafe": 8.3,
+    "воздуховод": 5.8,
+    "присоска/вакуум": 2.9
+   },
+   "price_med_buyer": 467.8,
+   "top10_share_pct": 32.8
+  },
+  "2025-10": {
+   "segments_cards": {
+    "прочее": 41,
+    "магнитный": 17,
+    "воздуховод": 8,
+    "MagSafe": 7,
+    "с зарядкой": 24,
+    "присоска/вакуум": 3
+   },
+   "segments_rev_pct": {
+    "прочее": 48.0,
+    "с зарядкой": 17.4,
+    "магнитный": 16.5,
+    "воздуховод": 8.7,
+    "MagSafe": 8.0,
+    "присоска/вакуум": 1.4
+   },
+   "price_med_buyer": 473.9,
+   "top10_share_pct": 37.6
+  },
+  "2025-11": {
+   "segments_cards": {
+    "прочее": 49,
+    "воздуховод": 5,
+    "магнитный": 17,
+    "MagSafe": 8,
+    "присоска/вакуум": 4,
+    "с зарядкой": 16,
+    "зажим": 1
+   },
+   "segments_rev_pct": {
+    "прочее": 43.5,
+    "магнитный": 20.1,
+    "с зарядкой": 15.1,
+    "воздуховод": 9.5,
+    "MagSafe": 7.7,
+    "присоска/вакуум": 4.2,
+    "зажим": 0.0
+   },
+   "price_med_buyer": 440.7,
+   "top10_share_pct": 31.5
+  },
+  "2026-01": {
+   "segments_cards": {
+    "прочее": 36,
+    "присоска/вакуум": 5,
+    "MagSafe": 9,
+    "с зарядкой": 21,
+    "воздуховод": 7,
+    "магнитный": 22
+   },
+   "segments_rev_pct": {
+    "прочее": 37.7,
+    "с зарядкой": 19.7,
+    "магнитный": 18.8,
+    "MagSafe": 9.7,
+    "присоска/вакуум": 7.9,
+    "воздуховод": 6.3
+   },
+   "price_med_buyer": 418.3,
+   "top10_share_pct": 29.8
+  },
+  "2026-02": {
+   "segments_cards": {
+    "прочее": 37,
+    "присоска/вакуум": 8,
+    "воздуховод": 10,
+    "с зарядкой": 20,
+    "магнитный": 16,
+    "MagSafe": 9
+   },
+   "segments_rev_pct": {
+    "прочее": 34.9,
+    "с зарядкой": 22.5,
+    "магнитный": 15.3,
+    "присоска/вакуум": 9.8,
+    "воздуховод": 9.3,
+    "MagSafe": 8.3
+   },
+   "price_med_buyer": 500.0,
+   "top10_share_pct": 30.3
+  },
+  "2026-04": {
+   "segments_cards": {
+    "прочее": 36,
+    "присоска/вакуум": 5,
+    "магнитный": 21,
+    "MagSafe": 9,
+    "воздуховод": 10,
+    "с зарядкой": 19
+   },
+   "segments_rev_pct": {
+    "прочее": 40.3,
+    "магнитный": 18.2,
+    "с зарядкой": 13.9,
+    "присоска/вакуум": 9.9,
+    "воздуховод": 9.1,
+    "MagSafe": 8.5
+   },
+   "price_med_buyer": 527.7,
+   "top10_share_pct": 34.5
+  }
+ }
+}
