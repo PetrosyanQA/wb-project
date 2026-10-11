@@ -32,6 +32,7 @@ from src.unit_econ import load_config, unit_economics
 sys.stdout.reconfigure(encoding="utf-8")
 RUN = "2026-10-07"
 R5, R6, R7 = "data/raw/saleflow/2026-10-05", "data/raw/saleflow/2026-10-06", "data/raw/saleflow/2026-10-07"
+R11 = "data/raw/saleflow/2026-10-11"
 WINDOW = ("2026-04-01", "2026-07-31")          # надёжное окно дневных данных (08–09.2026 в Saleflow неполные)
 COMMENTS_SINCE = "2025-10-06"                  # 365 дней отзывов (как в отчётах 2026-10-06)
 COHORT = ("2025-10-01", "2026-06-30")          # новые карточки для траекторий входа
@@ -85,6 +86,32 @@ PAINS_2486 = {"металл (шпуля / корпус / шестерни)": r"�
               "подарок": r"подар",
               "морская / солёная вода": r"морск|сол[её]н",
               "гарантия": r"гаранти"}
+
+# ── 729: поводки (рулетки). Словарь жалоб откалиброван по 45 случайным негативам лидеров (pivot/729, 2026-10-11) ────
+COMPLAINTS_729 = {
+    "заедает / не сматывается лента": r"заеда|застрева|заклин|не (сматыва|скручива|втягива|выдвига|заход)|плохо (сматыв|скручив|заход|втягив)|провиса|перекрут|закручива|глючит",
+    "кнопка / стопор / фиксатор": r"кнопк|стопор|тормоз|фиксатор|фиксац|блокир|застопор|регулировк|остановк",
+    "лента/трос порвались, собака сорвалась": r"порвал|оборвал|оторвал|перетер|перетёр|лопнул|сорвал|перегрыз",
+    "быстро сломался (дни–месяцы)": r"слома|сломан|перестал\w* работ|развалил|треснул|через (недел|месяц|\d)|хватило|прослужил|прожил|продержал",
+    "ручка неудобная / тяжёлый корпус": r"ручк|неудобн|не удобн|тяжел|тяжёл|в руке|громоздк",
+    "карабин / замок": r"карабин|замоч|замок|защелк|защёлк",
+    "хлипкий пластик / не удержит крупную": r"хлипк|пластик|ненад[её]жн|не удерж|крупн\w* собак|рывк|дерга",
+    "длина/нагрузка не как заявлено": r"длин|короче|метр|кг\b|вес собак",
+    "брак / некомплект / запах": r"брак|не (тот|та) |некомплект|не хватает|запах|воня",
+}
+PAINS_729 = {"нагрузка до N кг": r"до \d+ ?кг|нагрузк",
+             "длина N м": r"\d+ ?м\b|метр",
+             "лента (не трос)": r"лент",
+             "трос": r"трос",
+             "стальная пружина / механизм": r"пружин|механизм",
+             "кнопка: одно нажатие / тормоз / фиксатор": r"кнопк|тормоз|фиксатор|блокир|стоп",
+             "эргономичная / прорезиненная ручка": r"эргоном|прорезин|ручк",
+             "карабин 360° / не перекручивается": r"360|вращ|перекру",
+             "светоотражающий": r"светоотраж|отражат",
+             "диспенсер для пакетов": r"пакет|диспенсер",
+             "ударопрочный ABS": r"abs|ударопроч|прочн\w* пластик",
+             "гарантия": r"гаранти",
+             "подарок": r"подар"}
 
 
 def num(s):
@@ -162,6 +189,45 @@ def segment_2486(row: dict) -> str:
     return "спиннинговая 2000–4000"
 
 
+def classify_729(name: str, card: dict) -> dict:
+    n = name.lower()
+    t = f"{n} {(card.get('description') or '')[:1500].lower()} {(opt(card, 'Комплектация') or '').lower()}"
+    L = num(opt(card, "Длина поводка")) or num(opt(card, "Длина"))
+    if L is None:
+        m = re.search(r"(\d+(?:[.,]\d)?)\s*(?:м\b|метр)", n)
+        L = float(m.group(1).replace(",", ".")) if m else None
+    if L is not None and L > 20:                             # «500 см» / «5000 мм»
+        L = L / 100 if L <= 2000 else L / 1000
+    kg = num(opt(card, "Максимальная нагрузка")) or num(opt(card, "Максимальная нагрузка (кг)"))
+    if kg is None:
+        m = re.search(r"до\s*(\d+)\s*кг", t)
+        kg = float(m.group(1)) if m else None
+    rou = bool(re.search(r"рулетк|автоматическ|выдвижн|самосматыв", n))
+    return {"рулетка": rou, "length_m": L, "max_kg": kg,
+            "лента": bool(re.search(r"лент", n)), "трос": bool(re.search(r"трос|шнур", n)),
+            "LED": bool(re.search(r"\bled|фонар|подсветк|светодиод|usb|заряд", t[:600])),
+            "крупные": bool(re.search(r"крупн|больш\w* (пород|собак)|до (40|50|60|70)\s*кг", t[:600])),
+            "мелкие": bool(re.search(r"мелк|маленьк|миниатюр|кошек|для кош|до (5|8|10|12)\s*кг", t[:600])),
+            "двойной": bool(re.search(r"двойн|для двух|на 2 собак", n)),
+            "диспенсер": bool(re.search(r"пакет|диспенсер", n)),
+            "светоотражающий": bool(re.search(r"светоотраж|отражат", t[:600]))}
+
+
+def segment_729(row: dict) -> str:
+    if not row.get("рулетка"):
+        return "обычный поводок / другое"
+    if row.get("LED"):
+        return "рулетка с фонариком/LED (батарейки — исключено)"
+    L = row.get("length_m")
+    if L is None:
+        return "рулетка, длина не указана"
+    if L <= 3.5:
+        return "рулетка ≤ 3 м (мелкие)"
+    if L <= 5.5:
+        return "рулетка 5 м"
+    return "рулетка 8+ м"
+
+
 PRESETS = {
     777: {
         "name": "Держатели в авто",
@@ -219,6 +285,36 @@ PRESETS = {
                             "на резьбе, запасная шпуля", "price": 1590, "yuan": 20, "vol": 1.8, "kg": 0.45, "buyout": 79.0,
                     "commission": 21.0, "buyer_price": 1345},
         "launch": "2027-03", "first_batch": 250,                              # 300 шт съедают весь бюджет при той же прибыли
+    },
+    729: {
+        "name": "Поводки (рулетки)", "run": "2026-10-11",
+        "trends": f"{R11}/strategy729/trends_month.json",
+        "products500": f"{R11}/strategy729/products500_2026-07.json",
+        "products_30d": f"{R11}/strategy729/products_30d.json",
+        "top100_products": f"{R11}/strategy729/top100/top100_products_2026-07.json",
+        "top100_json": "data/processed/top100_729_2026-10-11.json",
+        "cards": f"{R11}/strategy729/top100/cards",
+        "daily": [f"{R11}/strategy729/top100/daily"],
+        "price_seg": {"2026-07": f"{R11}/strategy729/price_seg_2026-07.json", "30d": f"{R11}/strategy729/price_seg_30d.json"},
+        "kw_year": [f"{R11}/strategy729/keywords/keywords_{m}.json" for m in YEAR],
+        "kw_30d": f"{R11}/strategy729/keywords_30d.json",
+        "kw_peak": (f"{R11}/strategy729/keywords/keywords_2025-04.json", f"{R11}/strategy729/keywords/keywords_2026-04.json"),
+        "gap_source": f"{R11}/strategy729/keywords/keywords_2026-04.json",    # пик сезона: март–май
+        "gap_min_freq": 1500, "gap_min_results": 300,
+        "gap_re": r"рулетк|автоматическ|5 м|8 м|3 м|10 м|крупн|мелк|средн|лент|трос|для собак|прочн|кг",
+        "core_re": r"поводок|рулетк",
+        "sku_keywords": f"{R11}/strategy729/sku_*_keywords.json",
+        "comments": [f"{R11}/pivot/729/comments/*.json", f"{R11}/strategy729/comments/*.json"],
+        "sellers": f"{R11}/strategy729/sellers_2026-07.json",
+        "complaints": COMPLAINTS_729, "pains": PAINS_729, "classify": classify_729, "segment": segment_729,
+        "type_keys": ("лента", "трос", "крупные", "мелкие", "диспенсер"),
+        "our_segment": "рулетка 5 м",
+        "winner": None, "winner_file": None,
+        # уточняется после build (медиана сегмента); ¥ — допущение до КП
+        "product": {"name": "поводок-рулетка 5 м, лента, до 25 кг, стальная пружина, кнопка тормоз+фиксатор одним пальцем, "
+                            "эргономичная прорезиненная ручка, карабин 360°", "price": 990, "yuan": 11, "vol": 0.9, "kg": 0.3,
+                    "buyout": 85.0, "commission": 20.0, "buyer_price": 700},
+        "launch": "2027-02", "first_batch": 400,
     },
 }
 
@@ -312,7 +408,7 @@ def write_top100(niche: int) -> None:
     ws.freeze_panes = "D2"
     for i, w in enumerate([4, 11, 40, 22, 22, 9, 9, 8, 8, 8, 8, 9, 8, 8, 8, 8, 8, 7, 8, 11, 7, 7, 7, 7, 40, 6, 6, 6], 1):
         ws.column_dimensions[ws.cell(1, i).column_letter].width = w
-    xl = f"reports/top100_{niche}_{RUN}.xlsx"
+    xl = f"reports/top100_{niche}_{PRESETS[niche].get('run', RUN)}.xlsx"
     wb.save(xl)
     print(f"saved {out}, {xl}; карточек с контентом {sum(r['has_card'] for r in rows)}, с дневкой {sum(r['has_daily'] for r in rows)}")
 
@@ -717,7 +813,7 @@ def segments(P: dict) -> list[dict]:
 def build(niche: int, clean: bool = True, product: dict | None = None) -> dict:
     P = PRESETS[niche]
     ov = overview(P)
-    D = {"niche": niche, "name": P["name"], "run": RUN, "overview": ov, "top20": top20(P), "keywords": keywords(P),
+    D = {"niche": niche, "name": P["name"], "run": P.get("run", RUN), "overview": ov, "top20": top20(P), "keywords": keywords(P),
          "positions": positions(P), "prices": prices(P, clean), "content": content(P), "complaints": complaints(P),
          "barriers": barriers(P), "concentration": concentration(P), "yoy_check": yoy_check(P),
          "entry_curves": entry_curves(P, ov["season_index"]), "price_basis": price_basis(P), "segments": segments(P)}
@@ -788,7 +884,7 @@ def main() -> None:
         prod = {"name": a.product_name, "price": a.price, "yuan": a.yuan, "vol": a.vol, "kg": a.kg, "buyout": a.buyout,
                 "commission": a.commission, "buyer_price": a.buyer_price}
     D = build(a.niche, clean=not a.no_clean, product=prod)
-    out = f"data/processed/strategy_{a.niche}_{RUN}.json"
+    out = f"data/processed/strategy_{a.niche}_{PRESETS[a.niche].get('run', RUN)}.json"
     json.dump(D, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=str)
     print(f"saved {out}")
 

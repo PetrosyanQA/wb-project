@@ -11,6 +11,7 @@
   середняк = новичок с рангом ≥ 150, цена покупателя 0.6–1.6 × медианы top-100, минимальные продажи (до 6) —
              «честная» группа сравнения при НОРМАЛЬНОЙ цене (добавлена 2026-10-08).
 ⚠️ Карточки совсем без продаж в top-500 не попадают → контроль = «слабые новички», а не «нулевые».
+Другой день/ниша: LAUNCH_RUN=2026-10-11 python -m src.launch_collect select|collect (и так же launch_patterns).
 Ряд by_period: d1 = старт − 14 дней (не раньше 2025-05-15), d2 = вчера. Готовые ряды (777 daily_long, 2486 top100/daily)
 переиспользуются, если покрывают старт карточки.
 """
@@ -39,6 +40,13 @@ NICHES = {  # имя + products500 по умолчанию (снимок июл�
     1520: ("Ключницы", "data/raw/saleflow/2026-10-05/dna/1520/products500_2026-07.json"),
     731: ("Игрушки для животных", "data/raw/saleflow/2026-10-05/dna/731/products500_2026-07.json"),
 }
+# Дозапуск под одну нишу в другой день: LAUNCH_RUN=2026-10-11 → своя выборка/папка/отчёт, выборка 2026-10-08 не меняется
+RUNS = {"2026-10-11": ("2026-07-31", {729: ("Поводки", "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json")})}
+if os.environ.get("LAUNCH_RUN") in RUNS:
+    RUN = os.environ["LAUNCH_RUN"]
+    D2, NICHES = RUNS[RUN]
+    OUT = f"data/raw/saleflow/{RUN}/launch"
+    SAMPLE = f"data/processed/launch_sample_{RUN}.json"
 
 
 def products_path(niche: int) -> str:
@@ -120,6 +128,17 @@ def todo(sample: dict) -> list[tuple[str, dict]]:
     return L
 
 
+def fetch_split(c, fetch, args: dict) -> list:
+    """Ряд > 120 дней — двумя запросами (длинные диапазоны падают upstream, проверено 2026-10-11)."""
+    a, b = dt.date.fromisoformat(args["d1"]), dt.date.fromisoformat(args["d2"])
+    if (b - a).days <= 120:
+        return fetch(c, "wb_sku", args)
+    m = a + (b - a) / 2
+    left = fetch(c, "wb_sku", {**args, "d2": m.isoformat()})
+    right = fetch(c, "wb_sku", {**args, "d1": (m + dt.timedelta(days=1)).isoformat()})
+    return list(left) + list(right)
+
+
 def collect(dry: bool) -> None:
     from src.strategy_collect import Client, fetch, quota
     sample = json.load(open(SAMPLE, encoding="utf-8")) if os.path.exists(SAMPLE) else select()
@@ -135,7 +154,7 @@ def collect(dry: bool) -> None:
             os.makedirs(os.path.dirname(path), exist_ok=True)
             for attempt in range(2):
                 try:
-                    json.dump(fetch(c, "wb_sku", args), open(path, "w", encoding="utf-8"), ensure_ascii=False)
+                    json.dump(fetch_split(c, fetch, args), open(path, "w", encoding="utf-8"), ensure_ascii=False)
                     print(f"[{k}/{len(T)}] → {path}")
                     streak = 0
                     break

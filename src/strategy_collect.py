@@ -38,10 +38,15 @@ D1_30 = "2026-09-06"
 JUL = ("2026-07-01", "2026-07-31")
 BASE = f"data/raw/saleflow/{RUN}"
 TOP100 = {777: "data/raw/saleflow/2026-10-05/dna/777/top100/top100_products_2026-07.json",
-          2486: "data/raw/saleflow/2026-10-06/fresh/products_2486_2026-07.json"}
+          2486: "data/raw/saleflow/2026-10-06/fresh/products_2486_2026-07.json",
+          729: "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json"}
+TOP100_FALLBACK = {729: "data/raw/saleflow/2026-10-11/all/finalists/products_729.json"}   # top-100 пика (март 2026) до core
+DAILY_D2 = {729: "2026-07-31"}    # 2026-10-11: 2025-10-01 … 2026-10-10 падает upstream; после 07-31 Saleflow всё равно неполный
+RUNS = {729: ("2026-10-11", "2026-10-10", "2026-09-10")}    # (RUN, D2, D1_30) — ниша собирается в другой день
 OLD_COMMENTS = {2486: "data/raw/saleflow/2026-10-06/fresh/comments/2486_{}.json"}
 KW_MONTHS = {2486: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
-             777: ["2024-12"]}
+             777: ["2024-12"],
+             729: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]]}
 
 
 def out_dir(niche: int) -> str:
@@ -49,7 +54,8 @@ def out_dir(niche: int) -> str:
 
 
 def top100(niche: int) -> list[dict]:
-    d = json.load(open(TOP100[niche], encoding="utf-8"))
+    f = TOP100[niche] if os.path.exists(TOP100[niche]) else TOP100_FALLBACK.get(niche, TOP100[niche])
+    d = json.load(open(f, encoding="utf-8"))
     rows = d.get("data", d) if isinstance(d, dict) else d
     return sorted(rows, key=lambda p: -(p.get("revenue") or 0))[:100]
 
@@ -85,7 +91,8 @@ def tasks(niche: int, step: str, skus: list[int], comments: list[int]) -> list[t
         return L + summer25
     if step == "daily":
         ids = skus or [p["id"] for p in T]
-        return [(f"{o}/top100/daily/{i}.json", "wb_sku", {"sku": i, "report": "by_period", "d1": "2025-10-01", "d2": D2}, False)
+        d2 = DAILY_D2.get(niche, D2)
+        return [(f"{o}/top100/daily/{i}.json", "wb_sku", {"sku": i, "report": "by_period", "d1": "2025-10-01", "d2": d2}, False)
                 for i in ids]
     if step == "leaders":
         L = [(f"{o}/sku_{i}_keywords.json", "wb_sku", {"sku": i, "report": "keywords", "d1": D1_30, "d2": D2}, False) for i in skus]
@@ -107,7 +114,7 @@ def seed(niche: int) -> None:
     o = out_dir(niche)
     os.makedirs(f"{o}/top100", exist_ok=True)
     dst = f"{o}/top100/top100_products_2026-07.json"
-    if niche in TOP100 and not os.path.exists(dst):
+    if niche in TOP100 and os.path.exists(TOP100[niche]) and not os.path.exists(dst):
         json.dump(top100(niche), open(dst, "w", encoding="utf-8"), ensure_ascii=False)
     for sku_file in glob.glob(OLD_COMMENTS[niche].format("*")) if niche in OLD_COMMENTS else []:
         sku = sku_file.rsplit("_", 1)[1].split(".")[0]
@@ -145,6 +152,10 @@ def main() -> None:
     ap.add_argument("--comments", type=int, nargs="*", default=[])
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
+    global RUN, D2, D1_30, BASE
+    if a.niche in RUNS:
+        RUN, D2, D1_30 = RUNS[a.niche]
+        BASE = f"data/raw/saleflow/{RUN}"
     seed(a.niche)
     todo = [t for t in tasks(a.niche, a.step, a.sku, a.comments) if not os.path.exists(t[0])]
     n_quota = sum(1 for t in todo if not t[3])
