@@ -18,10 +18,18 @@ CLAMP_777 = [208015625, 163375828, 189246305]               # зажим/при�
 BOWLS_1126 = [137053734, 772685316, 396806148, 781974428, 160003098]   # миски на подставке/керамика в полосе 2 000–2 300 ₽ до СПП
 
 
+LEASH_729 = [517717379, 209201610, 111647586]            # поводки-рулетки: лидеры top-100 (март 2026)
+FISHSET_2499 = [185738754, 49364175, 548025847]       # наборы для рыбалки: лидеры top-100 (декабрь 2025)
+
+
 def tasks() -> list[tuple[str, str, dict]]:
-    L = [(f"{OUT}/777/comments/{s}.json", "wb_sku", {"sku": s, "report": "comments"}) for s in CLAMP_777]
-    L += [(f"{OUT}/1126/cards/{s}.json", "wb_card_content", {"sku": str(s)}) for s in BOWLS_1126]
-    L += [(f"{OUT}/1126/comments/{s}.json", "wb_sku", {"sku": s, "report": "comments"}) for s in BOWLS_1126[:3]]
+    L = [(f"{OUT}/729/cards/{s}.json", "wb_card_content", {"sku": str(s)}) for s in LEASH_729]
+    L += [(f"{OUT}/729/comments/{s}.json", "wb_sku", {"sku": s, "report": "comments"}) for s in LEASH_729]
+    L += [(f"{OUT}/2499/cards/{s}.json", "wb_card_content", {"sku": str(s)}) for s in FISHSET_2499[:2]]
+    L += [(f"{OUT}/2499/comments/{s}.json", "wb_sku", {"sku": s, "report": "comments"}) for s in FISHSET_2499[:3]]
+    L += [(f"{OUT}/777/comments/{s}.json", "wb_sku", {"sku": s, "report": "comments"}) for s in CLAMP_777]
+    # 1126 миски сняты 2026-10-11 (подставки 44 см, керамика — объём)
+
     return L
 
 

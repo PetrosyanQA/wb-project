@@ -206,7 +206,8 @@ def season() -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("step", choices=["list", "prefilter", "monthly", "season", "collect", "finalists"])
+    ap.add_argument("step", choices=["list", "prefilter", "monthly", "season", "collect", "finalists", "deep"])
+    ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--src", default="")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
@@ -224,6 +225,12 @@ def main() -> None:
             fetch_pages(T)
     elif a.step == "season":
         season()
+    elif a.step == "deep":
+        T = deep_tasks()
+        T = T[:a.limit] if a.limit else T
+        print(f"осталось без top-100: {len(deep_tasks())}")
+        if not a.dry_run:
+            fetch_subject(T)
     elif a.step == "collect":
         collect_finalists(a.src)
     else:
@@ -247,6 +254,78 @@ def collect_finalists(src_dir: str) -> None:
         c = collections.Counter(p.get("subject_id") for p in d.get("data", []))
         if c:
             shutil.copyfile(f, f"{FIN}/products_{c.most_common(1)[0][0]}.json")
+
+
+def write_xlsx(res: list[dict]) -> None:
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, PatternFill
+    wb = Workbook(); ws = wb.active; ws.title = "Все проверенные ниши"
+    head = ["id", "Ниша", "Тип", "Половина года", "Пик (мес)", "Дно % пика", "Цена до СПП ₽", "Цена покупателя ₽", "Шт/карт в пик",
+            "Шт/карт средний мес", "Объём л", "Top-1 %", "Top-10 %", "Чувств. груз %", "Комиссия FBS %", "Маржа %", "ROI %",
+            "Маржа от покупателя %", "¥ (цена/78)", "Прибыль/год на медиан. карточку ₽", "Строго ✅", "Сезонно ✅", "Не прошла"]
+    head += [f"Индекс {m}" for m in ("09", "10", "11", "12", "01", "02", "03", "04", "05", "06", "07", "08")]
+    ws.append(head)
+    for c in ws[1]:
+        c.font, c.fill = Font(bold=True, color="FFFFFF"), PatternFill("solid", fgColor="305496")
+    for r in res:
+        ws.append([r["id"], r["name"], r["type"], r["half"], r["peak_month"], r["trough_pct"], r["price_s"], r["price_b"],
+                   r["sales_peak_med"], r["sales_year_avg"], r["vol"], r["t1"], r["t10"], r["sens_pct"], r["commission"],
+                   r["margin"], r["roi"], r["margin_b"], r["yuan"], r["profit_year_per_card"],
+                   "да" if r["pass_strict"] else "", "да" if r["pass_seasonal"] else "", "; ".join(r["fails"])]
+                  + [r["index"].get(m) for m in ("09", "10", "11", "12", "01", "02", "03", "04", "05", "06", "07", "08")])
+    ws.freeze_panes = "C2"
+    ws.column_dimensions["B"].width = 48
+    ws.column_dimensions["W"].width = 50
+    wb.save(f"reports/all_niches_{RUN}.xlsx")
+
+
+def peak_window(peak_month: int) -> tuple[str, str]:
+    """Месяц пика → окно в 2025-10 … 2026-07 (целые данные новой методики); авг/сен → июль 2026 (ближайший целый)."""
+    import calendar
+    y, m = (2025, peak_month) if peak_month >= 10 else (2026, peak_month if peak_month <= 7 else 7)
+    return f"{y}-{m:02d}-01", f"{y}-{m:02d}-{calendar.monthrange(y, m)[1]:02d}"
+
+
+def deep_tasks() -> list[tuple[str, dict]]:
+    S = json.load(open(SEASON_OUT, encoding="utf-8"))
+    T = []
+    for s in S:
+        if os.path.exists(f"{FIN}/products_{s['id']}.json"):
+            continue
+        d1, d2 = peak_window(s["peak_month"])
+        T.append((f"{FIN}/products_{s['id']}.json", {"subject_id": s["id"], "report": "products", "d1": d1, "d2": d2, "limit": 100}))
+    return T
+
+
+def fetch_subject(tasks: list[tuple[str, dict]]) -> None:
+    from src.strategy_collect import Client, fetch, quota
+    print(f"к скачиванию: {len(tasks)}")
+    c = Client()
+    streak = 0
+    try:
+        print("квота до:", quota(c))
+        for k, (path, args) in enumerate(tasks, 1):
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            for attempt in range(2):
+                try:
+                    json.dump(fetch(c, "wb_subject", args), open(path, "w", encoding="utf-8"), ensure_ascii=False)
+                    print(f"[{k}/{len(tasks)}] → {path}", flush=True)
+                    streak = 0
+                    break
+                except Exception as e:                      # noqa: BLE001
+                    print(f"[{k}/{len(tasks)}] {args['subject_id']}: {str(e)[:120]} (попытка {attempt + 1})", flush=True)
+                    if "закрылся" in str(e):
+                        c = Client()
+                    if attempt == 0:
+                        time.sleep(60)
+            else:
+                streak += 1
+                if streak >= 5:
+                    print("5 сбоев подряд — стоп")
+                    break
+        print("квота после:", quota(c))
+    finally:
+        c.close()
 
 
 def finalists() -> None:
@@ -287,8 +366,10 @@ def finalists() -> None:
             fails.append(f"объём {vol} л > 1")
         if not (e["margin"] >= T_MARGIN and e["roi"] >= T_ROI):
             fails.append(f"маржа {e['margin']}% / ROI {e['roi']}%")
+        seasonal = s["type"] != "круглый год"
         if sales_year_avg < 150:
             fails.append(f"{round(sales_year_avg)} шт/карт/мес в среднем < 150")
+        soft_fail = (sales_peak < 100) if seasonal else (sales_year_avg < 150)
         if shares[0] > 25:
             fails.append(f"top-1 {round(shares[0])}%")
         if sens > 20:
@@ -301,9 +382,12 @@ def finalists() -> None:
                     "sens_pct": round(sens, 1), "new_rev_pct": round(sum(rev(p) for p in new) / tot * 100, 1),
                     "commission": com.get(sid), "margin": e["margin"], "roi": e["roi"], "margin_b": e["margin_b"],
                     "profit": e["profit"], "yuan": e["yuan78"], "yuan_max": e["yuan_max"],
-                    "profit_year_per_card": round(e["profit"] * sales_year_avg * 12) if e["profit"] > 0 else 0, "fails": fails})
-    res.sort(key=lambda r: (len(r["fails"]), -r["profit_year_per_card"]))
+                    "profit_year_per_card": round(e["profit"] * sales_year_avg * 12) if e["profit"] > 0 else 0, "fails": fails,
+                    "pass_strict": not fails,
+                    "pass_seasonal": not [x for x in fails if "в среднем" not in x] and not soft_fail})
+    res.sort(key=lambda r: (not r["pass_strict"], not r["pass_seasonal"], len(r["fails"]), -r["profit_year_per_card"]))
     json.dump(res, open(FIN_OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    write_xlsx(res)
     print("| id | Ниша | тип | пик | цена до СПП / покуп. | шт/карт пик / ср.мес | л | top-1 | маржа / ROI / от покуп. | ¥ | прибыль/год на медиан. карточку | не прошла |")
     for r in res:
         print(f"| {r['id']} | {r['name'][:38]} | {r['type'][:10]} {r['half'][:2]} | м{r['peak_month']:02d} | {r['price_s']} / {r['price_b']} | "
