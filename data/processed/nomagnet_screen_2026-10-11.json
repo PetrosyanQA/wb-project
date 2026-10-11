@@ -1,0 +1,1512 @@
+{
+ "kinds": [
+  "magnet",
+  "battery",
+  "liquid"
+ ],
+ "clean_max_pct": 20.0,
+ "rows": [
+  {
+   "id": 783,
+   "name": "Хранение вещей / Органайзеры для хранения",
+   "src": "newcomer_07.10",
+   "price": 2246,
+   "yuan": 28.8,
+   "p50_day": 5.3,
+   "profit12_p50": 696607,
+   "payback": 4,
+   "launch": "2027-03",
+   "fails": [
+    "маржа при медиане",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 235,
+   "name": "Декор интерьера / Фотоальбомы",
+   "src": "newcomer_07.10",
+   "price": 3378,
+   "yuan": 43.3,
+   "p50_day": 2.4,
+   "profit12_p50": 419596,
+   "payback": 6,
+   "launch": "2027-03",
+   "fails": [
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 8.5,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 8.5
+   },
+   "clean": true
+  },
+  {
+   "id": 1302,
+   "name": "Спортивный товар / Мячи спортивные",
+   "src": "newcomer_07.10",
+   "price": 2113,
+   "yuan": 27.1,
+   "p50_day": 3.6,
+   "profit12_p50": 395298,
+   "payback": 5,
+   "launch": "2027-01",
+   "fails": [],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1126,
+   "name": "Товары для животных / Миски для животных",
+   "src": "newcomer_07.10",
+   "price": 2148,
+   "yuan": 27.5,
+   "p50_day": 3.0,
+   "profit12_p50": 385549,
+   "payback": 6,
+   "launch": "2027-02",
+   "fails": [],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 28,
+   "name": "Декор интерьера / Фоторамки",
+   "src": "newcomer_07.10",
+   "price": 1588,
+   "yuan": 20.4,
+   "p50_day": 5.9,
+   "profit12_p50": 294075,
+   "payback": 9,
+   "launch": "2027-03",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 1.6,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 1.6
+   },
+   "clean": true
+  },
+  {
+   "id": 2486,
+   "name": "Спортивный товар / Катушки рыболовные",
+   "src": "newcomer_07.10",
+   "price": 1519,
+   "yuan": 19.5,
+   "p50_day": 3.1,
+   "profit12_p50": 166921,
+   "payback": 10,
+   "launch": "2026-12",
+   "fails": [],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1484,
+   "name": "Хранение вещей / Органайзеры подвесные",
+   "src": "newcomer_07.10",
+   "price": 2716,
+   "yuan": 34.8,
+   "p50_day": 1.2,
+   "profit12_p50": 120970,
+   "payback": null,
+   "launch": "2027-02",
+   "fails": [
+    "маржа при медиане",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 1.9,
+    "liquid": 0.0,
+    "any": 1.9
+   },
+   "clean": true
+  },
+  {
+   "id": 1643,
+   "name": "Религия и эзотерика / Иконы",
+   "src": "newcomer_07.10",
+   "price": 3090,
+   "yuan": 39.6,
+   "p50_day": 0.9,
+   "profit12_p50": 65420,
+   "payback": null,
+   "launch": "2027-03",
+   "fails": [
+    "≥150 шт/карт",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 6466,
+   "name": "Автоаксессуары и дополнительное оборудование / Пленки защитные для авто",
+   "src": "newcomer_07.10",
+   "price": 1931,
+   "yuan": 24.8,
+   "p50_day": 1.0,
+   "profit12_p50": 25470,
+   "payback": null,
+   "launch": "2026-12",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1543,
+   "name": "Хозяйственные товары / Наборы аксессуаров для ванн",
+   "src": "newcomer_07.10",
+   "price": 2950,
+   "yuan": 37.8,
+   "p50_day": 1.3,
+   "profit12_p50": 17893,
+   "payback": null,
+   "launch": "2027-02",
+   "fails": [
+    "маржа при медиане",
+    "≥150 шт/карт",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 223,
+   "name": "Декор интерьера / Вазы",
+   "src": "newcomer_07.10",
+   "price": 1976,
+   "yuan": 25.3,
+   "p50_day": 4.4,
+   "profit12_p50": 16372,
+   "payback": null,
+   "launch": "2026-12",
+   "fails": [
+    "маржа при медиане",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1545,
+   "name": "Хозяйственные товары / Чехлы для гладильных досок",
+   "src": "newcomer_07.10",
+   "price": 1421,
+   "yuan": 18.2,
+   "p50_day": 1.6,
+   "profit12_p50": -1152,
+   "payback": null,
+   "launch": "2027-02",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 937,
+   "name": "Хранение вещей / Коробки для хранения",
+   "src": "newcomer_07.10",
+   "price": 1442,
+   "yuan": 18.5,
+   "p50_day": 7.6,
+   "profit12_p50": -16273,
+   "payback": null,
+   "launch": "2027-01",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 249,
+   "name": "Спортивный товар / Эспандеры",
+   "src": "newcomer_07.10",
+   "price": 632,
+   "yuan": 8.1,
+   "p50_day": 10.1,
+   "profit12_p50": -29175,
+   "payback": null,
+   "launch": "2027-03",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 1.4,
+    "liquid": 0.0,
+    "any": 1.4
+   },
+   "clean": true
+  },
+  {
+   "id": 461,
+   "name": "Спортивный товар / Утяжелители",
+   "src": "newcomer_07.10",
+   "price": 749,
+   "yuan": 9.6,
+   "p50_day": 4.8,
+   "profit12_p50": -49357,
+   "payback": null,
+   "launch": "2026-12",
+   "fails": [
+    "≥150 шт/карт"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 3755,
+   "name": "Автоаксессуары и дополнительное оборудование / Пленки тонировочные",
+   "src": "newcomer_07.10",
+   "price": 752,
+   "yuan": 9.6,
+   "p50_day": 1.4,
+   "profit12_p50": -120969,
+   "payback": null,
+   "launch": "2026-12",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.5,
+    "liquid": 0.0,
+    "any": 0.5
+   },
+   "clean": true
+  },
+  {
+   "id": 3208,
+   "name": "Товары для животных / Дождевики для животных",
+   "src": "newcomer_07.10",
+   "price": 1338,
+   "yuan": 17.2,
+   "p50_day": 1.7,
+   "profit12_p50": -133840,
+   "payback": null,
+   "launch": "2027-01",
+   "fails": [
+    "маржа при медиане",
+    "≥150 шт/карт"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2267,
+   "name": "Автоаксессуары и дополнительное оборудование / Подушки автомобильные",
+   "src": "newcomer_07.10",
+   "price": 1588,
+   "yuan": 20.4,
+   "p50_day": 2.9,
+   "profit12_p50": -164105,
+   "payback": null,
+   "launch": "2027-03",
+   "fails": [
+    "маржа при медиане",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2215,
+   "name": "Хранение вещей / Корзинки",
+   "src": "newcomer_07.10",
+   "price": 1266,
+   "yuan": 16.2,
+   "p50_day": 3.6,
+   "profit12_p50": -189164,
+   "payback": null,
+   "launch": "2027-03",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 3798,
+   "name": "Автоаксессуары и дополнительное оборудование / Колпаки на колеса",
+   "src": "stageB_06.10",
+   "price": 2010,
+   "yuan": 25.8,
+   "margin": 26.1,
+   "roi": 99.4,
+   "fails": [
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2250,
+   "name": "Автоаксессуары и дополнительное оборудование / Декоративные детали кузова и бампера",
+   "src": "stageB_06.10",
+   "price": 1536,
+   "yuan": 19.7,
+   "margin": 23.9,
+   "roi": 86.8,
+   "fails": [
+    "F4 ≥ 150 шт/карточку",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 1.5,
+    "liquid": 0.0,
+    "any": 1.5
+   },
+   "clean": true
+  },
+  {
+   "id": 729,
+   "name": "Товары для животных / Поводки",
+   "src": "stageB_06.10",
+   "price": 1064,
+   "yuan": 13.6,
+   "margin": 22.8,
+   "roi": 76.7,
+   "fails": [
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1125,
+   "name": "Товары для животных / Лотки для животных",
+   "src": "stageB_06.10",
+   "price": 1034,
+   "yuan": 13.3,
+   "margin": 22.3,
+   "roi": 74.6,
+   "fails": [
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 4380,
+   "name": "Спортивный товар / Валики спортивные",
+   "src": "stageB_06.10",
+   "price": 1396,
+   "yuan": 17.9,
+   "margin": 22.1,
+   "roi": 78.8,
+   "fails": [
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 236,
+   "name": "Декор интерьера / Фигурки и статуэтки",
+   "src": "stageB_06.10",
+   "price": 1550,
+   "yuan": 19.9,
+   "margin": 21.8,
+   "roi": 79.4,
+   "fails": [],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 8163,
+   "name": "Автоаксессуары и дополнительное оборудование / Накладки защитные автомобильные",
+   "src": "stageB_06.10",
+   "price": 1470,
+   "yuan": 18.8,
+   "margin": 20.6,
+   "roi": 74.1,
+   "fails": [
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 339,
+   "name": "Рукоделие / Наборы для вышивания",
+   "src": "stageB_06.10",
+   "price": 1280,
+   "yuan": 16.4,
+   "margin": 20.1,
+   "roi": 70.6,
+   "fails": [
+    "F4 ≥ 150 шт/карточку",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2060,
+   "name": "Ручной инструмент и оснастка / Ключи гаечные",
+   "src": "stageB_06.10",
+   "price": 1928,
+   "yuan": 24.7,
+   "margin": 19.6,
+   "roi": 73.5,
+   "fails": [
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1426,
+   "name": "Хранение вещей / Вакуумные пакеты",
+   "src": "stageB_06.10",
+   "price": 920,
+   "yuan": 11.8,
+   "margin": 17.7,
+   "roi": 57.4,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 9.3,
+    "liquid": 0.0,
+    "any": 9.3
+   },
+   "clean": true
+  },
+  {
+   "id": 393,
+   "name": "Спортивные аксессуары / Наколенники",
+   "src": "stageB_06.10",
+   "price": 1187,
+   "yuan": 15.2,
+   "margin": 15.7,
+   "roi": 54.1,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 6370,
+   "name": "Автоаксессуары и дополнительное оборудование / Другие автоинструменты",
+   "src": "stageB_06.10",
+   "price": 4271,
+   "yuan": 54.8,
+   "margin": 14.2,
+   "roi": 42.9,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 10.5,
+    "any": 10.5
+   },
+   "clean": true
+  },
+  {
+   "id": 1443,
+   "name": "Декор интерьера / Декорации настенные",
+   "src": "stageB_06.10",
+   "price": 1023,
+   "yuan": 13.1,
+   "margin": 11.5,
+   "roi": 38.5,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 5.4,
+    "liquid": 0.0,
+    "any": 5.4
+   },
+   "clean": true
+  },
+  {
+   "id": 2508,
+   "name": "Спортивный товар / Удилища",
+   "src": "stageB_06.10",
+   "price": 2814,
+   "yuan": 36.1,
+   "margin": 10.0,
+   "roi": 29.6,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 4329,
+   "name": "Декор интерьера / Сухоцветы",
+   "src": "stageB_06.10",
+   "price": 998,
+   "yuan": 12.8,
+   "margin": 9.8,
+   "roi": 32.4,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 730,
+   "name": "Товары для животных / Шлейки",
+   "src": "stageB_06.10",
+   "price": 777,
+   "yuan": 10.0,
+   "margin": 7.9,
+   "roi": 24.5,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 766,
+   "name": "Автоаксессуары и дополнительное оборудование / Оплетки на руль",
+   "src": "stageB_06.10",
+   "price": 1346,
+   "yuan": 17.3,
+   "margin": 0.6,
+   "roi": 1.7,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 5554,
+   "name": "Товары для отдыха и кемпинга / Тенты универсальные",
+   "src": "stageB_06.10",
+   "price": 3300,
+   "yuan": 42.3,
+   "margin": 0.2,
+   "roi": 0.6,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 6307,
+   "name": "Автоаксессуары и дополнительное оборудование / Другие автоаксессуары",
+   "src": "newcomer_07.10",
+   "price": 6534,
+   "yuan": 83.8,
+   "p50_day": null,
+   "profit12_p50": null,
+   "payback": null,
+   "launch": null,
+   "fails": [
+    "≥150 шт/карт",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 2.4,
+    "battery": 6.3,
+    "liquid": 9.3,
+    "any": 15.6
+   },
+   "clean": true
+  },
+  {
+   "id": 240,
+   "name": "Спортивные аксессуары / Щитки",
+   "src": "newcomer_07.10",
+   "price": 4786,
+   "yuan": 61.4,
+   "p50_day": 1.2,
+   "profit12_p50": null,
+   "payback": null,
+   "launch": null,
+   "fails": [
+    "маржа при медиане",
+    "≥150 шт/карт",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1644,
+   "name": "Религия и эзотерика / Сувениры религиозные",
+   "src": "newcomer_07.10",
+   "price": 4902,
+   "yuan": 62.8,
+   "p50_day": 0.2,
+   "profit12_p50": null,
+   "payback": null,
+   "launch": null,
+   "fails": [
+    "маржа при медиане",
+    "≥150 шт/карт",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.9,
+    "any": 0.9
+   },
+   "clean": true
+  },
+  {
+   "id": 3072,
+   "name": "Декор интерьера / Фотофоны",
+   "src": "stageB_06.10",
+   "price": 2096,
+   "yuan": 26.9,
+   "margin": -5.0,
+   "roi": -13.2,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2431,
+   "name": "Все для садоводства / Подставки для цветов",
+   "src": "stageB_06.10",
+   "price": 1897,
+   "yuan": 24.3,
+   "margin": -8.2,
+   "roi": -18.5,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.4,
+    "any": 0.4
+   },
+   "clean": true
+  },
+  {
+   "id": 942,
+   "name": "Товары для животных / Домики для животных",
+   "src": "stageB_06.10",
+   "price": 1532,
+   "yuan": 19.6,
+   "margin": -14.9,
+   "roi": -32.1,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 374,
+   "name": "Декор интерьера / Картины",
+   "src": "stageB_06.10",
+   "price": 1911,
+   "yuan": 24.5,
+   "margin": -19.4,
+   "roi": -41.3,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 782,
+   "name": "Автоаксессуары и дополнительное оборудование / Органайзеры в багажник",
+   "src": "stageB_06.10",
+   "price": 1372,
+   "yuan": 17.6,
+   "margin": -21.1,
+   "roi": -44.1,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 4144,
+   "name": "Рукоделие / Картины по номерам",
+   "src": "stageB_06.10",
+   "price": 771,
+   "yuan": 9.9,
+   "margin": -27.0,
+   "roi": -54.7,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.6,
+    "any": 0.6
+   },
+   "clean": true
+  },
+  {
+   "id": 475,
+   "name": "Спортивный товар / Тренажеры",
+   "src": "stageB_06.10",
+   "price": 3837,
+   "yuan": 49.2,
+   "margin": -27.7,
+   "roi": -52.6,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 12.4,
+    "liquid": 0.0,
+    "any": 12.4
+   },
+   "clean": true
+  },
+  {
+   "id": 6422,
+   "name": "Рукоделие / Алмазная мозаика",
+   "src": "stageB_06.10",
+   "price": 771,
+   "yuan": 9.9,
+   "margin": -28.1,
+   "roi": -56.9,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 7.8,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 7.8
+   },
+   "clean": true
+  },
+  {
+   "id": 1181,
+   "name": "Хозяйственные товары / Корзины для белья",
+   "src": "stageB_06.10",
+   "price": 1739,
+   "yuan": 22.3,
+   "margin": -31.4,
+   "roi": -60.0,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 855,
+   "name": "Спортивный товар / Гантели",
+   "src": "stageB_06.10",
+   "price": 2001,
+   "yuan": 25.7,
+   "margin": -31.6,
+   "roi": -58.5,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2098,
+   "name": "Автоаксессуары и дополнительное оборудование / Емкости для масел и горючего",
+   "src": "stageB_06.10",
+   "price": 2470,
+   "yuan": 31.7,
+   "margin": -32.5,
+   "roi": -60.8,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 2.4,
+    "any": 2.4
+   },
+   "clean": true
+  },
+  {
+   "id": 1594,
+   "name": "Хозяйственные товары / Швабры",
+   "src": "stageB_06.10",
+   "price": 1772,
+   "yuan": 22.7,
+   "margin": -47.5,
+   "roi": -77.8,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1193,
+   "name": "Все для садоводства / Горшки для цветов",
+   "src": "stageB_06.10",
+   "price": 911,
+   "yuan": 11.7,
+   "margin": -61.5,
+   "roi": -89.3,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 936,
+   "name": "Хранение вещей / Вешалки-плечики",
+   "src": "stageB_06.10",
+   "price": 570,
+   "yuan": 7.3,
+   "margin": -67.9,
+   "roi": -97.6,
+   "fails": [
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 2251,
+   "name": "Автоаксессуары и дополнительное оборудование / Дефлекторы",
+   "src": "stageB_06.10",
+   "price": 1531,
+   "yuan": 19.6,
+   "margin": -68.9,
+   "roi": -95.9,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 5.9,
+    "liquid": 0.0,
+    "any": 5.9
+   },
+   "clean": true
+  },
+  {
+   "id": 1903,
+   "name": "Товары для отдыха и кемпинга / Качели подвесные",
+   "src": "stageB_06.10",
+   "price": 1908,
+   "yuan": 24.5,
+   "margin": -78.5,
+   "roi": -115.2,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F4 ≥ 150 шт/карточку",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1593,
+   "name": "Хозяйственные товары / Мусорные ведра",
+   "src": "stageB_06.10",
+   "price": 1342,
+   "yuan": 17.2,
+   "margin": -82.5,
+   "roi": -111.8,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 870,
+   "name": "Все для садоводства / Кашпо",
+   "src": "stageB_06.10",
+   "price": 1302,
+   "yuan": 16.7,
+   "margin": -93.5,
+   "roi": -111.5,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 3979,
+   "name": "Хранение вещей / Коробки картонные",
+   "src": "stageB_06.10",
+   "price": 1290,
+   "yuan": 16.5,
+   "margin": -111.8,
+   "roi": -120.8,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 1436,
+   "name": "Хозяйственные товары / Ведра хозяйственные",
+   "src": "stageB_06.10",
+   "price": 756,
+   "yuan": 9.7,
+   "margin": -127.2,
+   "roi": -129.8,
+   "fails": [
+    "F2 ≤ 2 кг (объёмный)",
+    "F3 маржа ≥ 18% и ROI ≥ 60%"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 0.0
+   },
+   "clean": true
+  },
+  {
+   "id": 777,
+   "name": "Автоаксессуары и дополнительное оборудование / Держатели в авто",
+   "src": "newcomer_07.10",
+   "price": 1576,
+   "yuan": 20.2,
+   "p50_day": 4.1,
+   "profit12_p50": 316632,
+   "payback": 7,
+   "launch": "2027-01",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 34.8,
+    "battery": 14.3,
+    "liquid": 0.0,
+    "any": 46.3
+   },
+   "clean": false
+  },
+  {
+   "id": 728,
+   "name": "Товары для животных / Ошейники",
+   "src": "newcomer_07.10",
+   "price": 1645,
+   "yuan": 21.1,
+   "p50_day": 3.1,
+   "profit12_p50": 180924,
+   "payback": 11,
+   "launch": "2027-01",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 30.2,
+    "liquid": 0.6,
+    "any": 30.8
+   },
+   "clean": false
+  },
+  {
+   "id": 2264,
+   "name": "Автоаксессуары и дополнительное оборудование / Рамки для номеров",
+   "src": "newcomer_07.10",
+   "price": 2420,
+   "yuan": 31.0,
+   "p50_day": 1.4,
+   "profit12_p50": 95694,
+   "payback": null,
+   "launch": "2027-01",
+   "fails": [
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 24.6,
+    "battery": 0.0,
+    "liquid": 0.0,
+    "any": 24.6
+   },
+   "clean": false
+  },
+  {
+   "id": 625,
+   "name": "Декор интерьера / Часы настенные",
+   "src": "newcomer_07.10",
+   "price": 790,
+   "yuan": 10.1,
+   "p50_day": 7.9,
+   "profit12_p50": -3205,
+   "payback": null,
+   "launch": "2027-03",
+   "fails": [
+    "маржа при медиане"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 21.5,
+    "liquid": 0.0,
+    "any": 21.5
+   },
+   "clean": false
+  },
+  {
+   "id": 1196,
+   "name": "Все для садоводства / Фигурки и вывески садовые",
+   "src": "newcomer_07.10",
+   "price": 2427,
+   "yuan": 31.1,
+   "p50_day": 0.7,
+   "profit12_p50": -38314,
+   "payback": null,
+   "launch": "2026-12",
+   "fails": [
+    "маржа при медиане",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 38.0,
+    "liquid": 0.0,
+    "any": 38.0
+   },
+   "clean": false
+  },
+  {
+   "id": 1220,
+   "name": "Садовые инструменты и полив / Секаторы",
+   "src": "newcomer_07.10",
+   "price": 2162,
+   "yuan": 27.7,
+   "p50_day": 1.3,
+   "profit12_p50": -42817,
+   "payback": null,
+   "launch": "2026-12",
+   "fails": [
+    "маржа при медиане",
+    "партия ≥ 200"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 64.7,
+    "liquid": 0.0,
+    "any": 64.7
+   },
+   "clean": false
+  },
+  {
+   "id": 6343,
+   "name": "Спортивный товар / Аксессуары для лодок",
+   "src": "stageB_06.10",
+   "price": 5364,
+   "yuan": 68.8,
+   "margin": 32.0,
+   "roi": 133.7,
+   "fails": [
+    "F4 ≥ 150 шт/карточку",
+    "F5 top-1 ≤ 25%",
+    "F7 партия 200 шт ≤ $1700"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 31.2,
+    "liquid": 0.4,
+    "any": 31.6
+   },
+   "clean": false
+  },
+  {
+   "id": 6720,
+   "name": "Товары для животных / Инструменты для пчеловодства",
+   "src": "stageB_06.10",
+   "price": 1528,
+   "yuan": 19.6,
+   "margin": 27.6,
+   "roi": 100.4,
+   "fails": [
+    "F4 ≥ 150 шт/карточку"
+   ],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 13.0,
+    "liquid": 9.3,
+    "any": 22.3
+   },
+   "clean": false
+  },
+  {
+   "id": 3235,
+   "name": "Товары для животных / Поилки для животных",
+   "src": "stageB_06.10",
+   "price": 832,
+   "yuan": 10.7,
+   "margin": 19.2,
+   "roi": 60.6,
+   "fails": [],
+   "top100_n": 100,
+   "sensitive_pct": {
+    "magnet": 0.0,
+    "battery": 36.9,
+    "liquid": 0.0,
+    "any": 36.9
+   },
+   "clean": false
+  }
+ ]
+}
