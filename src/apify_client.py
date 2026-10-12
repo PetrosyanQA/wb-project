@@ -1,0 +1,94 @@
+"""Apify (международные тренды: Amazon, TikTok, Google Trends) — клиент с кэшем и потолком расходов (2026-10-12).
+
+    python -m src.apify_client me                     # аккаунт, план, расход за месяц (0 $)
+    python -m src.apify_client leash [--dry-run]      # первый скан: поводок-рулетка на Amazon / TikTok / Google Trends
+
+Токен — только из .env (APIFY_TOKEN), никогда не печатается. Ответы → data/raw/apify/<дата>/<имя>.json;
+повторный запуск с тем же именем в тот же день = 0 $ (кэш). Каждый запуск ограничен maxTotalChargeUsd (PAY_PER_EVENT).
+Бесплатный план Apify — $5/мес. Не используем useCaptchaSolver и не обходим защиту сайтов.
+"""
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import os
+import sys
+import urllib.parse
+import urllib.request
+
+sys.stdout.reconfigure(encoding="utf-8")
+API = "https://api.apify.com/v2/"
+OUT = f"data/raw/apify/{dt.date.today().isoformat()}"
+
+
+def token() -> str:
+    for line in open(".env", encoding="utf-8-sig"):
+        if line.startswith("APIFY_TOKEN="):
+            return line.split("=", 1)[1].strip()
+    raise SystemExit("нет APIFY_TOKEN в .env")
+
+
+def call(path: str, body: dict | None = None, params: dict | None = None, timeout: int = 330):
+    url = API + path + ("?" + urllib.parse.urlencode(params) if params else "")
+    data = json.dumps(body).encode() if body is not None else None
+    req = urllib.request.Request(url, data=data, method="POST" if data else "GET",
+                                 headers={"Authorization": "Bearer " + token(), "Content-Type": "application/json"})
+    return json.load(urllib.request.urlopen(req, timeout=timeout))
+
+
+def me() -> dict:
+    d = call("users/me")["data"]
+    u = call("users/me/usage/monthly")["data"]
+    return {"user": d.get("username"), "plan": (d.get("plan") or {}).get("id"),
+            "credits_usd": (d.get("plan") or {}).get("monthlyUsageCreditsUsd"),
+            "used_usd": round(u.get("totalUsageCreditsUsdAfterVolumeDiscount") or u.get("totalUsageCreditsUsdBeforeVolumeDiscount") or 0, 3)}
+
+
+def run(name: str, actor: str, inp: dict, max_usd: float, timeout_s: int = 300) -> list:
+    """Синхронный запуск актора → элементы датасета. Кэш по имени на сегодня."""
+    path = f"{OUT}/{name}.json"
+    if os.path.exists(path):
+        return json.load(open(path, encoding="utf-8"))
+    items = call(f"acts/{actor}/run-sync-get-dataset-items", inp,
+                 {"timeout": timeout_s, "maxTotalChargeUsd": max_usd, "memory": 1024}, timeout=timeout_s + 30)
+    os.makedirs(OUT, exist_ok=True)
+    json.dump(items, open(path, "w", encoding="utf-8"), ensure_ascii=False)
+    return items
+
+
+LEASH = [  # (имя, актор, вход, потолок $)
+    ("amazon_retractable_leash", "junglee~amazon-crawler",
+     {"categoryOrProductUrls": [{"url": "https://www.amazon.com/s?k=retractable+dog+leash"}], "maxItemsPerStartUrl": 60,
+      "scrapeProductDetails": False, "maxOffers": 0, "scrapeSellers": False, "useCaptchaSolver": False}, 0.40),
+    ("tiktok_retractable_leash", "clockworks~tiktok-scraper",
+     {"searchQueries": ["retractable dog leash"], "resultsPerPage": 40, "searchSection": "/video",
+      "shouldDownloadVideos": False, "shouldDownloadCovers": False}, 0.50),   # минимум Apify — $0.50 на запуск
+    ("gtrends_leash", "apify~google-trends-scraper",
+     {"searchTerms": ["retractable dog leash", "поводок рулетка"], "timeRange": "today 5-y", "maxItems": 10}, 0.50),
+]
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("cmd", choices=["me", "leash"])
+    ap.add_argument("--dry-run", action="store_true")
+    a = ap.parse_args()
+    if a.cmd == "me":
+        print(me())
+        return
+    print("до:", me())
+    print(f"потолок скана: ${sum(x[3] for x in LEASH):.2f}")
+    if a.dry_run:
+        return
+    for name, actor, inp, cap in LEASH:
+        try:
+            items = run(name, actor, inp, cap)
+            print(f"{name}: {len(items)} шт → {OUT}/{name}.json")
+        except Exception as e:                                  # noqa: BLE001 — один актор не должен валить скан
+            print(f"{name}: ошибка {str(e)[:160]}")
+    print("после:", me())
+
+
+if __name__ == "__main__":
+    main()
