@@ -33,6 +33,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 RUN = "2026-10-07"
 R5, R6, R7 = "data/raw/saleflow/2026-10-05", "data/raw/saleflow/2026-10-06", "data/raw/saleflow/2026-10-07"
 R11 = "data/raw/saleflow/2026-10-11"
+R13 = "data/raw/saleflow/2026-10-13"
 WINDOW = ("2026-04-01", "2026-07-31")          # надёжное окно дневных данных (08–09.2026 в Saleflow неполные)
 COMMENTS_SINCE = "2025-10-06"                  # 365 дней отзывов (как в отчётах 2026-10-06)
 COHORT = ("2025-10-01", "2026-06-30")          # новые карточки для траекторий входа
@@ -228,6 +229,54 @@ def segment_729(row: dict) -> str:
     return "рулетка 8+ м"
 
 
+# ── 2499: наборы для рыбалки. Жалобы откалиброваны по 25 негативам лидеров (pivot/2499, 2026-10-13) ───────────
+COMPLAINTS_2499 = {
+    "некомплект / не хватает предметов": r"не ?комплект|не полност\w* укомплект|не хватает|нет (\w+ ){0,2}(шумовк|богор|удочк|удилищ|фонар|поводк|ремн)|отсутству|недолож|не было",
+    "не соответствует фото / описанию": r"не соответств|не совпада|другое|не то|на фото|картинк|другой фирм",
+    "упаковка мятая, всё рассыпано": r"мят|рассыпа|рваная|порван\w* (короб|упаков)|упаковк|коробк\w* (вся|мят|порв)|выпал|как попало",
+    "сломано / трещина при получении": r"слома|треснут|трещин|лопнул|сломан",
+    "дёшево выглядит / стыдно дарить": r"стыдно|дешев|ужасн\w* качеств|качество ужас|не стоит|за такие деньги|мусор",
+    "мелкие / не те снасти": r"мал[ыеа]|мелк|не подход|бесполезн",
+    "подарок": r"подар",
+}
+PAINS_2499 = {"в подарок / подарочная упаковка": r"подар|упаковк|короб",
+              "N предметов в наборе": r"\d+ ?(в|предмет)",
+              "ящик / органайзер": r"ящик|бокс|органайзер|коробк",
+              "для зимней рыбалки": r"зимн",
+              "для летней / поплавочной": r"летн|поплав",
+              "спиннинг / приманки": r"спиннинг|блесн|воблер|приманк",
+              "мужчине / 23 февраля / папе": r"мужчин|папе|муж|23 феврал|отцу"}
+
+
+def classify_2499(name: str, card: dict) -> dict:
+    n = name.lower()
+    m = re.search(r"(\d{2,3}) ?(в ?1|предмет)", n)
+    return {"items_n": int(m.group(1)) if m else None,
+            "подарочный": bool(re.search(r"подар", n)),
+            "зимний": bool(re.search(r"зимн|жерлиц|балансир|мормыш", n)),
+            "хапуга/каркас": bool(re.search(r"хапуг|каркас|клетк", n)),
+            "ящик": bool(re.search(r"ящик|бокс", n)),
+            "удочка в комплекте": bool(re.search(r"удочк|удилищ|спиннинг \d|\d[.,]?\d? ?м\b", n)),
+            "приманки/блёсны": bool(re.search(r"блесн|воблер|приманк", n)),
+            "электроника": bool(re.search(r"камер|эхолот|сигнализатор|фонар", n))}
+
+
+def segment_2499(row: dict) -> str:
+    if row.get("хапуга/каркас"):
+        return "хапуга / каркас (габарит)"
+    if row.get("электроника"):
+        return "электроника (исключено)"
+    if row.get("зимний"):
+        return "зимний набор"
+    if row.get("приманки/блёсны"):
+        return "набор приманок / блёсен"
+    if row.get("подарочный") or (row.get("items_n") or 0) >= 20:
+        return "подарочный набор аксессуаров"
+    if row.get("ящик"):
+        return "ящик со снастями"
+    return "прочие наборы"
+
+
 PRESETS = {
     777: {
         "name": "Держатели в авто",
@@ -315,6 +364,34 @@ PRESETS = {
                             "эргономичная прорезиненная ручка, карабин 360°", "price": 990, "yuan": 11, "vol": 0.9, "kg": 0.3,
                     "buyout": 85.0, "commission": 20.0, "buyer_price": 700},
         "launch": "2027-02", "first_batch": 400,
+    },
+    2499: {
+        "name": "Наборы для рыбалки", "run": "2026-10-13",
+        "trends": f"{R13}/strategy2499/trends_month.json",
+        "products500": f"{R13}/strategy2499/products500_2026-07.json",
+        "products_30d": f"{R13}/strategy2499/products_30d.json",
+        "top100_products": f"{R13}/strategy2499/top100/top100_products_2026-07.json",
+        "top100_json": "data/processed/top100_2499_2026-10-13.json",
+        "cards": f"{R13}/strategy2499/top100/cards",
+        "daily": [f"{R13}/strategy2499/top100/daily"],
+        "price_seg": {"2026-07": f"{R13}/strategy2499/price_seg_2026-07.json", "30d": f"{R13}/strategy2499/price_seg_30d.json"},
+        "kw_year": [f"{R13}/strategy2499/keywords/keywords_{m}.json" for m in YEAR],
+        "kw_30d": f"{R13}/strategy2499/keywords_30d.json",
+        "kw_peak": (f"{R13}/strategy2499/keywords/keywords_2025-07.json", f"{R13}/strategy2499/keywords/keywords_2026-07.json"),
+        "gap_source": f"{R13}/strategy2499/keywords/keywords_2025-12.json",   # новогодний пик подарков
+        "gap_min_freq": 1000, "gap_min_results": 100,
+        "gap_re": r"подар|набор|мужчин|рыбак|зимн|летн|снаст|ящик|бокс",
+        "core_re": r"набор|рыбал|снаст",
+        "sku_keywords": f"{R13}/strategy2499/sku_*_keywords.json",
+        "comments": [f"{R11}/pivot/2499/comments/*.json", f"{R13}/strategy2499/comments/*.json"],
+        "sellers": f"{R13}/strategy2499/sellers_2026-07.json",
+        "complaints": COMPLAINTS_2499, "pains": PAINS_2499, "classify": classify_2499, "segment": segment_2499,
+        "type_keys": ("подарочный", "ящик", "удочка в комплекте", "зимний"),
+        "our_segment": "подарочный набор аксессуаров",
+        "winner": None, "winner_file": None,
+        "product": {"name": "подарочный набор аксессуаров рыбака в кейсе", "price": 2290, "yuan": 28, "vol": 1.0, "kg": 0.5,
+                    "buyout": 70.0, "commission": 21.0, "buyer_price": 2060},     # уточняется после build; ¥ — допущение
+        "launch": "2026-12", "first_batch": 200,
     },
 }
 

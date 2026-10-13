@@ -39,13 +39,16 @@ JUL = ("2026-07-01", "2026-07-31")
 BASE = f"data/raw/saleflow/{RUN}"
 TOP100 = {777: "data/raw/saleflow/2026-10-05/dna/777/top100/top100_products_2026-07.json",
           2486: "data/raw/saleflow/2026-10-06/fresh/products_2486_2026-07.json",
-          729: "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json"}
-TOP100_FALLBACK = {729: "data/raw/saleflow/2026-10-11/all/finalists/products_729.json"}   # top-100 пика (март 2026) до core
-DAILY_D2 = {729: "2026-07-31"}    # 2026-10-11: 2025-10-01 … 2026-10-10 падает upstream; после 07-31 Saleflow всё равно неполный
-RUNS = {729: ("2026-10-11", "2026-10-10", "2026-09-10")}    # (RUN, D2, D1_30) — ниша собирается в другой день
+          729: "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json",
+          2499: "data/raw/saleflow/2026-10-13/strategy2499/products500_2026-07.json"}
+TOP100_FALLBACK = {729: "data/raw/saleflow/2026-10-11/all/finalists/products_729.json",
+                   2499: "data/raw/saleflow/2026-10-11/all/finalists/products_2499.json"}   # top-100 пика (март 2026) до core
+DAILY_D2 = {729: "2026-07-31", 2499: "2026-07-31"}    # 2026-10-11: 2025-10-01 … 2026-10-10 падает upstream; после 07-31 Saleflow всё равно неполный
+RUNS = {729: ("2026-10-11", "2026-10-10", "2026-09-10"), 2499: ("2026-10-13", "2026-10-12", "2026-09-12")}    # (RUN, D2, D1_30) — ниша собирается в другой день
 OLD_COMMENTS = {2486: "data/raw/saleflow/2026-10-06/fresh/comments/2486_{}.json"}
 KW_MONTHS = {2486: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
              777: ["2024-12"],
+             2499: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
              729: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]]}
 
 
