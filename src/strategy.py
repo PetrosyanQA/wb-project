@@ -34,6 +34,7 @@ RUN = "2026-10-07"
 R5, R6, R7 = "data/raw/saleflow/2026-10-05", "data/raw/saleflow/2026-10-06", "data/raw/saleflow/2026-10-07"
 R11 = "data/raw/saleflow/2026-10-11"
 R13 = "data/raw/saleflow/2026-10-13"
+R14 = "data/raw/saleflow/2026-10-14"
 WINDOW = ("2026-04-01", "2026-07-31")          # надёжное окно дневных данных (08–09.2026 в Saleflow неполные)
 COMMENTS_SINCE = "2025-10-06"                  # 365 дней отзывов (как в отчётах 2026-10-06)
 COHORT = ("2025-10-01", "2026-06-30")          # новые карточки для траекторий входа
@@ -277,6 +278,42 @@ def segment_2499(row: dict) -> str:
     return "прочие наборы"
 
 
+# ── 7640: сумки спортивные (2026-10-14). Словарь жалоб — типовой для сумок, проверяется на отзывах лидеров ─────────
+COMPLAINTS_7640 = {
+    "молния ломается / расходится": r"молни|застежк|застёжк|бегунок|собачк",
+    "шов / ручка / ремень оторвались": r"шов|швы|расп[оа]рол|оторвал|отвалил|ручк|ремен|лямк|карабин",
+    "меньше, чем на фото / не влезает": r"меньше|маленьк|не влез|не помещ|размер|объем|объём",
+    "ткань тонкая / дешёвая": r"тонк|хлипк|дешев|дёшев|ткань|материал|качество",
+    "запах": r"запах|воня|пахнет",
+    "не соответствует фото / цвет": r"не соответств|на фото|цвет|другой",
+    "брак при получении": r"брак|дырк|пятн|грязн",
+}
+PAINS_7640 = {"отдел для обуви": r"обув", "отдел мокрое/сухое": r"мокр|влажн", "водоотталкивающая": r"водо",
+              "объём N л": r"\d+ ?л\b|литр", "ручная кладь / размеры": r"ручн\w* клад|\d+ ?[хx×] ?\d+",
+              "регулируемый ремень": r"ремен|через плечо", "карман для телефона/ключей": r"карман"}
+
+
+def classify_7640(name: str, card: dict) -> dict:
+    n = name.lower()
+    m = re.search(r"(\d{2}) ?л\b", n)
+    return {"liters": int(m.group(1)) if m else None, "дорожная": bool(re.search(r"дорожн|путешеств|ручная кладь|поездок", n)),
+            "фитнес": bool(re.search(r"фитнес|тренир|зал", n)), "через плечо": bool(re.search(r"плеч", n)),
+            "рюкзак": bool(re.search(r"рюкзак", n)), "поясная": bool(re.search(r"поясн|бананк", n)),
+            "бассейн": bool(re.search(r"бассейн|пляж", n)), "обувной отдел": bool(re.search(r"обув", n))}
+
+
+def segment_7640(row: dict) -> str:
+    if row.get("рюкзак"):
+        return "рюкзак"
+    if row.get("поясная"):
+        return "поясная"
+    if row.get("бассейн"):
+        return "для бассейна/пляжа"
+    if row.get("дорожная"):
+        return "спорт+дорожная"
+    return "спортивная/фитнес"
+
+
 PRESETS = {
     777: {
         "name": "Держатели в авто",
@@ -392,6 +429,33 @@ PRESETS = {
         "product": {"name": "подарочный набор аксессуаров рыбака в кейсе", "price": 2290, "yuan": 28, "vol": 1.0, "kg": 0.5,
                     "buyout": 70.0, "commission": 21.0, "buyer_price": 2060},     # уточняется после build; ¥ — допущение
         "launch": "2026-12", "first_batch": 200,
+    },
+    7640: {
+        "name": "Сумки спортивные", "run": "2026-10-14",
+        "trends": f"{R14}/strategy7640/trends_month.json",
+        "products500": f"{R14}/strategy7640/products500_2026-07.json",
+        "products_30d": f"{R14}/strategy7640/products_30d.json",
+        "top100_products": f"{R14}/strategy7640/top100/top100_products_2026-07.json",
+        "top100_json": "data/processed/top100_7640_2026-10-14.json",
+        "cards": f"{R14}/strategy7640/top100/cards",
+        "daily": [f"{R14}/strategy7640/top100/daily"],
+        "price_seg": {"2026-07": f"{R14}/strategy7640/price_seg_2026-07.json", "30d": f"{R14}/strategy7640/price_seg_30d.json"},
+        "kw_year": [f"{R14}/strategy7640/keywords/keywords_{m}.json" for m in YEAR],
+        "kw_30d": f"{R14}/strategy7640/keywords_30d.json",
+        "kw_peak": (f"{R14}/strategy7640/keywords/keywords_2025-07.json", f"{R14}/strategy7640/keywords/keywords_2026-07.json"),
+        "gap_source": None, "gap_min_freq": 1500,
+        "gap_re": r"сумк|дорожн|спортивн|фитнес|ручная кладь|через плечо|обув",
+        "core_re": r"сумк",
+        "sku_keywords": f"{R14}/strategy7640/sku_*_keywords.json",
+        "comments": [f"{R14}/strategy7640/comments/*.json"],
+        "sellers": f"{R14}/strategy7640/sellers_2026-07.json",
+        "complaints": COMPLAINTS_7640, "pains": PAINS_7640, "classify": classify_7640, "segment": segment_7640,
+        "type_keys": ("дорожная", "фитнес", "через плечо", "обувной отдел"),
+        "our_segment": "спорт+дорожная",
+        "winner": None, "winner_file": None,
+        "product": {"name": "сумка спортивная дорожная", "price": 1590, "yuan": 15, "vol": 1.0, "kg": 0.5,
+                    "buyout": 70.0, "commission": 21.0, "buyer_price": 1370},     # уточняется после build; ¥ — допущение
+        "launch": "2027-01", "first_batch": 250,
     },
 }
 
