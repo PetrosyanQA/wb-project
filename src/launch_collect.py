@@ -41,7 +41,8 @@ NICHES = {  # имя + products500 по умолчанию (снимок июл�
     731: ("Игрушки для животных", "data/raw/saleflow/2026-10-05/dna/731/products500_2026-07.json"),
 }
 # Дозапуск под одну нишу в другой день: LAUNCH_RUN=2026-10-11 → своя выборка/папка/отчёт, выборка 2026-10-08 не меняется
-RUNS = {"2026-10-11": ("2026-07-31", {729: ("Поводки", "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json")})}
+RUNS = {"2026-10-11": ("2026-07-31", {729: ("Поводки", "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json")}),
+        "2026-10-14": ("2026-07-31", {7640: ("Сумки спортивные", "data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json")})}
 if os.environ.get("LAUNCH_RUN") in RUNS:
     RUN = os.environ["LAUNCH_RUN"]
     D2, NICHES = RUNS[RUN]
@@ -61,7 +62,7 @@ def products_path(niche: int) -> str:
     return p
 
 
-N_WIN, N_CTL, N_MID, PER_SELLER = 12, 8, 6, 3
+N_WIN, N_CTL, N_MID, PER_SELLER = int(os.environ.get('N_WIN', 12)), 8, 6, 3
 
 
 def rows(path: str) -> list[dict]:
@@ -131,12 +132,12 @@ def todo(sample: dict) -> list[tuple[str, dict]]:
 def fetch_split(c, fetch, args: dict) -> list:
     """Ряд > 120 дней — двумя запросами (длинные диапазоны падают upstream, проверено 2026-10-11)."""
     a, b = dt.date.fromisoformat(args["d1"]), dt.date.fromisoformat(args["d2"])
-    if (b - a).days <= 120:
-        return fetch(c, "wb_sku", args)
-    m = a + (b - a) / 2
-    left = fetch(c, "wb_sku", {**args, "d2": m.isoformat()})
-    right = fetch(c, "wb_sku", {**args, "d1": (m + dt.timedelta(days=1)).isoformat()})
-    return list(left) + list(right)
+    out, cur = [], a
+    while cur <= b:                                            # куски ≤ 150 дней (5 мес. проходят стабильно, 2026-10-14)
+        end = min(b, cur + dt.timedelta(days=149))
+        out += list(fetch(c, "wb_sku", {**args, "d1": cur.isoformat(), "d2": end.isoformat()}))
+        cur = end + dt.timedelta(days=1)
+    return out
 
 
 def collect(dry: bool) -> None:
