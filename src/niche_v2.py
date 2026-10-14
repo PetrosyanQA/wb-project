@@ -164,13 +164,13 @@ def collect(dry: bool) -> None:
 
 
 # ── блоки 2–5 ───────────────────────────────────────────────────────────────────────────────────────────────
-def econ_row(price: float, yuan: float, commission: float, buyout: float) -> dict:
+def econ_row(price: float, yuan: float, commission: float, buyout: float, vol: float = 0.9) -> dict:
     from src import strategy as S
     from src.deep_pair import fbs_config
     base = S.load_config
     S.load_config = lambda: fbs_config(base())
     try:
-        e = S.econ(None, {"price": price, "yuan": yuan, "vol": 0.9, "kg": 0.4, "buyout": buyout, "commission": commission,
+        e = S.econ(None, {"price": price, "yuan": yuan, "vol": vol, "kg": 0.4, "buyout": buyout, "commission": commission,
                           "buyer_price": price * 0.9})
     finally:
         S.load_config = base
@@ -198,9 +198,12 @@ def score() -> None:
         winners = sorted([x for x in new if x["sales"] / 31 / k_jul >= 5], key=lambda x: -x["sales"])
         seller_price = st.median(x["final_price"] for x in R if x.get("final_price"))
         commission = com.get(r["id"]) or 21.0
-        buyout = r.get("buyout") or 75.0
+        bo = [x.get("purchase_after_return") for x in R[:100] if x.get("purchase_after_return")]
+        buyout = st.median(bo) if bo else (r.get("buyout") or 75.0)       # реальный выкуп top-100 (7640: 61 %, не 75)
         e = econ_row(seller_price, 15.0, commission, buyout)          # ¥15 — опорная точка до проверки 1688
         b, s15 = e["база ДРР 15%"], e["цена −15%"]
+        r["buyout_real"] = buyout
+        r["margin_y15_vol2"] = econ_row(seller_price, 15.0, commission, buyout, 2.0)["база ДРР 15%"]["net_margin_pct"]   # если упаковка 2 л
         units_budget = (T["budget_rub"] * (1 - T["reserve_pct"] / 100) - T["start_costs"])
         max_cost_for_batch = units_budget / T["min_batch"]
         yuan_cap = min(e["max_yuan"], round((max_cost_for_batch - 83) / 17, 1))
@@ -241,7 +244,7 @@ def write_xlsx(out: list[dict]) -> None:
     ws = wb.active
     ws.title = "v2"
     cols = ["id", "name", "china_pct", "new_share", "top1_pct", "buyer_med", "timing", "newcomers_in_band", "nc_p25", "nc_p50",
-            "nc_p75", "seller_price_med", "commission", "margin_y15", "roi_y15", "stress_margin_y15", "yuan_cap",
+            "nc_p75", "seller_price_med", "commission", "buyout_real", "margin_y15", "margin_y15_vol2", "roi_y15", "stress_margin_y15", "yuan_cap",
             "monthly_profit_p50", "payback_months_p50", "fails"]
     ws.append(cols)
     for c in ws[1]:
