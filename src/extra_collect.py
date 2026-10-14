@@ -15,6 +15,17 @@ import time
 
 sys.stdout.reconfigure(encoding="utf-8")
 PLANS = {
+    729: {
+        "run": "2026-10-11",
+        "queries": [], "regions": [],
+        "queries_once": ["поводок рулетка", "рулетка для собак 5 м", "поводок рулетка 360"],
+        "focus": [111647586, 803883203],                       # Красницкий 5 м, ФРИ 10 м
+        "winners": [111647586, 803883203, 291113901, 642674096],
+        "faq": [111647586, 803883203, 291113901],
+        "keywords": [],
+        "sellers": {"Красницкий": None, "ФРИ": None},
+        "d1": "2026-07-01", "d2": "2026-07-31", "kw_d1": "2026-09-13", "kw_d2": "2026-10-13",
+    },
     7640: {
         "run": "2026-10-14",
         "queries": ["сумка спортивная", "сумка дорожная", "сумка спортивная с отделом для обуви"],
@@ -25,6 +36,10 @@ PLANS = {
         "keywords": [769180126, 597298281, 1009195748, 492558830, 768361554],
         "sellers": {"Кондрашов": 250026838, "Галсанов": 1153127, "Поликутин": 42792, "Slimberg": 39672},
         "d1": "2026-07-01", "d2": "2026-07-31", "kw_d1": "2026-09-13", "kw_d2": "2026-10-13",
+        "queries_once": ["ручная кладь в самолет", "сумка ручная кладь победа 36 30 27", "сумка дорожная ручная кладь",
+                         "рюкзак ручная кладь победа"],
+        "subjects": {"Рюкзаки": 138, "Сумки": 50},
+        "ozon_queries": ["сумка спортивная", "поводок рулетка"],
     },
 }
 
@@ -51,9 +66,20 @@ def tasks(niche: int) -> list[tuple[str, str, dict]]:
     for s in P["keywords"]:
         T.append((f"{o}/keywords_{s}.json", "wb_sku", {"sku": s, "report": "keywords", "d1": P["kw_d1"], "d2": P["kw_d2"]}))
     for name, sid in P["sellers"].items():
+        if not sid:
+            continue
         T.append((f"{o}/seller_{name}_products.json", "wb_seller", {"supplier_id": sid, "report": "products", "d1": P["d1"], "d2": P["d2"],
                                                                      "limit": 100}))
         T.append((f"{o}/seller_{name}_trends.json", "wb_seller", {"supplier_id": sid, "report": "trends", "d1": "2025-06-01", "d2": P["d2"]}))
+    for q in P.get("queries_once", []):                        # только Москва — регионы дали одинаковую выдачу (2026-10-15)
+        T.append((f"{o}/check_rates/{q.replace(' ', '_')}__Москва.json", "wb_check_rates", {"query": q, "region": "Москва", "limit": 100}))
+    for sub, sid in P.get("subjects", {}).items():
+        T.append((f"{o}/subject_{sid}_products500_2026-07.json", "wb_subject", {"subject_id": sid, "report": "products", "d1": "2026-07-01",
+                                                                                "d2": "2026-07-31", "limit": 500}))
+        T.append((f"{o}/subject_{sid}_trends.json", "wb_subject", {"subject_id": sid, "report": "trends", "d1": "2024-09-01",
+                                                                   "d2": "2026-09-30", "group_by": "month"}))
+    for q in P.get("ozon_queries", []):
+        T.append((f"{o}/ozon_search_{q.replace(' ', '_')}.json", "ozon_categories_search", {"query": q}))
     return T
 
 

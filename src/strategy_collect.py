@@ -4,7 +4,7 @@
     python -m src.strategy_collect --niche 2486 --step trends|cards20|core|daily|cards|leaders [--sku …] [--comments …]
     python -m src.strategy_collect --niche 777  --step trends|extra
 
-Шаги (квота Saleflow — 500 запросов/день; wb_card_content идёт в CDN WB, не в MPSTATS):
+Шаги (квота Saleflow — 500 запросов/день; wb_card_content тоже списывает квоту — проверено 2026-10-15):
   trends   — wb_subject trends по месяцам, 2024-09-01 … 2026-09-30 (1; диапазон длиннее или d2 не конец месяца → «request failed»)
   cards20  — wb_card_content top-20 по выручке июля → габариты упаковки ДО трат квоты (гейт ≤ 1 л)
   core     — products500 июль, top-100 за 30 дней, price_segmentation июль/30 дней, sellers июль,
@@ -83,7 +83,8 @@ def tasks(niche: int, step: str, skus: list[int], comments: list[int]) -> list[t
         return [(f"{o}/trends_month.json", "wb_subject", subj(niche, "trends", "2024-09-01", "2026-09-30", group_by="month"), False)]
     if step in ("cards20", "cards"):
         ids = [p["id"] for p in T[:20]] if step == "cards20" else [p["id"] for p in T]
-        return [(f"{o}/top100/cards/{i}.json", "wb_card_content", {"sku": str(i)}, True) for i in ids]
+        # 2026-10-15: wb_card_content списывает квоту Saleflow (94 карточки = 94 запроса), хотя данные из CDN WB
+        return [(f"{o}/top100/cards/{i}.json", "wb_card_content", {"sku": str(i)}, False) for i in ids]
     if step == "core":
         L = [(f"{o}/price_seg_2026-07.json", "wb_subject", subj(niche, "price_segmentation", *JUL), False),
              (f"{o}/price_seg_30d.json", "wb_subject", subj(niche, "price_segmentation", D1_30, D2), False),
