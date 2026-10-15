@@ -32,11 +32,13 @@ MONTHS_RU = ["янв", "фев", "мар", "апр", "май", "июн", "июл
 
 
 def unit(prod: dict, drr: float, price: float) -> dict:
-    cfg = load_config()
+    """Схема бизнеса — strategy.econ_config() (с 2026-10-15: ИП Армения, FBS РФ, налог 10 %, ДРР от заказов)."""
+    from src.strategy import econ_config
+    cfg = econ_config()
     cost, _ = cost_rub(prod["yuan"], prod.get("kg", 0.3))
     e = unit_economics(price, cost, prod["vol"], cfg, buyout_pct=prod["buyout"], commission_pct=prod["commission"],
                        ad_share_of_revenue_pct=drr, packaging_rub=50.0)
-    cash_in = price - e["commission"] - e["logistics_with_returns"] - e["storage"] - e["ads"] - e["tax"]
+    cash_in = price - e["commission"] - e["acquiring"] - e["logistics_with_returns"] - e["storage"] - e["ads"] - e["tax"]
     return {"profit": e["net_profit"], "goods": e["goods_cost_full"], "cash_in": cash_in}
 
 
@@ -75,12 +77,17 @@ def run(name: str, prod: dict, demand: list[float], season: list[int], batch: in
         cum_profit += profit
         rows.append({"month": m + 1, "orders_day": round(demand[m] * season[m] / 100, 1), "sold": round(sold),
                      "lost": round(want - sold), "revenue": round(revenue), "profit": round(profit),
-                     "cum_profit": round(cum_profit), "bought": round(buy), "stock_end": round(stock), "cash_end": round(cash)})
+                     "cum_profit": round(cum_profit), "bought": round(buy), "stock_end": round(stock), "cash_end": round(cash),
+                     "worth_end": round(cash + (stock + incoming) * u2["goods"])})   # деньги + товар (на складе и в пути) по себестоимости
+    # payback — строгий: накопленная прибыль ≥ всем вложениям (партия 1 учтена дважды: в прибыли уже вычтена её себестоимость);
+    # payback_money — «деньги вернулись»: деньги + товар по себестоимости ≥ стартовому бюджету (2026-10-15, аудит §2.11)
     payback = next((r["month"] for r in rows if r["cum_profit"] >= invest), None)
+    payback_money = next((r["month"] for r in rows if r["worth_end"] >= budget), None)
     roi = {k: round(rows[k - 1]["cum_profit"] / invest * 100) for k in (3, 6, 12)}
     return {"name": name, "start": start, "invest": invest, "budget": round(budget), "rows": rows, "payback": payback,
-            "roi": roi, "unit_launch": u1, "unit_base": u2, "min_cash": min(r["cash_end"] for r in rows),
-            "lost_units": sum(r["lost"] for r in rows), "batch": batch}
+            "payback_money": payback_money, "roi": roi, "unit_launch": u1, "unit_base": u2,
+            "min_cash": min(r["cash_end"] for r in rows), "lost_units": sum(r["lost"] for r in rows), "batch": batch,
+            "net_12m": rows[-1]["worth_end"] - round(budget)}
 
 
 def season_from(index: dict, start: str) -> list[int]:

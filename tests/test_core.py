@@ -179,3 +179,44 @@ class CompetitorWatchWindow(unittest.TestCase):
         a = analyse(R)
         self.assertFalse(a["data_ok"])
         self.assertNotIn("дефектура", " ".join(a["signals"]))
+
+
+class SchemeAmFbs(unittest.TestCase):
+    """Схема 2026-10-15 (config/scheme_am_fbs.yaml): FBS ≤ 1 л = 30 ₽, налог 10 %, ДРР от заказов, эквайринг."""
+
+    def test_scheme_does_not_touch_legacy_config(self):
+        from src.unit_econ import load_config, load_scheme
+        self.assertEqual(load_config()["tax"]["rate_pct"], 6.0)          # 777-отчёты и marketing777 — по старой схеме
+        s = load_scheme("am_fbs")
+        self.assertEqual(s["tax"]["rate_pct"], 10.0)
+        self.assertEqual(s["operations"]["ad_basis"], "orders")
+
+    def test_flat_logistics_small_items_only(self):
+        from src.unit_econ import load_scheme, wb_logistics
+        s = load_scheme("am_fbs")
+        self.assertAlmostEqual(wb_logistics(0.6, s), 30.0)
+        self.assertAlmostEqual(wb_logistics(2.0, s), 78.2 + 23.8)          # > 1 л — тариф WB API «Свой склад РФ»
+
+    def test_ads_from_orders_divided_by_buyout(self):
+        from src.unit_econ import load_scheme, unit_economics
+        s = load_scheme("am_fbs")
+        e = unit_economics(1000, 200, 0.5, s, buyout_pct=50, ad_share_of_revenue_pct=10, commission_pct=20)
+        self.assertAlmostEqual(e["ads"], 200.0)                          # 10 % от заказов при выкупе 50 % = 20 % от продаж
+        self.assertAlmostEqual(e["tax"], 100.0)
+        self.assertAlmostEqual(e["acquiring"], 15.0)
+
+    def test_fixed_per_unit_lowers_profit_exactly(self):
+        from src.unit_econ import load_scheme, unit_economics
+        s = load_scheme("am_fbs")
+        a = unit_economics(1500, 250, 0.6, s, buyout_pct=70, commission_pct=28, with_breakeven=False)
+        b = unit_economics(1500, 250, 0.6, s, buyout_pct=70, commission_pct=28, with_breakeven=False, fixed_per_unit_rub=80)
+        self.assertAlmostEqual(a["net_profit"] - b["net_profit"], 80.0, delta=0.01)
+
+    def test_payback_money_not_later_than_strict(self):
+        from src import finplan as F
+        prod = {"name": "t", "price": 1590, "yuan": 15, "vol": 0.6, "kg": 0.25, "buyout": 71.0, "commission": 28.0}
+        season = [100] * 12
+        r = F.run("t", prod, [6.0] * 12, season, 300)
+        if r["payback"] is not None:
+            self.assertIsNotNone(r["payback_money"])
+            self.assertLessEqual(r["payback_money"], r["payback"])

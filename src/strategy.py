@@ -27,7 +27,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
 from src.outliers import clean_items
-from src.unit_econ import load_config, unit_economics
+from src.unit_econ import load_config, load_scheme, unit_economics
 
 sys.stdout.reconfigure(encoding="utf-8")
 RUN = "2026-10-07"
@@ -853,29 +853,53 @@ def cost_rub(yuan: float, kg: float) -> tuple[float, float]:
     return yuan * YUAN_RUB + extra, extra
 
 
+def econ_config() -> dict:
+    """Текущая схема бизнеса (ИП Армения, FBS «Свой склад РФ», налог 10 %, ДРР от заказов) — config/scheme_am_fbs.yaml.
+    До 2026-10-15 здесь был load_config() = СЦ Ереван (tariffs_auto) — старые отчёты считались по нему."""
+    return load_scheme("am_fbs")
+
+
 def econ(P: dict, prod: dict) -> dict:
-    cfg = load_config()
+    """prod: price, yuan, vol, kg, buyout, commission, buyer_price [+ orders_day — заказов/день P50: тогда ФФ
+    (fixed_month_rub) делится на ожидаемые продажи и входит в маржу и в max ¥]."""
+    cfg = econ_config()
+    t = cfg["targets"]
+    fixed_m = cfg.get("fixed_month_rub", FIXED)
     price, yuan, vol = prod["price"], prod["yuan"], prod["vol"]
     cost, extra = cost_rub(yuan, prod.get("kg", 0.3))
+    sold_m = (prod.get("orders_day") or 0) * 30 * prod["buyout"] / 100
+    ff = round(fixed_m / sold_m, 1) if sold_m else 0.0
     kw = dict(buyout_pct=prod["buyout"], commission_pct=prod["commission"], ad_share_of_revenue_pct=DRR_BASE, packaging_rub=PACK)
     out = {}
-    for tag, pr, drr in (("старт ДРР 25%", price, 25.0), ("база ДРР 15%", price, 15.0), ("зрелость ДРР 10%", price, 10.0),
-                         ("цена −15%", round(price * 0.85), 15.0),
-                         (f"СПП-сценарий (от цены покупателя {prod['buyer_price']} ₽)", prod["buyer_price"], 15.0)):
-        e = unit_economics(pr, cost, vol, cfg, **{**kw, "ad_share_of_revenue_pct": drr})
-        out[tag] = {**{k: e[k] for k in ("price", "commission", "logistics_with_returns", "storage", "goods_cost_full",
-                                         "ads", "tax", "net_profit", "net_margin_pct", "roi_on_goods_pct", "breakeven_price")},
+    rows = [("старт ДРР 25%", price, 25.0, 0.0), ("база ДРР 15%", price, 15.0, 0.0), ("зрелость ДРР 10%", price, 10.0, 0.0),
+            ("цена −15%", round(price * 0.85), 15.0, 0.0),
+            (f"СПП-сценарий (от цены покупателя {prod['buyer_price']} ₽)", prod["buyer_price"], 15.0, 0.0)]
+    if ff:
+        rows.append((f"база ДРР 15% + ФФ {ff:.0f} ₽/шт (при {prod['orders_day']} заказов/день)", price, 15.0, ff))
+    for tag, pr, drr, fx in rows:
+        e = unit_economics(pr, cost, vol, cfg, **{**kw, "ad_share_of_revenue_pct": drr, "fixed_per_unit_rub": fx})
+        out[tag] = {**{k: e[k] for k in ("price", "commission", "acquiring", "logistics_with_returns", "storage", "goods_cost_full",
+                                         "ads", "tax", "fixed_per_unit", "net_profit", "net_margin_pct", "roi_on_goods_pct",
+                                         "breakeven_price")},
                     "yuan": yuan}
-    lo, hi = 0.0, float(price)
-    for _ in range(50):
-        mid = (lo + hi) / 2
-        e = unit_economics(price, mid + extra, vol, cfg, with_breakeven=False, **kw)
-        lo, hi = (mid, hi) if e["net_margin_pct"] >= 18 and e["roi_on_goods_pct"] >= 60 else (lo, mid)
+
+    def max_cost(fx: float) -> float:
+        lo, hi = 0.0, float(price)
+        for _ in range(50):
+            mid = (lo + hi) / 2
+            e = unit_economics(price, mid + extra, vol, cfg, with_breakeven=False, **{**kw, "fixed_per_unit_rub": fx})
+            ok = e["net_margin_pct"] >= t["min_net_margin_pct"] and e["roi_on_goods_pct"] >= t["min_roi_on_cost_pct"]
+            lo, hi = (mid, hi) if ok else (lo, mid)
+        return lo
+
+    lo, lo_ff = max_cost(0.0), max_cost(ff)
     out["max_cost_rub"] = round(lo)
-    out["max_yuan"] = round(lo / YUAN_RUB, 1)
+    out["max_yuan"] = round(lo / YUAN_RUB, 1)                       # без ФФ (как в отчётах до 2026-10-15)
+    out["max_yuan_with_ff"] = round(lo_ff / YUAN_RUB, 1) if ff else None
+    out["ff_per_unit"] = ff
     out["cargo_extra_rub"] = round(extra)
-    out["fixed_month_rub"] = FIXED
-    out["breakeven_units_month"] = round(FIXED / out["база ДРР 15%"]["net_profit"])
+    out["fixed_month_rub"] = fixed_m
+    out["breakeven_units_month"] = round(fixed_m / out["база ДРР 15%"]["net_profit"]) if out["база ДРР 15%"]["net_profit"] > 0 else None
     out["tariffs_source"] = cfg.get("_tariffs_source")
     return out
 
@@ -1037,8 +1061,13 @@ def build(niche: int, clean: bool = True, product: dict | None = None) -> dict:
 
 # ── регрессия 777 против отчёта 2026-10-06 ───────────────────────────────────────────────────────────────────────────
 def check(niche: int) -> None:
+    global econ_config
     old = load("data/processed/strategy777_2026-10-06.json")
-    new = json.loads(json.dumps(build(niche, clean=False), ensure_ascii=False, default=str))
+    cur, econ_config = econ_config, load_config         # отчёт 2026-10-06 считался по старой схеме (СЦ Ереван, налог 6 %)
+    try:
+        new = json.loads(json.dumps(build(niche, clean=False), ensure_ascii=False, default=str))
+    finally:
+        econ_config = cur
     o, n = old["overview"], new["overview"]
     pairs = [(o[k], n[k]) for k in ("rev_30d", "sales_30d", "rev_90d", "sales_90d", "sellers_total", "sellers_with_sells",
                                     "items", "items_with_sells", "aov", "yoy_jul_sales", "yoy_h1_sales", "season_index")]
@@ -1054,7 +1083,10 @@ def check(niche: int) -> None:
             b = {**{kk: v for kk, v in b.items() if kk != "winner"},
                  "winner_494403950": {kk: v for kk, v in b["winner"].items() if kk != "id"}}
         if k == "econ":                                  # ярлык СПП-сценария отличается пробелом в «1 000» — сверяем по порядку
-            a, b = list(a.values()), [v for kk, v in b.items() if kk != "cargo_extra_rub"]
+            new_keys = ("cargo_extra_rub", "max_yuan_with_ff", "ff_per_unit")      # поля, добавленные после 2026-10-06
+            a = list(a.values())
+            b = [{x: y for x, y in v.items() if x not in ("acquiring", "fixed_per_unit")} if isinstance(v, dict) else v
+                 for kk, v in b.items() if kk not in new_keys]
         pairs.append((a, b))
     a, b = old["prices"], new["prices"]
     pairs.append(({kk: a[kk] for kk in ("before_spp", "buyer", "segments")}, {kk: b[kk] for kk in ("before_spp", "buyer", "segments")}))

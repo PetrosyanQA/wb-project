@@ -34,9 +34,24 @@ def load_config(path: Path | str = ROOT / "config" / "unit_economics.yaml",
     return cfg
 
 
+def load_scheme(name: str = "am_fbs", path: Path | str = ROOT / "config" / "unit_economics.yaml") -> dict:
+    """Բազային կոնֆիգ + բիզնեսի ընթացիկ սխեման (config/scheme_<name>.yaml), առանց tariffs_auto.yaml-ի (СЦ Ереван)։
+    Սխեմայում՝ FBS «Свой склад РФ», հարկ, эквайринг, ДРР-ի հիմքը (պատվերներից), ֆիքսված ФФ."""
+    cfg = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+    patch = yaml.safe_load((ROOT / "config" / f"scheme_{name}.yaml").read_text(encoding="utf-8")) or {}
+    cfg = _deep_merge(cfg, patch)
+    lg = cfg["logistics"]
+    cfg["_tariffs_source"] = (f"scheme {name}: FBS ≤ {lg.get('flat_max_l', 1.0)} л — {lg.get('flat_rub')} ₽/заказ, > 1 л — "
+                              f"{lg['first_liter_over_1l']} + {lg['extra_liter']} ₽/л; налог {cfg['tax']['rate_pct']}%; "
+                              f"эквайринг {cfg.get('acquiring_pct', 0)}%; ДРР от {cfg['operations'].get('ad_basis', 'sales')}")
+    return cfg
+
+
 def wb_logistics(volume_l: float, cfg: dict) -> float:
-    """Ուղիղ լոգիստիկա 1 պատվերի համար՝ ըստ WB 2026 բազային ցանցի."""
+    """Ուղիղ լոգիստիկա 1 պատվերի համար՝ ըստ WB 2026 բազային ցանցի (կամ սխեմայի ֆիքսված FBS-ի ≤ 1 լ ապրանքի համար)."""
     log = cfg["logistics"]
+    if log.get("flat_rub") is not None and volume_l <= float(log.get("flat_max_l", 1.0)):
+        return float(log["flat_rub"]) * float(log["warehouse_coef"]) * float(log["localization_index"])
     if volume_l <= 1.0:
         base = None
         for limit, price in sorted(((float(k), v) for k, v in log["tiers_under_1l"].items())):
@@ -52,10 +67,13 @@ def wb_logistics(volume_l: float, cfg: dict) -> float:
 
 def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None = None,
                    with_breakeven: bool = True, **overrides) -> dict:
-    """price — գնորդի վճարած գին (₽), cost — ինքնարժեք առանց first mile-ի."""
+    """price — գնորդի վճարած գին (₽), cost — ինքնարժեք առանց first mile-ի.
+    overrides: buyout_pct, ad_share_of_revenue_pct, … + commission_pct, fixed_per_unit_rub (ФФ-ի ֆիքսված մասը 1 վաճառքի վրա)։
+    operations.ad_basis = "orders" → ДРР-ը WB-ի պես պատվերներից է, 1 վաճառքի վրա՝ ДРР × գին / выкуп."""
     cfg = cfg or load_config()
     ops = dict(cfg["operations"]); ops.update({k: v for k, v in overrides.items() if k in ops})
     commission_pct = overrides.get("commission_pct", cfg["commission_pct"])
+    fixed = float(overrides.get("fixed_per_unit_rub", 0.0))
     buyout = max(1.0, float(ops["buyout_pct"])) / 100.0
 
     commission = price * float(commission_pct) / 100.0
@@ -72,6 +90,8 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
     acceptance = float(cfg.get("acceptance_per_liter", 0)) * volume_l * float(st["warehouse_coef"])
 
     ads = price * float(ops["ad_share_of_revenue_pct"]) / 100.0
+    if ops.get("ad_basis") == "orders":
+        ads /= buyout
     goods = (cost + float(ops["packaging_rub"]) + float(ops["first_mile_rub"]))
     goods *= 1.0 + float(ops["defect_loss_pct"]) / 100.0
 
@@ -81,8 +101,8 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
 
     tax_cfg = cfg["tax"]
     tax = (price * float(tax_cfg["rate_pct"]) / 100.0 if tax_cfg["mode"] == "revenue"
-           else max(0.0, gross) * float(tax_cfg["rate_pct"]) / 100.0)
-    net = gross - tax
+           else max(0.0, gross - fixed) * float(tax_cfg["rate_pct"]) / 100.0)
+    net = gross - tax - fixed
 
     return {
         "price": round(price, 2),
@@ -96,22 +116,23 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
         "goods_cost_full": round(goods, 2),
         "ads": round(ads, 2),
         "tax": round(tax, 2),
+        "fixed_per_unit": round(fixed, 2),
         "net_profit": round(net, 2),
         "net_margin_pct": round(net / price * 100, 1) if price else 0.0,
         "roi_on_goods_pct": round(net / goods * 100, 1) if goods else 0.0,
-        "breakeven_price": round(_breakeven(price, cost, volume_l, cfg, ops, commission_pct), 2)
+        "breakeven_price": round(_breakeven(price, cost, volume_l, cfg, ops, commission_pct, fixed), 2)
         if with_breakeven else None,
     }
 
 
 def _breakeven(price: float, cost: float, volume_l: float, cfg: dict, ops: dict,
-               commission_pct: float) -> float:
+               commission_pct: float, fixed: float = 0.0) -> float:
     """Նվազագույն գինը, որի դեպքում net = 0 (պարզ բիսեկցիա)."""
     lo, hi = 1.0, max(price * 5, 100.0)
     for _ in range(60):
         mid = (lo + hi) / 2
         res = unit_economics(mid, cost, volume_l, cfg, with_breakeven=False,
-                             commission_pct=commission_pct, **ops)
+                             commission_pct=commission_pct, fixed_per_unit_rub=fixed, **ops)
         if res["net_profit"] >= 0:
             hi = mid
         else:
