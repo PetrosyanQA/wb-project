@@ -35,6 +35,7 @@ R5, R6, R7 = "data/raw/saleflow/2026-10-05", "data/raw/saleflow/2026-10-06", "da
 R11 = "data/raw/saleflow/2026-10-11"
 R13 = "data/raw/saleflow/2026-10-13"
 R14 = "data/raw/saleflow/2026-10-14"
+R15 = "data/raw/saleflow/2026-10-15"
 WINDOW = ("2026-04-01", "2026-07-31")          # надёжное окно дневных данных (08–09.2026 в Saleflow неполные)
 COMMENTS_SINCE = "2025-10-06"                  # 365 дней отзывов (как в отчётах 2026-10-06)
 COHORT = ("2025-10-01", "2026-06-30")          # новые карточки для траекторий входа
@@ -314,6 +315,45 @@ def segment_7640(row: dict) -> str:
     return "спортивная/фитнес"
 
 
+# ── 52: кошельки (2026-10-15). Словарь жалоб — типовой для кошельков/кожгалантереи, проверяется на отзывах лидеров ───
+COMPLAINTS_52 = {
+    "не натуральная кожа / дешёвый материал": r"не (натуральн|кож)|кожзам|экокож\w* (а не|вместо)|дерматин|клеёнк|клеенк|пластик|дешев|дёшев",
+    "запах": r"запах|воня|пахнет",
+    "кнопка / молния сломалась": r"кнопк|молни|застежк|застёжк|замок|магнит",
+    "нитки / швы / краска облезла": r"нитк|шов|швы|облез|облуп|стерл|потерт|потёрт|отклеил|расклеил",
+    "маленький / карты не влезают": r"маленьк|не влез|не помещ|тесн|карт\w* (не|выпада)|купюр\w* (не|мнут)",
+    "не как на фото / цвет": r"не соответств|на фото|цвет|другой",
+    "брак / упаковка": r"брак|упаковк|короб|мят",
+}
+PAINS_52 = {"натуральная кожа": r"натуральн\w* кож", "RFID-защита": r"rfid|защит\w* от (считыв|сканир)",
+            "отделения для карт N": r"\d+ ?(карт|отдел)", "монетница на молнии": r"монет", "подарочная упаковка": r"подар",
+            "компактный / тонкий": r"компакт|тонк|маленьк", "на кнопке / на молнии": r"кнопк|молни"}
+
+
+def classify_52(name: str, card: dict) -> dict:
+    n = name.lower()
+    return {"натуральная кожа": bool(re.search(r"натуральн|кожан|кожи\b", n)) and not re.search(r"эко", n),
+            "эко-кожа": bool(re.search(r"эко|искусств|pu\b", n)),
+            "картхолдер": bool(re.search(r"картхолдер|визитниц|для карт", n)),
+            "обложка паспорт": bool(re.search(r"паспорт|обложк|автодокумент", n)),
+            "портмоне/большой": bool(re.search(r"портмоне|больш|клатч|длинн", n)),
+            "маленький": bool(re.search(r"маленьк|мини|компакт", n)),
+            "женский": bool(re.search(r"женск", n)), "мужской": bool(re.search(r"мужск", n)),
+            "подарок": bool(re.search(r"подар", n))}
+
+
+def segment_52(row: dict) -> str:
+    if row.get("обложка паспорт"):
+        return "обложка / для документов"
+    if row.get("картхолдер"):
+        return "картхолдер"
+    if row.get("маленький"):
+        return "маленький кошелёк"
+    if row.get("портмоне/большой"):
+        return "портмоне / большой"
+    return "кошелёк (прочее)"
+
+
 PRESETS = {
     777: {
         "name": "Держатели в авто",
@@ -456,6 +496,33 @@ PRESETS = {
         "product": {"name": "сумка спортивная дорожная", "price": 1590, "yuan": 15, "vol": 1.0, "kg": 0.5,
                     "buyout": 70.0, "commission": 21.0, "buyer_price": 1370},     # уточняется после build; ¥ — допущение
         "launch": "2027-01", "first_batch": 250,
+    },
+    52: {
+        "name": "Кошельки", "run": "2026-10-15",
+        "trends": f"{R15}/strategy52/trends_month.json",
+        "products500": f"{R15}/strategy52/products500_2026-07.json",
+        "products_30d": f"{R15}/strategy52/products_30d.json",
+        "top100_products": f"{R15}/strategy52/top100/top100_products_2026-07.json",
+        "top100_json": "data/processed/top100_52_2026-10-15.json",
+        "cards": f"{R15}/strategy52/top100/cards",
+        "daily": [f"{R15}/strategy52/top100/daily"],
+        "price_seg": {"2026-07": f"{R15}/strategy52/price_seg_2026-07.json", "30d": f"{R15}/strategy52/price_seg_30d.json"},
+        "kw_year": [f"{R15}/strategy52/keywords/keywords_{m}.json" for m in YEAR],
+        "kw_30d": f"{R15}/strategy52/keywords_30d.json",
+        "kw_peak": (f"{R15}/strategy52/keywords/keywords_2025-12.json", f"{R15}/strategy52/keywords/keywords_2025-12.json"),
+        "gap_source": None, "gap_min_freq": 1500,
+        "gap_re": r"кошел|портмоне|картхолдер|обложк|кожа|мужск|женск|подар",
+        "core_re": r"кошел|портмоне|картхолдер|бумажник",
+        "sku_keywords": f"{R15}/strategy52/sku_*_keywords.json",
+        "comments": [f"{R15}/strategy52/comments/*.json"],
+        "sellers": f"{R15}/strategy52/sellers_2026-07.json",
+        "complaints": COMPLAINTS_52, "pains": PAINS_52, "classify": classify_52, "segment": segment_52,
+        "type_keys": ("натуральная кожа", "эко-кожа", "женский", "мужской", "подарок"),
+        "our_segment": "маленький кошелёк",
+        "winner": None, "winner_file": None,
+        "product": {"name": "кошелёк", "price": 1290, "yuan": 10, "vol": 0.5, "kg": 0.25,
+                    "buyout": 71.0, "commission": 28.0, "buyer_price": 1160},     # ¥ — допущение
+        "launch": "2027-01", "first_batch": 300,
     },
 }
 

@@ -41,16 +41,19 @@ TOP100 = {777: "data/raw/saleflow/2026-10-05/dna/777/top100/top100_products_2026
           2486: "data/raw/saleflow/2026-10-06/fresh/products_2486_2026-07.json",
           729: "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json",
           2499: "data/raw/saleflow/2026-10-13/strategy2499/products500_2026-07.json",
-          7640: "data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json"}
+          7640: "data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json",
+          52: "data/raw/saleflow/2026-10-15/strategy52/products500_2026-07.json"}
 TOP100_FALLBACK = {729: "data/raw/saleflow/2026-10-11/all/finalists/products_729.json",
                    2499: "data/raw/saleflow/2026-10-11/all/finalists/products_2499.json",
                    7640: "data/raw/saleflow/2026-10-14/v2/products500_7640_2026-07.json"}   # top-100 пика (март 2026) до core
-DAILY_D2 = {729: "2026-07-31", 2499: "2026-07-31", 7640: "2026-07-31"}    # 2026-10-11: 2025-10-01 … 2026-10-10 падает upstream; после 07-31 Saleflow всё равно неполный
+DAILY_D2 = {729: "2026-07-31", 2499: "2026-07-31", 7640: "2026-07-31", 52: "2026-07-31"}    # 2026-10-11: 2025-10-01 … 2026-10-10 падает upstream; после 07-31 Saleflow всё равно неполный
 RUNS = {729: ("2026-10-11", "2026-10-10", "2026-09-10"), 2499: ("2026-10-13", "2026-10-12", "2026-09-12"),
-        7640: ("2026-10-14", "2026-10-13", "2026-09-13")}    # (RUN, D2, D1_30) — ниша собирается в другой день
+        7640: ("2026-10-14", "2026-10-13", "2026-09-13"),
+        52: ("2026-10-15", "2026-10-14", "2026-09-14")}    # (RUN, D2, D1_30) — ниша собирается в другой день
 OLD_COMMENTS = {2486: "data/raw/saleflow/2026-10-06/fresh/comments/2486_{}.json"}
 KW_MONTHS = {2486: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
              777: ["2024-12"],
+             52: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
              7640: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
              2499: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]],
              729: [f"{y}-{m:02d}" for y, m in [(2025, i) for i in range(4, 13)] + [(2026, i) for i in range(1, 9)]]}

@@ -42,7 +42,8 @@ NICHES = {  # имя + products500 по умолчанию (снимок июл�
 }
 # Дозапуск под одну нишу в другой день: LAUNCH_RUN=2026-10-11 → своя выборка/папка/отчёт, выборка 2026-10-08 не меняется
 RUNS = {"2026-10-11": ("2026-07-31", {729: ("Поводки", "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json")}),
-        "2026-10-14": ("2026-07-31", {7640: ("Сумки спортивные", "data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json")})}
+        "2026-10-14": ("2026-07-31", {7640: ("Сумки спортивные", "data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json")}),
+        "2026-10-15": ("2026-07-31", {52: ("Кошельки", "data/raw/saleflow/2026-10-15/strategy52/products500_2026-07.json")})}
 if os.environ.get("LAUNCH_RUN") in RUNS:
     RUN = os.environ["LAUNCH_RUN"]
     D2, NICHES = RUNS[RUN]
