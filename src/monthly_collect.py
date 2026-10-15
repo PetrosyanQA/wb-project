@@ -24,7 +24,8 @@ def main() -> None:
     a = ap.parse_args()
     from src.strategy import PRESETS
     out = f"{os.path.dirname(PRESETS[a.niche]['trends'])}/monthly"
-    todo = [(y, m) for y, m in MONTHS if not os.path.exists(f"{out}/products_{y}-{m:02d}.json")]
+    # новые месяцы первыми: у 52 (2026-10-15) 2025-08…11 стабильно падали upstream и 4-сбоя-стоп не давал дойти до 2026
+    todo = [(y, m) for y, m in reversed(MONTHS) if not os.path.exists(f"{out}/products_{y}-{m:02d}.json")]
     print(f"месяцев к скачиванию: {len(todo)}")
     if a.dry_run or not todo:
         return
