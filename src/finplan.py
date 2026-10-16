@@ -47,6 +47,8 @@ def run(name: str, prod: dict, demand: list[float], season: list[int], batch: in
     """legacy_moq=True — правило finplan777 (заказ < 100 шт не делаем → при спросе ≈ 100 шт/мес модель сама рвёт остаток);
     иначе — как живой продавец: если остатка не хватит на следующий месяц × 1.2, заказываем max(нехватка, 100 шт)."""
     price = price or prod["price"]
+    from src.strategy import econ_config
+    fixed = econ_config().get("fixed_month_rub", FIXED)          # схема am_fbs: 0 (только 30 ₽ за отправку)
     budget = BUDGET_USD * FX
     start = dict(START_COSTS)
     u1, u2 = unit(prod, 25.0, price), unit(prod, 15.0, price)
@@ -63,8 +65,8 @@ def run(name: str, prod: dict, demand: list[float], season: list[int], batch: in
         sold = min(want, stock)
         stock -= sold
         revenue = sold * price
-        profit = sold * u["profit"] - FIXED
-        cash += sold * u["cash_in"] - FIXED
+        profit = sold * u["profit"] - fixed
+        cash += sold * u["cash_in"] - fixed
         nxt = demand[m + 1] * 30 * season[(m + 1) % 12] / 100 * buyout / 100 * 1.2 if m < 11 else 0
         need = max(0.0, nxt - stock)
         if legacy_moq:
