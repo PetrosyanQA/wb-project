@@ -41,8 +41,8 @@ def load_scheme(name: str = "am_fbs", path: Path | str = ROOT / "config" / "unit
     patch = yaml.safe_load((ROOT / "config" / f"scheme_{name}.yaml").read_text(encoding="utf-8")) or {}
     cfg = _deep_merge(cfg, patch)
     lg = cfg["logistics"]
-    cfg["_tariffs_source"] = (f"scheme {name}: FBS ≤ {lg.get('flat_max_l', 1.0)} л — {lg.get('flat_rub')} ₽/заказ, > 1 л — "
-                              f"{lg['first_liter_over_1l']} + {lg['extra_liter']} ₽/л; налог {cfg['tax']['rate_pct']}%; "
+    cfg["_tariffs_source"] = (f"scheme {name}: WB FBS {lg['first_liter_over_1l']} + {lg['extra_liter']} ₽/л + ФФ "
+                              f"{lg.get('ff_per_order_rub', 0)} ₽/отправка; налог {cfg['tax']['rate_pct']}%; "
                               f"эквайринг {cfg.get('acquiring_pct', 0)}%; ДРР от {cfg['operations'].get('ad_basis', 'sales')}")
     return cfg
 
@@ -79,7 +79,7 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
     commission = price * float(commission_pct) / 100.0
     acquiring = price * float(cfg.get("acquiring_pct", 0)) / 100.0
 
-    ship = wb_logistics(volume_l, cfg)
+    ship = wb_logistics(volume_l, cfg) + float(cfg["logistics"].get("ff_per_order_rub", 0))   # + ФФ до пункта приёма WB
     # 1 վաճառքի հաշվով՝ բոլոր չգնված պատվերների լոգիստիկան նույնպես մերն է
     logistics = ship / buyout
     returns = float(cfg["logistics"]["return_cost_rub"]) * (1.0 / buyout - 1.0)

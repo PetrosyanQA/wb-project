@@ -191,11 +191,13 @@ class SchemeAmFbs(unittest.TestCase):
         self.assertEqual(s["tax"]["rate_pct"], 10.0)
         self.assertEqual(s["operations"]["ad_basis"], "orders")
 
-    def test_flat_logistics_small_items_only(self):
-        from src.unit_econ import load_scheme, wb_logistics
+    def test_wb_fbs_tariff_plus_ff_per_order(self):
+        from src.unit_econ import load_scheme, unit_economics, wb_logistics
         s = load_scheme("am_fbs")
-        self.assertAlmostEqual(wb_logistics(0.6, s), 30.0)
-        self.assertAlmostEqual(wb_logistics(2.0, s), 78.2 + 23.8)          # > 1 л — тариф WB API «Свой склад РФ»
+        self.assertAlmostEqual(wb_logistics(0.6, s), 78.2)                # WB API «Свой склад РФ», 1-й литр
+        self.assertAlmostEqual(wb_logistics(2.0, s), 78.2 + 23.8)
+        e = unit_economics(1000, 200, 0.6, s, buyout_pct=100, commission_pct=20, with_breakeven=False)
+        self.assertAlmostEqual(e["logistics_with_returns"], 78.2 + 30.0)  # + ФФ 30 ₽ до пункта приёма
 
     def test_ads_from_orders_divided_by_buyout(self):
         from src.unit_econ import load_scheme, unit_economics

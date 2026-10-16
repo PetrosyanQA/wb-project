@@ -10,10 +10,10 @@ scheme: AM_FBS_RF
 acquiring_pct: 1.5              # [допущение] в еженедельном отчёте WB эквайринг — отдельная строка; уточнить по 1-му отчёту
 
 logistics:
-  flat_rub: 30                  # [пользователь 2026-10-15] доставка FBS до ПВЗ в РФ, ₽ за заказ
-  flat_max_l: 1.0               # flat_rub применяется к товарам объёмом ≤ 1 л
-  first_liter_over_1l: 78.2     # [факт] WB API tariffs/box «Свой склад РФ», 2026-10-11 (= 46 ₽ × 1,70) — для товаров > 1 л
-  extra_liter: 23.8             # [факт] то же (= 14 ₽ × 1,70)
+  ff_per_order_rub: 30          # [пользователь 2026-10-16] фулфилмент везёт заказ до пункта приёма WB, ₽ за отправку
+  tiers_under_1l: {0.2: 78.2, 0.4: 78.2, 0.6: 78.2, 0.8: 78.2, 1.0: 78.2}   # [факт] WB API: тарифа < 1 л нет → 1-й литр
+  first_liter_over_1l: 78.2     # [факт] WB API tariffs/box «Свой склад РФ» boxDeliveryMarketplaceBase, 2026-10-16 (коэф. 170 %)
+  extra_liter: 23.8             # [факт] то же, boxDeliveryMarketplaceLiter
   warehouse_coef: 1.0
   localization_index: 1.0
   return_cost_rub: 50           # [допущение] обратная логистика за невыкупленный заказ
