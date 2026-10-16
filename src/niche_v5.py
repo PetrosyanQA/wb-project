@@ -155,6 +155,7 @@ def season_k(n: int) -> float:
     return ((S.get(n, {}).get("index", {}) or {}).get("07") or 100) / 100
 
 
+ALLOW_ELECTRO = False                                # v6: True (карго-фильтры сняты)
 BANDS = [(500, 800), (800, 1100), (1100, 1400), (1400, 1800), (1800, 2300), (2300, 3000), (3000, 4000)]
 
 
@@ -295,7 +296,7 @@ def final(assumed_share: float = 0.09) -> None:
                     "max_yuan_drr10": max_yuan(price, vol, kg, o["buyout"], comm, 10, 0), "max_yuan_drr15": max_yuan(price, vol, kg, o["buyout"], comm, 15, 0),
                     "yuan_assumed": y_assumed, "margin_drr15_assumed": margin_at(price, y_assumed, kg, vol, o["buyout"], comm, 15),
                     "margin_drr10_assumed": margin_at(price, y_assumed, kg, vol, o["buyout"], comm, 10), "batch": batch, "runs": runs})
-    out.sort(key=lambda r: (r["need_kiz"] or r["electro"], -(r["runs"].get("p50") or -1e9)))
+    out.sort(key=lambda r: (r["need_kiz"] or (r["electro"] and not ALLOW_ELECTRO), -(r["runs"].get("p50") or -1e9)))
     json.dump(out, open(FINAL, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"итог: {len(out)} → {FINAL}")
 
