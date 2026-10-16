@@ -848,9 +848,21 @@ def barriers(P: dict) -> dict:
                        "reviews_at_10": com_at.get(hit10), "reviews_at_30": com_at.get(hit30), "series_len": len(w)}}
 
 
-def cost_rub(yuan: float, kg: float) -> tuple[float, float]:
+def cost_rub(yuan: float, kg: float, vol: float | None = None) -> tuple[float, float]:
+    """→ (себестоимость 1 шт до ФФ ₽, часть «не от ¥»). С объёмом и секцией cargo в схеме — модель карго YUANEXIM (src.cargo):
+    ¥ × курс + коробка карго / шт; иначе старая модель ¥ × 17 (+ $2/кг сверх 0,5 кг)."""
+    c = econ_config().get("cargo") if vol is not None else None
+    if c:
+        from src.cargo import per_unit
+        u = per_unit(yuan, kg, vol, c=c)
+        return u["landed_rub"], u["cargo_rub"]
     extra = max(0.0, kg - BASE_KG) * CARGO_USD_KG * FX
     return yuan * YUAN_RUB + extra, extra
+
+
+def rub_per_yuan() -> float:
+    c = econ_config().get("cargo")
+    return c["cny_to_rub"] * (1 + c.get("agent_pct", 0) / 100) if c else YUAN_RUB
 
 
 def econ_config() -> dict:
@@ -866,7 +878,7 @@ def econ(P: dict, prod: dict) -> dict:
     t = cfg["targets"]
     fixed_m = cfg.get("fixed_month_rub", FIXED)
     price, yuan, vol = prod["price"], prod["yuan"], prod["vol"]
-    cost, extra = cost_rub(yuan, prod.get("kg", 0.3))
+    cost, extra = cost_rub(yuan, prod.get("kg", 0.3), vol)
     sold_m = (prod.get("orders_day") or 0) * 30 * prod["buyout"] / 100
     ff = round(fixed_m / sold_m, 1) if sold_m else 0.0
     kw = dict(buyout_pct=prod["buyout"], commission_pct=prod["commission"], ad_share_of_revenue_pct=DRR_BASE, packaging_rub=PACK)
@@ -894,8 +906,8 @@ def econ(P: dict, prod: dict) -> dict:
 
     lo, lo_ff = max_cost(0.0), max_cost(ff)
     out["max_cost_rub"] = round(lo)
-    out["max_yuan"] = round(lo / YUAN_RUB, 1)                       # без ФФ (как в отчётах до 2026-10-15)
-    out["max_yuan_with_ff"] = round(lo_ff / YUAN_RUB, 1) if ff else None
+    out["max_yuan"] = round(lo / rub_per_yuan(), 1)                 # без ФФ (как в отчётах до 2026-10-15)
+    out["max_yuan_with_ff"] = round(lo_ff / rub_per_yuan(), 1) if ff else None
     out["ff_per_unit"] = ff
     out["cargo_extra_rub"] = round(extra)
     out["fixed_month_rub"] = fixed_m

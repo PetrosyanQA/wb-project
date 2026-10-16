@@ -222,3 +222,23 @@ class SchemeAmFbs(unittest.TestCase):
         if r["payback"] is not None:
             self.assertIsNotNone(r["payback_money"])
             self.assertLessEqual(r["payback_money"], r["payback"])
+
+
+class CargoYuanexim(unittest.TestCase):
+    def test_calculator_example(self):
+        """Калькулятор YUANEXIM: 35 кг, 55×50×44, уголки 2 кг, 2,1 $/кг → 87,4 $."""
+        from src.cargo import carton_usd
+        self.assertAlmostEqual(carton_usd(35, (55, 50, 44))["total_usd"], 87.4, delta=0.05)
+
+    def test_wallet_unit_cost(self):
+        from src.cargo import per_unit
+        u = per_unit(20, 0.25, 0.6)
+        self.assertEqual(u["pcs_per_carton"], 140)
+        self.assertAlmostEqual(u["cargo_rub"], 87.38 * 83.48 / 140, delta=0.5)
+        self.assertAlmostEqual(u["goods_rub"], 20 * 12.43, delta=0.1)
+
+    def test_strategy_uses_cargo_model(self):
+        from src import strategy as S
+        cost, cargo = S.cost_rub(20, 0.25, 0.6)
+        self.assertAlmostEqual(cost, 20 * 12.43 + cargo, delta=0.5)
+        self.assertEqual(S.cost_rub(18, 0.3)[0], 18 * 17)                  # без объёма — старая модель (777)

@@ -35,7 +35,7 @@ def unit(prod: dict, drr: float, price: float) -> dict:
     """Схема бизнеса — strategy.econ_config() (с 2026-10-15: ИП Армения, FBS РФ, налог 10 %, ДРР от заказов)."""
     from src.strategy import econ_config
     cfg = econ_config()
-    cost, _ = cost_rub(prod["yuan"], prod.get("kg", 0.3))
+    cost, _ = cost_rub(prod["yuan"], prod.get("kg", 0.3), prod["vol"])
     e = unit_economics(price, cost, prod["vol"], cfg, buyout_pct=prod["buyout"], commission_pct=prod["commission"],
                        ad_share_of_revenue_pct=drr, packaging_rub=50.0)
     cash_in = price - e["commission"] - e["acquiring"] - e["logistics_with_returns"] - e["storage"] - e["ads"] - e["tax"]

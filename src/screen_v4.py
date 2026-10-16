@@ -53,7 +53,7 @@ def max_yuan(price: float, vol: float, kg: float, buyout: float, comm: float, dr
     from src.unit_econ import unit_economics
     cfg = S.econ_config()
     t = cfg["targets"]
-    extra = S.cost_rub(0, kg)[1]
+    extra = S.cost_rub(0, kg, vol)[1]
     lo, hi = 0.0, float(price)
     for _ in range(40):
         mid = (lo + hi) / 2
@@ -61,7 +61,7 @@ def max_yuan(price: float, vol: float, kg: float, buyout: float, comm: float, dr
                            ad_share_of_revenue_pct=drr, packaging_rub=S.PACK, fixed_per_unit_rub=ff)
         ok = e["net_margin_pct"] >= t["min_net_margin_pct"] and e["roi_on_goods_pct"] >= t["min_roi_on_cost_pct"]
         lo, hi = (mid, hi) if ok else (lo, mid)
-    return round(lo / S.YUAN_RUB, 1)
+    return round(lo / S.rub_per_yuan(), 1)
 
 
 def score(vol: float = 0.8, kg: float = 0.35) -> list[dict]:
