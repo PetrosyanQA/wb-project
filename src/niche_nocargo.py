@@ -76,12 +76,23 @@ def history() -> dict[int, dict]:
     return {r["id"]: r["waves"] for r in (load(fs[-1]) if fs else [])}
 
 
+def card(sku) -> dict | None:
+    """Карточка из кэша Saleflow (v5_cards) или публичного CDN WB (src.wb_cdn_card, data/raw/wb_cdn)."""
+    for d in (V.CARDS, "data/raw/wb_cdn"):
+        if os.path.exists(f"{d}/{sku}.json"):
+            return load(f"{d}/{sku}.json")
+    return None
+
+
 def dims_for(ids) -> tuple[float, float, str]:
-    d = [V.card_dims(load(f"{V.CARDS}/{s}.json")) for s in ids[:2] if os.path.exists(f"{V.CARDS}/{s}.json")]
+    d = [V.card_dims(c) for c in (card(s) for s in ids[:3]) if c]
     vols = [x["vol_l"] for x in d if x["vol_l"]]
     kgs = [x["kg"] for x in d if x["kg"]]
     if vols and kgs:
         return round(sorted(vols)[len(vols) // 2], 2), round(sorted(kgs)[len(kgs) // 2], 2), "карточки"
+    if vols:                                           # веса нет в карточке → объёмный вес карго 1:6000 (см³), т.е. л / 6
+        v = sorted(vols)[len(vols) // 2]
+        return round(v, 2), round(v / 6, 2), "карточки (вес = объём/6)"
     return 0.8, 0.35, "допущение"
 
 
