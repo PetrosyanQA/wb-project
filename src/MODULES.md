@@ -28,6 +28,7 @@
 |---|---|
 | `wb_algo` | «Алгоритм WB»: драйверы позиции/продаж, кривые реакции, изменения по месяцам → `wb_algorithm/` |
 | `launch_patterns`, `launch_summary` | Как заходили победители vs середняки vs слабые |
+| `winner_decisions` | Что видели новички-победители до T0 и что сделали в нед. 1–8: правила с проверкой по времени, leave-one-niche-out и «честной зоне» цены; `apply` — checklist v2 к кандидатам (`config/filters.yaml → newcomer_rules`) |
 | `strategy`, `finplan`, `compare_niches`, `newcomer_screen` | Стратегия ниши по шаблону, финплан, сравнение ниш (единая методика 07.10) |
 | `discover`, `niche_scan`, `gates`, `trend_scan`, `sku_audit`, `scoring` | Исходный конвейер поиска ниш (CLAUDE.md) |
 | `subject_screen`, `fresh_screen`, `category_econ`, `niche_dna*`, `dna_*`, `saleflow_eval`, `niche_rank`, `segments` | Скрины и ДНК ниш (цена — с исправлением СПП от 07.10) |

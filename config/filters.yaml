@@ -89,3 +89,48 @@ outliers:
   min_days_with_sales: 2        # 1 օրվա պայթյուն = ակցիա/ինքնագնում, ոչ թե պահանջարկ
   drop_foreign_subject: true    # այլ предмет-ի տողերը դուրս են
   max_share_dropped_pct: 40     # եթե ավելի շատ է մաքրվում — տվյալը կասկածելի է
+
+# ── 7. ՆՈՐԵԿՆԵՐԻ ԿԱՆՈՆՆԵՐ (src/winner_decisions.py, 2026-10-16) ─────────────
+# Սահմանումները ամրագրված են ՆԱԽՔԱՆ հաշվարկը. checklist-ի շեմերը ընտրված են տվյալներից և ստուգված
+# ժամանակով + leave-one-niche-out (տես reports/winner_decisions_2026-10-16.md)։
+newcomer_rules:
+  newcomer_from: "2025-06-01"   # առաջին վաճառքը այս միջակայքում
+  newcomer_to: "2026-05-31"
+  data_cut: "2026-07-31"        # Saleflow 2026-08…09 կոտրված է
+  outcome_days: [60, 180]       # 3–6-րդ ամիսներ առաջին վաճառքից
+  outcome_min_days: 30          # պակաս դիտարկված օր → censored
+  win_per_day: 5                # սեզոնից մաքրված ≥ 5 հատ/օր + կենդանի 2026-07-ին
+  fail_per_day: 1               # < 1 հատ/օր
+  t0_lag_days: 60               # որոշման պահ = առաջին վաճառք − 60 օր [допущение]
+  t0_sensitivity: [30, 90]
+  early_weeks: 8                # «ինչ արեցին» = առաջին 8 շաբաթ
+  min_n: 15                     # ավելի փոքր խումբ → հատկանիշը մերժվում է
+  wilson_z: 1.2816              # 80% միջակայք
+  train_until: "2025-12-31"     # ժամանակային վալիդացիա. կառուցում ≤ այս ամսաթիվ, ստուգում՝ հետո
+  lono_min_side: 3              # leave-one-niche-out. կողմում ≥ 3 քարտ, որ նիշան հաշվվի
+  niche_cohorts:                # նիշայի մակարդակ. T0 = կոհորտի առաջին ամսվա 1-ը
+    - {name: "2025-H2", t0: "2025-06-01", from: "2025-06-01", to: "2025-11-30"}
+    - {name: "2026-H1", t0: "2025-12-01", from: "2025-12-01", to: "2026-05-31"}
+  # Checklist v2 — շեմերը վերցված են src.winner_decisions-ի արդյունքից (կլորացված), status-ը՝ զեկույցից։
+  # group: info = չի օգտագործվում որպես kill (արտեֆակտ); niche = նիշայի մակարդակ (32 նիշա); exec = առաջին 8 շաբաթ;
+  # early = 1–4-րդ շաբաթի ազդանշան (kill)։ cut = ամբողջ նմուշ; cut_fair = «արդար գոտի» (գինը ≥ top-500 հուլիսի
+  # տեսանելիության շեմ, որտեղ ձախողումն էլ է երևում) — մեր թանկ ապրանքների համար օգտագործել cut_fair։
+  checklist:
+    price_rel_aov:  {group: info,   op: "<=", cut: 1.2, status: artifact}            # ամբողջ նմուշում VALID, արդար գոտում՝ ոչ → նմուշառման արտեֆակտ
+    m_sellers_6m:   {group: niche,  op: "<=", cut: 12, status: observation}         # վաճառողների աճը 6 ամսում ≤ 12 %
+    m_sps_3m:       {group: niche,  op: ">=", cut: 190, status: niche-level}        # վաճառք/վաճառող/ամիս ≥ 190 հատ (Spearman +0.64/+0.52)
+    m_yoy_peak:     {group: niche,  op: "<=", cut: 45, status: observation}         # պիկ ամսվա YoY ≤ 45 %
+    ads_w1_8:       {group: exec,   op: ">=", cut: 80, cut_fair: 55, status: VALID/observation-fair}  # գովազդ ≥ X % օրերի
+    promo_w1_8:     {group: exec,   op: ">=", cut: 55, cut_fair: 43, status: VALID}         # акция ≥ X % օրերի
+    oos_w1_8:       {group: exec,   op: "<=", cut: 0, cut_fair: 22, status: VALID/observation-fair}  # օրեր առանց մնացորդի
+    price_chg_w8:   {group: info,   op: "<=", cut: -8, status: VALID-full/rejected-fair}    # 8-րդ շաբաթին գինը ≥ 8 % ցածր
+    wh_w4:          {group: exec,   op: ">=", cut: 5, cut_fair: 3, status: VALID-but-FBO}   # պահեստներ 4-րդ շաբաթին (FBS-ով անհասանելի)
+    sales_w1:       {group: early,  op: ">=", cut: 3, cut_fair: 1, status: VALID}           # 1-ին շաբաթ հատ/օր
+    words_w4:       {group: early,  op: ">=", cut: 225, cut_fair: 107, status: VALID}       # 4-րդ շաբաթ որոնման բառեր
+    reviews_w4:     {group: early,  op: ">=", cut: 30, cut_fair: 8, status: VALID}          # 4-րդ շաբաթ отзывы
+  # Կիրառում. t0 = վերջին ամբողջական ամսից հետո (տվյալը ≤ 2026-07); price = գին մինչև СПП, spp = [допущение] 777 զեկույցից
+  candidates:
+    - {name: "777 A магнит+вакуум MagSafe", niche: 777, t0: "2026-08-01", price: 1590, spp: 21}
+    - {name: "52 кошелёк компактный кожа (ФИНАЛ)", niche: 52, t0: "2026-08-01", price: 1690, spp: 21}
+    - {name: "52 картхолдер кожа", niche: 52, t0: "2026-08-01", price: 1590, spp: 21}
+    - {name: "249 тканевые резинки премиум", niche: 249, t0: "2026-08-01", price: 1190, spp: 21}

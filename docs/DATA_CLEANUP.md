@@ -9,12 +9,15 @@
 | Файл | Байт | Начало |
 |---|---:|---|
 
-## Точные дубликаты: 26 групп, лишнее место 11.7 МБ
+## Точные дубликаты: 38 групп, лишнее место 16.1 МБ
 
 - 2.47 МБ × 2: `data/raw/saleflow/2026-10-03/vakuumatory/comments_raw/mcp-saleflow_universal-wb_sku-1791057639696.txt` = `data/raw/saleflow/2026-10-03/vakuumatory/mcp-saleflow_universal-wb_sku-1791057639696.txt`
 - 1.76 МБ × 2: `data/raw/saleflow/2026-10-03/vakuumatory/comments_raw/mcp-saleflow_universal-wb_sku-1791057629044.txt` = `data/raw/saleflow/2026-10-03/vakuumatory/mcp-saleflow_universal-wb_sku-1791057629044.txt`
 - 1.18 МБ × 2: `data/raw/saleflow/2026-10-06/fresh/comments/2486_162194496.json` = `data/raw/saleflow/2026-10-07/strategy2486/comments/162194496.json`
 - 1.14 МБ × 2: `data/raw/saleflow/2026-10-03/chasy-naruchnye/comments_raw/mcp-saleflow_universal-wb_sku-1791059077215.txt` = `data/raw/saleflow/2026-10-03/chasy-naruchnye/mcp-saleflow_universal-wb_sku-1791059077215.txt`
+- 1.02 МБ × 3: `data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json` = `data/raw/saleflow/2026-10-14/v2/products500_7640_2026-07.json` = `data/raw/saleflow/v3_products500/7640.json`
+- 0.95 МБ × 2: `data/raw/saleflow/2026-10-14/strategy7640/extra/subject_50_products500_2026-07.json` = `data/raw/saleflow/v3_products500/50.json`
+- 0.94 МБ × 2: `data/raw/saleflow/2026-10-15/strategy52/products500_2026-07.json` = `data/raw/saleflow/v3_products500/52.json`
 - 0.60 МБ × 2: `data/raw/saleflow/2026-10-03/chasy-naruchnye/comments_raw/mcp-saleflow_universal-wb_sku-1791059072505.txt` = `data/raw/saleflow/2026-10-03/chasy-naruchnye/mcp-saleflow_universal-wb_sku-1791059072505.txt`
 - 0.48 МБ × 2: `data/raw/saleflow/2026-10-06/fresh/comments/2486_213920076.json` = `data/raw/saleflow/2026-10-07/strategy2486/comments/213920076.json`
 - 0.45 МБ × 2: `data/raw/saleflow/2026-10-03/chasy-naruchnye/comments_raw/mcp-saleflow_universal-wb_sku-1791059081503.txt` = `data/raw/saleflow/2026-10-03/chasy-naruchnye/mcp-saleflow_universal-wb_sku-1791059081503.txt`
@@ -26,6 +29,7 @@
 - 0.25 МБ × 2: `data/raw/saleflow/2026-10-03/vakuumatory/comments_raw/mcp-saleflow_universal-wb_sku-1791057643537.txt` = `data/raw/saleflow/2026-10-03/vakuumatory/mcp-saleflow_universal-wb_sku-1791057643537.txt`
 - 0.21 МБ × 2: `data/raw/saleflow/2026-10-05/dna/777/top100/top100_products_2026-07.json` = `data/raw/saleflow/2026-10-07/strategy777/top100/top100_products_2026-07.json`
 - 0.21 МБ × 2: `data/raw/saleflow/2026-10-08/winners777/market/products100_2026-02.json` = `data/raw/saleflow/2026-10-11/all/finalists/products_777.json`
+- 0.19 МБ × 2: `data/raw/saleflow/2026-10-11/all/finalists/products_52.json` = `data/raw/saleflow/2026-10-15/strategy52/monthly/products_2025-12.json`
 - 0.19 МБ × 2: `data/raw/saleflow/2026-10-05/sumki-stroit/mcp-saleflow_universal-wb_subject-1791102695400.txt` = `data/raw/saleflow/2026-10-05/sumki-stroit/products_snapshot.json`
 - 0.19 МБ × 2: `data/raw/saleflow/2026-10-04/vyshivanie/mcp-saleflow_universal-wb_subject-1791059733165.txt` = `data/raw/saleflow/2026-10-04/vyshivanie/products_snapshot.json`
 - 0.18 МБ × 2: `data/raw/saleflow/2026-10-05/dna/777/top100/daily/941395990.json` = `data/raw/saleflow/2026-10-05/dna/777/winners/941395990_by_period.json`
@@ -33,7 +37,15 @@
 - 0.17 МБ × 2: `data/raw/saleflow/2026-10-05/sbornye-modeli/mcp-saleflow_universal-wb_subject-1791102690158.txt` = `data/raw/saleflow/2026-10-05/sbornye-modeli/products_snapshot.json`
 - 0.11 МБ × 2: `data/raw/saleflow/2026-10-06/fresh/comments/2486_504109542.json` = `data/raw/saleflow/2026-10-07/strategy2486/comments/504109542.json`
 - 0.06 МБ × 3: `data/raw/saleflow/2026-10-03/termos-feb/mcp-saleflow_universal-wb_analytics-1791019184483.txt` = `data/raw/saleflow/2026-10-03/termos-jan/mcp-saleflow_universal-wb_analytics-1791019184483.txt` = `data/raw/saleflow/2026-10-03/termos/mcp-saleflow_universal-wb_analytics-1791019184483.txt`
-- 0.03 МБ × 2: `data/raw/saleflow/2026-10-06/strategy777/trends_month.json` = `data/raw/saleflow/2026-10-07/strategy777/trends_month.json`
+- 0.03 МБ × 2: `data/raw/saleflow/2026-10-14/strategy7640/extra/subject_138_trends.json` = `data/raw/saleflow/2026-10-16/weekly/138/trends_full.json`
+- 0.03 МБ × 2: `data/raw/saleflow/2026-10-15/strategy52/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/52/trends_full.json`
+- 0.03 МБ × 3: `data/raw/saleflow/2026-10-06/strategy777/trends_month.json` = `data/raw/saleflow/2026-10-07/strategy777/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/777/trends_full.json`
+- 0.03 МБ × 2: `data/raw/saleflow/2026-10-07/newcomer/937/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/937/trends_full.json`
+- 0.03 МБ × 2: `data/raw/saleflow/2026-10-07/newcomer/235/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/235/trends_full.json`
+- 0.03 МБ × 2: `data/raw/saleflow/2026-10-11/strategy729/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/729/trends_full.json`
+- 0.03 МБ × 2: `data/raw/saleflow/2026-10-07/strategy2486/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/2486/trends_full.json`
+- 0.02 МБ × 2: `data/raw/saleflow/2026-10-14/strategy7640/trends_month.json` = `data/raw/saleflow/2026-10-16/weekly/7640/trends_full.json`
 - 0.01 МБ × 2: `data/raw/saleflow/2026-10-11/pivot/729/cards/111647586.json` = `data/raw/saleflow/2026-10-11/strategy729/top100/cards/111647586.json`
 - 0.00 МБ × 2: `data/raw/saleflow/2026-10-04/videonyani/subject902_trends_monthly.csv` = `data/raw/saleflow/2026-10-04/xborder/902/subject902_trends_monthly.csv`
 - 0.00 МБ × 2: `data/raw/saleflow/2026-10-04/videoglazki/subject4528_trends_monthly.csv` = `data/raw/saleflow/2026-10-04/xborder/4528/subject4528_trends_monthly.csv`
+- 0.00 МБ × 3: `data/raw/saleflow/2026-10-14/strategy7640/extra/similar_identical_wb_769180126.json` = `data/raw/saleflow/2026-10-15/strategy52/extra/similar_identical_wb_529165808.json` = `data/raw/saleflow/2026-10-15/strategy52/extra/similar_identical_wb_757094033.json`
