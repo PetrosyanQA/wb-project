@@ -1,0 +1,130 @@
+# Очередь сбора products (limit 100, июль 2026) — когда Saleflow wb_subject products снова заработает.
+# Порядок: 1) Ofa_Sert без флагов, медиана ≥ 1000 ₽; затем < 1000 ₽ (на схеме AM FBS обычно убыточны), 2) с флагами (проверить габарит/ЧЗ), 3) остаток старой очереди.
+# Уже исключены: ЧЗ, магниты/батарейки, ложные совпадения (data/processed/ofasert_match_2026-10-17.json → drop).
+# Перед каждой пачкой: account_limits. Список Ofa_Sert: docs/ofasert_otkaz_list_2026-03-13.txt.
+
+ofasert:
+  - {id: 2508, name: "Удилища", rev_mln: 222.3, price: 1942, sellers: 525}
+  - {id: 6548, name: "Вешалки настенные", rev_mln: 57.2, price: 1689, sellers: 567, not_in_universe: true}
+  - {id: 5868, name: "Подставки для ноутбуков", rev_mln: 23.8, price: 1523, sellers: 322}
+  - {id: 1428, name: "Ножницы парикмахерские", rev_mln: 21.7, price: 2517, sellers: 244}
+  - {id: 6948, name: "Зонты садовые", rev_mln: 16.9, price: 2784, sellers: 73}
+  - {id: 1386, name: "Подставки для ножей", rev_mln: 16.0, price: 1160.5, sellers: 309}
+  - {id: 1219, name: "Ножницы садовые", rev_mln: 15.9, price: 1142, sellers: 244}
+  - {id: 203, name: "Серьги", rev_mln: 410.3, price: 611, sellers: 6109}
+  - {id: 201, name: "Браслеты", rev_mln: 376.6, price: 617, sellers: 6133}
+  - {id: 1156, name: "Искусственные растения", rev_mln: 230.6, price: 599.5, sellers: 1814}
+  - {id: 270, name: "Свечи", rev_mln: 163.0, price: 596, sellers: 3202}
+  - {id: 24, name: "Кольца", rev_mln: 158.1, price: 630, sellers: 2880}
+  - {id: 944, name: "Наклейки интерьерные", rev_mln: 153.0, price: 489, sellers: 1559}
+  - {id: 1567, name: "Папки канцелярские", rev_mln: 118.3, price: 467, sellers: 896}
+  - {id: 298, name: "Подвески бижутерные", rev_mln: 113.2, price: 523, sellers: 2955}
+  - {id: 5014, name: "Бусины", rev_mln: 97.0, price: 510, sellers: 916}
+  - {id: 301, name: "Цепочки", rev_mln: 80.0, price: 536, sellers: 1584}
+  - {id: 1411, name: "Ножницы маникюрные", rev_mln: 75.2, price: 778, sellers: 523}
+  - {id: 968, name: "Таблички и наклейки информационные", rev_mln: 74.7, price: 638, sellers: 667}
+  - {id: 3871, name: "Ленты для рукоделия", rev_mln: 66.2, price: 470, sellers: 1227}
+  - {id: 1906, name: "Фотобумага", rev_mln: 57.0, price: 718, sellers: 182}
+  - {id: 661, name: "Блокноты", rev_mln: 52.5, price: 471, sellers: 1178}
+  - {id: 2060, name: "Ключи гаечные", rev_mln: 51.8, price: 674, sellers: 524}
+  - {id: 5866, name: "Постеры", rev_mln: 50.3, price: 503, sellers: 786}
+  - {id: 742, name: "Коврики для мыши", rev_mln: 49.0, price: 679.5, sellers: 811}
+  - {id: 2840, name: "Салфетки для авто", rev_mln: 45.6, price: 468, sellers: 756}
+  - {id: 2724, name: "Этикетки", rev_mln: 44.4, price: 454.5, sellers: 487}
+  - {id: 2257, name: "Насадки для швабр", rev_mln: 44.1, price: 558, sellers: 846}
+  - {id: 2489, name: "Леска рыболовная", rev_mln: 44.0, price: 539.5, sellers: 501}
+  - {id: 797, name: "Подставки канцелярские", rev_mln: 39.9, price: 592, sellers: 761}
+  - {id: 324, name: "Ободки", rev_mln: 39.9, price: 506, sellers: 1426}
+  - {id: 2294, name: "Отвертки", rev_mln: 39.9, price: 493, sellers: 913}
+  - {id: 3750, name: "Монеты сувенирные", rev_mln: 38.9, price: 468, sellers: 251}
+  - {id: 3480, name: "Расчески для животных", rev_mln: 35.6, price: 480, sellers: 478}
+  - {id: 2631, name: "Канекалон", rev_mln: 33.4, price: 530, sellers: 151}
+  - {id: 1121, name: "Кормушки для животных", rev_mln: 32.7, price: 751, sellers: 557, not_in_universe: true}
+  - {id: 976, name: "Карнавальные маски", rev_mln: 31.1, price: 485, sellers: 661}
+  - {id: 2487, name: "Кормушки рыболовные", rev_mln: 30.4, price: 517, sellers: 368, not_in_universe: true}
+  - {id: 1131, name: "Бумага художественная", rev_mln: 30.1, price: 525, sellers: 248}
+  - {id: 1647, name: "Свечи религиозные", rev_mln: 29.9, price: 595, sellers: 288}
+  - {id: 1539, name: "Карнавальные аксессуары", rev_mln: 29.4, price: 662, sellers: 658}
+  - {id: 4526, name: "Сменные файлы для пилок", rev_mln: 29.0, price: 538, sellers: 179}
+  - {id: 1308, name: "Ножницы кухонные", rev_mln: 29.0, price: 502, sellers: 470}
+  - {id: 2935, name: "Подгузники для животных", rev_mln: 28.3, price: 598, sellers: 63}
+  - {id: 4919, name: "Бумага подарочная", rev_mln: 27.7, price: 468, sellers: 502}
+  - {id: 906, name: "Браслеты для часов", rev_mln: 26.9, price: 666, sellers: 327}
+  - {id: 3373, name: "Чехлы для брелоков автомобильной сигнализации", rev_mln: 24.1, price: 544, sellers: 339}
+  - {id: 256, name: "Повязки на голову", rev_mln: 23.5, price: 478, sellers: 829}
+  - {id: 386, name: "Скакалки", rev_mln: 22.0, price: 500, sellers: 420}
+  - {id: 1286, name: "Ножницы для рукоделия", rev_mln: 21.8, price: 558, sellers: 486}
+  - {id: 3169, name: "Файлы-вкладыши", rev_mln: 21.5, price: 465.5, sellers: 165}
+  - {id: 3562, name: "Приманки", rev_mln: 21.0, price: 518.5, sellers: 283}
+  - {id: 1480, name: "Конверты бумажные", rev_mln: 20.8, price: 566.5, sellers: 224}
+  - {id: 253, name: "Шапочки для плавания", rev_mln: 19.9, price: 549, sellers: 515}
+  - {id: 5712, name: "Подставки декоративные", rev_mln: 19.2, price: 664, sellers: 963}
+  - {id: 2502, name: "Поплавки", rev_mln: 19.1, price: 474, sellers: 303}
+  - {id: 3216, name: "Декорации для аквариумов и террариумов", rev_mln: 18.7, price: 573, sellers: 437}
+  - {id: 1753, name: "Наполнители для рукоделия", rev_mln: 18.7, price: 649, sellers: 155}
+  - {id: 1285, name: "Спицы для вязания", rev_mln: 18.5, price: 557, sellers: 232}
+  - {id: 3472, name: "Гамаки для животных", rev_mln: 17.4, price: 592, sellers: 288}
+  - {id: 1898, name: "Подставки для книг", rev_mln: 17.4, price: 578, sellers: 262}
+  - {id: 3016, name: "Подставки для благовоний", rev_mln: 17.3, price: 532, sellers: 415}
+  - {id: 3096, name: "Подставки для бытовой техники", rev_mln: 17.0, price: 597, sellers: 419}
+  - {id: 1828, name: "Органайзеры на мойку", rev_mln: 15.7, price: 551, sellers: 369}
+  - {id: 1449, name: "Держатели для кашпо", rev_mln: 15.7, price: 675, sellers: 214}
+  - {id: 1481, name: "Рулетки", rev_mln: 15.2, price: 515, sellers: 454}
+  - {id: 1594, name: "Швабры", rev_mln: 379.1, price: 1247, sellers: 1126, flag: "длина > 1 м?"}
+  - {id: 1625, name: "Коврики для ванной", rev_mln: 277.2, price: 1150, sellers: 1523, flag: "проверить ЧЗ (текстиль 6302/5703)"}
+  - {id: 930, name: "Коврики автомобильные", rev_mln: 249.2, price: 2606.5, sellers: 755, flag: "габарит"}
+  - {id: 1895, name: "Вешалки напольные", rev_mln: 180.2, price: 2422, sellers: 529, flag: "габарит (напольная)", not_in_universe: true}
+  - {id: 1619, name: "Жалюзи", rev_mln: 145.6, price: 1558, sellers: 273, flag: "длина"}
+  - {id: 7180, name: "Газоны искусственные", rev_mln: 140.2, price: 2154, sellers: 223, flag: "габарит (рулон)"}
+  - {id: 7242, name: "Бордюры садовые", rev_mln: 125.0, price: 1219, sellers: 204, flag: "длина/вес"}
+  - {id: 855, name: "Гантели", rev_mln: 103.7, price: 1601, sellers: 194, flag: "тяжёлые"}
+  - {id: 388, name: "Коврики спортивные", rev_mln: 86.0, price: 1775, sellers: 288, flag: "объём рулона"}
+  - {id: 260, name: "Елки искусственные", rev_mln: 31.8, price: 2253, sellers: 608, flag: "сезон декабрь + габарит"}
+  - {id: 1501, name: "Парики", rev_mln: 19.1, price: 1990, sellers: 249, flag: "парики — проверить", not_in_universe: true}
+  - {id: 943, name: "Наполнители для лотков и клеток", rev_mln: 844.2, price: 954, sellers: 909, flag: "тяжёлый (наполнитель 3–10 кг)"}
+  - {id: 582, name: "Накладные ресницы", rev_mln: 249.2, price: 480, sellers: 812, flag: "проверить: не косметика (6704)"}
+  - {id: 936, name: "Вешалки-плечики", rev_mln: 217.5, price: 660, sellers: 1044, flag: "объём упаковки"}
+  - {id: 1346, name: "Автомобильные ароматизаторы", rev_mln: 170.9, price: 494, sellers: 1661, flag: "автохимия — проверить", not_in_universe: true}
+  - {id: 870, name: "Кашпо", rev_mln: 151.7, price: 975.5, sellers: 1145, flag: "хрупкость/объём"}
+  - {id: 983, name: "Массажеры механические", rev_mln: 64.4, price: 505, sellers: 1099, flag: "только механические", not_in_universe: true}
+  - {id: 1489, name: "Зеркала косметические", rev_mln: 61.4, price: 703.5, sellers: 1026, flag: "только без подсветки", not_in_universe: true}
+  - {id: 986, name: "Точилки для ножей", rev_mln: 55.6, price: 847, sellers: 736, flag: "только механические"}
+
+rest_old_queue:
+  - {id: 4042, name: "Фотопленки", rev_mln: 113.9}
+  - {id: 4680, name: "Штативы для съемки", rev_mln: 115.0}
+  - {id: 1136, name: "Подушки на стул", rev_mln: 115.6}
+  - {id: 3542, name: "Тенты для бассейнов", rev_mln: 117.5}
+  - {id: 876, name: "Емкости неполимерные", rev_mln: 128.9}
+  - {id: 7162, name: "Ковровые дорожки", rev_mln: 131.7}
+  - {id: 1416, name: "Коврики пляжные", rev_mln: 131.8}
+  - {id: 709, name: "Вафельницы", rev_mln: 132.1}
+  - {id: 619, name: "Миксеры", rev_mln: 134.4}
+  - {id: 4080, name: "Краскопульты", rev_mln: 136.3, flag: "только сетевые"}
+  - {id: 788, name: "Мыши", rev_mln: 139.8, flag: "только проводные (беспроводные — батарейка)"}
+  - {id: 6356, name: "Сушилки для посуды", rev_mln: 142.6}
+  - {id: 5924, name: "Шторы уличные", rev_mln: 151.6}
+  - {id: 5581, name: "Плиты настольные", rev_mln: 159.5}
+  - {id: 570, name: "Подушки декоративные", rev_mln: 160.4}
+  - {id: 1218, name: "Шланги садовые", rev_mln: 167.5}
+  - {id: 767, name: "Компрессоры автомобильные", rev_mln: 175.7, flag: "только сетевые/12V, не аккумуляторные"}
+  - {id: 602, name: "Мангалы", rev_mln: 193.7}
+  - {id: 475, name: "Тренажеры", rev_mln: 203.5}
+  - {id: 2317, name: "Коврики придверные", rev_mln: 213.8}
+  - {id: 829, name: "Наборы столовых приборов", rev_mln: 226.7}
+  - {id: 592, name: "Столы туристические", rev_mln: 233.2}
+  - {id: 8416, name: "Бассейны надувные", rev_mln: 238.0}
+  - {id: 1593, name: "Мусорные ведра", rev_mln: 251.0}
+  - {id: 1137, name: "Карнизы", rev_mln: 256.3}
+  - {id: 2098, name: "Емкости для масел и горючего", rev_mln: 260.9}
+  - {id: 743, name: "Наматрасники", rev_mln: 299.0}
+  - {id: 7219, name: "Аксессуары для бассейна", rev_mln: 321.7}
+  - {id: 1479, name: "Шторы для ванной", rev_mln: 349.7}
+  - {id: 1621, name: "Рулонные шторы", rev_mln: 369.0}
+  - {id: 821, name: "Тарелки", rev_mln: 452.6}
+  - {id: 319, name: "Одеяла", rev_mln: 556.8}
+  - {id: 823, name: "Кастрюли", rev_mln: 633.9}
+  - {id: 704, name: "Сковороды", rev_mln: 772.5}
+  - {id: 336, name: "Подушки", rev_mln: 862.3}
+  - {id: 7161, name: "Ковры", rev_mln: 1067.1}
+  - {id: 1620, name: "Тюль", rev_mln: 1378.7}
