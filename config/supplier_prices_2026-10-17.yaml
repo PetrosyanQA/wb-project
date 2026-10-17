@@ -1,0 +1,22 @@
+# Ориентир цены поставщика (Alibaba/Global Sources, витрина, USD за шт) — 2026-10-17, WebSearch.
+# Это НЕ котировка: цены листингов, часто тиры по MOQ; 1688 обычно дешевле Alibaba [допущение].
+# ¥ = USD × usd_to_rub / cny_to_rub (scheme_am_fbs.yaml: 83.48 / 12.43 = 6.716).
+# lo/hi — диапазон листингов, src — откуда, match — насколько листинг совпадает с товаром победителей.
+593:  {item: "наушники большие ANC без бренда", lo: 10.2, hi: 13.2, moq: "500–1000", match: точно,
+       src: "alibaba.com listings Shenzhen Compoka / Qichen (JL chipset over-ear ANC)"}
+787:  {item: "смарт-часы AMOLED со звонками", lo: 15.55, hi: 18.99, moq: "2", match: близко,
+       src: "electronics.alibaba.com (2.06'' AMOLED BT call); генерик W2 $5–19"}
+600:  {item: "видеорегистратор 3 камеры 1080p", lo: 7.8, hi: 9.2, moq: "1–2", match: точно,
+       src: "accio.com таблицы Alibaba hot sellers; alibaba арабская витрина $12.62"}
+468:  {item: "повербанк 100 000 mAh солнечный", lo: 13.02, hi: 16.7, moq: "10", match: близко,
+       src: "electronics.alibaba.com Shenzhen Update Electronics"}
+1301: {item: "ручной вакуумный отпариватель", lo: 19.9, hi: 20.5, moq: "500", match: точно,
+       src: "alibaba Ningbo Hanya suction garment steamer; простой ручной $7.1–8.5"}
+1673: {item: "ночник с белым шумом", lo: 6.28, hi: 7.25, moq: "2–2000", match: близко,
+       src: "electronics.alibaba.com sleep sound machine / baby white noise"}
+620:  {item: "электробритва (общая категория)", lo: 4.22, hi: 10.9, moq: "500–3000", match: категория,
+       src: "globalsources.com electric shavers; не именно 3в1 роторная"}
+504:  {item: "налобный фонарь с датчиком движения", lo: 2.4, hi: 5.79, moq: "100–1000", match: близко,
+       src: "uchangepromo.com (US промо-поставщик, выше фабрики)"}
+52:   {item: "кошелёк (образец пользователя)", lo: 20, hi: 20, unit: cny, moq: "—", match: точно,
+       src: "со слов пользователя 2026-10-16 (образец ¥20)"}
