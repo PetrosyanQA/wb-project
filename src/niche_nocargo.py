@@ -93,6 +93,9 @@ def dims_for(ids) -> tuple[float, float, str]:
     if vols:                                           # веса нет в карточке → объёмный вес карго 1:6000 (см³), т.е. л / 6
         v = sorted(vols)[len(vols) // 2]
         return round(v, 2), round(v / 6, 2), "карточки (вес = объём/6)"
+    if kgs:                                            # есть только вес → объём по той же норме 1:6000, т.е. кг × 6
+        k = sorted(kgs)[len(kgs) // 2]
+        return round(k * 6, 2), round(k, 2), "карточки (объём = вес×6)"
     return 0.8, 0.35, "допущение"
 
 
