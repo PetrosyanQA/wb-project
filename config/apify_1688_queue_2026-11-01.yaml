@@ -1,0 +1,36 @@
+# Очередь цен 1688 через Apify на 2026-11-01 (кредит Apify обнулится 1 ноября).
+# Источник списка: data/processed/niche_final_rank_2026-10-17.json минус «Честный знак» (reports/marking_check_2026-10-17.md).
+# max_yuan_drr15 / drr10 — потолок ¥ при марже ≥ 18 % и ROI ≥ 60 % (оценка, scheme_am_fbs).
+# query_cn — поисковый запрос 1688 [допущение], проверить выдачу глазами на первой нише.
+# Исключены (ЧЗ, ПП № 1954): 504 Фонари спортивные, 2420 Светильники уличные, 1673 Ночники.
+
+niches:
+  - {id: 52,   name: Кошельки,                   product: кошелёк из натуральной кожи,       price: 2164, max_yuan_drr15: 15.1, max_yuan_drr10: 27.2, query_cn: 真皮钱包 男}
+  - {id: 593,  name: Наушники беспроводные,      product: накладные ANC без бренда,          price: 3020, max_yuan_drr15: 64.5, max_yuan_drr10: 73.6, query_cn: 头戴式 主动降噪 蓝牙耳机}
+  - {id: 620,  name: Бритвы электрические,       product: роторная электробритва,            price: 1817, max_yuan_drr15: 21.6, max_yuan_drr10: 30.9, query_cn: 电动剃须刀 旋转}
+  - {id: 3313, name: Аппараты для маникюра,      product: аппарат 35–45 тыс. об/мин,         price: 5292, max_yuan_drr15: 73.6, max_yuan_drr10: 95.5, query_cn: 美甲打磨机 35000转}
+  - {id: 1717, name: Триммеры,                   product: женский триммер 4в1/5в1,           price: 1600, max_yuan_drr15: 19.5, max_yuan_drr10: 26.7, query_cn: 女士剃毛器 五合一}
+  - {id: 6307, name: Другие автоаксессуары,      product: — (без лидирующего типа),          price: 1194, max_yuan_drr15: 10.1, max_yuan_drr10: 15.9, query_cn: 汽车 摆件 装饰}
+  - {id: 731,  name: Игрушки для животных,       product: игрушка для собак,                 price: 1065, max_yuan_drr15: 11.4, max_yuan_drr10: 16.1, query_cn: 狗玩具 耐咬}
+  - {id: 60,   name: Часы наручные,              product: кварцевые женские,                 price: 4799, max_yuan_drr15: 49.3, max_yuan_drr10: 78.2, query_cn: 女士石英手表}
+  - {id: 236,  name: Фигурки и статуэтки,        product: декоративная статуэтка (не аниме), price: 1838, max_yuan_drr15: 18.9, max_yuan_drr10: 27.7, query_cn: 树脂摆件 情侣}
+  - {id: 5067, name: Вибраторы,                  product: вибратор с пультом (18+),          price: 2055, max_yuan_drr15: 17.5, max_yuan_drr10: 27.8, query_cn: 振动棒 遥控}
+  - {id: 604,  name: Клавиатуры,                 product: механическая клавиатура,           price: 1416, max_yuan_drr15: 10.5, max_yuan_drr10: 18.0, query_cn: 机械键盘}
+  - {id: 249,  name: Эспандеры,                  product: эспандер,                          price: 1432, max_yuan_drr15: 11.5, max_yuan_drr10: 18.4, query_cn: 握力器 拉力器}
+  - {id: 2314, name: Выпрямители волос,          product: выпрямитель,                       price: 1877, max_yuan_drr15: 12.1, max_yuan_drr10: 22.5, query_cn: 直板夹}
+  - {id: 722,  name: Упаковщики вакуумные,       product: вакууматор,                        price: 1834, max_yuan_drr15: 11.0, max_yuan_drr10: 21.5, query_cn: 真空封口机}
+  - {id: 1904, name: Пряжа,                      product: пряжа 5 мотков,                    price: 1260, max_yuan_drr15: 4.9,  max_yuan_drr10: 11.1, query_cn: 毛线 手工编织}
+  - {id: 3851, name: Походный душ,               product: аккумуляторный душ с насосом,      price: 2751, max_yuan_drr15: 21.4, max_yuan_drr10: 34.4, query_cn: 便携式淋浴器 充电}
+  - {id: 1370, name: Москитные сетки,            product: сетка на дверь на магнитах,        price: 1136, max_yuan_drr15: 4.9,  max_yuan_drr10: 10.1, query_cn: 磁性门帘 纱门}
+  - {id: 3185, name: Машинки для стрижки волос,  product: машинка для стрижки,               price: 1382, max_yuan_drr15: 6.5,  max_yuan_drr10: 13.2, query_cn: 理发器}
+  - {id: 787,  name: Смарт-часы,                 product: смарт-часы,                        price: 4072, max_yuan_drr15: 74.3, max_yuan_drr10: 93.1, query_cn: 智能手表}
+  - {id: 600,  name: Видеорегистраторы,          product: видеорегистратор,                  price: 1754, max_yuan_drr15: 14.2, max_yuan_drr10: 23.4, query_cn: 行车记录仪}
+  - {id: 1301, name: Отпариватели,               product: ручной отпариватель,               price: 5502, max_yuan_drr15: 71.9, max_yuan_drr10: 97.1, query_cn: 手持挂烫机}
+  - {id: 468,  name: Внешние аккумуляторы,       product: powerbank,                         price: 3792, max_yuan_drr15: 29.8, max_yuan_drr10: 48.8, query_cn: 充电宝 快充}
+
+# Ниши из прошлых этапов (не в final_rank, потолок ¥ — из своих отчётов или «—»):
+earlier:
+  - {id: 777,  name: Держатели в авто,  product: вакуумно-магнитный MagSafe, price: 1590, max_yuan_drr15: —,    query_cn: 真空吸盘 磁吸 车载支架}
+  - {id: 729,  name: Поводки,           product: рулетка-поводок 5 м,        price: —,    max_yuan_drr15: 16.4, query_cn: 自动伸缩 狗绳 5米}
+  - {id: 2486, name: Катушки,           product: спиннинговая катушка,       price: —,    max_yuan_drr15: —,    query_cn: 纺车轮 渔线轮}
+  - {id: 7640, name: Спортивные сумки,  product: спортивная сумка,           price: —,    max_yuan_drr15: —,    query_cn: 运动健身包}
