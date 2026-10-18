@@ -320,6 +320,7 @@ python3 -m src.saleflow ingest - --tool items --note "Дом/Хранение 30
 - Финотчёт WB: старый `/api/v5/supplier/reportDetailByPeriod` отключён → `finance-api /api/finance/v1/sales-reports/detailed`
   (токен категории «Финансы», бит 13).
 - Git: коммитить код/конфиги/md-отчёты; `.env`, `.mcp.json`, `data/raw` — никогда.
+- `docs/TOOLS.md` — карта всех инструментов (Saleflow, MPSTATS, WB API, Bright Data, Exa, Apify, браузер, фото): что решает и сколько стоит. Выбирать самый дешёвый рабочий.
 - `docs/DATA_CATALOG.md` — что сохранено по каждой нише. После нового сбора: `python -m src.catalog`.
 - В новом коде брать данные через `src/datastore.py` (`files(777, "daily")`, `latest(777, "products500")`,
   `daily(sku)`), а не жёсткими путями. Сырые файлы в `data/raw/saleflow/<дата>/…` не перемещать — на них ссылается старый код.
