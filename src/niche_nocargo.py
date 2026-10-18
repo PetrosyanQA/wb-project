@@ -12,7 +12,7 @@
                   top-1 полосы ≤ 35 % (v4/v5); сезон: июль < 50 % среднего → отсев (v5);
   4. рынок      — top-3 у одного продавца → ❌ (CLAUDE.md, v2); копии брендов > 30 % → ❌ (v2); YoY пика < −5 % → ❌ (gates №4, где есть trends);
   5. экономика  — выкуп = медиана purchase_after_return top-100 (v2); max ¥ при марже ≥ 18 % и ROI ≥ 60 % (v4); маржа ДРР 15 % при
-                  закупке = 9 % цены покупателя [допущение v5]; стресс цена −15 % → маржа ≥ 15 % (v2); габарит из карточек, иначе 0,8 л / 0,35 кг;
+                  закупке = 9 % цены покупателя [допущение v5]; стресс цена −15 % → маржа ≥ 15 % (v2); габарит — медиана упаковки top-20 полосы (Saleflow), иначе карточки, иначе 0,8 л / 0,35 кг;
   6. финплан    — src.finplan.run: партия fit_batch, спрос P25/P50/P75 новичков полосы × разгон 40/70/100 % [допущение] × сезон, старт 2026-12;
                   окупаемость «деньги вернулись» ≤ 6 мес. при P50 (v2/v5);
   7. строго     — gates №3/№5 и v2 как отдельная колонка: top-10 ≤ 40 %, top-1 продавец ≤ 25 %, ≥ 8 продавцов в top-20, ≤ 4 карточки бренда
@@ -84,18 +84,39 @@ def card(sku) -> dict | None:
     return None
 
 
+def pkg_vol(x: dict) -> float | None:
+    """Объём упаковки из Saleflow products500 (package_length × width × height, см → л)."""
+    L = [x.get(k) for k in ("package_length", "package_width", "package_height")]
+    return round(L[0] * L[1] * L[2] / 1000, 2) if all(isinstance(v, (int, float)) and v > 0 for v in L) else None
+
+
+def saleflow_dims(R: list[dict], band: list, ids) -> tuple[float, float, str] | None:
+    """Габарит = медиана объёма упаковки top-20 полосы по выручке (Saleflow); вес — из карточек top-3, иначе объём/6."""
+    lo, hi = band
+    B = sorted((x for x in R if lo <= x["revenue"] / x["sales"] < hi), key=lambda x: -x["revenue"])[:20]
+    vols = sorted(v for v in (pkg_vol(x) for x in B) if v)
+    if len(vols) < 3:
+        return None
+    v = vols[len(vols) // 2]
+    kgs = sorted(x["kg"] for x in (V.card_dims(c) for c in (card(s) for s in ids[:3]) if c) if x["kg"])
+    if kgs:
+        return round(v, 2), round(kgs[len(kgs) // 2], 2), f"Saleflow ({len(vols)} карт.)"
+    return round(v, 2), round(v / 6, 2), f"Saleflow ({len(vols)} карт., вес = объём/6)"
+
+
 def dims_for(ids) -> tuple[float, float, str]:
     d = [V.card_dims(c) for c in (card(s) for s in ids[:3]) if c]
+    sf = all(os.path.exists(f"{V.CARDS}/{s}.json") for s in ids[:3] if card(s))   # wb_card_content Saleflow, не CDN WB
     vols = [x["vol_l"] for x in d if x["vol_l"]]
     kgs = [x["kg"] for x in d if x["kg"]]
     if vols and kgs:
-        return round(sorted(vols)[len(vols) // 2], 2), round(sorted(kgs)[len(kgs) // 2], 2), "карточки"
+        return round(sorted(vols)[len(vols) // 2], 2), round(sorted(kgs)[len(kgs) // 2], 2), ("карточки Saleflow" if sf else "карточки WB")
     if vols:                                           # веса нет в карточке → объёмный вес карго 1:6000 (см³), т.е. л / 6
         v = sorted(vols)[len(vols) // 2]
-        return round(v, 2), round(v / 6, 2), "карточки (вес = объём/6)"
+        return round(v, 2), round(v / 6, 2), ("карточки Saleflow" if sf else "карточки WB") + " (вес = объём/6)"
     if kgs:                                            # есть только вес → объём по той же норме 1:6000, т.е. кг × 6
         k = sorted(kgs)[len(kgs) // 2]
-        return round(k * 6, 2), round(k, 2), "карточки (объём = вес×6)"
+        return round(k * 6, 2), round(k, 2), ("карточки Saleflow" if sf else "карточки WB") + " (объём = вес×6)"
     return 0.8, 0.35, "допущение"
 
 
@@ -248,7 +269,7 @@ def evaluate(u: dict, seas: dict, cny: float) -> dict:
         b["max_yuan_drr10"] = max_yuan(b["seller_price_med"], 0.8, 0.35, buyout, comm, 10, 0)
         b["score"] = round(b["p50"] * b["max_yuan_drr10"], 1)
     b = max(ok, key=lambda b: b["score"])
-    vol, kg, src = dims_for(b["top_ids"])
+    vol, kg, src = saleflow_dims(R, b["band"], b["top_ids"]) or dims_for(b["top_ids"])
     price = b["seller_price_med"]
     y = round(b["buyer_med"] * SHARE / cny, 1)
     m15 = round(V.margin_at(price, y, kg, vol, buyout, comm, 15), 1)
@@ -285,7 +306,7 @@ def evaluate(u: dict, seas: dict, cny: float) -> dict:
     cert = kw_hits(u["name"], FLT["regulatory"]["certification_keywords"])
     if cert:
         flags.append(f"декларация ({cert[0]})")
-    if src != "карточки":
+    if src == "допущение" or "объём = вес×6" in src:            # объём не измерен
         flags.append("габарит —")
     if KIZ_CHECK.search(u["name"]):
         flags.append("ЧЗ? проверить")
