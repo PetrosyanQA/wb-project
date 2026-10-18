@@ -130,7 +130,17 @@ def detail_1688(html: str) -> dict:
         except ValueError:
             pass
     w = re.search(r'"unitWeight":([0-9.]+)', html)
-    return {"title": title, "skus": skus, "tiers": tiers,
+    pack = []                                          # «商品件重尺»: вес (г) и габарит упаковки (см) по SKU — от продавца
+    m = re.search(r'"pieceWeightScaleInfo":(\[.*?\])', html)
+    if m:
+        try:
+            for p in json.loads(m.group(1)):
+                pack.append({"sku": H.unescape(str(p.get("sku1") or "")), "g": p.get("weight"),
+                             "cm": [p.get("length"), p.get("width"), p.get("height")]})
+        except ValueError:
+            pass
+    attr_g = re.search(r'"name":"(?:重量|净重|毛重)[^"]*","values":\["([0-9.]+)"\]', html)
+    return {"title": title, "skus": skus, "tiers": tiers, "pack": pack, "attr_weight": attr_g.group(1) if attr_g else None,
             "unit_weight_kg": float(w.group(1)) if w else None,
             "moq": min([s["moq"] for s in skus] or [t["from"] for t in tiers] or [0]) or None}
 
@@ -152,6 +162,10 @@ def main() -> None:
     elif a.cmd == "d1688":
         d = detail_1688(fetch(f"https://detail.1688.com/offer/{a.arg}.html", f"1688d_{a.arg}"))
         print(d["title"][:70], "| MOQ", d["moq"], "| вес", d["unit_weight_kg"], "кг (часто заглушка 1.0)", "| ступени", d["tiers"])
+        for p in d["pack"][:12]:
+            print(f"  упаковка: {p['g']} г, {p['cm']} см  {p['sku'][:50]}")
+        if d["attr_weight"]:
+            print("  атрибут «вес»:", d["attr_weight"])
         for s in sorted(d["skus"], key=lambda s: s["price_cny"]):
             print(f"  ¥{s['price_cny']:>7}  от {s['moq']:>3} шт  {s['sku'][:60]}")
     else:
