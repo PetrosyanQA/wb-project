@@ -23,25 +23,7 @@ import urllib.request
 sys.stdout.reconfigure(encoding="utf-8")
 API = "https://api.brightdata.com/request"
 OUT = f"data/raw/brightdata/{dt.date.today().isoformat()}"
-USAGE = "data/raw/brightdata/_usage.json"     # счётчик платных запросов по дням (сбой тоже считается)
-
-
-def usage() -> dict:
-    try:
-        return json.load(open(USAGE, encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
-
-
-def spend_one() -> None:
-    """Потолок платных запросов в день: BRIGHTDATA_MAX_DAY в .env (по умолчанию 20). Выше — отказ без запроса."""
-    u, day = usage(), dt.date.today().isoformat()
-    cap = int(env("BRIGHTDATA_MAX_DAY", "20"))
-    if u.get(day, 0) >= cap:
-        raise SystemExit(f"стоп: сегодня уже {u[day]} платных запросов (потолок {cap}) — поднимите BRIGHTDATA_MAX_DAY осознанно")
-    u[day] = u.get(day, 0) + 1
-    os.makedirs(os.path.dirname(USAGE), exist_ok=True)
-    json.dump(u, open(USAGE, "w", encoding="utf-8"), indent=1)
+USAGE = "data/raw/brightdata/_usage.json"     # счётчик запросов по дням (сбой тоже считается)
 
 
 def env(key: str, default: str | None = None) -> str:
@@ -51,6 +33,36 @@ def env(key: str, default: str | None = None) -> str:
     if default is None:
         raise SystemExit(f"нет {key} в .env — добавьте строку {key}=<ключ> вручную (в чат ключ не присылать)")
     return default
+
+
+def usage() -> dict:
+    try:
+        return json.load(open(USAGE, encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def month_used(u: dict) -> int:
+    m = dt.date.today().strftime("%Y-%m")
+    return sum(v for k, v in u.items() if k.startswith(m))
+
+
+def spend_one() -> None:
+    """Бюджет: BRIGHTDATA_MONTH_CREDITS (5000 бесплатных/мес, обновление 1-го числа) минус резерв BRIGHTDATA_RESERVE (100).
+    Решение пользователя 2026-10-18: тратить сколько нужно, но остановиться и сообщить, когда останется 100.
+    Дневной потолок BRIGHTDATA_MAX_DAY (по умолчанию 1000) — страховка от зацикливания."""
+    u, day = usage(), dt.date.today().isoformat()
+    total, reserve = int(env("BRIGHTDATA_MONTH_CREDITS", "5000")), int(env("BRIGHTDATA_RESERVE", "100"))
+    left = total - month_used(u)
+    if left <= reserve:
+        raise SystemExit(f"СТОП: по счётчику осталось {left} кредитов (резерв {reserve}) — сообщить пользователю, дальше только с его разрешения")
+    if u.get(day, 0) >= int(env("BRIGHTDATA_MAX_DAY", "1000")):
+        raise SystemExit(f"стоп: дневной потолок {u[day]} запросов")
+    u[day] = u.get(day, 0) + 1
+    os.makedirs(os.path.dirname(USAGE), exist_ok=True)
+    json.dump(u, open(USAGE, "w", encoding="utf-8"), indent=1)
+    if left - 1 <= reserve + 50:
+        print(f"⚠️ Bright Data: осталось ≈ {left - 1} кредитов — близко к резерву {reserve}")
 
 
 def fetch(url: str, name: str, timeout: int = 200) -> str:
@@ -106,7 +118,9 @@ def main() -> None:
     ap.add_argument("--name")
     a = ap.parse_args()
     if a.cmd == "usage":
-        print(json.dumps(usage(), ensure_ascii=False))
+        u = usage()
+        total = int(env("BRIGHTDATA_MONTH_CREDITS", "5000"))
+        print(json.dumps(u, ensure_ascii=False), f"| за месяц {month_used(u)} | осталось ≈ {total - month_used(u)} из {total} (резерв {env('BRIGHTDATA_RESERVE', '100')})")
     elif a.cmd == "ping":
         print(fetch("https://geo.brdtest.com/welcome.txt?product=unlocker&method=api", f"ping_{dt.datetime.now():%H%M%S}")[:300])
     elif a.cmd == "get":
