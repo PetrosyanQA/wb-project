@@ -5,6 +5,7 @@
     python -m src.brightdata_client s1688 "狗玩具 耐咬 橡胶" --name 731   # поиск 1688 (keywords в GBK)
 
 Токен — только из .env (BRIGHTDATA_TOKEN), никогда не печатается и не пишется в отчёты.
+    python -m src.brightdata_client d1688 954555712385                # карточка 1688: SKU, цены, мин. партия
     python -m src.brightdata_client usage                      # сколько платных запросов ушло по дням (0 запросов)
 
 Зона — BRIGHTDATA_ZONE из .env (по умолчанию web_unlocker1). Повторный запуск с тем же именем в тот же день = 0 запросов (кэш).
@@ -111,9 +112,32 @@ def offers_1688(html: str) -> list[dict]:
     return out
 
 
+def detail_1688(html: str) -> dict:
+    """Карточка товара 1688 (detail.1688.com/offer/<id>.html): SKU (specAttrs → цена, мин. партия), ступени цены, вес."""
+    import html as H
+    title = (re.search(r"<title>([^<]*)", html) or [None, ""])[1].replace(" - 阿里巴巴", "")
+    skus, seen = [], set()
+    for m in re.finditer(r'"specAttrs":"([^"]{1,80})","price":"([0-9.]+)","priceAmount":(\d+)', html):
+        k = (m.group(1), m.group(2))
+        if k not in seen:
+            seen.add(k)
+            skus.append({"sku": H.unescape(m.group(1)).replace(">", " / "), "price_cny": float(m.group(2)), "moq": int(m.group(3))})
+    tiers = []
+    m = re.search(r'"currentPrices":(\[[^\]]{0,600}\])', html)
+    if m:
+        try:
+            tiers = [{"from": int(t.get("beginAmount", 0)), "price_cny": float(t["price"])} for t in json.loads(m.group(1))]
+        except ValueError:
+            pass
+    w = re.search(r'"unitWeight":([0-9.]+)', html)
+    return {"title": title, "skus": skus, "tiers": tiers,
+            "unit_weight_kg": float(w.group(1)) if w else None,
+            "moq": min([s["moq"] for s in skus] or [t["from"] for t in tiers] or [0]) or None}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["ping", "get", "s1688", "usage"])
+    ap.add_argument("cmd", choices=["ping", "get", "s1688", "d1688", "usage"])
     ap.add_argument("arg", nargs="?")
     ap.add_argument("--name")
     a = ap.parse_args()
@@ -125,6 +149,11 @@ def main() -> None:
         print(fetch("https://geo.brdtest.com/welcome.txt?product=unlocker&method=api", f"ping_{dt.datetime.now():%H%M%S}")[:300])
     elif a.cmd == "get":
         fetch(a.arg, a.name or re.sub(r"\W+", "_", a.arg)[-60:])
+    elif a.cmd == "d1688":
+        d = detail_1688(fetch(f"https://detail.1688.com/offer/{a.arg}.html", f"1688d_{a.arg}"))
+        print(d["title"][:70], "| MOQ", d["moq"], "| вес", d["unit_weight_kg"], "кг (часто заглушка 1.0)", "| ступени", d["tiers"])
+        for s in sorted(d["skus"], key=lambda s: s["price_cny"]):
+            print(f"  ¥{s['price_cny']:>7}  от {s['moq']:>3} шт  {s['sku'][:60]}")
     else:
         q = urllib.parse.quote(a.arg.encode("gbk"))
         html = fetch(f"https://s.1688.com/selloffer/offer_search.htm?keywords={q}", f"1688_{a.name or 'q'}")
