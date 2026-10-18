@@ -79,14 +79,15 @@ def fetch(url: str, name: str, timeout: int = 200) -> str:
 
 
 def offers_1688(html: str) -> list[dict]:
-    """Карточки выдачи 1688 (вёрстка 2026-10: titleText → ¥ → priceMain + дробь → «N件» продано)."""
+    """Карточки выдачи 1688. Две вёрстки (2026-10): class="titleText--…" и class="title-text";
+    в обеих: название → ¥ → целая часть + «.дробь» → «N件» продано → «回头率 N%»."""
     out = []
-    for blk in html.split('class="titleText--')[1:]:
+    for blk in re.split(r'class="(?:titleText--[^"]*|title-text)"', html)[1:]:
         t = [x.strip() for x in re.sub(r"<[^>]+>", "|", blk[:3000]).split("|") if x.strip()]
         if "¥" not in t:
             continue
         i = t.index("¥")
-        title = "".join(x for x in t[1:i] if x not in ("｜", "全网低价") and "首单" not in x)
+        title = "".join(x for x in t[1:i] if x not in ("｜", "全网低价", "国货品牌", "普通人群", "跨境") and "首单" not in x)
         num = t[i + 1] + (t[i + 2] if i + 2 < len(t) and t[i + 2].startswith(".") else "")
         try:
             price = float(num)
