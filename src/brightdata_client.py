@@ -53,7 +53,7 @@ def env(key: str, default: str | None = None) -> str:
     return default
 
 
-def fetch(url: str, name: str, timeout: int = 120) -> str:
+def fetch(url: str, name: str, timeout: int = 200) -> str:
     os.makedirs(OUT, exist_ok=True)
     path = f"{OUT}/{name}.html"
     if os.path.exists(path):
@@ -68,7 +68,11 @@ def fetch(url: str, name: str, timeout: int = 120) -> str:
         raw = urllib.request.urlopen(req, timeout=timeout).read()
     except urllib.error.HTTPError as e:
         raise SystemExit(f"Bright Data HTTP {e.code}: {e.read()[:200]!r}" + (" — ключ неверный/отозван" if e.code in (401, 403) else ""))
+    except TimeoutError:
+        raise SystemExit(f"Bright Data: таймаут {timeout} с — повторите позже (запрос засчитан в счётчик)")
     text = raw.decode("utf-8", errors="replace")
+    if len(raw) < 2000:                          # пустой/служебный ответ не кэшируем, чтобы повтор не отдавал пустоту
+        raise SystemExit(f"Bright Data: короткий ответ ({len(raw)} байт), не сохранён: {text[:150]!r}")
     open(path, "w", encoding="utf-8").write(text)
     print(f"сохранено: {path} ({len(raw)} байт)")
     return text
