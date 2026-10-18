@@ -228,8 +228,12 @@ def card_dims(d: dict) -> dict:
     opts = {o["name"]: o["value"] for o in d.get("options", [])}
     num = lambda s: float(re.search(r"\d+(?:[.,]\d+)?", str(s)).group().replace(",", ".")) if s and re.search(r"\d", str(s)) else None
     L = [num(opts.get(k)) for k in ("Длина упаковки", "Ширина упаковки", "Высота упаковки")]
-    if not all(L):
-        L = [num(opts.get(k)) for k in ("Глубина предмета", "Ширина предмета", "Высота предмета")]
+    if not all(L):                                     # нет упаковки → размеры предмета («Длина» или «Глубина», в разных категориях по-разному)
+        L = [num(opts.get("Длина предмета") or opts.get("Глубина предмета")), num(opts.get("Ширина предмета")), num(opts.get("Высота предмета"))]
+    if not all(L):                                     # последний шанс: «54*38*41» / «54x38x41 см» в названии
+        m = re.search(r"(\d{1,3}(?:[.,]\d)?)\s*[*xх×]\s*(\d{1,3}(?:[.,]\d)?)\s*[*xх×]\s*(\d{1,3}(?:[.,]\d)?)", d.get("imt_name", ""))
+        if m:
+            L = [float(v.replace(",", ".")) for v in m.groups()]
     g = num(opts.get("Вес товара с упаковкой (г)")) or num(opts.get("Вес товара без упаковки (г)"))
     kg = num(opts.get("Вес с упаковкой (кг)")) or (g / 1000 if g else None)
     txt = (d.get("imt_name", "") + " " + " ".join(f"{k} {v}" for k, v in opts.items())).lower()
