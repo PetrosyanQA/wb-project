@@ -22,3 +22,6 @@ reports/pdf_parts/
 wb_algorithm/*.pdf
 wb_algorithm/*.html
 token_inbox.txt
+
+# маркетинг: сырые генерации (тяжёлые PNG) — не в git
+marketing/*/generated/
