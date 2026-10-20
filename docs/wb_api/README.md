@@ -48,3 +48,23 @@
 
 https://dev.wildberries.ru/en/business-solutions — более 125 сервисов, подключаются Service-токеном в один клик
 (MPSpace, Torgstat, MarketGuru, Wildbox, Otveto, Mpstats и др.). Платные; у нас аналитика и биддер уже есть (MPSTATS, Saleflow `wbbidder_*`), поэтому сейчас не нужны.
+
+## Проверено в песочнице 2026-10-20 (WB_TOKEN_TEST, `src/wb_card.py` + ручные вызовы)
+
+| Шаг | Метод | Результат / особенность |
+|---|---|---|
+| Баркоды | POST `/content/v2/barcodes` `{"count":3}` | ✅ |
+| Карточка 3 варианта (склейка) | POST `/content/v2/cards/upload` | ✅ один imtID; **вес только в `dimensions.weightBrutto` (кг)** — характеристики «Вес с упаковкой», «Д/Ш/В упаковки» отклоняются |
+| Цены | POST `/api/v2/upload/task` `{"data":[{"nmID","price","discount"}]}` | ✅ |
+| Склад продавца | GET `/api/v3/offices` → POST `/api/v3/warehouses` `{"name","officeId"}` | ✅ |
+| Остатки | PUT `/api/v3/stocks/{warehouseId}` `{"stocks":[{"chrtId","amount"}]}` | ✅ **по `chrtId`, не по баркоду** (по sku → 400) |
+| Тест-заказы FBS | POST `/api/v3/test/fbs/orders/make` `{"orders":[{"sku":"<баркод>","amount":n}]}` | ✅ amount ≤ 10 |
+| Новые задания | GET `/api/v3/orders/new` | ✅ цена в копейках (110000 = 1 100 ₽) |
+| Поставка | POST `/api/v3/supplies` → PATCH `/api/v3/supplies/{id}/orders/{orderId}` → PATCH `.../deliver` | ✅ |
+| Стикеры | POST `/api/v3/orders/stickers?type=png&width=58&height=40` | ✅ PNG base64, partA/partB (пример: reports/assets/wb_fbs_sticker_sandbox.png) |
+| Действия покупателя (тест) | PATCH `/api/v3/test/fbs/orders/{id}/deliver|receive|reject|defect`, `/api/v3/test/fbs/supplies/{id}/close` | ✅ статусы sold / canceled_by_client / defect |
+| Тест-отзывы/вопросы | POST `/api/v1/test/make/feedbacks/batch`, `/questions/batch` `{"feedbacks":[{"nmId","texts":[…]}]}` | ✅ |
+| Ответ на отзыв | POST `/api/v1/feedbacks/answer` `{"id","text"}` | ✅ 204 |
+| Ответ на вопрос | PATCH `/api/v1/questions` `{"id","answer":{"text"},"state":"wbRu"}` | ✅ |
+| Тест-баланс рекламы | POST `/adv/v1/test/update/balance` `{"balance","net","bonus"}` | ✅ каждое поле ≥ 100 |
+| Кампания | POST `/adv/v2/seacat/save-ad` `{"name","nms":[…]}` → бюджет POST `/adv/v1/budget/deposit?id=` → GET `/adv/v0/start?id=` | ✅ тип 9, статус 9 (идут показы). `/api/advert/v2/adverts`, `/api/advert/v1/bids/min`, `/adv/v1/promotion/adverts` в песочнице → 404 |
