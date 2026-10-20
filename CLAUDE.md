@@ -128,6 +128,7 @@ python -m src.trend_scan --path "Автотовары/Органайзеры" --
 python -m src.trend_scan --path "Автотовары/Органайзеры" --days 540 --snapshots 4
 python -m src.trend_scan --demo                       # offline smoke test
 
+python -m src.wb_help_sync                          # справочный центр WB → docs/wb_help/ (+ OFFER_full.md)
 python -m src.brightdata_client s1688 "狗玩具 耐咬" --name 731   # 1688 prices via Bright Data (cap 20/day, docs/BRIGHTDATA.md)
 python -m src.sku_audit --sku 12345678 --days 30 --cost 380 --volume 0.6
 python -m src.unit_econ --price 1490 --cost 380 --volume 0.5 --buyout 82 --drr 15

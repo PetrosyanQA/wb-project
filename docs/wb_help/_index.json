@@ -1,0 +1,2033 @@
+{
+ "tree": {
+  "account-settings": {
+   "change-seller-data": [
+    "how-to-change-phone-number",
+    "how-to-change-the-sellers-information-ru",
+    "personal-account-access-restoring"
+   ],
+   "data-security": [
+    "data-and-seller-account-security",
+    "how-to-change-email",
+    "how-to-protect-yourself-from-scammers",
+    "how-to-work-with-portal-data-securely",
+    "two-factor-authentication-for-personal-account"
+   ],
+   "seller-account-and-user-roles": [
+    "users-and-accesses",
+    "website-personal-account-section"
+   ]
+  },
+  "analytics": {
+   "analytics-reports": [
+    "brands-share-in-sales-report",
+    "daily-dynamics-and-sales-analysis-report",
+    "hidden-items-report",
+    "income-and-expenses-report",
+    "mandatory-labeling-items-report",
+    "paid-acceptance-report",
+    "paid-storage-report",
+    "profit-calculator",
+    "report-on-invalid-id",
+    "retentions-report",
+    "returns-and-item-transfer-perort",
+    "sales-by-region-report",
+    "summary-seller-report",
+    "unit-economy-report",
+    "warehouse-stocks-report"
+   ],
+   "items-balances-analytics": [
+    "regional-shipment-report",
+    "stock-history-report"
+   ],
+   "researches": [
+    "check-is-higher-for-purchases-on-seller-page-ru",
+    "how-and-which-cards-do-sellers-compare-on-wb",
+    "how-does-the-brand-zone-impact-on-average-cheque-of-order",
+    "how-wb-club-discounts-affect-sales-growth",
+    "jam-subscription-profits-for-seller",
+    "which-format-of-replacement-articles-buyers-choose"
+   ],
+   "search-analytics": [
+    "search-analytics-report",
+    "search-queries-report"
+   ],
+   "seller-analytics": [
+    "analytical-summary",
+    "analytics-for-brand-representatives",
+    "events-calendar",
+    "item-ratings",
+    "order-feed-report",
+    "sales-funnel-part2",
+    "sales-funnel-report",
+    "sellers-analytics"
+   ],
+   "trading-platform-analytics": [
+    "cards-comparing-analytics",
+    "customer-portrait-report-v2",
+    "entry-points-to-product-cards",
+    "product-niche-analytics"
+   ]
+  },
+  "banking-and-financial-services": {
+   "banking": [
+    "billing-account-in-llc-wildberis-bank-general",
+    "how-to-open-a-billing-account-in-llc-wildberis-bank-through-esya",
+    "how-to-open-a-billing-account-with-the-outgoing-service",
+    "how-to-open-a-current-account-in-wildberries-bank-for-llc-and-ie-with-the-help-of-ukep",
+    "how-to-open-a-deposit-with-wildberries-bank",
+    "loyalty-program-berries-for-business",
+    "mobile-application-for-wildberries-bank"
+   ],
+   "credits-and-loans": [
+    "cession-of-the-contracts",
+    "how-to-apply",
+    "how-to-apply-for-a-loan-from-wb-bank",
+    "loan-from-wb-bank",
+    "loan-from-wb-finance"
+   ]
+  },
+  "communication-with-customers": {
+   "chat-with-customers": [
+    "chat"
+   ],
+   "ratings": [
+    "item-ratings",
+    "product-rating",
+    "seller-rating"
+   ],
+   "rewiews-and-questions": [
+    "cashback-for-reviews-and-wibes",
+    "customer-questions",
+    "customer-reviews",
+    "how-to-collect-more-product-reviews",
+    "important-from-reviews",
+    "pinned-reviews",
+    "questions-about-customer-reviews",
+    "respond-to-a-review-on-behalf-of-a-brand",
+    "return-by-review",
+    "score-for-reviews"
+   ]
+  },
+  "get-started-on-wildberries": {
+   "how-to-start-selling-at-wildberries": [
+    "electronic-document-management-with-wb",
+    "how-to-choose-sales-model",
+    "how-to-start-selling-on-wildberries",
+    "how-to-work-with-portal-data-securely",
+    "profit-calculator",
+    "projects-and-communication-channels",
+    "unified-digital-platform-for-entrepreneurs-rwb-sreda",
+    "wb-partners-site-registration",
+    "your-first-sale-on-wildberries"
+   ],
+   "introduction-to-sellers-portal": [
+    "fees-site-section",
+    "portal-news",
+    "portal-notifications",
+    "sellers-site-main-page",
+    "website-personal-account-section"
+   ],
+   "offer": [
+    "ads-placement-service-terms",
+    "calculating-remuneration-rules-and-fbs-acceptance-procedure",
+    "closing-the-personal-account",
+    "contract-changing",
+    "contract-concluding-process",
+    "contract-subject",
+    "definitions",
+    "final-positions",
+    "for-reference",
+    "how-to-use-offer",
+    "item-promotion-service-terms",
+    "item-redemtion-terms",
+    "items-acceptance-and-return-terms",
+    "items-retention",
+    "packing-and-labeling-terms",
+    "personal-datprocessing-agreement",
+    "placement-of-offers-for-booking-goods",
+    "price-reporting-and-calculations",
+    "remuneration-and-ohter-payments",
+    "sale-of-goods",
+    "service-terms",
+    "site-using-terms",
+    "vehicle-sale-terms",
+    "wb-mediservice-application-form"
+   ],
+   "terms-and-conditions": [
+    "ads-reception-agreement",
+    "changes-for-sellers-who-use-simplified-tax-system",
+    "fines-retentions-and-other-penalties-for-sellers",
+    "gas-emission-calculation-table",
+    "how-to-end-your-partnership-with-wb",
+    "retentions",
+    "wildberries-legsl-entity-change",
+    "wildberries-reward-ratio"
+   ]
+  },
+  "how-to-add-items-in-your-store": {
+   "actions-with-cards": [
+    "cards-merging",
+    "cards-statuses-limits-and-settings",
+    "edit-cards-in-bulk",
+    "labels-for-filtering-items"
+   ],
+   "card-specifics-by-category": [
+    "automotive-products-picker",
+    "foreign-agents-book-labeling",
+    "how-to-create-car-tires-cards",
+    "how-to-create-card-for-medical-items",
+    "how-to-create-cards-for-adults-items",
+    "how-to-create-cards-for-bijouterie",
+    "how-to-create-cards-for-dietary-supplements",
+    "how-to-create-cards-for-traceable-goods-in-belarus",
+    "how-to-create-lingerie-cards",
+    "how-to-specify-gender-in-children-clothes",
+    "paint-tinting"
+   ],
+   "cards-transfer": [
+    "common-mistakes-when-transferring-cards",
+    "how-to-transfer-card-with-foreign-inn-in-kiz",
+    "how-to-transfer-cards-to-another-store",
+    "how-to-transfer-kiz-cards-with-stock-to-another-store",
+    "potential-errors-on-product-card-exchange",
+    "product-card-exchange",
+    "transfering-cards-conditions"
+   ],
+   "how-to-create-item-card": [
+    "add-items-in-bulk",
+    "card-quality-rating",
+    "common-questions-about-blocking-product-cards",
+    "how-to-create-card",
+    "how-to-work-with-barcodes",
+    "item-dimensions-measuring",
+    "item-photo-rules-recommendations-and-common-mistakes",
+    "product-cetegories"
+   ],
+   "how-to-improve-item-card": [
+    "3d-model-in-card",
+    "autoplay-in-card-and-catalog",
+    "card-analytics",
+    "how-to-improve-photos-and-videos-in-a-card",
+    "how-to-optimize-the-product-profile",
+    "item-marks-on-photo-in-card",
+    "items-search-results-and-ranking-in-wildberries",
+    "main-photo-ab-testing",
+    "model-photo-recommendations",
+    "photo-editor",
+    "rich-content",
+    "sellers-recomendation-module-in-card",
+    "sizing-chart-in-item-card",
+    "subject-photo-recommendations",
+    "two-main-photos-on-the-product-card",
+    "video-background-in-the-product-profile-ru",
+    "virtual-clothes-fitting-by-photostudio",
+    "virtual-fitting-for-buyers",
+    "virtual-fitting-of-lipstick"
+   ],
+   "how-to-put-card-in-right-section": [
+    "beauty-items-special-sections",
+    "books-special-sections",
+    "how-card-gets-to-the-right-website-section",
+    "jewerly-special-sections"
+   ],
+   "price-and-discounts": [
+    "how-to-check-price-and-discount-updates",
+    "how-to-enable-wholesale-discounts-for-business",
+    "how-to-set-minimal-price-and-block-auto-promotions",
+    "how-to-set-price-and-discount",
+    "how-to-set-up-cashback",
+    "how-to-set-up-social-electronic-certificate-payment",
+    "price-index",
+    "price-management-window",
+    "price-quarantine",
+    "wb-club-discount",
+    "wb-discount"
+   ]
+  },
+  "integration": {
+   "api-integration": [
+    "api-integration-with-token",
+    "how-to-create-update-or-delete-a-wb-api-token",
+    "oauth20-api-integration",
+    "wb-api",
+    "wb-api-data-categories"
+   ]
+  },
+  "items-promotion": {
+   "brand-zone": [
+    "about-brand-zone",
+    "how-to-improve-store-and-brand-pages",
+    "how-to-work-with-brand-zone-elements"
+   ],
+   "events-and-discounts": [
+    "auto-promotions",
+    "discount-depth-in-autopromotions",
+    "geo-segments-promo",
+    "how-to-add-all-suitable-products-to-an-autopromotion-with-one-button",
+    "how-to-set-minimal-price-and-block-auto-promotions",
+    "personalized-discounts-using-want-discount-tool",
+    "promo-events-calendar",
+    "promo-events-items-ranking",
+    "seller-promocodes",
+    "wb-promo-events"
+   ],
+   "influence": [
+    "promoting-videos-on-wibes",
+    "wb-influence",
+    "wibes-platform"
+   ],
+   "wb-advertising-at-pick-up-points": [
+    "advertising-at-pick-up-points"
+   ],
+   "wb-media": [
+    "audiences",
+    "banners-on-wildberries",
+    "branded-shelf",
+    "context-banner",
+    "how-to-evaluate-results-of-advertisement",
+    "push-notifications-and-social-media-posts"
+   ],
+   "wb-promotion": [
+    "budget-and-payment-for-promotion",
+    "common-questions-about-search-and-promotion-on-wildberries",
+    "how-to-choose-bid-for-promotion",
+    "how-to-start-and-edit-promotion-campaigns",
+    "statistics-and-promotion-management",
+    "wb-promotion-payment-models-and-working-principles"
+   ]
+  },
+  "orders-management-with-dbs-model": {
+   "dbs-model": [
+    "about-dbs-and-edbs-sales-model",
+    "cargo-customs-declaration",
+    "configuring-delivery-costs-and-additional-services-for-dbs-edbs",
+    "delivery-by-carrier-dbs-and-edbs",
+    "delivery-rating",
+    "how-to-create-warehouse-in-dbs",
+    "how-to-manage-orders-in-dbs",
+    "how-to-set-up-notifications-for-dbs-edbs-and-cc",
+    "how-to-work-with-orders-in-pvz-using-the-dbs-model",
+    "inventory-management-dbs",
+    "order-cancelling-and-fines-in-dbs",
+    "paid-items-delivery-in-dbs-and-edbs",
+    "returns-in-dbs-with-delivery-in-pick-up",
+    "returns-of-goods-using-the-showcase-model-dbs",
+    "terms-of-working-with-transport-companies-in-dbs",
+    "wholesale-of-goods"
+   ],
+   "edbs-model": [
+    "about-the-showcase-sales-model-express",
+    "comission-for-delayed-delivery-edbs-model",
+    "configuring-delivery-costs-and-additional-services-for-dbs-edbs",
+    "delivery-rating",
+    "how-to-create-warehouse-for-edbs-model",
+    "how-to-handle-orders-using-the-showcase-express-model",
+    "how-to-set-up-notifications-for-dbs-edbs-and-cc",
+    "inventory-management-dbs",
+    "paid-delivery-by-edbs",
+    "returns-of-goods-using-the-showcase-model-dbs"
+   ],
+   "pickup-from-seller-store-model": [
+    "about-click-and-collect-sales-model",
+    "cancellation-orders-return-items-in-cc",
+    "cargo-customs-declaration",
+    "click-and-collect-model",
+    "inventory-management-cc"
+   ]
+  },
+  "orders-management-with-dbw-model": {
+   "dbw-model": [
+    "about-dbw-sales-model",
+    "how-to-manage-orders-in-dbw",
+    "item-returns-in-dbw",
+    "oversized-goods-packaging-for-the-dbw-model"
+   ]
+  },
+  "orders-management-with-fbs-model": {
+   "fbs-model": [
+    "delivery-rating",
+    "fbs-sales-model",
+    "how-to-create-sellers-warehouse"
+   ],
+   "how-to-process-orders-in-fbs": [
+    "cargo-customs-declaration",
+    "interactive-assembly-task",
+    "step-one-fbs-order-processing",
+    "step-three-b-fbs-shipment-delivery-to-pick-up-point",
+    "step-three-fbs-shipment-delivery-to-warehose-or-sorting-centre",
+    "step-two-items-packing-and-labeling-in-fbs"
+   ],
+   "labeling-items-and-orders-in-fbs": [
+    "how-to-sell-cim-labeled-items",
+    "items-and-shipment-labling-like-barcode-and-others",
+    "items-labeling-in-fbs",
+    "kiz-common-errors",
+    "stickers-for-marking-orders-fbs-model",
+    "verify-product-identifiers"
+   ],
+   "orders-cancel-and-returns-in-fbs": [
+    "disposal-of-goods",
+    "item-auto-return-to-seller",
+    "item-returns-by-customer-request",
+    "item-returns-to-seller-from-wb-warehouse",
+    "order-cancelling",
+    "reordering-items-that-were-refused-at-pick-up-point",
+    "return-of-goods-with-manufacturing-defects"
+   ],
+   "orders-management": [
+    "one-customer-orders-grouping-in-fbs",
+    "self-acceptance-at-sorting-centre-in-fbs",
+    "stocks-management",
+    "warehouse-day-off"
+   ],
+   "pack-items-in-fbs": [
+    "how-to-pack-electronics-and-home-appliances-in-fbs",
+    "how-to-pack-items-in-fbs",
+    "how-to-pack-jewerly-shipment-in-fbs"
+   ]
+  },
+  "orders-management-with-fbw-model": {
+   "fbw-model": [
+    "fbw-sales-model",
+    "fixation-of-tariffs",
+    "logistics-types-and-cost-calculation",
+    "multiple-sellers-shipment",
+    "receipt-of-goods",
+    "redistribution-between-warehouses",
+    "storage-of-goods-in-a-warehouse"
+   ],
+   "how-to-schedule-and-create-shipments-in-fbw": [
+    "cargo-customs-declaration",
+    "documents-for-processing-the-delivery",
+    "fbw-shipment-delivery-common-mistakes",
+    "how-to-order-warehouse-pass",
+    "step-four-delivery-fbw-shipment-to-warehouse",
+    "step-one-fbw-shipments-creation",
+    "step-three-fbw-shipment-preparation",
+    "step-two-fbw-package-filling"
+   ],
+   "labeling-items-and-shipments-in-fbw": [
+    "how-to-sell-cim-labeled-items",
+    "how-to-work-with-barcodes",
+    "items-and-shipment-labling-like-barcode-and-others",
+    "transfering-labeling-codes-at-monopallet-shipment"
+   ],
+   "pack-items-in-fbw": [
+    "how-to-pack-different-items-properly",
+    "how-to-pack-electronics-and-home-appliances-in-fbw",
+    "how-to-pack-items-in-fbw",
+    "how-to-pack-jewerly-in-fbw",
+    "incorrect-packaging-of-goods",
+    "paid-packaging-of-goods-fbw"
+   ],
+   "returns-in-fbw": [
+    "disposal-of-goods",
+    "item-auto-return-to-seller",
+    "item-returns-by-customer-request",
+    "item-returns-to-seller-from-wb-warehouse",
+    "reordering-items-that-were-refused-at-pick-up-point",
+    "return-of-goods-with-manufacturing-defects"
+   ],
+   "shipments-management": [
+    "accepted-shipment-documents",
+    "corrective-act",
+    "delivery-to-the-warehouse-using-wb-drive",
+    "how-to-cancel-shipment-or-change-date-and-items-quantity"
+   ]
+  },
+  "orders-management-with-freight-shipments": {
+   "bulky-items": [
+    "bulky-items-shipment-in-fbs",
+    "items-size-brief-guide-for-sellers"
+   ],
+   "oversized-items": [
+    "about-dbw-sales-model",
+    "items-size-brief-guide-for-sellers",
+    "oversized-goods-packaging-for-the-dbw-model",
+    "oversized-items-return",
+    "packaging-oversized-items-in-fbw-and-fbs",
+    "packing-and-delivery-of-oversized-items-in-fbs",
+    "profit-calculator"
+   ]
+  },
+  "problem-solutions": {
+   "complaints": [
+    "pre-trial-settlement"
+   ],
+   "contact-support-desk": [
+    "contact-support-desk-for-sellers"
+   ],
+   "rightsholders-info": [
+    "digital-arbitration"
+   ],
+   "technical-issues": [
+    "cache-and-cookies-clearing"
+   ]
+  },
+  "services-for-sales-growth": {
+   "jam": [
+    "history-of-payments-for-services",
+    "how-to-increase-limits-of-the-jam-services-ru",
+    "jam-subscription",
+    "jam-subscription-profits-for-seller",
+    "jam-tariffs",
+    "replacement-articles",
+    "wbot-analytics-in-the-app",
+    "whats-included-in-jam"
+   ],
+   "other-services": [
+    "content-protection",
+    "history-of-payments-for-services",
+    "how-to-activate-business-assistant",
+    "how-to-obtain-permits-through-wb-certification",
+    "insurance-of-goods-on-pex-wildberries",
+    "rwb-online-university",
+    "sellers-insurance-service"
+   ],
+   "sellers-levels-program": [
+    "how-the-sellers-levels-program-works-1"
+   ],
+   "sellers-showcase": [
+    "check-is-higher-for-purchases-on-seller-page-ru",
+    "how-to-improve-store-and-brand-pages",
+    "loyalty-discount",
+    "seller-showcase-what-is-included",
+    "sellers-showcase-service-about"
+   ],
+   "tariff-constructor": [
+    "about-tariff-constructor",
+    "max-payment",
+    "minimum-payment-and-different-periods-of-options",
+    "option-packages",
+    "points-for-days-program",
+    "tariff-constructor-options"
+   ]
+  },
+  "store-balance-and-documents": {
+   "documents": [
+    "documents-on-the-movement-of-goods",
+    "electronic-document-management-with-wb",
+    "how-to-activate-business-assistant",
+    "how-to-generate-receipts-instruction-for-self-employed",
+    "labeled-items-utd-dop-forming",
+    "transfering-labeling-codes-at-monopallet-shipment",
+    "utd-for-belarus-sellers"
+   ],
+   "financial-reports": [
+    "how-to-read-fimancial-reports-detalization",
+    "how-to-read-general-financial-report"
+   ],
+   "store-balance": [
+    "how-to-manage-balance",
+    "how-to-pay-the-debt",
+    "how-to-transfer-money-to-your-bank-account",
+    "withdraw-now-service"
+   ]
+  },
+  "what-to-sell": {
+   "brands": [
+    "analytics-for-brand-representatives",
+    "brand-promotion",
+    "how-to-activate-pro-subscription-for-brand-representatives",
+    "how-to-become-brand-representative",
+    "how-to-create-brand",
+    "how-to-find-out-who-sells-your-brand-products-on-wildberries",
+    "original-mark",
+    "respond-to-a-review-on-behalf-of-a-brand"
+   ],
+   "certificated-and-declared-items": [
+    "certificates-and-conformity-declarations",
+    "mandatory-veterinary-certification-items-sale"
+   ],
+   "jewerly": [
+    "common-mistakes-when-creating-jewelry-shipments",
+    "how-to-create-and-send-specifications-in-giis-dmdk",
+    "how-to-create-contract-in-giis-dmdk",
+    "how-to-sell-jewerly-in-fbs",
+    "how-to-sell-jewerly-in-fbw",
+    "report-for-jewelry-sellers",
+    "send-specifications-to-giis-dmdk-for-the-marketplace-model"
+   ],
+   "labeled-items": [
+    "how-to-sell-cim-labeled-items",
+    "items-and-shipment-labling-like-barcode-and-others",
+    "labeled-items-utd-dop-forming",
+    "labeling-features-for-customs-union-countries",
+    "transfering-labeling-codes-at-monopallet-shipment"
+   ],
+   "sale-to-legal-entities-and-sole-proprietors": [
+    "cargo-customs-declaration",
+    "how-to-sale-items-to-legal-entities-and-sole-proprietors",
+    "how-to-sale-labeled-items-to-legal-entities-and-sole-proprietors",
+    "report-on-legal-entities-and-sole-proprietors-prepayments",
+    "sales-register-to-legal-entities-and-sole-proprietors",
+    "wholesale-of-goods"
+   ],
+   "what-you-can-sell-on-wb": [
+    "how-to-sell-flammable-and-hazardous-goods",
+    "prohibited-or-partially-restricted-items",
+    "prohibited-smoking-wares",
+    "weight-and-dimensional-restrictions-on-different-sales-models"
+   ]
+  }
+ },
+ "items": {
+  "A-43": [
+   "Как работать с офертой",
+   "how-to-use-offer"
+  ],
+  "A-2075": [
+   "Справочно",
+   "for-reference"
+  ],
+  "A-179": [
+   "1. Определения",
+   "definitions"
+  ],
+  "A-180": [
+   "2. Порядок заключения договора",
+   "contract-concluding-process"
+  ],
+  "A-181": [
+   "3. Предмет Договора",
+   "contract-subject"
+  ],
+  "A-182": [
+   "4. Продажа Товара",
+   "sale-of-goods"
+  ],
+  "A-183": [
+   "5. Цена Товара, отчётность и расчёты",
+   "price-reporting-and-calculations"
+  ],
+  "A-184": [
+   "6. Вознаграждение и иные выплаты Продавца",
+   "remuneration-and-ohter-payments"
+  ],
+  "A-185": [
+   "7.\\tИзменение Договора",
+   "contract-changing"
+  ],
+  "A-186": [
+   "8.\\tЗаключительные положения",
+   "final-positions"
+  ],
+  "A-187": [
+   "9. Правила использования портала ",
+   "site-using-terms"
+  ],
+  "A-188": [
+   "10. Правила упаковки и маркировки товара",
+   "packing-and-labeling-terms"
+  ],
+  "A-189": [
+   "11. Правила приёмки и возврата товара ",
+   "items-acceptance-and-return-terms"
+  ],
+  "A-190": [
+   "12. Правила расчёта вознаграждения. Порядок приёмки товара для способа «Маркетплейс» (FBS)",
+   "calculating-remuneration-rules-and-fbs-acceptance-procedure"
+  ],
+  "A-191": [
+   "13. Правила оказания услуг ",
+   "service-terms"
+  ],
+  "A-192": [
+   "14. Правила выкупа товара ",
+   "item-redemtion-terms"
+  ],
+  "A-195": [
+   "15. Правила оказания услуг по продвижению товаров ",
+   "item-promotion-service-terms"
+  ],
+  "A-200": [
+   "16. Правила оказания услуг по размещению рекламных материалов ",
+   "ads-placement-service-terms"
+  ],
+  "A-194": [
+   "17.\\tФорма заявки на оказание услуг «WB.МЕДИА»",
+   "wb-mediservice-application-form"
+  ],
+  "A-197": [
+   "19. Соглашение об обработке персональных данных ",
+   "personal-datprocessing-agreement"
+  ],
+  "A-198": [
+   "20. Удержание товаров",
+   "items-retention"
+  ],
+  "A-199": [
+   "21. Правила продажи транспортных средств",
+   "vehicle-sale-terms"
+  ],
+  "A-196": [
+   "22.\\tПравила оказания услуг по размещению предложений о бронировании товара",
+   "placement-of-offers-for-booking-goods"
+  ],
+  "A-2073": [
+   "23.\\tПорядок расторжения договора и закрытия личного кабинета ",
+   "closing-the-personal-account"
+  ],
+  "A-416": [
+   "Как подготовиться к работе на Wildberries перед регистрацией",
+   "how-to-start-selling-on-wildberries"
+  ],
+  "A-1578": [
+   "Как безопасно работать с данными портала WB Partners",
+   "how-to-work-with-portal-data-securely"
+  ],
+  "A-378": [
+   "Регистрация нового продавца на портале WB Partners",
+   "wb-partners-site-registration"
+  ],
+  "A-269": [
+   "Как выбрать модель продаж",
+   "how-to-choose-sales-model"
+  ],
+  "A-414": [
+   "Первая продажа на Wildberries",
+   "your-first-sale-on-wildberries"
+  ],
+  "A-1561": [
+   "Электронный документооборот c Wildberries",
+   "electronic-document-management-with-wb"
+  ],
+  "A-310": [
+   "Калькулятор прибыли",
+   "profit-calculator"
+  ],
+  "A-256": [
+   "Проекты и каналы коммуникации Wildberries",
+   "projects-and-communication-channels"
+  ],
+  "A-2316": [
+   "Единая цифровая платформа для предпринимателей RWB Среда",
+   "unified-digital-platform-for-entrepreneurs-rwb-sreda"
+  ],
+  "A-111": [
+   "Коэффициент вознаграждения Wildberries",
+   "wildberries-reward-ratio"
+  ],
+  "A-71": [
+   "Штрафы, удержания и другие взыскания для продавцов на Wildberries",
+   "fines-retentions-and-other-penalties-for-sellers"
+  ],
+  "A-70": [
+   "Удержания",
+   "retentions"
+  ],
+  "A-412": [
+   "Согласие на получение рекламы",
+   "ads-reception-agreement"
+  ],
+  "A-341": [
+   "Изменения для продавцов, которые платят налоги по упрощённой системе (УСН)",
+   "changes-for-sellers-who-use-simplified-tax-system"
+  ],
+  "A-937": [
+   "Таблица расчёта уровня выброса парниковых газов",
+   "gas-emission-calculation-table"
+  ],
+  "A-1644": [
+   "Как завершить сотрудничество с Wildberries",
+   "how-to-end-your-partnership-with-wb"
+  ],
+  "A-227": [
+   "Изменение юридического лица Wildberries",
+   "wildberries-legsl-entity-change"
+  ],
+  "A-17": [
+   "Главная страница портала продавца",
+   "sellers-site-main-page"
+  ],
+  "A-19": [
+   "Раздел «Профиль» на портале продавца",
+   "website-personal-account-section"
+  ],
+  "A-20": [
+   "Раздел «Тарифы» на портале продавца",
+   "fees-site-section"
+  ],
+  "A-995": [
+   "Как работать с уведомлениями на портале",
+   "portal-notifications"
+  ],
+  "A-1008": [
+   "Раздел «Новости» на портале продавца",
+   "portal-news"
+  ],
+  "A-104": [
+   "Ограничения по весу и габаритам товаров для разных моделей продаж",
+   "weight-and-dimensional-restrictions-on-different-sales-models"
+  ],
+  "A-65": [
+   "Товары, продажа которых запрещена или частично ограничена на Wildberries",
+   "prohibited-or-partially-restricted-items"
+  ],
+  "A-2338": [
+   "Как продавать горючие и опасные товары на Wildberries",
+   "how-to-sell-flammable-and-hazardous-goods"
+  ],
+  "A-419": [
+   "Запрещённые к продаже на Wildberries товары для курения",
+   "prohibited-smoking-wares"
+  ],
+  "A-306": [
+   "Маркировка товаров и поставок. Баркод, ШК, КИЗ, УИН, GTIN и IMEI",
+   "items-and-shipment-labling-like-barcode-and-others"
+  ],
+  "A-37": [
+   "Как продавать товары с КИЗ",
+   "how-to-sell-cim-labeled-items"
+  ],
+  "A-93": [
+   "Формирование УПД «ДОП» на товары с обязательной маркировкой для поставок типа «Короб»",
+   "labeled-items-utd-dop-forming"
+  ],
+  "A-488": [
+   "Оформление УПД для маркированных товаров в поставках типа «Монопаллета»",
+   "transfering-labeling-codes-at-monopallet-shipment"
+  ],
+  "A-222": [
+   "Особенности маркировки для стран Таможенного союза",
+   "labeling-features-for-customs-union-countries"
+  ],
+  "A-51": [
+   "Продажа товаров, которые подлежат обязательной ветеринарной сертификации ЭВСД",
+   "mandatory-veterinary-certification-items-sale"
+  ],
+  "A-232": [
+   "Разрешительные документы",
+   "certificates-and-conformity-declarations"
+  ],
+  "A-302": [
+   "Как добавить бренд на Wildberries",
+   "how-to-create-brand"
+  ],
+  "A-44": [
+   "Значок «Оригинал»",
+   "original-mark"
+  ],
+  "A-432": [
+   "Как стать представителем бренда",
+   "how-to-become-brand-representative"
+  ],
+  "A-469": [
+   "Аналитика для представителей брендов",
+   "analytics-for-brand-representatives"
+  ],
+  "A-993": [
+   "Как ответить на отзыв покупателя от лица бренда",
+   "respond-to-a-review-on-behalf-of-a-brand"
+  ],
+  "A-1498": [
+   "Продвижение бренда",
+   "brand-promotion"
+  ],
+  "A-468": [
+   "Как подключить подписку «Бренды Pro» для представителей брендов",
+   "how-to-activate-pro-subscription-for-brand-representatives"
+  ],
+  "A-1586": [
+   "Как узнать, кто продаёт на Wildberries товары под вашим брендом",
+   "how-to-find-out-who-sells-your-brand-products-on-wildberries"
+  ],
+  "A-262": [
+   "Продажа товаров юридическим лицам и ИП",
+   "how-to-sale-items-to-legal-entities-and-sole-proprietors"
+  ],
+  "A-966": [
+   "Как продавать товары только юрлицам и ИП поштучно и оптом",
+   "wholesale-of-goods"
+  ],
+  "A-454": [
+   "Вывод КИЗ из оборота при продажах маркированных товаров юрлицам и ИП",
+   "how-to-sale-labeled-items-to-legal-entities-and-sole-proprietors"
+  ],
+  "A-423": [
+   "Реестр продаж юридическим лицам и ИП",
+   "sales-register-to-legal-entities-and-sole-proprietors"
+  ],
+  "A-428": [
+   "Отчёт по предоплатам юрлиц и ИП",
+   "report-on-legal-entities-and-sole-proprietors-prepayments"
+  ],
+  "A-1048": [
+   "Декларация на товары (Грузовая таможенная декларация)",
+   "cargo-customs-declaration"
+  ],
+  "A-277": [
+   "Как продавать ювелирные изделия по модели «Склад WB» (FBW)",
+   "how-to-sell-jewerly-in-fbw"
+  ],
+  "A-278": [
+   "Как продавать ювелирные изделия по модели «Маркетплейс» (FBS)",
+   "how-to-sell-jewerly-in-fbs"
+  ],
+  "A-201": [
+   "Как создать договор-контракт в ГИИС ДМДК",
+   "how-to-create-contract-in-giis-dmdk"
+  ],
+  "A-202": [
+   "Как создать и отправить спецификации в ГИИС ДМДК — для модели «Склад WB» (FBW)",
+   "how-to-create-and-send-specifications-in-giis-dmdk"
+  ],
+  "A-527": [
+   "Как создать и отправить спецификации в ГИИС ДМДК — для модели «Маркетплейс» (FBS)",
+   "send-specifications-to-giis-dmdk-for-the-marketplace-model"
+  ],
+  "A-521": [
+   "Отчёт для продавцов ювелирных изделий",
+   "report-for-jewelry-sellers"
+  ],
+  "A-117": [
+   "Частые ошибки при создании поставок с ювелирными изделиями  ",
+   "common-mistakes-when-creating-jewelry-shipments"
+  ],
+  "A-164": [
+   "Как создать карточку товара",
+   "how-to-create-card"
+  ],
+  "A-124": [
+   "Фото товаров: правила, рекомендации и частые ошибки",
+   "item-photo-rules-recommendations-and-common-mistakes"
+  ],
+  "A-254": [
+   "Категории товаров",
+   "product-cetegories"
+  ],
+  "A-54": [
+   "Как работать с баркодами на Wildberries",
+   "how-to-work-with-barcodes"
+  ],
+  "A-221": [
+   "Габариты товаров",
+   "item-dimensions-measuring"
+  ],
+  "A-330": [
+   "Рейтинг заполнения карточки товара",
+   "card-quality-rating"
+  ],
+  "A-203": [
+   "Как создать сразу много карточек товаров",
+   "add-items-in-bulk"
+  ],
+  "A-1610": [
+   "Частые вопросы по блокировке карточек товаров",
+   "common-questions-about-blocking-product-cards"
+  ],
+  "A-55": [
+   "Как устанавливать цены и скидки",
+   "how-to-set-price-and-discount"
+  ],
+  "A-383": [
+   "Как установить минимальную цену и блокировку в автоакциях",
+   "how-to-set-minimal-price-and-block-auto-promotions"
+  ],
+  "A-60": [
+   "Как проверить обновление цен и скидок",
+   "how-to-check-price-and-discount-updates"
+  ],
+  "A-266": [
+   "Окно управления ценой товара",
+   "price-management-window"
+  ],
+  "A-338": [
+   "Скидка WB",
+   "wb-discount"
+  ],
+  "A-78": [
+   "Индекс цен",
+   "price-index"
+  ],
+  "A-337": [
+   "Скидка для участников WB Клуба",
+   "wb-club-discount"
+  ],
+  "A-977": [
+   "Как установить кешбэк на свои товары",
+   "how-to-set-up-cashback"
+  ],
+  "A-1931": [
+   "Как подключить оптовые скидки для бизнеса",
+   "how-to-enable-wholesale-discounts-for-business"
+  ],
+  "A-2076": [
+   "Как настроить оплату социальным электронным сертификатом",
+   "how-to-set-up-social-electronic-certificate-payment"
+  ],
+  "A-34": [
+   "Карантин цен",
+   "price-quarantine"
+  ],
+  "A-165": [
+   "Статусы, лимиты и настройки карточек",
+   "cards-statuses-limits-and-settings"
+  ],
+  "A-166": [
+   "Ярлыки для фильтрации товаров",
+   "labels-for-filtering-items"
+  ],
+  "A-204": [
+   "Как отредактировать сразу много карточек товаров",
+   "edit-cards-in-bulk"
+  ],
+  "A-83": [
+   "Объединение карточек товаров",
+   "cards-merging"
+  ],
+  "A-69": [
+   "Как правильно указать пол для детской одежды",
+   "how-to-specify-gender-in-children-clothes"
+  ],
+  "A-170": [
+   "Особенности маркировки книжной продукции",
+   "foreign-agents-book-labeling"
+  ],
+  "A-120": [
+   "Колеровка краски",
+   "paint-tinting"
+  ],
+  "A-371": [
+   "Как оформить карточки нижнего белья",
+   "how-to-create-lingerie-cards"
+  ],
+  "A-424": [
+   "Как правильно оформить карточки для продажи бижутерии",
+   "how-to-create-cards-for-bijouterie"
+  ],
+  "A-563": [
+   "Как правильно заполнить поля в карточках медицинских изделий",
+   "how-to-create-card-for-medical-items"
+  ],
+  "A-206": [
+   "Подборщик автотоваров",
+   "automotive-products-picker"
+  ],
+  "A-274": [
+   "Оформление карточки товара для автомобильных шин",
+   "how-to-create-car-tires-cards"
+  ],
+  "A-1584": [
+   "Заполнение карточек товаров, которые подлежат прослеживаемости в Беларуси",
+   "how-to-create-cards-for-traceable-goods-in-belarus"
+  ],
+  "A-53": [
+   "Заполнение полей карточек товаров категорий «БАДы» и «Бытовая химия»",
+   "how-to-create-cards-for-dietary-supplements"
+  ],
+  "A-94": [
+   "Товары для взрослых: правила оформления карточек",
+   "how-to-create-cards-for-adults-items"
+  ],
+  "A-48": [
+   "Выдача и ранжирование  товаров на Wildberries",
+   "items-search-results-and-ranking-in-wildberries"
+  ],
+  "A-167": [
+   "Аналитика карточки",
+   "card-analytics"
+  ],
+  "A-213": [
+   "А/Б-тестирование главного фото в карточке товара",
+   "main-photo-ab-testing"
+  ],
+  "A-530": [
+   "Таблица размеров в карточке товара",
+   "sizing-chart-in-item-card"
+  ],
+  "A-462": [
+   "Фоторедактор",
+   "photo-editor"
+  ],
+  "A-112": [
+   "Рич-контент",
+   "rich-content"
+  ],
+  "A-228": [
+   "Отметки товаров на фото в карточке товара",
+   "item-marks-on-photo-in-card"
+  ],
+  "A-275": [
+   "«Фотостудия»: генерация фото товара с помощью нейросети",
+   "virtual-clothes-fitting-by-photostudio"
+  ],
+  "A-175": [
+   "Рекомендации по предметной съёмке",
+   "subject-photo-recommendations"
+  ],
+  "A-136": [
+   "Рекомендации по модельной съёмке",
+   "model-photo-recommendations"
+  ],
+  "A-342": [
+   "3D-модель в карточке товара",
+   "3d-model-in-card"
+  ],
+  "A-529": [
+   "Автозапуск видео в карточке товара и каталоге",
+   "autoplay-in-card-and-catalog"
+  ],
+  "A-372": [
+   "Рекомендации продавца в карточке товара",
+   "sellers-recomendation-module-in-card"
+  ],
+  "A-1364": [
+   "Видеообложка в карточке товара",
+   "video-background-in-the-product-profile-ru"
+  ],
+  "A-1151": [
+   "Примерка на фото для покупателей",
+   "virtual-fitting-for-buyers"
+  ],
+  "A-1960": [
+   "Примерка помады для покупателей",
+   "virtual-fitting-of-lipstick"
+  ],
+  "A-1631": [
+   "Как оптимизировать карточку товара",
+   "how-to-optimize-the-product-profile"
+  ],
+  "A-1632": [
+   "Как улучшить фото и видео в карточке",
+   "how-to-improve-photos-and-videos-in-a-card"
+  ],
+  "A-2045": [
+   "Фото для целевой аудитории: как настроить разные главные фото в карточке",
+   "two-main-photos-on-the-product-card"
+  ],
+  "A-85": [
+   "Как карточка товара попадает в нужный раздел сайта",
+   "how-card-gets-to-the-right-website-section"
+  ],
+  "A-98": [
+   "Специальные разделы для книг",
+   "books-special-sections"
+  ],
+  "A-90": [
+   "Специальные разделы для товаров из категории «Красота»",
+   "beauty-items-special-sections"
+  ],
+  "A-100": [
+   "Специальные разделы для ювелирных изделий",
+   "jewerly-special-sections"
+  ],
+  "A-2065": [
+   "Биржа карточек товаров",
+   "product-card-exchange"
+  ],
+  "A-1788": [
+   "Условия для переноса карточек товаров в кабинет другого продавца",
+   "transfering-cards-conditions"
+  ],
+  "A-220": [
+   "Как перенести карточки товаров в кабинет другого продавца",
+   "how-to-transfer-cards-to-another-store"
+  ],
+  "A-2015": [
+   "Как перенести карточку товара с КИЗ вместе с остатками в кабинет другого продавца",
+   "how-to-transfer-kiz-cards-with-stock-to-another-store"
+  ],
+  "A-2017": [
+   "Как перенести карточку товара, если в КИЗ указан ИНН не отправителя и не Wildberries",
+   "how-to-transfer-card-with-foreign-inn-in-kiz"
+  ],
+  "A-1789": [
+   "Возможные ошибки при переносе карточек товаров в кабинет другого продавца",
+   "common-mistakes-when-transferring-cards"
+  ],
+  "A-2070": [
+   "Возможные ошибки при работе с биржей карточек товаров ",
+   "potential-errors-on-product-card-exchange"
+  ],
+  "A-1559": [
+   "Модель продаж «Склад WB» (FBW)",
+   "fbw-sales-model"
+  ],
+  "A-2035": [
+   "Как рассчитывается хранение товара на складе",
+   "storage-of-goods-in-a-warehouse"
+  ],
+  "A-2002": [
+   "Фиксация тарифов: тарифы на поставку и на остаток",
+   "fixation-of-tariffs"
+  ],
+  "A-114": [
+   "Поставка от нескольких продавцов",
+   "multiple-sellers-shipment"
+  ],
+  "A-2044": [
+   "Перераспределение остатков между складами",
+   "redistribution-between-warehouses"
+  ],
+  "A-2001": [
+   "Доставка: виды и расчёт стоимости",
+   "logistics-types-and-cost-calculation"
+  ],
+  "A-2037": [
+   "Обработка товара при приёмке",
+   "receipt-of-goods"
+  ],
+  "A-251": [
+   "Упаковка товаров для модели «Склад WB» (FBW) — общие правила",
+   "how-to-pack-items-in-fbw"
+  ],
+  "A-343": [
+   "Как упаковать электронику и бытовую технику по модели «Склад WB» (FBW)",
+   "how-to-pack-electronics-and-home-appliances-in-fbw"
+  ],
+  "A-264": [
+   "Как упаковать ювелирные изделия перед отгрузкой по модели «Склад WB» (FBW)",
+   "how-to-pack-jewerly-in-fbw"
+  ],
+  "A-1539": [
+   "Неправильная упаковка товаров",
+   "incorrect-packaging-of-goods"
+  ],
+  "A-1894": [
+   "Как оформить услугу платной упаковки товаров на складе Wildberries",
+   "paid-packaging-of-goods-fbw"
+  ],
+  "A-115": [
+   "Как правильно упаковать разные виды товаров",
+   "how-to-pack-different-items-properly"
+  ],
+  "A-31": [
+   "Этап 1. Создание поставки",
+   "step-one-fbw-shipments-creation"
+  ],
+  "A-36": [
+   "Этап 2. Наполнение упаковки",
+   "step-two-fbw-package-filling"
+  ],
+  "A-103": [
+   "Этап 3. Подготовка поставки к отгрузке",
+   "step-three-fbw-shipment-preparation"
+  ],
+  "A-38": [
+   "Этап 4. Доставка поставки в пункт отгрузки",
+   "step-four-delivery-fbw-shipment-to-warehouse"
+  ],
+  "A-205": [
+   "Частые ошибки при отгрузке поставки по модели «Склад WB» (FBW)",
+   "fbw-shipment-delivery-common-mistakes"
+  ],
+  "A-66": [
+   "Как заказать пропуск в пункт отгрузки",
+   "how-to-order-warehouse-pass"
+  ],
+  "A-2255": [
+   "Документы для оформления поставки",
+   "documents-for-processing-the-delivery"
+  ],
+  "A-377": [
+   "Как отменить поставку или изменить дату и количество товаров ",
+   "how-to-cancel-shipment-or-change-date-and-items-quantity"
+  ],
+  "A-551": [
+   "Поставка на склад с помощью WB Drive",
+   "delivery-to-the-warehouse-using-wb-drive"
+  ],
+  "A-41": [
+   "Документы по принятым поставкам",
+   "accepted-shipment-documents"
+  ],
+  "A-537": [
+   "Акт корректировки",
+   "corrective-act"
+  ],
+  "A-540": [
+   "Возврат товаров с дефектами производства",
+   "return-of-goods-with-manufacturing-defects"
+  ],
+  "A-40": [
+   "Возврат товара со склада Wildberries продавцу",
+   "item-returns-to-seller-from-wb-warehouse"
+  ],
+  "A-102": [
+   "Возврат товара по заявке покупателя",
+   "item-returns-by-customer-request"
+  ],
+  "A-336": [
+   "Перезаказ товаров, от которых отказались в пункте выдачи",
+   "reordering-items-that-were-refused-at-pick-up-point"
+  ],
+  "A-253": [
+   "Автовозврат товара продавцу ",
+   "item-auto-return-to-seller"
+  ],
+  "A-1978": [
+   "Утилизация товаров",
+   "disposal-of-goods"
+  ],
+  "A-122": [
+   "Модель продаж «Маркетплейс» (FBS)",
+   "fbs-sales-model"
+  ],
+  "A-6": [
+   "Как создать склад продавца для работы по модели «Маркетплейс» (FBS)",
+   "how-to-create-sellers-warehouse"
+  ],
+  "A-121": [
+   "Рейтинг доставки",
+   "delivery-rating"
+  ],
+  "A-9": [
+   "Этап 1. Обработка нового заказа по модели «Маркетплейс» (FBS)",
+   "step-one-fbs-order-processing"
+  ],
+  "A-10": [
+   "Этап 2. Маркировка и упаковка заказов для модели «Маркетплейс» (FBS)",
+   "step-two-items-packing-and-labeling-in-fbs"
+  ],
+  "A-11": [
+   "Этап 3а. Отгрузка поставок по модели «Маркетплейс» (FBS) в СЦ",
+   "step-three-fbs-shipment-delivery-to-warehose-or-sorting-centre"
+  ],
+  "A-997": [
+   "Как работать с интерактивным листом подбора",
+   "interactive-assembly-task"
+  ],
+  "A-207": [
+   "Этап 3б. Отгрузка поставок FBS в ПВЗ, ППТ и ПФЦ",
+   "step-three-b-fbs-shipment-delivery-to-pick-up-point"
+  ],
+  "A-304": [
+   "Упаковка товаров для модели «Маркетплейс» (FBS)",
+   "how-to-pack-items-in-fbs"
+  ],
+  "A-344": [
+   "Как упаковать электронику и бытовую технику по модели «Маркетплейс» (FBS)",
+   "how-to-pack-electronics-and-home-appliances-in-fbs"
+  ],
+  "A-265": [
+   "Как упаковать ювелирные изделия перед поставкой по модели «Маркетплейс» (FBS)",
+   "how-to-pack-jewerly-shipment-in-fbs"
+  ],
+  "A-305": [
+   "Маркировка товаров для модели «Маркетплейс» (FBS)",
+   "items-labeling-in-fbs"
+  ],
+  "A-996": [
+   "Стикеры для маркировки заказов по модели «Маркетплейс» (FBS)",
+   "stickers-for-marking-orders-fbs-model"
+  ],
+  "A-1860": [
+   "Проверка кодов маркировки при работе по модели FBS",
+   "verify-product-identifiers"
+  ],
+  "A-1996": [
+   "Почему КИЗ не проходит проверку: частые ошибки и как их исправить",
+   "kiz-common-errors"
+  ],
+  "A-123": [
+   "Управление остатками по модели FBS",
+   "stocks-management"
+  ],
+  "A-511": [
+   "Выходные для складов продавцов по модели «Маркетплейс» (FBS)",
+   "warehouse-day-off"
+  ],
+  "A-294": [
+   "Группировка заказов одного покупателя для доставки по модели «Маркетплейс» (FBS)",
+   "one-customer-orders-grouping-in-fbs"
+  ],
+  "A-276": [
+   "Самостоятельная приёмка в СЦ для модели «Маркетплейс» (FBS)",
+   "self-acceptance-at-sorting-centre-in-fbs"
+  ],
+  "A-12": [
+   "Отмена заказа",
+   "order-cancelling"
+  ],
+  "A-270": [
+   "О модели продаж «Деливери WB» (DBW)",
+   "about-dbw-sales-model"
+  ],
+  "A-271": [
+   "Как работать с заказами по модели «Деливери WB» (DBW)",
+   "how-to-manage-orders-in-dbw"
+  ],
+  "A-272": [
+   "Возврат товаров по модели «Деливери WB» (DBW)",
+   "item-returns-in-dbw"
+  ],
+  "A-930": [
+   "Упаковка сверхгабаритных товаров (СГТ) для модели «Деливери WB» (DBW)",
+   "oversized-goods-packaging-for-the-dbw-model"
+  ],
+  "A-107": [
+   "О модели продаж «Витрина» (DBS) ",
+   "about-dbs-and-edbs-sales-model"
+  ],
+  "A-252": [
+   "Как создать склад для работы по модели «Витрина» (DBS)",
+   "how-to-create-warehouse-in-dbs"
+  ],
+  "A-1078": [
+   "Управление остатками по моделям «Витрина» (DBS) и «Витрина экспресс» (EDBS)",
+   "inventory-management-dbs"
+  ],
+  "A-1825": [
+   "Настройка уведомлений для работы по моделям DBS и EDBS",
+   "how-to-set-up-notifications-for-dbs-edbs-and-cc"
+  ],
+  "A-108": [
+   "Как работать с заказами по модели «Витрина» (DBS)",
+   "how-to-manage-orders-in-dbs"
+  ],
+  "A-1546": [
+   "Как работать с заказами в ПВЗ по модели DBS ",
+   "how-to-work-with-orders-in-pvz-using-the-dbs-model"
+  ],
+  "A-329": [
+   "Платная доставка товаров по модели «Витрина» (DBS)",
+   "paid-items-delivery-in-dbs-and-edbs"
+  ],
+  "A-1923": [
+   "Настройка стоимости доставки и дополнительных услуг для моделей DBS и EDBS",
+   "configuring-delivery-costs-and-additional-services-for-dbs-edbs"
+  ],
+  "A-1835": [
+   "Как подключить курьерскую доставку по модели DBS",
+   "delivery-by-carrier-dbs-and-edbs"
+  ],
+  "A-110": [
+   "Отмена заказов, возвраты и штрафы при работе по модели «Витрина» (DBS)",
+   "order-cancelling-and-fines-in-dbs"
+  ],
+  "A-1417": [
+   "Возврат товаров по моделям «Витрина» (DBS) и «Витрина экспресс» (EDBS)",
+   "returns-of-goods-using-the-showcase-model-dbs"
+  ],
+  "A-1915": [
+   "Возвраты товаров по модели «Витрина» (DBS) при доставке в ПВЗ",
+   "returns-in-dbs-with-delivery-in-pick-up"
+  ],
+  "A-2371": [
+   "Условия и особенности работы с транспортными компаниями по модели «Витрина» (DBS)",
+   "terms-of-working-with-transport-companies-in-dbs"
+  ],
+  "A-959": [
+   "О модели продаж «Витрина экспресс» (EDBS)",
+   "about-the-showcase-sales-model-express"
+  ],
+  "A-541": [
+   "Как создать склад для работы по модели «Витрина экспресс» (EDBS)",
+   "how-to-create-warehouse-for-edbs-model"
+  ],
+  "A-550": [
+   "Как работать с заказами по модели «Витрина экспресс» (EDBS)",
+   "how-to-handle-orders-using-the-showcase-express-model"
+  ],
+  "A-549": [
+   "Комиссия при задержке доставки по модели «Витрина экспресс» (EDBS)",
+   "comission-for-delayed-delivery-edbs-model"
+  ],
+  "A-1136": [
+   "Платная доставка товаров по модели «Витрина экспресс» (EDBS)",
+   "paid-delivery-by-edbs"
+  ],
+  "A-345": [
+   "О модели продаж «Самовывоз из магазина продавца» (C&C)",
+   "click-and-collect-model"
+  ],
+  "A-2018": [
+   "Как работать с заказами по модели «Самовывоз из магазина продавца» (C&C)",
+   "about-click-and-collect-sales-model"
+  ],
+  "A-1079": [
+   "Управление остатками по модели «Самовывоз из магазина продавца» (C&C)",
+   "inventory-management-cc"
+  ],
+  "A-2022": [
+   "Отмена заказов и возврат товаров по модели «Самовывоз из магазина продавца» (С&С)",
+   "cancellation-orders-return-items-in-cc"
+  ],
+  "A-463": [
+   "МГТ, КГТ+ и СГТ: гид для продавцов",
+   "items-size-brief-guide-for-sellers"
+  ],
+  "A-1921": [
+   "Упаковка сверхгабаритных товаров по моделям «Склад WB» (FBW) и «Маркетплейс» (FBS)",
+   "packaging-oversized-items-in-fbw-and-fbs"
+  ],
+  "A-246": [
+   "Отгрузка сверхгабаритных товаров по модели «Маркетплейс» (FBS)",
+   "packing-and-delivery-of-oversized-items-in-fbs"
+  ],
+  "A-426": [
+   "Возврат сверхгабаритных товаров (СГТ)",
+   "oversized-items-return"
+  ],
+  "A-308": [
+   "Поставка крупногабаритных товаров (КГТ+) по модели «Маркетплейс» (FBS)",
+   "bulky-items-shipment-in-fbs"
+  ],
+  "A-326": [
+   "О сервисе «Витрина магазина»",
+   "sellers-showcase-service-about"
+  ],
+  "A-1625": [
+   "Все инструменты «Витрины магазина»",
+   "seller-showcase-what-is-included"
+  ],
+  "A-1673": [
+   "Оформление страниц магазина и бренда: как сделать их привлекательными для покупателей",
+   "how-to-improve-store-and-brand-pages"
+  ],
+  "A-1858": [
+   "Средний чек на 37% выше, когда покупают через страницу продавца",
+   "check-is-higher-for-purchases-on-seller-page-ru"
+  ],
+  "A-1622": [
+   "Скидка лояльности",
+   "loyalty-discount"
+  ],
+  "A-268": [
+   "О конструкторе тарифов",
+   "about-tariff-constructor"
+  ],
+  "A-1084": [
+   "Минимальный платёж и разный период действия опций",
+   "minimum-payment-and-different-periods-of-options"
+  ],
+  "A-561": [
+   "Опции конструктора тарифов",
+   "tariff-constructor-options"
+  ],
+  "A-562": [
+   "Пакеты опций",
+   "option-packages"
+  ],
+  "A-1608": [
+   "Программа «Баллы за дни»",
+   "points-for-days-program"
+  ],
+  "A-1994": [
+   "Максимальный платёж в конструкторе тарифов",
+   "max-payment"
+  ],
+  "A-398": [
+   "Подписка «Джем»: как подключить, управлять и отключить",
+   "jam-subscription"
+  ],
+  "A-578": [
+   "Что входит в подписку «Джем»",
+   "whats-included-in-jam"
+  ],
+  "A-579": [
+   "Тарифы «Джема»",
+   "jam-tariffs"
+  ],
+  "A-1909": [
+   "Как увеличить лимиты сервисов подписки «Джем»",
+   "how-to-increase-limits-of-the-jam-services-ru"
+  ],
+  "A-1588": [
+   "«Помощник»: аналитика и данные по вашим товарам",
+   "wbot-analytics-in-the-app"
+  ],
+  "A-1174": [
+   "История платежей за сервисы",
+   "history-of-payments-for-services"
+  ],
+  "A-524": [
+   "Сервис подмены артикула",
+   "replacement-articles"
+  ],
+  "A-490": [
+   "Выгодна ли подписка «Джем» продавцу?",
+   "jam-subscription-profits-for-seller"
+  ],
+  "A-425": [
+   "Страхование заказов",
+   "sellers-insurance-service"
+  ],
+  "A-461": [
+   "Как подключить сервис «Бизнес-помощник»",
+   "how-to-activate-business-assistant"
+  ],
+  "A-1979": [
+   "Защита контента",
+   "content-protection"
+  ],
+  "A-2012": [
+   "Онлайн Университет RWB",
+   "rwb-online-university"
+  ],
+  "A-1760": [
+   "Как оформить разрешительные документы в сервисе WB Сертификация",
+   "how-to-obtain-permits-through-wb-certification"
+  ],
+  "A-2290": [
+   "Страхование товаров в ПФЦ Wildberries",
+   "insurance-of-goods-on-pex-wildberries"
+  ],
+  "A-226": [
+   "Как работает программа «Уровни продавцов»",
+   "how-the-sellers-levels-program-works-1"
+  ],
+  "A-323": [
+   "Акции на Wildberries",
+   "wb-promo-events"
+  ],
+  "A-259": [
+   "Календарь акций",
+   "promo-events-calendar"
+  ],
+  "A-263": [
+   "Автоакции",
+   "auto-promotions"
+  ],
+  "A-952": [
+   "Как добавить в автоакцию все подходящие товары одной кнопкой",
+   "how-to-add-all-suitable-products-to-an-autopromotion-with-one-button"
+  ],
+  "A-967": [
+   "Глубина скидки в автоакциях",
+   "discount-depth-in-autopromotions"
+  ],
+  "A-261": [
+   "Ранжирование товаров в акциях",
+   "promo-events-items-ranking"
+  ],
+  "A-1731": [
+   "Промокоды продавца",
+   "seller-promocodes"
+  ],
+  "A-1779": [
+   "Собственные акции продавца",
+   "geo-segments-promo"
+  ],
+  "A-2323": [
+   "Как выдавать персональные скидки с помощью инструмента «Хочу скидку»",
+   "personalized-discounts-using-want-discount-tool"
+  ],
+  "A-1380": [
+   "WB Продвижение: модели оплаты и принцип работы",
+   "wb-promotion-payment-models-and-working-principles"
+  ],
+  "A-1381": [
+   "Как запустить и редактировать кампанию по продвижению",
+   "how-to-start-and-edit-promotion-campaigns"
+  ],
+  "A-1382": [
+   "Как выбрать ставку для продвижения",
+   "how-to-choose-bid-for-promotion"
+  ],
+  "A-1430": [
+   "Бюджет и оплата кампаний  по продвижению",
+   "budget-and-payment-for-promotion"
+  ],
+  "A-1474": [
+   "Статистика и управление продвижением",
+   "statistics-and-promotion-management"
+  ],
+  "A-1633": [
+   "Частые вопросы по поиску и продвижению на Wildberries",
+   "common-questions-about-search-and-promotion-on-wildberries"
+  ],
+  "A-548": [
+   "Контент-платформа Wibes",
+   "wibes-platform"
+  ],
+  "A-1732": [
+   "Продвижение видео в Wibes",
+   "promoting-videos-on-wibes"
+  ],
+  "A-523": [
+   "WB Инфлюенс",
+   "wb-influence"
+  ],
+  "A-1761": [
+   "Реклама в ПВЗ",
+   "advertising-at-pick-up-points"
+  ],
+  "A-1945": [
+   "Баннеры на Wildberries",
+   "banners-on-wildberries"
+  ],
+  "A-1892": [
+   "Контекстный баннер",
+   "context-banner"
+  ],
+  "A-1881": [
+   "Пуш-уведомления",
+   "push-notifications-and-social-media-posts"
+  ],
+  "A-1775": [
+   "Брендовая полка",
+   "branded-shelf"
+  ],
+  "A-1857": [
+   "Как оценить результаты рекламы",
+   "how-to-evaluate-results-of-advertisement"
+  ],
+  "A-2292": [
+   "Как создать сегмент аудитории в WB Медиа",
+   "audiences"
+  ],
+  "A-397": [
+   "Бренд-зона",
+   "about-brand-zone"
+  ],
+  "A-2256": [
+   "Как работать с элементами бренд-зоны: правила и рекомендации",
+   "how-to-work-with-brand-zone-elements"
+  ],
+  "A-81": [
+   "Вопросы покупателей",
+   "customer-questions"
+  ],
+  "A-79": [
+   "Отзывы покупателей",
+   "customer-reviews"
+  ],
+  "A-1676": [
+   "Как собирать больше отзывов о товарах",
+   "how-to-collect-more-product-reviews"
+  ],
+  "A-307": [
+   "Закреплённые отзывы и вайбы",
+   "pinned-reviews"
+  ],
+  "A-82": [
+   "Важное из отзывов",
+   "important-from-reviews"
+  ],
+  "A-42": [
+   "Баллы за отзывы",
+   "score-for-reviews"
+  ],
+  "A-1973": [
+   "Кешбэк за отзывы и вайбы",
+   "cashback-for-reviews-and-wibes"
+  ],
+  "A-80": [
+   "Возврат по отзывам",
+   "return-by-review"
+  ],
+  "A-1674": [
+   "Частые вопросы по отзывам покупателей",
+   "questions-about-customer-reviews"
+  ],
+  "A-526": [
+   "Рейтинг товара",
+   "product-rating"
+  ],
+  "A-525": [
+   "Рейтинг продавца",
+   "seller-rating"
+  ],
+  "A-249": [
+   "Отчёт «Оценка товара»",
+   "item-ratings"
+  ],
+  "A-76": [
+   "Чат с покупателями",
+   "chat"
+  ],
+  "A-208": [
+   "Аналитика продавца",
+   "sellers-analytics"
+  ],
+  "A-509": [
+   "Сводка аналитики",
+   "analytical-summary"
+  ],
+  "A-376": [
+   "Отчёт «Календарь событий»",
+   "events-calendar"
+  ],
+  "A-1759": [
+   "Отчёт «Лента заказов»",
+   "order-feed-report"
+  ],
+  "A-257": [
+   "Отчёт «Воронка продаж»",
+   "sales-funnel-report"
+  ],
+  "A-1769": [
+   "Отчёт «Воронка продаж по WB»",
+   "sales-funnel-part2"
+  ],
+  "A-2250": [
+   "Частые вопросы по отчёту «Воронка продаж»",
+   "questions-about-interactive-report"
+  ],
+  "A-2248": [
+   "Частые вопросы по отчёту «Календарь событий»",
+   "questions-about-events-calendar"
+  ],
+  "A-546": [
+   "Отчёт «География заказов»",
+   "regional-shipment-report"
+  ],
+  "A-389": [
+   "Отчёт «История остатков»",
+   "stock-history-report"
+  ],
+  "A-333": [
+   "Отчёт «Поисковые запросы: ваши товары»",
+   "search-queries-report"
+  ],
+  "A-556": [
+   "Отчёт «Поисковые запросы на WB»",
+   "search-analytics-report"
+  ],
+  "A-2247": [
+   "Частые вопросы по аналитике поиска",
+   "common-questions-about-search-analytics-report"
+  ],
+  "A-1757": [
+   "Отчёт «Портрет покупателя»",
+   "customer-portrait-report-v2"
+  ],
+  "A-250": [
+   "Отчёт «Анализ ниш»",
+   "product-niche-analytics"
+  ],
+  "A-415": [
+   "Отчёт «Сравнение карточек»",
+   "cards-comparing-analytics"
+  ],
+  "A-2244": [
+   "Частые вопросы по отчёту «Анализ ниш»",
+   "questions-about-product-niche-analytics"
+  ],
+  "A-2251": [
+   "Частые вопросы по отчёту «Сравнение карточек»",
+   "questions-about-cards-comparing-analytics"
+  ],
+  "A-2249": [
+   "Частые вопросы по отчёту «Портрет покупателя»",
+   "questions-about-customer-portrait-report"
+  ],
+  "A-231": [
+   "Отчёт «Еженедельная динамика и анализ продаж»",
+   "daily-dynamics-and-sales-analysis-report"
+  ],
+  "A-235": [
+   "Отчёт «Продажи по регионам»",
+   "sales-by-region-report"
+  ],
+  "A-234": [
+   "Отчёт «Доля бренда в продажах»",
+   "brands-share-in-sales-report"
+  ],
+  "A-239": [
+   "Сводный отчёт по продавцу",
+   "summary-seller-report"
+  ],
+  "A-240": [
+   "Отчёт «Скрытые товары»",
+   "hidden-items-report"
+  ],
+  "A-242": [
+   "Отчёт  «Платное хранение»",
+   "paid-storage-report"
+  ],
+  "A-243": [
+   "Отчёт по товарам с обязательной маркировкой",
+   "mandatory-labeling-items-report"
+  ],
+  "A-244": [
+   "Отчёт по остаткам на складе",
+   "warehouse-stocks-report"
+  ],
+  "A-247": [
+   "Отчёт по удержаниям",
+   "retentions-report"
+  ],
+  "A-248": [
+   "Отчёт по возвратам и перемещению товаров",
+   "returns-and-item-transfer-perort"
+  ],
+  "A-1859": [
+   "Отчёт по неверным идентификаторам",
+   "report-on-invalid-id"
+  ],
+  "A-1869": [
+   "Отчёт «Юнит-экономика»",
+   "unit-economy-report"
+  ],
+  "A-245": [
+   "Отчёт «Услуга по обработке товара»",
+   "paid-acceptance-report"
+  ],
+  "A-493": [
+   "Отчёт «Показатели»",
+   "income-and-expenses-report"
+  ],
+  "A-554": [
+   "Как скидки WB Клуба влияют на рост продаж",
+   "how-wb-club-discounts-affect-sales-growth"
+  ],
+  "A-1551": [
+   "Как и какие карточки сравнивают продавцы на Wildberries",
+   "how-and-which-cards-do-sellers-compare-on-wb"
+  ],
+  "A-2006": [
+   "Подменные артикулы Wildberries: какой формат выбирают покупатели",
+   "which-format-of-replacement-articles-buyers-choose"
+  ],
+  "A-2014": [
+   "Как бренд-зона влияет на средний чек заказа",
+   "how-does-the-brand-zone-impact-on-average-cheque-of-order"
+  ],
+  "A-225": [
+   "Как работать с балансом",
+   "how-to-manage-balance"
+  ],
+  "A-311": [
+   "Как вывести деньги на свой счёт",
+   "how-to-transfer-money-to-your-bank-account"
+  ],
+  "A-1589": [
+   "Услуга «Вывести сейчас»",
+   "withdraw-now-service"
+  ],
+  "A-29": [
+   "Как оплатить долг",
+   "how-to-pay-the-debt"
+  ],
+  "A-13": [
+   "Еженедельные отчёты реализации",
+   "how-to-read-general-financial-report"
+  ],
+  "A-14": [
+   "Детализация еженедельного отчёта реализации",
+   "how-to-read-fimancial-reports-detalization"
+  ],
+  "A-1726": [
+   "Документы по движению товара",
+   "documents-on-the-movement-of-goods"
+  ],
+  "A-47": [
+   "УПД на уведомление о выкупе",
+   "utd-for-belarus-sellers"
+  ],
+  "A-1623": [
+   "Как сформировать чеки: инструкция для самозанятых",
+   "how-to-generate-receipts-instruction-for-self-employed"
+  ],
+  "A-1051": [
+   "Расчётный счёт в ООО «ВБ Банк»: общее",
+   "billing-account-in-llc-wildberis-bank-general"
+  ],
+  "A-1050": [
+   "Как ИП открыть расчётный счёт в ООО «ВБ Банк» через ЕСИА",
+   "how-to-open-a-billing-account-in-llc-wildberis-bank-through-esya"
+  ],
+  "A-768": [
+   "Как открыть расчётный счёт в ООО «ВБ Банк» для ООО и ИП с помощью УКЭП",
+   "how-to-open-a-current-account-in-wildberries-bank-for-llc-and-ie-with-the-help-of-ukep"
+  ],
+  "A-1557": [
+   "Как открыть расчётный счёт с помощью нового выездного сервиса",
+   "how-to-open-a-billing-account-with-the-outgoing-service"
+  ],
+  "A-801": [
+   "Мобильное приложение для WB Банка",
+   "mobile-application-for-wildberries-bank"
+  ],
+  "A-1550": [
+   "Программа лояльности «Ягодки для бизнеса»",
+   "loyalty-program-berries-for-business"
+  ],
+  "A-555": [
+   "Как открыть депозит в ООО «ВБ Банк»",
+   "how-to-open-a-deposit-with-wildberries-bank"
+  ],
+  "A-534": [
+   "Заём от WB Finance",
+   "loan-from-wb-finance"
+  ],
+  "A-533": [
+   "Как подать заявку на заём",
+   "how-to-apply"
+  ],
+  "A-1595": [
+   "Кредитование от WB Банка",
+   "loan-from-wb-bank"
+  ],
+  "A-1596": [
+   "Как подать заявку на кредит от WB Банка",
+   "how-to-apply-for-a-loan-from-wb-bank"
+  ],
+  "A-2005": [
+   "Цессия договоров из ООО МКК «ВБ Финанс» в ООО «ВБ Банк»",
+   "cession-of-the-contracts"
+  ],
+  "A-8": [
+   "Пользователи и доступы",
+   "users-and-accesses"
+  ],
+  "A-409": [
+   "Как изменить данные продавца",
+   "how-to-change-the-sellers-information-ru"
+  ],
+  "A-27": [
+   "Как изменить номер телефона",
+   "how-to-change-phone-number"
+  ],
+  "A-370": [
+   "Восстановление доступа к личному кабинету",
+   "personal-account-access-restoring"
+  ],
+  "A-564": [
+   "Безопасность данных и профиля продавца ",
+   "data-and-seller-account-security"
+  ],
+  "A-347": [
+   "Как изменить адрес электронной почты для двухфакторной аутентификации",
+   "how-to-change-email"
+  ],
+  "A-301": [
+   "Защита личного кабинета с помощью двухфакторной аутентификации",
+   "two-factor-authentication-for-personal-account"
+  ],
+  "A-105": [
+   "Как защититься от мошенников",
+   "how-to-protect-yourself-from-scammers"
+  ],
+  "A-433": [
+   "Что такое WB API и как с ним работать",
+   "wb-api"
+  ],
+  "A-552": [
+   "Как подключиться по API через токен",
+   "api-integration-with-token"
+  ],
+  "A-553": [
+   "Как подключиться по API через OAuth 2.0",
+   "oauth20-api-integration"
+  ],
+  "A-1468": [
+   "Как создать, обновить или удалить токен WB API",
+   "how-to-create-update-or-delete-a-wb-api-token"
+  ],
+  "A-1600": [
+   "Категории данных WB API: как выбрать нужные для вашей интеграции",
+   "wb-api-data-categories"
+  ],
+  "A-59": [
+   "Цифровой арбитраж",
+   "digital-arbitration"
+  ],
+  "A-63": [
+   "Поддержка продавцов",
+   "contact-support-desk-for-sellers"
+  ],
+  "A-62": [
+   "Очистка временных файлов: кэша и cookie в браузере",
+   "cache-and-cookies-clearing"
+  ],
+  "A-58": [
+   "Досудебное урегулирование",
+   "pre-trial-settlement"
+  ]
+ }
+}
