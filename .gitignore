@@ -21,3 +21,4 @@ reports/**/*.html
 reports/pdf_parts/
 wb_algorithm/*.pdf
 wb_algorithm/*.html
+token_inbox.txt
