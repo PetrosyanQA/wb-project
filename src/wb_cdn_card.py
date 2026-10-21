@@ -36,8 +36,8 @@ def fetch(sku: int) -> dict | None:
             return None
 
     hit = None
-    ex = ThreadPoolExecutor(40)                        # все корзины разом, берём первый ответ (по порядку ждали таймаутов)
-    for f in as_completed([ex.submit(get, n) for n in range(1, 41)]):
+    ex = ThreadPoolExecutor(80)                        # все корзины разом (новые SKU > 1 млрд — basket-41+), берём первый ответ (по порядку ждали таймаутов)
+    for f in as_completed([ex.submit(get, n) for n in range(1, 81)]):
         if f.result():
             hit = f.result()
             break
