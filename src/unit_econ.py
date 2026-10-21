@@ -100,9 +100,13 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
     gross = payout - goods - ads
 
     tax_cfg = cfg["tax"]
-    tax = (price * float(tax_cfg["rate_pct"]) / 100.0 if tax_cfg["mode"] == "revenue"
-           else max(0.0, gross - fixed) * float(tax_cfg["rate_pct"]) / 100.0)
-    net = gross - tax - fixed
+    tax_rate = float(overrides.get("tax_rate_pct", tax_cfg["rate_pct"]))
+    tax = (price * tax_rate / 100.0 if tax_cfg["mode"] == "revenue"
+           else max(0.0, gross - fixed) * tax_rate / 100.0)
+    # НДС РФ при продаже продавцом из ЕАЭС через маркетплейс (ст. 174.3 НК РФ): доля цены, если маркетплейс удерживает его
+    # сверх своей комиссии; в схеме — 0 до письменного ответа WB [проверить]
+    vat_ru = price * float(overrides.get("vat_ru_eaeu_pct", cfg.get("vat_ru_eaeu_pct", 0))) / 100.0
+    net = gross - tax - vat_ru - fixed
 
     return {
         "price": round(price, 2),
@@ -116,6 +120,7 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
         "goods_cost_full": round(goods, 2),
         "ads": round(ads, 2),
         "tax": round(tax, 2),
+        "vat_ru": round(vat_ru, 2),
         "fixed_per_unit": round(fixed, 2),
         "net_profit": round(net, 2),
         "net_margin_pct": round(net / price * 100, 1) if price else 0.0,

@@ -35,6 +35,12 @@ after 180 days — if a call returns 401, tell the user to reissue, never work a
 WB rate limits are brutal (commission and statistics = 1 request/minute); the client throttles
 automatically, so a call may block for ~60s. Do not "optimise" by removing the throttle.
 
+## MPSTATS pipeline status (2026-10-22)
+`MPSTATS_TOKEN` in `.env` is empty/invalid → `gates`, `discover`, `niche_scan`, `trend_scan`, `sku_audit` (MPSTATS) are
+**not used**; the live pipeline is Saleflow + public WB + WB Seller API (see `docs/PROJECT_GUIDE.md`). The gate logic below
+still applies as a method. Current product: niche 249 TPE pull-up band — `PROJECT_STATE.md`, `reports/economics_249_2026-10-22.md`.
+Before any product money decision: check RU VAT for EAEU sellers (art. 174.3 NK RF, `vat_ru_eaeu_pct` in `config/scheme_am_fbs.yaml`).
+
 ## Filter order — ALWAYS cheapest first
 
 Run gates in this order and STOP at the first failure (`config/filters.yaml` holds every

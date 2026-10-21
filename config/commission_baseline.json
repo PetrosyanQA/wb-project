@@ -10,6 +10,12 @@
    "FBS": 21,
    "FBO": 17.5,
    "DBS": 20
+  },
+  "249": {
+   "FBS": 21,
+   "FBO": 17.5,
+   "DBS": 20
   }
- }
+ },
+ "commission_249_source": "WB API cache 2026-10-18 (kgvpMarketplace/paidStorageKgvp/kgvpSupplier)"
 }

@@ -23,7 +23,7 @@ import sys
 from src.wb_seller import WBError, WBSellerClient, rub
 
 sys.stdout.reconfigure(encoding="utf-8")
-WATCH = {777: "Держатели в авто", 2486: "Катушки рыболовные"}
+WATCH = {249: "Эспандеры", 777: "Держатели в авто", 2486: "Катушки рыболовные"}   # 249 — наш товар; 777/2486 — для истории
 BASE = "config/commission_baseline.json"
 HIST = "data/processed/commission_history.csv"
 FIELDS = {"FBS": "kgvpMarketplace", "FBO": "paidStorageKgvp", "DBS": "kgvpSupplier"}
@@ -56,11 +56,15 @@ def commission() -> int:
                 alarm = 1
                 print(f"⚠️ {sid} {WATCH[sid]} {k}: было {b[k]}% ({base['date']}) → стало {v[k]}%")
         print(f"{sid} {WATCH[sid]}: FBS {v['FBS']}% | FBO {v['FBO']}% | DBS {v['DBS']}%")
-    if alarm:
-        from src.marketing777 import econ
-        e = econ(1590, 15, comm=now[777]["FBS"])
-        print(f"→ 777 при новой комиссии FBS {now[777]['FBS']}%: маржа {e['net_margin_pct']}%, прибыль {e['net_profit']} ₽/шт "
-              f"(цена до СПП 1 590 ₽, ДРР 15%). Порог проекта — 18%. Обновить: python -m src.marketing777")
+    if alarm and now.get(249, {}).get("FBS") is not None:
+        from src.unit_econ import load_scheme, unit_economics
+        from src.cargo import per_unit
+        cfg = load_scheme("am_fbs")
+        for name, price, yuan, kg, vol in (("чёрная 22 мм", 1100, 5.7, 0.23, 0.77), ("фиолетовая 32 мм", 1250, 7.8, 0.33, 0.96)):
+            e = unit_economics(price, per_unit(yuan, kg, vol)["landed_rub"], vol, cfg, with_breakeven=False, buyout_pct=82,
+                               commission_pct=now[249]["FBS"], ad_share_of_revenue_pct=15, packaging_rub=50)
+            print(f"→ 249 {name} {price} ₽ при комиссии FBS {now[249]['FBS']}% (¥{yuan}, ДРР 15%): прибыль {e['net_profit']} ₽, "
+                  f"маржа {e['net_margin_pct']}% (порог 18%)")
     else:
         print("✅ комиссия не изменилась с", base["date"])
     return alarm

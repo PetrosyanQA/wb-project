@@ -80,7 +80,7 @@ def store_reviews(base: str, imt: int, F: list[dict]) -> None:
 def calib_k(base: str, B: list[dict], fb: dict) -> dict:
     """Продаж на один отзыв по июлю-2026 (последний полный месяц продаж Saleflow) для каждого SKU; иначе медиана ниши."""
     p = f"{base}/k.json"
-    if os.path.exists(p):
+    if os.path.exists(p) and (dt.datetime.now().timestamp() - os.path.getmtime(p)) < 30 * 86400:   # пересчёт раз в месяц
         return json.load(open(p, encoding="utf8"))
     k = {}
     for r in B:
@@ -192,7 +192,9 @@ def run(niche: int, saleflow: bool, sf_max: int) -> str:
             sf7[s_] = sf7.get(s_, 0) + float(r.get("sf_sales") or 0)
     for (d, s_), r in rows.items():
         has_sf = r.get("sf_sales") not in ("", None) and float(r.get("balance") or 0) > 0
-        if has_sf and (rev7.get(s_, 0) < 3 or rev7[s_] <= 0.25 * sf7.get(s_, 0)):
+        if has_sf and rev7.get(s_, 0) < 3:                               # мало отзывов — полноту Saleflow не проверить
+            r["sales"], r["sales_src"] = r["sf_sales"], "неизвестно"
+        elif has_sf and rev7[s_] <= 0.25 * sf7.get(s_, 0):
             r["sales"], r["sales_src"] = r["sf_sales"], "факт"
         elif has_sf:
             r["sales"], r["sales_src"] = r["sf_sales"], "факт, неполный"
@@ -208,18 +210,29 @@ def run(niche: int, saleflow: bool, sf_max: int) -> str:
 def report(niche: int, rows: dict, jul_rank: dict, n_cards: int, has_sf: bool) -> str:
     num = lambda x: float(x) if x not in ("", None) else None                     # noqa: E731
     y = [r for (d, _), r in rows.items() if d == YDAY]
-    w = [r for (d, _), r in rows.items() if d in DAYS[:-1]]
+    # Отзывы приходят с задержкой модерации → сравниваем ЗАВЕРШЁННЫЕ недели (конец 3 дня назад), а не неполное «вчера»
+    end = TODAY - dt.timedelta(days=3)
+    wk = [(end - dt.timedelta(days=i)).isoformat() for i in range(7)]
+    pw = [(end - dt.timedelta(days=7 + i)).isoformat() for i in range(7)]
+    cur = [r for (d, _), r in rows.items() if d in wk]
+    prv = [r for (d, _), r in rows.items() if d in pw]
+    have_prev = len({r["date"] for r in prv}) == 7
     tot = lambda R, f: round(sum(num(r[f]) or 0 for r in R), 1)                     # noqa: E731
-    L = [f"# Ниша {niche}: день {YDAY}", "",
+
+    def line(name, f, R1=cur, R2=prv):
+        a, b = tot(R1, f), tot(R2, f)
+        d = f"{round((a / b - 1) * 100):+d} %" if have_prev and b else "—"
+        return f"| {name} | {a:g} | {b:g} | {d} |" if have_prev else f"| {name} | {a:g} | — | — |"
+    L = [f"# Ниша {niche}: неделя {wk[-1]} … {wk[0]}", "",
          f"Карточек под наблюдением: {n_cards} (ленты из products500 + живая выдача). Отзывы WB — все карточки; "
-         f"Saleflow (цена/реклама/продажи) — топ-30 + новые в выдаче. Отзывы за последние дни ещё дописываются модерацией WB.", "",
-         "| Показатель | Вчера | Среднее за 6 дней до |", "|---|---:|---:|",
-         f"| Новых отзывов (все карточки) | {tot(y, 'rev_new')} | {round(tot(w, 'rev_new') / 6, 1)} |",
-         f"| из них негатив (≤3★) | {tot(y, 'rev_neg')} | {round(tot(w, 'rev_neg') / 6, 1)} |",
-         f"| из них «порвалась» | {tot(y, 'rev_rip')} | {round(tot(w, 'rev_rip') / 6, 1)} |",
-         f"| Продажи, шт (FBS — факт Saleflow, FBO — оценка по отзывам) | {tot(y, 'sales')} | {round(tot(w, 'sales') / 6, 1)} |",
-         *[f"| из них {k} | {tot([r for r in y if r['sales_src'] == k], 'sales')} | "
-           f"{round(tot([r for r in w if r['sales_src'] == k], 'sales') / 6, 1)} |" for k in ("факт", "факт, неполный", "оценка")]]
+         f"Saleflow (цена/реклама/продажи) — топ-30 + новые в выдаче. Последние 2 дня не учитываются: отзывы ещё на модерации.", "",
+         f"| Показатель | Неделя {wk[-1]} … {wk[0]} | Неделя {pw[-1]} … {pw[0]} | Δ |", "|---|---:|---:|---:|",
+         line("Новых отзывов (все карточки) [факт]", "rev_new"),
+         line("из них негатив (≤3★) [факт]", "rev_neg"),
+         line("из них «порвалась» [факт]", "rev_rip"),
+         line("Продажи «факт» (чистые FBS) [факт]", "sales", [r for r in cur if r["sales_src"] == "факт"], [r for r in prv if r["sales_src"] == "факт"]),
+         line("Индекс продаж по отзывам (НЕ штуки)", "est_sales"),
+         "", f"Вчера ({YDAY}, предварительно): новых отзывов {tot(y, 'rev_new'):g}, негатив {tot(y, 'rev_neg'):g}."]
     week = {}
     for (d, s_), r in rows.items():
         if d in DAYS:
@@ -230,11 +243,12 @@ def report(niche: int, rows: dict, jul_rank: dict, n_cards: int, has_sf: bool) -
                 a["r"] = r
     L += ["", f"## Топ-20 карточек за 7 дней ({DAYS[0]} … {YDAY})", "",
           "Одна карточка за один день — шум (1–2 отзыва), поэтому по карточкам показываю сумму за 7 дней.", "",
-          "| SKU | Товар | FBS/FBO | Продажи 7д | Надёжность | Отзывы 7д | Негатив | Порв. | Цена ₽ | Реклама | Место в выдаче |",
+          "| SKU | Товар | FBS/FBO | Продажи 7д (оценка = индекс) | Надёжность | Отзывы 7д | Негатив | Порв. | Цена ₽ | Реклама | Место в выдаче |",
           "|---|---|:-:|---:|---|---:|---:|---:|---:|:-:|---:|"]
     for s_, a in sorted(week.items(), key=lambda kv: -kv[1]["sales"])[:20]:
         r = a["r"]; fbs = {"1": "FBS", "0": "FBO"}.get(str(r["fbs"]), "—")
-        src = "факт, неполный" if "факт, неполный" in a["src"] else ("факт" if a["src"] == {"факт"} else "оценка ±50 %")
+        src = ("факт, неполный" if "факт, неполный" in a["src"] else "факт" if a["src"] == {"факт"}
+               else "неизвестно" if "неизвестно" in a["src"] else "индекс")
         L.append(f"| {s_} | {str(r['name'])[:34]} | {fbs} | {round(a['sales'])} | {src} | {a['rev']} | {a['neg']} | {a['rip']} | "
                  f"{r['price'] or '—'} | {'да' if str(r['ads']) == '1' else ('нет' if str(r['ads']) == '0' else '—')} | {r['search_pos'] or '—'} |")
     sig = []
