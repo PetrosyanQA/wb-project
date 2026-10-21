@@ -15,14 +15,20 @@
 - Не трать время на весь проект: читай только список ниже, остальное — точечно через поиск, если нужно проверить факт.
 - Каждое утверждение — со ссылкой на файл:строку. Не выдумывай чисел.
 
-ЧИТАТЬ (по порядку):
-1. CLAUDE.md, PROJECT_STATE.md, reports/INDEX.md
-2. Решение: reports/deep5_niches_2026-10-19.md, reports/latex_vs_tpe_249_2026-10-21.md,
-   reports/subtypes_seo_249_2026-10-21.md, reports/gaps_5_8_11_2026-10-21.md, reports/compete_249_2026-10-18.md
-3. Экономика: src/unit_econ.py, config/unit_economics.yaml, config/tariffs_auto.yaml, src/niche_final_rank.py (функция econ)
-4. Продукт и поставка: reports/product_requirements_249_2026-10-19.md, reports/forwarder_spec_249_2026-10-18.md,
-   reports/supplier_tpe_questions_249_2026-10-21.md, reports/wb_help_findings_2026-10-20.md
-5. Мониторинг: src/niche_daily.py, src/niche_monitor.py
+ЧИТАТЬ (по порядку, ≈ 25 файлов — этого достаточно, чтобы понять всю логику):
+1. Правила и стратегия: CLAUDE.md, docs/STRATEGY.md, PROJECT_STATE.md, reports/market_reality_20261003.md
+2. Бюджет и схема бизнеса: config/scoring.yaml (блок бюджета), config/unit_economics.yaml, config/tariffs_auto.yaml,
+   config/scenarios.yaml, src/unit_econ.py, src/strategy.py (cost_rub, econ_config — карго, ФФ, налог AM)
+3. Как отбираем ниши (воронка): config/filters.yaml, src/gates.py, src/niche_nocargo.py,
+   reports/audit_2026-10-15.md, reports/niche_relaxed_2026-10-18.md, reports/niche_rank_final_2026-10-17.md
+4. Как дошли до решения: reports/deep_top5_2026-10-18.md, reports/FINAL_DECISION_2026-10-18.md,
+   reports/deep5_niches_2026-10-19.md, src/niche_final_rank.py (econ)
+5. Товар 249: reports/latex_vs_tpe_249_2026-10-21.md, reports/subtypes_seo_249_2026-10-21.md,
+   reports/compete_249_2026-10-18.md, reports/product_requirements_249_2026-10-19.md,
+   reports/supplier_tpe_questions_249_2026-10-21.md
+6. Деньги и план: reports/cashflow_249_2026-10-18.md, reports/gaps_5_8_11_2026-10-21.md, reports/wb_help_findings_2026-10-20.md
+7. Мониторинг: src/niche_daily.py, src/niche_monitor.py
+Остальное (reports/INDEX.md, архив) — только точечно, если нужно проверить факт.
 
 ПРОВЕРЬ:
 A. Логика выбора ниши: нет ли ошибки выжившего, подмены данных, устаревших данных
