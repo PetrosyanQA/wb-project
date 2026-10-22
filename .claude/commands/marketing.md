@@ -7,6 +7,8 @@ Follow `marketing/README.md` step by step. Report in Armenian, full text in chat
 
 1. **Data first.** Make sure products500 for the niche exists (`src.datastore.latest(<niche>, "products500")`); if not, collect it
    with Saleflow (`src.strategy_collect --step core`). Buyer complaints: `data/processed/complaints_*` or WB feedbacks (`src.niche_final_rank.feedbacks`).
+1b. **Marketing analysis from project data:** `python -m src.mkt_analyze --niche <id>` → `reports/marketing/<id>_<date>.md`
+   (SEO core, complaints → USP, live-search ad share, competitors' ads, SPP via Evirma, ad budget). Base positioning on it.
 2. **WB visual research:** `python -m src.mkt wb --niche <id> --top 12` (0 paid requests, WB CDN).
 3. **International research:** `python -m src.mkt amazon --niche <id> --query "<english query>" --detail 6` (Bright Data, ≈ 7 credits;
    stop and tell the user if fewer than 100 credits remain).
