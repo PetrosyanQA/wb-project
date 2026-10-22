@@ -41,7 +41,7 @@ automatically, so a call may block for ~60s. Do not "optimise" by removing the t
 still applies as a method. Current product: niche 249 TPE pull-up band — `PROJECT_STATE.md`, `reports/economics_249_2026-10-22.md`.
 SPP of competitors per niche: ALWAYS take from Evirma (`python -m src.evirma show <subject>`).
 USER DECISION 2026-10-22: our AM cabinet gets SPP like everyone → compute margins at the SELLER price (before SPP);
-supply = white import via YUAN EXIM (`docs/suppliers/yuanexim_offer_2026-10-22.md`); tax 10 %. Before any product money decision: check RU VAT for EAEU sellers (art. 174.3 NK RF, `vat_ru_eaeu_pct` in `config/scheme_am_fbs.yaml`).
+supply = white import via YUAN EXIM (`docs/suppliers/yuanexim_offer_2026-10-22.md`); tax 10 %. RU VAT art. 174.3: USER 2026-10-22 — not withheld from us (`vat_ru_eaeu_pct: 0`); don't re-raise.
 
 ## Filter order — ALWAYS cheapest first
 
