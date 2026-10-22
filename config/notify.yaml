@@ -1,0 +1,2 @@
+# Куда слать сигналы. Заполнить после привязки чата к Telegram-боту (/telegram:access в терминале).
+telegram_chat_id: null
