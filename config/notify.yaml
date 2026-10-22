@@ -1,2 +1,2 @@
-# Куда слать сигналы. Заполнить после привязки чата к Telegram-боту (/telegram:access в терминале).
-telegram_chat_id: null
+# Куда слать сигналы (Telegram-бот @wbbrend_bot, чат привязан 2026-10-22).
+telegram_chat_id: 6654116067
