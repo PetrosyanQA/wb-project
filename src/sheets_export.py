@@ -55,7 +55,8 @@ def build(niche: int, since: dict) -> dict[str, list[list]]:
             int(sum(num(r["rev_new"]) or 0 for r in R)), int(sum(num(r["rev_neg"]) or 0 for r in R)),
             int(sum(num(r["rev_rip"]) or 0 for r in R)),
             round(st.median(prices)) if prices else None,
-            round(sum(1 for r in ads if r["ads"] in ("1", "True", "true")) / len(ads), 3) if ads else None])
+            round(sum(1 for r in ads if r["ads"] in ("1", "True", "true")) / len(ads), 3) if ads else None,
+            '=IF(INDIRECT("E"&ROW())=0;0;INDIRECT("F"&ROW())/INDIRECT("E"&ROW()))'])   # % негатива; «;» — русская локаль таблицы
         top = sorted(R, key=lambda r: -(num(r["sales"]) or 0))[:TOP]
         keep = {r["sku"] for r in top} | {r["sku"] for r in R if int(r["sku"]) in watch}
         for r in sorted((r for r in R if r["sku"] in keep), key=lambda r: -(num(r["sales"]) or 0)):
