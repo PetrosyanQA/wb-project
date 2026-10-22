@@ -27,7 +27,7 @@ def key() -> str:
     raise SystemExit("нет ANTHROPIC_API_KEY в .env")
 
 
-def ask(question: str, files: list[str], effort: str = "high", max_tokens: int = 16000) -> dict:
+def ask(question: str, files: list[str], effort: str = "high", max_tokens: int = 40000) -> dict:
     parts = [f"=== {f} ===\n{(ROOT / f).read_text(encoding='utf-8')}" for f in files]
     content = ("\n\n".join(parts) + "\n\n---\n\n" if parts else "") + question
     body = {"model": MODEL, "max_tokens": max_tokens, "system": SYSTEM, "output_config": {"effort": effort},
