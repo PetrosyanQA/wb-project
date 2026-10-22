@@ -3,6 +3,7 @@
     python -m src.wb_card payload                 # показать JSON карточки, 0 запросов
     python -m src.wb_card sandbox                 # весь цикл в песочнице (WB_TOKEN_TEST): баркоды → карточка → цены → склад/остатки
     python -m src.wb_card sandbox --step status   # только проверить карточки/ошибки в песочнице
+    python -m src.wb_card sandbox --step update   # обновить описание/характеристики уже созданных карточек (+ цены)
     python -m src.wb_card prod ...                # реальный кабинет — ТОЛЬКО после явного «да» пользователя (токен с правом записи)
 
 Значения характеристик — reports/product_spec_249_2026-10-18.md, card_content_249_2026-10-18.md, forwarder_spec_249_2026-10-18.md.
@@ -128,7 +129,24 @@ def cycle(api: API, step: str) -> None:
     nm = {c["vendorCode"]: c["nmID"] for c in cards}
     for c in cards:
         print("   ", c["vendorCode"], "nmID", c["nmID"], "| характеристик", len(c.get("characteristics") or []), "| баркод", c["sizes"][0]["skus"])
-    if step in ("all", "price") and nm:
+    if step == "update" and cards:                          # существующие карточки: новые название/описание/характеристики/габариты
+        new = {v["vendorCode"]: v for v in build(["-"] * len(VARIANTS))[0]["variants"]}   # баркоды/размеры берём из самой карточки
+        for c in cards:                                     # по одной: пачкой из склейки WB отвечает «неуникальный баркод»
+            n = new.get(c["vendorCode"])
+            if not n:
+                continue
+            body = [{"nmID": c["nmID"], "vendorCode": c["vendorCode"], "title": n["title"], "description": n["description"],
+                     "dimensions": n["dimensions"], "characteristics": n["characteristics"], "sizes": c["sizes"]}]
+            st, d = api.call("POST", "content", "/content/v2/cards/update", body, f"update_{c['vendorCode']}.json")
+            print("обновление", c["vendorCode"], st, d.get("errorText") or "ok")
+        time.sleep(20)
+        st, d = api.call("POST", "content", "/content/v2/get/cards/list",
+                         {"settings": {"cursor": {"limit": 100}, "filter": {"withPhoto": -1}}}, "cards_list.json")
+        for c in (d.get("cards") or []):
+            if c.get("subjectID") == SUBJECT:
+                print("   ", c["vendorCode"], "| описание", len(c.get("description") or ""), "симв. | совпадает:",
+                      c.get("description") == DESCRIPTION, "| название:", c.get("title"))
+    if step in ("all", "price", "update") and nm:
         body = {"data": [{"nmID": nm[v[0]], "price": v[8], "discount": 0} for v in VARIANTS if v[0] in nm]}
         st, d = api.call("POST", "prices", "/api/v2/upload/task", body, "price_task.json")
         print("цены:", st, d.get("errorText") or d.get("data"))
@@ -155,7 +173,7 @@ def cycle(api: API, step: str) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=["payload", "sandbox", "prod"])
-    ap.add_argument("--step", default="all", choices=["all", "card", "status", "price", "stock"])
+    ap.add_argument("--step", default="all", choices=["all", "card", "update", "status", "price", "stock"])
     a = ap.parse_args()
     if a.mode == "payload":
         print(json.dumps(build([f"200000000000{i}" for i in range(len(VARIANTS))]), ensure_ascii=False, indent=1)); return
