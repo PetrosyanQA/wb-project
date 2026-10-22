@@ -39,7 +39,8 @@ automatically, so a call may block for ~60s. Do not "optimise" by removing the t
 `MPSTATS_TOKEN` in `.env` is empty/invalid → `gates`, `discover`, `niche_scan`, `trend_scan`, `sku_audit` (MPSTATS) are
 **not used**; the live pipeline is Saleflow + public WB + WB Seller API (see `docs/PROJECT_GUIDE.md`). The gate logic below
 still applies as a method. Current product: niche 249 TPE pull-up band — `PROJECT_STATE.md`, `reports/economics_249_2026-10-22.md`.
-Before any product money decision: check RU VAT for EAEU sellers (art. 174.3 NK RF, `vat_ru_eaeu_pct` in `config/scheme_am_fbs.yaml`).
+SPP of competitors per niche: ALWAYS take from Evirma (`python -m src.evirma show <subject>`), and compute margins at the
+BUYER price (our AM cabinet has SPP ≈ 0) — never at the seller price. Before any product money decision: check RU VAT for EAEU sellers (art. 174.3 NK RF, `vat_ru_eaeu_pct` in `config/scheme_am_fbs.yaml`).
 
 ## Filter order — ALWAYS cheapest first
 

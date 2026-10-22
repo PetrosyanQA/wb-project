@@ -262,6 +262,25 @@ def report(niche: int, rows: dict, jul_rank: dict, n_cards: int, has_sf: bool) -
             sig.append(f"🆕 {r['sku']} в топ-30 выдачи (место {r['search_pos']}), не было в июльском топ-500")
         if (num(r["rev_neg"]) or 0) >= 3:
             sig.append(f"⚠️ {r['sku']} {r['rev_neg']} негативных отзывов за день (порвалась: {r['rev_rip']})")
+    # СПП конкурентов (Evirma, Москва): один запрос в день; при ограничении частоты — пропуск, журнал не ломается
+    try:
+        from src import evirma as E
+        rg = E.ranges([niche, 654], retries=1)
+        sp = f"data/processed/monitor_{niche}/spp.csv"
+        new_file = not os.path.exists(sp)
+        with open(sp, "a", encoding="utf8", newline="") as fh:
+            w = csv.writer(fh)
+            if new_file:
+                w.writerow(["date", "subject", "fbo_spp", "fbs_bands"])
+            for sid, r in rg.items():
+                w.writerow([r["date"], sid, (r["fbo"] or [{}])[0].get("spp"),
+                            "; ".join(f"{b['price_from']}–{b['price_to'] or '∞'}:{b['spp']}" for b in r["fbs"])])
+        L += ["", "## СПП конкурентов (Evirma, Москва) [факт]"]
+        for sid, r in rg.items():
+            fbs = "; ".join(f"{b['price_from']}–{b['price_to'] or '∞'} ₽ → {b['spp']:g} %" for b in r["fbs"])
+            L.append(f"- {sid}: FBO {(r['fbo'] or [{}])[0].get('spp', '—')} %; FBS {fbs or '—'} (наш кабинет: СПП ≈ 0)")
+    except Exception as e:                                                # noqa: BLE001
+        L += ["", f"СПП Evirma: нет данных сегодня ({str(e)[:60]})"]
     L += ["", "## Сигналы", *(sig or ["— без резких изменений"]), "",
           f"Данные: data/processed/monitor_{niche}/daily.csv (по дням и SKU), отзывы — data/processed/monitor_{niche}/reviews/. "
           "Оценка продаж = новые отзывы × (продажи/отзывы июля-2026 этой карточки) — [оценка]. Проверка 2026-10-21: по карточке "

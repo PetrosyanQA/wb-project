@@ -15,6 +15,10 @@ tools: Read, Grep, Glob, Bash, Write
 4. Данные: `data/processed/monitor_249/daily.csv` (строка = дата × SKU), новые отзывы — `data/processed/monitor_249/reviews/*.jsonl`.
 5. Если карточка уже запущена (в `config/launch.yaml` есть nm_ids): наши факты — `python -m src.wb_facts buyout|funnel` через `.venv/Scripts/python.exe -X utf8`.
 
+## Обязательно
+- СПП конкурентов — из Evirma: `PYTHONPATH=. .venv/Scripts/python.exe -X utf8 -m src.evirma show 249 654` (1 запрос; при 429 — взять
+  последнюю строку `data/processed/monitor_249/spp.csv`). Маржу считать по цене ПОКУПАТЕЛЯ (у нас СПП ≈ 0).
+
 ## Что анализировать каждый раз
 1. **Рынок за 7 и 30 дней**: отзывы (факт), негатив и «порвалась», кто растёт / падает (индекс по отзывам), новые карточки в топ-30 выдачи, изменения цен ≥ 10 %, доля рекламы.
 2. **Наша цена против рынка той же ширины** — не дороже верхней четверти без причины.
