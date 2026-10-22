@@ -1,2 +1,5 @@
 # Куда слать сигналы (Telegram-бот @wbbrend_bot, чат привязан 2026-10-22).
 telegram_chat_id: 6654116067
+
+# Google Sheets «WB 249 мониторинг» — пишет Claude (коннектор Sheets) по строкам из src.sheets_export
+sheets_id: 190LhB9cXRinAkaM7aGzQjy6ELmXAzRcBBKgF2I5yLtc
