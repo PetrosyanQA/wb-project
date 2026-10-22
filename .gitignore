@@ -25,3 +25,8 @@ token_inbox.txt
 
 # маркетинг: сырые генерации (тяжёлые PNG) — не в git
 marketing/*/generated/
+
+# коммерческие предложения: PDF и картинки с реквизитами — только локально
+docs/suppliers/*.pdf
+docs/suppliers/*.txt
+docs/suppliers/yuanexim_pages/
