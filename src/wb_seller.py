@@ -153,7 +153,7 @@ class WBSellerClient:
         """→ (թոքեն, որ .env-բանալիից). Ընտրում է ամենաքիչ իրավունք ունեցողը."""
         bit = HOST_BIT.get(host)
         fit = [(k, v) for k, v in self.tokens.items()
-               if bit is None or bit in v["bits"]]
+               if (bit is None or bit in v["bits"]) and not v.get("sandbox")]   # sandbox-ключ на боевых хостах → 403
         if not fit:
             need = BIT_NAME.get(bit, host)
             have = {BIT_NAME[b] for v in self.tokens.values() for b in v["bits"] if b in BIT_NAME}
