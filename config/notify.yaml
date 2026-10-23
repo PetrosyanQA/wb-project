@@ -3,3 +3,4 @@ telegram_chat_id: 6654116067
 
 # Google Sheets «WB 249 мониторинг» — пишет Claude (коннектор Sheets) по строкам из src.sheets_export
 sheets_id: 190LhB9cXRinAkaM7aGzQjy6ELmXAzRcBBKgF2I5yLtc
+sheets_requirements_id: 1c1fOvaZAAVCbFqg-bi4qeIUPBMX_uUUcO1kCN0ZwX_c   # «WB: что нужно для каждой ниши» (src.niche_requirements)
