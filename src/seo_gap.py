@@ -2,6 +2,8 @@
 
     python -m src.seo_gap collect [--month 2026-07] [--limit 170]   # 1 запрос Saleflow на нишу (wb_subject keywords)
     python -m src.seo_gap analyze [--month 2026-07]                 # 0 запросов → data/processed/seo_demand_<дата>.json
+    python -m src.seo_gap collect --month 2025-07                   # база для роста год к году
+    python -m src.seo_gap growth                                    # 0 запросов: запросы с ростом ≥ ×2 за год
     python -m src.seo_gap supply --top 200                          # 1 запрос на запрос (wb_check_rates) → seo_supply_<дата>.json
 
 Ниши: data/processed/niche_requirements_2026-10-23.json — 🟢 без документов или 🟡 декларация (не «крупный»),
@@ -169,14 +171,53 @@ def analyze(month: str) -> None:
         print(f"  {r['freq']:>8,} | {r['word']} | {r['subject']} | мед. {r['median_price']} ₽".replace(",", " "))
 
 
+BRANDS = re.compile(r"zarina|befree|zolla|gloria|o.?stin|love republic|sela|momi|magic family|mona|xiaomi|tefal|samsonite|"
+                    r"[a-z]{3,}.*женск", re.I)
+
+
+def growth(month: str = "2026-07", base: str = "2025-07", min_freq: int = 5000, min_x: float = 2.0) -> None:
+    """Шаг 1б (0 запросов): запросы, чья частота за год выросла ≥ min_x раз (тот же месяц) — спрос обгоняет предложение."""
+    U = {x["id"]: x for x in universe()}
+    R, per = [], collections.defaultdict(list)
+    for sid, x in U.items():
+        a, b = path(sid, month), path(sid, base)
+        if not (a.exists() and b.exists()):
+            continue
+        old = {q["word"]: q.get("wb_count") or 0 for q in json.load(open(b, encoding="utf-8")).get("queries") or []}
+        for q in json.load(open(a, encoding="utf-8")).get("queries") or []:
+            f, f0, it = q.get("wb_count") or 0, old.get(q["word"], 0), q.get("items_count") or 0
+            if f < min_freq or it < 30 or GENERIC.search(q["word"]) or len(q["word"].split()) < 2:
+                continue
+            if f0 < 1000 or BRANDS.search(q["word"]):             # «новый» = не попал в топ-5000 прошлого года, не рост
+                continue
+            x_ = f / f0
+            if x_ >= min_x:
+                r = {"subject_id": sid, "subject": x["subject"], "word": q["word"], "freq": f, "freq_base": f0,
+                     "x": round(x_, 1) if x_ else None, "items": it, "median_price": x["median_price"], "rev_mln": x["rev_mln"],
+                     "sellers": x["sellers"]}
+                R.append(r)
+                per[sid].append(r)
+    R.sort(key=lambda r: -(r["freq"] - r["freq_base"]))
+    today = dt.date.today().isoformat()
+    json.dump(R, open(ROOT / "data" / "processed" / f"seo_growth_{today}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"запросов с ростом ≥ ×{min_x} (база ≥ 1 000) при ≥ {min_freq} поисков: {len(R)}")
+    print("Ниши по приросту поисков (растущие запросы): ниша | запросов | прирост поисков/мес | топ-запрос (было → стало)")
+    for sid, v in sorted(per.items(), key=lambda kv: -sum(r["freq"] - r["freq_base"] for r in kv[1]))[:30]:
+        t = max(v, key=lambda r: r["freq"] - r["freq_base"])
+        print(f"  {U[sid]['subject']} ({sid}) | {len(v)} | +{sum(r['freq'] - r['freq_base'] for r in v):,} | {t['word']} ({t['freq_base']:,} → {t['freq']:,}) | мед. {U[sid]['median_price']} ₽".replace(",", " "))
+    print("\nТоп-50 растущих запросов: запрос | ниша | было | стало | ×")
+    for r in R[:50]:
+        print(f"  {r['word']} | {r['subject']} | {r['freq_base']} | {r['freq']} | {r['x'] or 'новый'}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("step", choices=["collect", "analyze", "supply"])
+    ap.add_argument("step", choices=["collect", "analyze", "supply", "growth"])
     ap.add_argument("--top", type=int, default=200)
     ap.add_argument("--month", default="2026-07")
     ap.add_argument("--limit", type=int, default=170)
     a = ap.parse_args()
-    {"collect": lambda: collect(a.month, a.limit), "analyze": lambda: analyze(a.month), "supply": lambda: supply(a.month, a.top)}[a.step]()
+    {"collect": lambda: collect(a.month, a.limit), "analyze": lambda: analyze(a.month), "supply": lambda: supply(a.month, a.top), "growth": lambda: growth()}[a.step]()
 
 
 if __name__ == "__main__":
