@@ -1,0 +1,12 @@
+# Облачная ежедневная проверка (src/cloud_daily.py, GitHub Actions). Решение 25.10: reports/decision_249_band_set_2026-10-25.md
+products:
+  - name: Набор 2 лент TPE 22+32 мм
+    subject_id: 249
+    seller_price: 2290      # цена продавца (до СПП)
+    target_spp: 31          # стоим в верхней полосе СПП FBS (на 25.10 — 29–31 %)
+    min_spp: 20             # ниже — переходим на запасной
+    fallback: следующая закупка — игрушка для собак 731
+  - name: Запасной — игрушка для собак TPR
+    subject_id: 731
+    seller_price: 1065
+    min_spp: 15

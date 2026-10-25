@@ -1,0 +1,39 @@
+{
+ "date": "2026-10-25",
+ "249": {
+  "spp": 29.0,
+  "border": 2200,
+  "bands": [
+   {
+    "price_from": 0,
+    "price_to": 2200,
+    "spp": 4.0,
+    "spp_max": 29.0,
+    "articles": 3998,
+    "zero_pct": 0
+   },
+   {
+    "price_from": 2200,
+    "price_to": null,
+    "spp": 29.0,
+    "spp_max": 4.0,
+    "articles": 2477,
+    "zero_pct": 0
+   }
+  ]
+ },
+ "731": {
+  "spp": 20.0,
+  "border": null,
+  "bands": [
+   {
+    "price_from": 0,
+    "price_to": null,
+    "spp": 20.0,
+    "spp_max": 30.0,
+    "articles": 1424,
+    "zero_pct": 0
+   }
+  ]
+ }
+}
