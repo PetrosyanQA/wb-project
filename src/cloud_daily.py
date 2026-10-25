@@ -72,8 +72,10 @@ def main() -> None:
         if p.get("target_spp") and b is not None and p["seller_price"] < b:
             alerts.append(f"🚨 {p['name']}: наша цена {p['seller_price']} ₽ НИЖЕ границы {b} ₽ — СПП упадёт до {spp} %. "
                           f"Правило: цена = граница + 4 % ≈ {round(b * 1.04)} ₽")
-        if p.get("min_spp") and (spp or 0) < p["min_spp"]:
-            alerts.append(f"🚨 {p['name']}: СПП на нашей цене {spp} % < порога {p['min_spp']} % — {p.get('fallback', 'пересмотр')}")
+        if old.get("spp") is not None and spp is not None and old["spp"] - spp >= 5:
+            alerts.append(f"📉 {p['name']}: СПП на нашей цене упала {old['spp']:g} → {spp:g} % за сутки (покупатель ≈ {buyer} ₽)")
+        if p.get("min_spp") and (spp or 0) <= p["min_spp"]:
+            alerts.append(f"🚨 {p['name']}: СПП на нашей цене {spp} % ≤ порога {p['min_spp']} % — {p.get('fallback', 'пересмотр')}")
     L.append("\n" + ("\n".join(alerts) if alerts else "✅ Сигналов нет: цена в нужной полосе СПП."))
     text = "\n".join(L)
     STATE.parent.mkdir(exist_ok=True)
