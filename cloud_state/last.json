@@ -8,8 +8,8 @@
     "price_from": 0,
     "price_to": null,
     "spp": 24.0,
-    "spp_max": 24.0,
-    "articles": 6720,
+    "spp_max": 29.0,
+    "articles": 7045,
     "zero_pct": 0
    }
   ]
@@ -20,10 +20,18 @@
   "bands": [
    {
     "price_from": 0,
+    "price_to": 300,
+    "spp": 16.0,
+    "spp_max": 20.0,
+    "articles": 388,
+    "zero_pct": 0
+   },
+   {
+    "price_from": 300,
     "price_to": null,
     "spp": 20.0,
     "spp_max": 30.0,
-    "articles": 1857,
+    "articles": 2476,
     "zero_pct": 0
    }
   ]
