@@ -1,0 +1,21 @@
+{
+ "theme": "light",
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "tag": "НАБОР · TPE",
+ "headline": "2 ленты для подтягивания",
+ "headline_size": 84,
+ "sub": "Резинки на турник: 22 мм + 32 мм",
+ "bullets": [
+  "Подтянуться с первой тренировки",
+  "Без запаха латекса",
+  "Длина 208 см, толщина 4,5 мм"
+ ],
+ "out": "marketing/249/v1/slide_01.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

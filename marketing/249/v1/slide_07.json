@@ -1,0 +1,21 @@
+{
+ "theme": "light",
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "tag": "РАЗМЕРЫ",
+ "headline": "208 см × 4,5 мм",
+ "headline_size": 80,
+ "sub": "Длина и толщина одинаковые у обеих лент",
+ "bullets": [
+  "Ширина: 22 мм и 32 мм",
+  "Длина в кольце: 208 см",
+  "Толщина: 4,5 мм"
+ ],
+ "out": "marketing/249/v1/slide_07.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

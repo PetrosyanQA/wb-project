@@ -1,0 +1,21 @@
+{
+ "theme": "light",
+ "bg": "marketing/249/concept/black_clean.jpg",
+ "tag": "НЕ ТОЛЬКО ТУРНИК",
+ "headline": "Для всего тела",
+ "headline_size": 88,
+ "sub": "Одна лента — много упражнений",
+ "bullets": [
+  "Приседания и выпады",
+  "Отжимания с сопротивлением",
+  "Растяжка и разминка"
+ ],
+ "out": "marketing/249/v1/slide_08.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

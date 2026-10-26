@@ -1,0 +1,21 @@
+{
+ "theme": "light",
+ "bg": "marketing/249/concept/violet_clean.jpg",
+ "tag": "УХОД",
+ "headline": "Как служит дольше",
+ "headline_size": 84,
+ "sub": "Три простых правила",
+ "bullets": [
+  "Не растягивать больше чем в 2,5 раза",
+  "Хранить без прямого солнца",
+  "Осматривать перед тренировкой"
+ ],
+ "out": "marketing/249/v1/slide_10.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

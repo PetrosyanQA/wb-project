@@ -1,0 +1,21 @@
+{
+ "theme": "light",
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "tag": "КОМПЛЕКТ",
+ "headline": "Что в наборе",
+ "headline_size": 96,
+ "sub": "Две ленты разной силы",
+ "bullets": [
+  "Чёрная — 22 мм",
+  "Фиолетовая — 32 мм",
+  "Можно использовать вместе"
+ ],
+ "out": "marketing/249/v1/slide_02.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

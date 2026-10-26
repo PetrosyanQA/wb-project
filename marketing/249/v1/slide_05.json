@@ -1,0 +1,21 @@
+{
+ "theme": "light",
+ "bg": "marketing/249/concept/violet_clean.jpg",
+ "tag": "МАТЕРИАЛ",
+ "headline": "TPE, а не латекс",
+ "headline_size": 88,
+ "sub": "Термопластичный эластомер",
+ "bullets": [
+  "Без запаха резины",
+  "Не содержит латекса",
+  "Плотная лента 4,5 мм"
+ ],
+ "out": "marketing/249/v1/slide_05.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}
