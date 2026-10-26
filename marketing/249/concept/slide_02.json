@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ · комплект",
+ "headline": "Что в наборе",
+ "headline_size": 96,
+ "sub": "Всё для старта на турнике",
+ "bullets": [
+  "Чёрная лента 22 мм",
+  "Фиолетовая лента 32 мм",
+  "Мешочек и памятка по упражнениям"
+ ],
+ "out": "marketing/249/concept/slide_02.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

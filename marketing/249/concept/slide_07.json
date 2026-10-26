@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ",
+ "headline": "Для кого",
+ "headline_size": 96,
+ "sub": "Когда пока не получается подтянуться самому",
+ "bullets": [
+  "Новичкам и подросткам",
+  "Девушкам — первые подтягивания",
+  "После перерыва и травм"
+ ],
+ "out": "marketing/249/concept/slide_07.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

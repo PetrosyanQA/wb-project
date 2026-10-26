@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/black_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ · вопросы",
+ "headline": "Частые вопросы",
+ "headline_size": 88,
+ "sub": "Отвечаем на то, о чём пишут в отзывах",
+ "bullets": [
+  "Порвётся? — тест шва 100 раз",
+  "Хватит нагрузки? — см. слайд 3",
+  "Пахнет? — TPE без запаха"
+ ],
+ "out": "marketing/249/concept/slide_09.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

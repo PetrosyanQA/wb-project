@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/black_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ · цифры после теста",
+ "headline": "Проверяем прочность",
+ "headline_size": 84,
+ "sub": "Каждый образец — под нагрузкой",
+ "bullets": [
+  "Груз вдвое больше заявленного",
+  "100 растяжений на шов",
+  "Мороз −18 °C"
+ ],
+ "out": "marketing/249/concept/slide_04.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

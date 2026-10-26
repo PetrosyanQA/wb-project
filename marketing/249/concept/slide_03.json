@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ · выбор",
+ "headline": "Какую взять",
+ "headline_size": 96,
+ "sub": "Чем шире лента — тем сильнее помогает",
+ "bullets": [
+  "32 мм — первые подтягивания",
+  "22 мм — добиваем повторы",
+  "Вместе — максимальная помощь"
+ ],
+ "out": "marketing/249/concept/slide_03.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

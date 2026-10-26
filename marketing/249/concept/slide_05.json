@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/violet_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ · материал",
+ "headline": "TPE, а не латекс",
+ "headline_size": 88,
+ "sub": "Главная жалоба в нише — «порвалась». Мы выбрали TPE",
+ "bullets": [
+  "Без запаха резины",
+  "Не содержит латекса",
+  "Прочность шва — проверяем тестом"
+ ],
+ "out": "marketing/249/concept/slide_05.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

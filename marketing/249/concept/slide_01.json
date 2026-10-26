@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ",
+ "headline": "2 ленты для подтягивания",
+ "headline_size": 84,
+ "sub": "Набор резинок на турник из TPE",
+ "bullets": [
+  "Ширина 22 мм + 32 мм",
+  "Подтянуться с первой тренировки",
+  "Без запаха латекса"
+ ],
+ "out": "marketing/249/concept/slide_01.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}

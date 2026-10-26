@@ -1,0 +1,14 @@
+{
+ "bg": "marketing/249/generated/test_hero/pe_photoshoot_test_1.png",
+ "theme": "dark",
+ "tag": "КОНЦЕПТ · фото-заглушка",
+ "headline": "Как пользоваться",
+ "headline_size": 88,
+ "sub": "Петля на перекладине — стопа или колено в петле",
+ "bullets": [
+  "Накиньте ленту на турник",
+  "Проденьте в петлю",
+  "Поставьте ногу и подтягивайтесь"
+ ],
+ "out": "marketing/249/concept/slide_06.png"
+}

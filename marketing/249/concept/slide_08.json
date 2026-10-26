@@ -1,0 +1,21 @@
+{
+ "bg": "marketing/249/concept/set_2_clean.jpg",
+ "theme": "light",
+ "tag": "КОНЦЕПТ · размеры",
+ "headline": "208 см × 4,5 мм",
+ "headline_size": 80,
+ "sub": "Длина замкнутой ленты и толщина — одинаковые у обеих",
+ "bullets": [
+  "Ширина: 22 мм и 32 мм",
+  "Длина: 208 см",
+  "Толщина: 4,5 мм"
+ ],
+ "out": "marketing/249/concept/slide_08.png",
+ "photo_box": [
+  0,
+  420,
+  900,
+  540
+ ],
+ "bullets_y": 985
+}
