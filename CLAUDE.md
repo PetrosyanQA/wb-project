@@ -136,7 +136,7 @@ python -m src.trend_scan --path "Автотовары/Органайзеры" --
 python -m src.trend_scan --path "Автотовары/Органайзеры" --days 540 --snapshots 4
 python -m src.trend_scan --demo                       # offline smoke test
 
-python -m src.mkt wb --niche 249 --top 12            # маркетинг: WB/Amazon визуальная разведка, audit, gen (Photo Editor), compose — marketing/README.md, /marketing
+python -m src.mkt wb --niche 249 --top 12            # маркетинг: WB/Amazon визуальная разведка, audit, gen (Photo Editor), compose — marketing/README.md, /3-kartochka
 python -m src.wb_help_sync                          # справочный центр WB → docs/wb_help/ (+ OFFER_full.md)
 python -m src.brightdata_client s1688 "狗玩具 耐咬" --name 731   # 1688 prices via Bright Data (cap 20/day, docs/BRIGHTDATA.md)
 python -m src.sku_audit --sku 12345678 --days 30 --cost 380 --volume 0.6
@@ -334,3 +334,9 @@ python3 -m src.saleflow ingest - --tool items --note "Дом/Хранение 30
 - `docs/DATA_CATALOG.md` — что сохранено по каждой нише. После нового сбора: `python -m src.catalog`.
 - В новом коде брать данные через `src/datastore.py` (`files(777, "daily")`, `latest(777, "products500")`,
   `daily(sku)`), а не жёсткими путями. Сырые файлы в `data/raw/saleflow/<дата>/…` не перемещать — на них ссылается старый код.
+
+## Команды (с 2026-10-26 — три шага)
+- `/1-vybor-tovara` — товара нет: ниши, спрос, конкуренты, экономика → 1 товар + 2 запасных.
+- `/2-proverka-tovara` — товар выбран: конкуренты, жалобы, СПП и цена, экономика, поставщик, премортем; после старта — реальные продажи.
+- `/3-kartochka` — карточка: исследование, позиционирование, SEO, фото и инфографика.
+Перед любым выводом — `docs/ANALYSIS_CHECKLIST.md`. Старые команды (decide, gates, niche-scan, trend, sku-audit, reality-check, sync-tariffs, find-niche) — в `docs/archive/commands/`.
