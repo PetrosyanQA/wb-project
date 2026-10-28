@@ -1,31 +1,31 @@
 {
- "date": "2026-10-27",
+ "date": "2026-10-28",
  "249": {
-  "spp": 24.0,
-  "border": 3200,
+  "spp": 25.0,
+  "border": 3100,
   "bands": [
    {
     "price_from": 0,
-    "price_to": 1500,
+    "price_to": 2100,
     "spp": 4.0,
-    "spp_max": 29.0,
-    "articles": 2894,
+    "spp_max": 35.0,
+    "articles": 3970,
     "zero_pct": 0
    },
    {
-    "price_from": 1500,
-    "price_to": 3200,
-    "spp": 24.0,
-    "spp_max": 28.0,
-    "articles": 2634,
+    "price_from": 2100,
+    "price_to": 3100,
+    "spp": 25.0,
+    "spp_max": 4.0,
+    "articles": 1915,
     "zero_pct": 0
    },
    {
-    "price_from": 3200,
+    "price_from": 3100,
     "price_to": null,
     "spp": 27.0,
-    "spp_max": 28.0,
-    "articles": 194,
+    "spp_max": 27.0,
+    "articles": 152,
     "zero_pct": 0
    }
   ]
@@ -39,7 +39,7 @@
     "price_to": null,
     "spp": 20.0,
     "spp_max": 30.0,
-    "articles": 2157,
+    "articles": 2257,
     "zero_pct": 0
    }
   ]
