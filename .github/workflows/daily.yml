@@ -1,7 +1,7 @@
 name: daily-check
 on:
-  schedule:
-    - cron: "0 5 * * *"     # 09:00 по Еревану
+  # 2026-10-29: расписание выключено по просьбе пользователя (уведомления по нише 249 больше не нужны);
+  # мониторинг кистей 437 — .github/workflows/watch437.yml. Ручной запуск оставлен.
   workflow_dispatch: {}      # кнопка «Run workflow» для ручного запуска
 permissions:
   contents: write            # чтобы сохранить cloud_state/last.json

@@ -1,0 +1,47 @@
+name: watch-437-brushes
+on:
+  schedule:
+    - cron: "5 * * * *"      # каждый час (выдача: цена, реклама, места, остатки)
+    - cron: "10 5 * * *"     # 09:10 по Еревану — итоги дня (продажи, СПП, отзывы)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "probe / hourly / daily"
+        default: probe
+permissions:
+  contents: write            # сохранить cloud_state/watch437
+concurrency:
+  group: watch437
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests pyyaml
+      - name: Мониторинг кистей
+        env:
+          SALEFLOW_TOKEN: ${{ secrets.SALEFLOW_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WATCH_STATE_DIR: cloud_state/watch437
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            if [ "${{ github.event.schedule }}" = "10 5 * * *" ]; then MODE=daily; else MODE=hourly; fi
+          fi
+          mkdir -p cloud_state/watch437
+          python -m src.brush_watch_cloud "$MODE"
+      - name: Сохранить состояние
+        if: always()
+        run: |
+          git config user.name "watch-437"
+          git config user.email "actions@users.noreply.github.com"
+          git add cloud_state/watch437 || true
+          git diff --cached --quiet || git commit -m "watch437 state $(date -u +%FT%H%M)"
+          git pull --rebase -q || true
+          git push || true

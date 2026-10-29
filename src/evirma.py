@@ -53,7 +53,7 @@ def ranges(ids: list[int], retries: int = 6) -> dict[int, dict]:
         pct = lambda v: v / 100 if v is not None else None                                                # noqa: E731
         rub = lambda v: v // 100 if v is not None else None                                               # noqa: E731
         conv = lambda L: [{"price_from": rub(b["price_from"]), "price_to": rub(b["price_to"]), "spp": pct(b["spp_mode"]),   # noqa: E731
-                           "spp_max": pct(b["spp_max"]), "articles": b["articles"], "zero_pct": b["zero_articles_percent"]}
+                           "spp_max": pct(b["spp_max"]), "articles": b["articles"], "zero_pct": b.get("zero_articles_percent")}
                           for b in L or []]
         res[d["subject_wb_id"]] = {"date": d.get("date"), "stale": d.get("is_stale"), "fbo": conv(dims.get("fbo")), "fbs": conv(dims.get("fbs"))}
     return res
