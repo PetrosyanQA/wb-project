@@ -1,12 +1,14 @@
 name: watch-437-brushes
 on:
-  schedule:
-    - cron: "5 * * * *"      # каждый час (выдача: цена, реклама, места, остатки)
-    - cron: "10 5 * * *"     # 09:10 по Еревану — итоги дня (продажи, СПП, отзывы)
+  # Расписание включить, когда в Saleflow будет «API доступ» (сейчас 403 «API token auth not enabled»);
+  # до тех пор отчёты шлёт компьютер (задачи report-437-morning / -evening). Тогда раскомментировать:
+  # schedule:
+  #   - cron: "0 6 * * *"     # 10:00 по Еревану — утренний глубокий отчёт
+  #   - cron: "0 16 * * *"    # 20:00 по Еревану — вечерний отчёт
   workflow_dispatch:
     inputs:
       mode:
-        description: "probe / hourly / daily"
+        description: "probe / morning / evening"
         default: probe
 permissions:
   contents: write            # сохранить cloud_state/watch437
@@ -32,10 +34,10 @@ jobs:
         run: |
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "$MODE" ]; then
-            if [ "${{ github.event.schedule }}" = "10 5 * * *" ]; then MODE=daily; else MODE=hourly; fi
+            if [ "${{ github.event.schedule }}" = "0 6 * * *" ]; then MODE=morning; else MODE=evening; fi
           fi
           mkdir -p cloud_state/watch437
-          python -m src.brush_watch_cloud "$MODE"
+          if [ "$MODE" = "probe" ]; then python -m src.brush_watch_cloud probe; else python -m src.brush_report "$MODE"; fi
       - name: Сохранить состояние
         if: always()
         run: |
