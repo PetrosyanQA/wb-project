@@ -152,7 +152,9 @@ def card(sku: int, s: dict | None, r: list[dict], prev: dict | None) -> dict:
                 comments=(s or {}).get("comments") or (r[-1].get("comments") if r else None),
                 rating=r[-1].get("avg_latest_rating") if r else (s or {}).get("rating"),
                 neg=r[-1].get("latest_negative_comments_percent") if r else None, in_action=bool(r and r[-1].get("in_action")),
-                prev=prev or {}, our=sku in OUR)
+                prev=prev or {}, our=sku in OUR,
+                d_y=r[-1]["data"] if r else None, d7=(last7[0]["data"], last7[-1]["data"]) if last7 else None,
+                dp=(r[-14]["data"], r[-8]["data"]) if len(r) >= 14 else None)
 
 
 def spp_now() -> tuple[float | None, str]:
@@ -202,35 +204,69 @@ def _econ(buyer: float, spp: float | None) -> dict:
     return {"seller": seller, "start": round(st_["net_profit"]), "norm": round(nm["net_profit"]), "margin": nm["net_margin_pct"]}
 
 
+def proposals(rec_price: int, buyer: int, soon: list, ads_share: float) -> list[tuple[str, list]]:
+    """Предложения с кнопками «Да / Нет». Шлём только новые (не повторяем одно и то же каждый отчёт)."""
+    from src.tg import h
+    nm = OUR[0] if OUR else 0
+    test = "" if nm else "\n🧪 <i>Тест: товара ещё нет — кнопка покажет, что бот сделал бы.</i>"
+    out = []
+    if rec_price != buyer:
+        why = f"у {len(soon)} конкурентов товар закончится за неделю" if len(soon) >= 3 else "цены конкурентов выше нашей"
+        out.append((f"💡 <b>ПРЕДЛОЖЕНИЕ: поменять цену {buyer} → {rec_price} ₽</b>\nПричина: {h(why)}.{test}",
+                    [[{"text": f"✅ Да, поставить {rec_price} ₽", "callback_data": f"price:{nm}:{rec_price}"},
+                      {"text": "❌ Нет", "callback_data": "no:price"}]]))
+    f = BASE / "proposals_last.json"
+    last = json.load(open(f, encoding="utf-8")) if f.exists() else []
+    new = [x for x in out if x[0] not in last]
+    json.dump([x[0] for x in out], open(f, "w", encoding="utf-8"), ensure_ascii=False)
+    return new
+
+
 # ── отчёт ───────────────────────────────────────────────────────────────────────────────────────────────────
+def dm(d: str | None) -> str:
+    return f"{d[8:10]}.{d[5:7]}" if d else "—"
+
+
 def fmt_card(c: dict, i: int, rv: dict | None) -> str:
+    from src.tg import h
     p = c["prev"]
-    L = [f"{i}. {'⭐ НАШ: ' if c['our'] else ''}{c['name'][:60]}", f"   https://www.wildberries.ru/catalog/{c['sku']}/detail.aspx"]
-    pos = f"{c['pos']}" if c["pos"] else "нет в первых 100"
+    L = [f"━━━━━━━━━━━━━━━",
+         f"<b>{i}. {'⭐ НАШ ТОВАР: ' if c['our'] else ''}{h(c['name'][:60])}</b>",
+         f'<a href="https://www.wildberries.ru/catalog/{c["sku"]}/detail.aspx">открыть на WB · арт. {c["sku"]}</a>']
+    pos = f"<b>{c['pos']}</b>" if c["pos"] else "нет в первых 100"
     if p.get("pos") and c["pos"] and p["pos"] != c["pos"]:
-        pos += f" (было {p['pos']} {'⬆️' if c['pos'] < p['pos'] else '⬇️'})"
-    L.append(f"   Место в поиске: {pos}")
-    pr = f"{c['price']} ₽"
+        pos += f" (в прошлом отчёте {p['pos']}, {'поднялся ⬆️' if c['pos'] < p['pos'] else 'опустился ⬇️'})"
+    L.append(f"📍 Место в поиске: {pos}")
+    pr = f"<b>{c['price']} ₽</b>"
     if p.get("price") and c["price"] and p["price"] != c["price"]:
-        pr += f" (в прошлом отчёте {p['price']} ₽, {(c['price'] / p['price'] - 1) * 100:+.0f} %)"
+        pr += f" (в прошлом отчёте {p['price']} ₽ → {(c['price'] / p['price'] - 1) * 100:+.0f} %)"
     elif c["price_2"] and c["price_y"] and c["price_2"] != c["price_y"]:
         pr += f" (позавчера {c['price_2']} ₽ → вчера {c['price_y']} ₽)"
-    L.append(f"   Цена: {pr}" + (" · акция WB" if c["in_action"] else ""))
-    ad = "есть 📣" if c["ads"] else "нет"
+    else:
+        pr += " (не менялась)"
+    L.append(f"💰 Цена: {pr}" + (" · участвует в акции WB" if c["in_action"] else ""))
+    ad = "<b>ДА</b>" if c["ads"] else "<b>НЕТ</b>"
     if p and p.get("ads") is not None and p.get("ads") != c["ads"]:
-        ad = "ВКЛЮЧИЛ 📣" if c["ads"] else "ВЫКЛЮЧИЛ 📴"
-    L.append(f"   Реклама: {ad} · {c['ads_days']} из 7 дней" + (f" · слов в рекламе {c['ad_words']}" if c["ad_words"] else ""))
-    ch = f"{(c['a7'] / c['p7'] - 1) * 100:+.0f} %" if c["p7"] else "—"
-    L.append(f"   Продажи: вчера {c['sales_y'] if c['sales_y'] is not None else '—'} шт · 7 дн {c['a7']} шт ({ch} к прошлым 7) · ≈{c['per_day']}/день")
+        ad = "<b>ВКЛЮЧИЛ</b> 📣" if c["ads"] else "<b>ВЫКЛЮЧИЛ</b> 📴"
+    L.append(f"📣 Реклама: {ad} (была {c['ads_days']} из последних 7 дней)")
+    L.append(f"🛒 Продано вчера ({dm(c['d_y'])}): <b>{c['sales_y'] if c['sales_y'] is not None else '—'} шт</b>")
+    if c["d7"]:
+        ch = (f" → <b>{(c['a7'] / c['p7'] - 1) * 100:+.0f} %</b>" if c["p7"] else "")
+        prevw = f"неделей раньше ({dm(c['dp'][0])}–{dm(c['dp'][1])}): {c['p7']} шт{ch}" if c["dp"] else ""
+        L.append(f"🗓 Продано за неделю ({dm(c['d7'][0])}–{dm(c['d7'][1])}): <b>{c['a7']} шт</b> (в среднем {c['per_day']} в день)")
+        if prevw:
+            L.append(f"     {prevw}")
     if c["balance"] is not None:
-        dl = c["days_left"]
-        end = f" → хватит на ≈{dl} дн (до {(NOW + dt.timedelta(days=dl)):%d.%m})" if dl is not None and dl < 120 else ""
-        warn = " ⚠️" if dl is not None and dl <= 7 else ""
-        L.append(f"   Остаток: {c['balance']} шт{end}{warn}")
+        if not c["balance"]:
+            L.append("📦 <b>ОСТАТОК: 0 шт — товара НЕТ</b> ❗")
+        else:
+            dl = c["days_left"]
+            end = f" — хватит на <b>{dl:.0f} дн.</b> (примерно до {(NOW + dt.timedelta(days=dl)):%d.%m})" if dl is not None and dl < 120 else ""
+            L.append(f"📦 <b>ОСТАТОК: {c['balance']} шт</b>{end}{' ⚠️ скоро закончится' if dl is not None and dl <= 7 else ''}")
     rv_s = ""
     if rv and rv["new"]:
-        rv_s = f" · новых {rv['new']}" + (f", плохих {rv['neg']}" if rv["neg"] else "")
-    L.append(f"   Отзывы: {c['comments']}{rv_s} · рейтинг {c['rating']}" + (f" · негатив {c['neg']} %" if c["neg"] else ""))
+        rv_s = f" · новых {rv['new']}" + (f", из них плохих {rv['neg']}" if rv["neg"] else "")
+    L.append(f"⭐ Отзывы: {c['comments']}{rv_s} · рейтинг {c['rating']}" + (f" · плохих в последних {c['neg']:.0f} %" if c["neg"] else ""))
     return "\n".join(L)
 
 
@@ -318,43 +354,65 @@ def build(mode: str, dry: bool) -> None:
         R.append(f"• В карточке закрыть жалобы конкурентов: {', '.join(k for k, _ in top_theme.most_common(3))}")
 
     # текст
-    title = "☀️ УТРЕННИЙ" if mode == "morning" else "🌙 ВЕЧЕРНИЙ"
-    head = [f"{title} ОТЧЁТ — КИСТИ ДЛЯ МАКИЯЖА (ниша 437)",
-            f"{NOW:%d.%m.%Y %H:%M} · {len(C)} конкурентов · поиск WB, Москва · 🧪 тест-режим: нашего товара ещё нет", "",
-            "📈 РЫНОК",
-            f"• Продажи наших {len(C)} конкурентов: 7 дн {a7} шт (прошлые 7 дн {p7} шт, {((a7 / p7 - 1) * 100 if p7 else 0):+.0f} %)",
-            f"• 🔮 Прогноз на следующие 7 дней: ≈{fc} шт ({f_txt})",
-            f"• Цены конкурентов: медиана {med:.0f} ₽, от {prices[0] if prices else '—'} до {prices[-1] if prices else '—'} ₽ · наша плановая {buyer} ₽",
-            f"• Реклама: в топ-30 {promo_top30} из {top30_n}; всего рекламных мест {q0.get('promoted_total')} из {q0.get('total')}",
-            f"• 💳 СПП FBS при нашей цене: {spp} % (Evirma {spp_date})" + ("" if mode == "morning" else " — из утреннего замера")]
+    from src.tg import h, send as tg_send
+    title = "☀️ УТРЕННИЙ ОТЧЁТ" if mode == "morning" else "🌙 ВЕЧЕРНИЙ ОТЧЁТ"
+    d7 = next((c["d7"] for c in C if c.get("d7")), None)
+    dp = next((c["dp"] for c in C if c.get("dp")), None)
+    wk = f"{dm(d7[0])}–{dm(d7[1])}" if d7 else "7 дн"
+    pwk = f"{dm(dp[0])}–{dm(dp[1])}" if dp else "прошлые 7 дн"
+    mk = (a7 / p7 - 1) * 100 if p7 else 0
+    head = [f"<b>{title} — КИСТИ ДЛЯ МАКИЯЖА</b>",
+            f"{NOW:%d.%m.%Y %H:%M} · {len(C)} конкурентов · поиск WB, Москва",
+            "🧪 <i>Тест-режим: нашего товара ещё нет</i>", "",
+            "<b>📈 РЫНОК</b>",
+            f"🛒 Все {len(C)} конкурентов продали за неделю ({wk}): <b>{a7} шт</b>",
+            f"     неделей раньше ({pwk}): {p7} шт → <b>{mk:+.0f} %</b>",
+            f"🔮 <b>Прогноз на следующие 7 дней: ≈{fc} шт</b> ({h(f_txt)})",
+            f"💰 Цены конкурентов: средняя (медиана) <b>{med:.0f} ₽</b>, от {prices[0] if prices else '—'} до {prices[-1] if prices else '—'} ₽",
+            f"     наша плановая цена: <b>{buyer} ₽</b>",
+            f"📣 Реклама: в первых 30 местах — <b>{promo_top30} из {top30_n}</b> на рекламе",
+            f"💳 СПП (скидка WB покупателю) при нашей цене: <b>{spp} %</b>" + ("" if mode == "morning" else " (утренний замер)")]
     if soon:
-        head += ["", "📦 У КОГО СКОРО ЗАКОНЧИТСЯ ТОВАР"] + [
-            (f"• {c['name'][:45].strip()}: уже нет в наличии" if not c["balance"] else
-             f"• {c['name'][:45].strip()}: {c['balance']} шт ≈ {c['days_left']} дн (до {(NOW + dt.timedelta(days=c['days_left'])):%d.%m})") for c in soon[:8]]
+        head += ["", "<b>📦 У КОГО СКОРО ЗАКОНЧИТСЯ ТОВАР</b>"] + [
+            (f"❗ {h(c['name'][:45].strip())}: <b>товара НЕТ</b>" if not c["balance"] else
+             f"⚠️ {h(c['name'][:45].strip())}: <b>{c['balance']} шт</b> — на {c['days_left']:.0f} дн. (до {(NOW + dt.timedelta(days=c['days_left'])):%d.%m})")
+            for c in soon[:8]]
     if growers:
-        head += ["", "🚀 КТО РАСТЁТ (7 дн к прошлым 7)"] + [f"• {c['name'][:45]}: {c['p7']} → {c['a7']} шт ({(c['a7'] / c['p7'] - 1) * 100:+.0f} %), {c['price']} ₽, реклама {'да' if c['ads'] else 'нет'}" for c in growers[:5]]
+        head += ["", f"<b>🚀 КТО РАСТЁТ</b> (неделя {wk} к неделе {pwk})"] + [
+            f"• {h(c['name'][:45])}: {c['p7']} → <b>{c['a7']} шт</b> ({(c['a7'] / c['p7'] - 1) * 100:+.0f} %), {c['price']} ₽, реклама {'да' if c['ads'] else 'нет'}"
+            for c in growers[:5]]
     nr = sum(v["new"] for v in RV.values()); nn = sum(v["neg"] for v in RV.values())
-    head += ["", "💬 НОВЫЕ ОТЗЫВЫ (с прошлого отчёта)",
-             f"• Всего {nr}, плохих (≤3★) {nn}" + (f" — {', '.join(f'{k} {v}' for k, v in top_theme.most_common(3))}" if top_theme else "")]
-    head += [f"   «{q}»" for v in RV.values() for q in v["quote"]][:2]
-    head += ["", "🔔 ЧТО ИЗМЕНИЛОСЬ С ПРОШЛОГО ОТЧЁТА"] + (S[:15] if S else ["Первый отчёт — сравнение будет в следующем." if not last else "Существенных изменений нет."])
-    head += ["", "✅ ЧТО ДЕЛАТЬ НАМ (стратегия)"] + R
+    head += ["", "<b>💬 НОВЫЕ ОТЗЫВЫ</b> (с прошлого отчёта)",
+             f"Всего <b>{nr}</b>, из них плохих (1–3★) <b>{nn}</b>" + (f": {h(', '.join(f'{k} — {v}' for k, v in top_theme.most_common(3)))}" if top_theme else "")]
+    head += [f"     «{h(q)}»" for v in RV.values() for q in v["quote"]][:2]
+    head += ["", "<b>🔔 ЧТО ИЗМЕНИЛОСЬ С ПРОШЛОГО ОТЧЁТА</b>"] + ([h(x) for x in S[:15]] if S else
+                                                              ["Первый отчёт — сравнение будет в следующем." if not last else "Существенных изменений нет."])
+    head += ["", "<b>✅ ЧТО ДЕЛАТЬ НАМ</b>"] + [h(x) for x in R]
+    text1 = "\n".join(head)
     cards = [fmt_card(c, i, RV.get(c["sku"])) for i, c in enumerate(sorted(C, key=lambda c: -c["a7"]), 1)]
     nf = meta.get("_not_found") or []
-    tail = [f"❔ Ориентиры не найдены в поиске (нет в первых 500): {', '.join(WATCH.get(k, str(k))[:25] for k in nf)}"] if nf else []
-    text1 = "\n".join(head)
-    body = "👥 ВСЕ КОНКУРЕНТЫ (по продажам за 7 дней)\n\n" + "\n\n".join(cards) + ("\n\n" + "\n".join(tail) if tail else "")
+    tail = [f"❔ Ориентиры не найдены в поиске (нет в первых 500): {h(', '.join(WATCH.get(k, str(k))[:25] for k in nf))}"] if nf else []
     rep = ROOT / "reports" / "monitor" / "watch437" / f"{NOW:%Y-%m-%d}_{mode}.md"
     rep.parent.mkdir(parents=True, exist_ok=True)
-    rep.write_text(text1 + "\n\n" + body + "\n", encoding="utf-8")
-    send(text1, dry)
-    chunk = ""
-    for part in body.split("\n\n"):                                       # Telegram ≤ 4096 знаков
+    rep.write_text(text1 + "\n\n" + "\n\n".join(cards) + "\n", encoding="utf-8")
+    print(text1)
+    if not dry:
+        tg_send(text1)
+        props = proposals(rec_price, buyer, soon, ads_share)
+        for txt, btn in props:
+            tg_send(txt, buttons=btn)
+    chunk = f"<b>👥 ВСЕ КОНКУРЕНТЫ</b> — отсортированы по продажам за неделю ({wk})"
+    for part in cards + tail:                                              # Telegram ≤ 4096 знаков
         if len(chunk) + len(part) > 3800:
-            send(chunk, dry); chunk = ""
-        chunk += ("\n\n" if chunk else "") + part
+            print(chunk)
+            if not dry:
+                tg_send(chunk)
+            chunk = ""
+        chunk += ("\n" if chunk else "") + part
     if chunk:
-        send(chunk, dry)
+        print(chunk)
+        if not dry:
+            tg_send(chunk)
     json.dump({"ts": NOW.isoformat(timespec="seconds"), "spp": spp, "spp_date": spp_date,
                "top20": [str(k) for k, v in cur.items() if v["pos"] <= 20],
                "cards": {str(c["sku"]): {k: c[k] for k in ("pos", "price", "ads", "balance", "a7")} for c in C}},

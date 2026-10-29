@@ -42,16 +42,8 @@ def rows(p: str) -> list[dict]:
 
 
 def telegram(text: str) -> bool:
-    """В облаке — TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID из секретов GitHub; на компьютере — как в src.competitor_pulse."""
-    tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
-    if not (tok and chat):
-        from src.competitor_pulse import telegram as local
-        return local(text)
-    try:
-        r = requests.post(f"https://api.telegram.org/bot{tok}/sendMessage", json={"chat_id": chat, "text": text[:4000]}, timeout=20)
-        return r.ok
-    except requests.RequestException:
-        return False
+    from src.tg import send as tg_send
+    return tg_send(text, html_mode=False)
 
 
 def send(text: str, dry: bool) -> None:

@@ -1,0 +1,41 @@
+name: bot-437-buttons
+# Бот-команды: забирает нажатия кнопок «Да / Нет» и команды (/status, /price 1490) из Telegram и выполняет.
+# Работает без компьютера и без Saleflow (нужны только Telegram и WB-токен). Каждые 30 минут — так укладываемся
+# в бесплатные минуты GitHub. Мгновенная реакция — позже через webhook (Cloudflare Worker).
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: bot437
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests pyyaml
+      - name: Нажатия и команды
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WB_SELLER_TOKEN: ${{ secrets.WB_SELLER }}
+          WATCH_STATE_DIR: cloud_state/watch437
+        run: |
+          mkdir -p cloud_state/watch437
+          python -m src.bot_actions poll
+      - name: Сохранить состояние
+        if: always()
+        run: |
+          git config user.name "bot-437"
+          git config user.email "actions@users.noreply.github.com"
+          git add cloud_state/watch437/bot_offset.json cloud_state/watch437/actions.csv 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "bot437 state $(date -u +%FT%H%M)"
+          git pull --rebase -q || true
+          git push || true
