@@ -61,8 +61,10 @@ def snapshot(sku: int) -> dict | None:
     except Exception:                                                     # noqa: BLE001
         return None
     media = card.get("media") or {}
+    opts = {o.get("name"): str(o.get("value")) for o in card.get("options") or [] if isinstance(o, dict) and o.get("name")}
     return {"fp": fp, "jpg": jpg, "photos": media.get("photo_count"), "video": bool(media.get("has_video")),
-            "title": card.get("imt_name") or "", "rich": bool(card.get("has_rich"))}
+            "title": card.get("imt_name") or "", "rich": bool(card.get("has_rich")),
+            "desc": card.get("description") or "", "opts": opts}
 
 
 def check(skus: list[int], names: dict[int, str]) -> list[dict]:
@@ -90,6 +92,13 @@ def check(skus: list[int], names: dict[int, str]) -> list[dict]:
                 out.append({"sku": sku, "kind": "video", "text": f"🎬 {nm}: {'ДОБАВИЛ видео' if s['video'] else 'убрал видео'}"})
             if p.get("title") and p["title"] != s["title"]:
                 out.append({"sku": sku, "kind": "title", "text": f"✏️ {nm}: сменил название\n     было: «{p['title'][:70]}»\n     стало: «{s['title'][:70]}»"})
+            if p.get("desc") is not None and p.get("desc") != s["desc"]:
+                out.append({"sku": sku, "kind": "desc", "text": f"📝 {nm}: изменил ОПИСАНИЕ ({desc_change(p['desc'], s['desc'])})"})
+            if p.get("opts") is not None:
+                ch = [f"{k}: «{p['opts'].get(k, '—')[:30]}» → «{s['opts'].get(k, '—')[:30]}»"
+                      for k in sorted(set(p["opts"]) | set(s["opts"])) if p["opts"].get(k) != s["opts"].get(k)]
+                if ch:
+                    out.append({"sku": sku, "kind": "opts", "text": f"🔧 {nm}: изменил характеристики — " + "; ".join(ch[:4]) + (f" и ещё {len(ch) - 4}" if len(ch) > 4 else "")})
             if not p.get("rich") and s["rich"]:
                 out.append({"sku": sku, "kind": "rich", "text": f"📄 {nm}: добавил rich-контент (расширенное описание)"})
         (PHOTOS / f"{sku}_last.jpg").write_bytes(s["jpg"])
@@ -97,6 +106,20 @@ def check(skus: list[int], names: dict[int, str]) -> list[dict]:
     json.dump(st, open(STATE, "w", encoding="utf-8"), ensure_ascii=False)
     json.dump(ev, open(EVENTS, "w", encoding="utf-8"), ensure_ascii=False)
     return out
+
+
+def desc_change(a: str, b: str) -> str:
+    """Коротко, что поменялось в описании: длина и новые слова (без стоп-слов)."""
+    import re
+    wa = set(re.findall(r"[а-яёa-z]{4,}", a.lower())); wb = set(re.findall(r"[а-яёa-z]{4,}", b.lower()))
+    add = sorted(wb - wa, key=len, reverse=True)[:6]
+    rem = sorted(wa - wb, key=len, reverse=True)[:4]
+    s = f"длина {len(a)} → {len(b)} знаков"
+    if add:
+        s += "; добавил слова: " + ", ".join(add)
+    if rem:
+        s += "; убрал: " + ", ".join(rem)
+    return s
 
 
 def effects(bp: dict[int, list[dict]], min_days: int = 3) -> list[str]:
