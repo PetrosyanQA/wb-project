@@ -97,7 +97,7 @@ def cmd_hourly(a) -> None:
     for sku in list(WATCH) + sorted(OUR - set(WATCH)):
         b, p0 = cur.get(sku), prev.get(sku)
         if not b:
-            L.append(f"· {name(sku)}: нет в топ-100 выдачи"); continue
+            L.append(f"· {name(sku)}: нет в выдаче (топ-500)"); continue
         sold = (p0["balance"] - b["balance"]) if p0 and p0.get("balance") is not None and b.get("balance") is not None else None
         price = f"{b['price']} ₽"
         if p0 and p0.get("price") and b.get("price") and abs(b["price"] / p0["price"] - 1) * 100 >= pp:
