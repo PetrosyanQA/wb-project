@@ -61,7 +61,7 @@ def send(text: str, dry: bool) -> None:
 
 
 def name(sku: int, fallback: str = "") -> str:
-    return ("⭐ наш " if sku in OUR else "") + (WATCH.get(sku) or fallback or str(sku))[:34]
+    return ("⭐ НАШ: " if sku in OUR else "") + (WATCH.get(sku) or fallback or str(sku))[:60]
 
 
 def cmd_status(a) -> None:
@@ -93,46 +93,88 @@ def cmd_hourly(a) -> None:
     lf = BASE / "last_hour.json"
     prev = {int(k): v for k, v in json.load(open(lf, encoding="utf-8")).items()} if lf.exists() else {}
     pp, pos_th, low = TH.get("price_pct", 3), TH.get("position", 10), TH.get("low_stock", 10)
-    L, S = [], []
+    first = not prev
+    L, S, ACT = [], [], []
+    gone = []
     for sku in list(WATCH) + sorted(OUR - set(WATCH)):
         b, p0 = cur.get(sku), prev.get(sku)
         if not b:
-            L.append(f"· {name(sku)}: нет в выдаче (топ-500)"); continue
-        sold = (p0["balance"] - b["balance"]) if p0 and p0.get("balance") is not None and b.get("balance") is not None else None
-        price = f"{b['price']} ₽"
-        if p0 and p0.get("price") and b.get("price") and abs(b["price"] / p0["price"] - 1) * 100 >= pp:
-            price = f"{p0['price']}→{b['price']} ₽ {'⬆️' if b['price'] > p0['price'] else '⬇️'}"
-            drop = (1 - b["price"] / p0["price"]) * 100
-            S.append(f"{'⚠️ снизил цену на %.0f %%, проверить нашу' % drop if drop >= TH.get('price_drop_alert', 10) else '💸 цена'} — "
-                     f"{name(sku)}: {p0['price']} → {b['price']} ₽")
-        ads = "📣" if b["ads"] else "—"
+            gone.append(name(sku)); continue
+        lines = [f"{len(L) + 1}. {name(sku)}", f"   https://www.wildberries.ru/catalog/{sku}/detail.aspx"]
+        # место в поиске
+        if p0 and p0["pos"] != b["pos"]:
+            arrow = "⬆️ поднялся" if b["pos"] < p0["pos"] else "⬇️ опустился"
+            lines.append(f"   Место в поиске: {b['pos']} (было {p0['pos']}, {arrow})")
+            if abs(b["pos"] - p0["pos"]) >= pos_th:
+                S.append(f"{arrow[:2]} {name(sku)}: место {p0['pos']} → {b['pos']}")
+        else:
+            lines.append(f"   Место в поиске: {b['pos']}" + ("" if first else " (без изменений)"))
+        # цена
+        if p0 and p0.get("price") and b.get("price") and b["price"] != p0["price"]:
+            ch = (b["price"] / p0["price"] - 1) * 100
+            lines.append(f"   Цена: {b['price']} ₽ (было {p0['price']} ₽, {ch:+.0f} %)")
+            if abs(ch) >= pp:
+                if -ch >= TH.get("price_drop_alert", 10):
+                    S.append(f"⚠️ {name(sku)} снизил цену на {-ch:.0f} %: {p0['price']} → {b['price']} ₽")
+                    ACT.append(f"• {name(sku)} резко снизил цену — следим, не теряем ли мы заказы; свою цену пока не трогаем")
+                else:
+                    S.append(f"💸 {name(sku)}: цена {p0['price']} → {b['price']} ₽ ({ch:+.0f} %)")
+        else:
+            lines.append(f"   Цена: {b['price']} ₽" + ("" if first else " (не менялась)"))
+        # реклама
         if p0 and p0.get("ads") != b["ads"]:
+            lines.append(f"   Реклама: {'включил 📣' if b['ads'] else 'выключил 📴'}")
             S.append(f"{'📣 включил' if b['ads'] else '📴 выключил'} рекламу: {name(sku)}")
-        mv = ""
-        if p0 and abs(b["pos"] - p0["pos"]) >= pos_th:
-            mv = f" ({p0['pos']}→{b['pos']})"
-            S.append(f"{'⬆️' if b['pos'] < p0['pos'] else '⬇️'} {name(sku)}: место {p0['pos']} → {b['pos']}")
-        if b.get("balance") is not None and b["balance"] <= low and (not p0 or (p0.get("balance") or 0) > low):
-            S.append(f"📦 {name(sku)}: остаток {b['balance']} шт — может закончиться (шанс забрать покупателей)")
-        sold_s = f", продано ≈{sold}" if sold and sold > 0 else ""
-        L.append(f"· {name(sku)}: место {b['pos']}{mv}, {price}, реклама {ads}{sold_s}")
+        else:
+            lines.append(f"   Реклама: {'есть 📣' if b['ads'] else 'нет'}")
+        # остаток и продажи за час
+        if b.get("balance") is not None:
+            sold = (p0["balance"] - b["balance"]) if p0 and p0.get("balance") is not None else None
+            tail = ""
+            if sold is not None and sold > 0:
+                tail = f" (−{sold} за час ≈ {sold} продаж)"
+            elif sold is not None and sold < 0:
+                tail = f" (+{-sold}, пришла поставка)"
+            lines.append(f"   Остаток: {b['balance']} шт{tail}")
+            if b["balance"] <= low and (not p0 or (p0.get("balance") or 0) > low):
+                S.append(f"📦 {name(sku)}: остаток {b['balance']} шт — скоро закончится")
+        # отзывы
+        if b.get("comments") is not None:
+            dc = (b["comments"] - p0["comments"]) if p0 and p0.get("comments") is not None else 0
+            lines.append(f"   Отзывов: {b['comments']}" + (f" (+{dc} новых)" if dc > 0 else "") + (f", рейтинг {b['rating']}" if b.get("rating") else ""))
+        L.append("\n".join(lines))
     short = [sku for sku in WATCH if cur.get(sku) and cur[sku].get("balance") is not None and cur[sku]["balance"] <= low]
     if len(short) >= TH.get("raise_price_min", 2):
-        S.append(f"💡 у {len(short)} конкурентов заканчивается товар — можно поднять цену на 5–10 % (спрос уйдёт к тем, у кого есть)")
+        S.append(f"💡 у {len(short)} конкурентов заканчивается товар")
+        ACT.append("• У нескольких конкурентов кончается товар — можно поднять нашу цену на 5–10 %")
     top10_prev = {k for k, v in prev.items() if v["pos"] <= 10}
     for sku, v in sorted(cur.items(), key=lambda kv: kv[1]["pos"]):
         if v["pos"] <= 10 and prev and sku not in top10_prev and sku not in WATCH:
-            S.append(f"🆕 в топ-10: {sku} «{v['name']}» {v['price']} ₽, реклама {'да' if v['ads'] else 'нет'}")
-    promo = sum(1 for v in cur.values() if v["pos"] <= 30 and v["ads"])
+            S.append(f"🆕 новый в топ-10: «{v['name']}» {v['price']} ₽, реклама {'да' if v['ads'] else 'нет'} — "
+                     f"https://www.wildberries.ru/catalog/{sku}/detail.aspx")
+    top = sorted(cur.values(), key=lambda v: v["pos"])[:10]
+    avg = round(sum(v["price"] or 0 for v in top) / len(top)) if top else 0
+    promo = sum(1 for v in top if v["ads"])
     with open(BASE / "hourly.csv", "a", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
         for sku, v in cur.items():
             if v["pos"] <= 30 or sku in WATCH or sku in OUR:
                 w.writerow([NOW.isoformat(timespec="minutes"), sku, v["pos"], v["price"], int(v["ads"]), v["balance"], v["rating"], v["comments"]])
     json.dump({str(k): v for k, v in cur.items()}, open(lf, "w", encoding="utf-8"), ensure_ascii=False)
-    head = f"🖌 Кисти 437 — {NOW:%d.%m %H:%M} (выдача WB, Москва)\nРеклама в топ-30: {promo} из 30"
-    body = ("\nИзменения за час:\n" + "\n".join(S[:12])) if S else "\nЗа час без заметных изменений."
-    send(head + body + "\n\nКонкуренты:\n" + "\n".join(L), a.dry)
+    our_price = CFG.get("our_price_buyer") or 1390
+    head = (f"🖌 КИСТИ ДЛЯ МАКИЯЖА — отчёт за час\n{NOW:%d.%m.%Y %H:%M}, поиск WB «{CFG['queries'][0]}», Москва\n\n"
+            f"📊 РЫНОК (первые 10 мест поиска)\n"
+            f"• Средняя цена: {avg} ₽ (наша плановая — {our_price} ₽)\n"
+            f"• С рекламой: {promo} из {len(top)} — без рекламы наверх не попасть")
+    if first:
+        chg = "\n\n🔔 ЧТО ИЗМЕНИЛОСЬ\nЭто первый замер — сравнение «было → стало» будет со следующего часа."
+    else:
+        chg = "\n\n🔔 ЧТО ИЗМЕНИЛОСЬ ЗА ЧАС\n" + ("\n".join(S[:12]) if S else "Ничего важного: цены, реклама и места почти те же.")
+    act = ("\n\n✅ ЧТО ДЕЛАТЬ НАМ\n" + "\n".join(ACT)) if ACT else ""
+    comp = "\n\n👥 КОНКУРЕНТЫ (наши ориентиры)\n\n" + "\n\n".join(L)
+    if gone:
+        comp += "\n\n❔ Не найдены в поиске (нет в первых 500 — возможно, кончился товар):\n" + "\n".join(f"• {g}" for g in gone)
+    send(head + chg + act + comp, a.dry)
 
 
 def cmd_daily(a) -> None:
@@ -151,22 +193,35 @@ def cmd_daily(a) -> None:
         pr0 = (prev or {}).get("final_price") or (prev or {}).get("price")
         pch = "=" if not pr0 or pr == pr0 else f"{pr0}→{pr} {'⬆️' if pr > pr0 else '⬇️'}"
         ads_days = sum(1 for x in r[-7:] if x.get("in_ads"))
-        L.append(f"· {name(sku)}: вчера {last.get('sales') or 0} шт, цена {pr} ₽ ({pch}), реклама {'📣' if last.get('in_ads') else '—'} "
-                 f"({ads_days}/7 дн), 7 дн {s7} шт к прошлым 7 дн {dif}, отзывов {last.get('comments')}")
-        tot.append((s7, s7p))
+        ch_txt = f"{(s7 / s7p - 1) * 100:+.0f} %" if s7p else "нет данных"
+        pr_txt = f"{pr} ₽" + ("" if not pr0 or pr == pr0 else f" (позавчера {pr0} ₽, {'выросла ⬆️' if pr > pr0 else 'снизилась ⬇️'})")
+        L.append("\n".join([
+            f"{len(L) + 1}. {name(sku)}",
+            f"   https://www.wildberries.ru/catalog/{sku}/detail.aspx",
+            f"   Продано вчера: {last.get('sales') or 0} шт",
+            f"   За 7 дней: {s7} шт (прошлые 7 дней: {s7p} шт, {ch_txt})",
+            f"   Цена: {pr_txt}",
+            f"   Реклама: {'есть 📣' if last.get('in_ads') else 'нет'} (была {ads_days} из 7 дней)",
+            f"   Остаток: {last.get('balance')} шт, отзывов: {last.get('comments')}"]))
+        tot.append((s7, s7p, sku))
         with open(BASE / "daily.csv", "a", encoding="utf-8", newline="") as f:
             csv.writer(f).writerow([last["data"], sku, last.get("sales"), pr, int(bool(last.get("in_ads"))), last.get("balance"), last.get("comments"), s7, s7p])
     if not L:
         print("нет данных by_period"); return
     extra = spp_line() + reviews_lines(yday) + (weekly_lines() if NOW.weekday() == 0 else [])
-    a7, b7 = sum(x for x, _ in tot), sum(y for _, y in tot)
-    head = (f"📊 Кисти 437 — итоги за {yday[8:]}.{yday[5:7]}\nВсе конкуренты: 7 дн {a7} шт к прошлым 7 дн {b7} шт "
-            f"({(a7 / b7 - 1) * 100:+.0f} %)" if b7 else f"📊 Кисти 437 — итоги за {yday}")
+    a7, b7 = sum(x for x, _, _ in tot), sum(y for _, y, _ in tot)
+    best = max(tot, key=lambda x: x[0])
+    mkt = f"{(a7 / b7 - 1) * 100:+.0f} %" if b7 else "нет данных"
+    head = (f"📊 КИСТИ ДЛЯ МАКИЯЖА — итоги дня за {yday[8:]}.{yday[5:7]}.{yday[:4]}\n\n"
+            f"📈 РЫНОК (наши {len(tot)} конкурентов вместе)\n"
+            f"• За 7 дней продали {a7} шт, за прошлые 7 дней — {b7} шт ({mkt})\n"
+            f"• Больше всех продаёт: {name(best[2])} — {best[0]} шт за неделю")
+    more = ("\n\n🔎 ДОПОЛНИТЕЛЬНО\n" + "\n".join(extra)) if extra else ""
+    body = head + more + "\n\n👥 ПО КАЖДОМУ КОНКУРЕНТУ\n\n" + "\n\n".join(L)
     rep = ROOT / "reports" / "monitor" / "watch437" / f"{NOW:%Y-%m-%d}.md"
     rep.parent.mkdir(parents=True, exist_ok=True)
-    body = head + "\n\n" + "\n".join(L) + ("\n\n" + "\n".join(extra) if extra else "")
     rep.write_text(body + "\n", encoding="utf-8")
-    send(body + "\n\n(продажи — Saleflow: оценка, точны только для FBS)", a.dry)
+    send(body + "\n\n(продажи — данные Saleflow, это оценка)", a.dry)
 
 
 def spp_line() -> list[str]:
