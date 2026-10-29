@@ -288,6 +288,9 @@ def build(mode: str, dry: bool) -> None:
     last = json.load(open(last_f, encoding="utf-8")) if last_f.exists() else {}
     prevc = {int(k): v for k, v in (last.get("cards") or {}).items()}
     C = [card(k, cur.get(k), bp.get(k, []), prevc.get(k)) for k in skus]
+    from src.card_watch import check as card_check, effects as card_effects
+    CH = card_check(skus, {c["sku"]: c["name"][:45] for c in C})
+    EFF = card_effects(bp) if mode == "morning" else []
     since = last.get("ts") or (NOW - dt.timedelta(days=1)).isoformat()
     RV = reviews(skus, since[:19])
     spp, spp_date = spp_now() if mode == "morning" else (last.get("spp"), last.get("spp_date"))
@@ -385,6 +388,10 @@ def build(mode: str, dry: bool) -> None:
     head += ["", "<b>💬 НОВЫЕ ОТЗЫВЫ</b> (с прошлого отчёта)",
              f"Всего <b>{nr}</b>, из них плохих (1–3★) <b>{nn}</b>" + (f": {h(', '.join(f'{k} — {v}' for k, v in top_theme.most_common(3)))}" if top_theme else "")]
     head += [f"     «{h(q)}»" for v in RV.values() for q in v["quote"]][:2]
+    head += ["", "<b>🖼 КАРТОЧКИ КОНКУРЕНТОВ</b> (фото, видео, название)"] + (
+        [h(x["text"]) for x in CH] or ["Изменений нет." if (BASE / "cards_state.json").exists() else "Первая проверка — запомнил карточки."])
+    if EFF:
+        head += ["", "<b>📊 ПОМОГЛО ЛИ НОВОЕ ФОТО</b> (продажи, место, видимость — 7 дн до и после; CTR конкурентов WB не показывает)"] + [h(x) for x in EFF]
     head += ["", "<b>🔔 ЧТО ИЗМЕНИЛОСЬ С ПРОШЛОГО ОТЧЁТА</b>"] + ([h(x) for x in S[:15]] if S else
                                                               ["Первый отчёт — сравнение будет в следующем." if not last else "Существенных изменений нет."])
     head += ["", "<b>✅ ЧТО ДЕЛАТЬ НАМ</b>"] + [h(x) for x in R]
@@ -398,6 +405,10 @@ def build(mode: str, dry: bool) -> None:
     print(text1)
     if not dry:
         tg_send(text1)
+        from src.tg import send_photo
+        for x in CH:
+            if x["kind"] == "photo":
+                send_photo(x["jpg"], f"🖼 <b>Новое главное фото</b>\n{h(x['text'])}\nhttps://www.wildberries.ru/catalog/{x['sku']}/detail.aspx")
         props = proposals(rec_price, buyer, soon, ads_share)
         for txt, btn in props:
             tg_send(txt, buttons=btn)

@@ -54,3 +54,15 @@ def send(text: str, html_mode: bool = True, buttons: list[list[dict]] | None = N
     if buttons:
         p["reply_markup"] = {"inline_keyboard": buttons}
     return bool(api("sendMessage", **p))
+
+
+def send_photo(jpg: bytes, caption: str) -> bool:
+    tok, chat = creds()
+    if not (tok and chat):
+        return False
+    try:
+        r = requests.post(f"https://api.telegram.org/bot{tok}/sendPhoto", data={"chat_id": chat, "caption": caption[:1000], "parse_mode": "HTML"},
+                          files={"photo": ("photo.jpg", jpg, "image/jpeg")}, timeout=60)
+        return r.ok
+    except requests.RequestException:
+        return False
