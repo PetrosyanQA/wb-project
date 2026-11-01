@@ -32,3 +32,9 @@ docs/suppliers/*.txt
 docs/suppliers/yuanexim_pages/
 data/wb_mcp/
 .arena/
+
+# аудит 2026-11-01
+.duel/
+.arena/
+data/processed/*.log
+docs/**/*.pdf

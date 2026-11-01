@@ -12,7 +12,10 @@ import argparse, datetime as dt, json, os, re, sys
 sys.stdout.reconfigure(encoding="utf-8")
 from src.niche_v7 import P500, req, _load
 
-OLD = ["data/raw/saleflow/v3_products500", ".arena/run-20261025-153238-s146793/scratch/a001/p500"]
+from src.datastore import PRODUCT_DIRS  # noqa: E402
+OLD = PRODUCT_DIRS["2026-07"]           # июль — база сравнения
+WARN = ("⚠️ Октябрь (FBS, неполный ≈ 0,61×) против июля: рост ЗАНИЖЕН для всех одинаково — сравнивать карточки между собой, "
+        "а не с порогом роста рынка")
 
 
 def rows(p):
@@ -47,6 +50,7 @@ def main():
                             country=r.get("country"), in_ads=None, docs=rq["docs"][:45], verdict=rq["verdict"][:25], has_jul=bool(old)))
     out.sort(key=lambda x: -(x["rev_oct"] or 0))
     json.dump(out, open("data/processed/wb_risers_2026-11-01.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(WARN)
     print(f"растущих карточек: {len(out)} в {len({x['sid'] for x in out})} нишах")
     for x in out[:a.top]:
         print(f"{x['id']} {x['price']}₽ окт {x['sales_oct']} (июль {x['sales_jul']}) {x['rev_oct']//1000}т ₽ старт {x['start'][:7]} ★{x['rating']}({x['comments']}) {x['country']} | {x['niche'][:30]} | {x['name'][:55]} | {x['verdict']}")

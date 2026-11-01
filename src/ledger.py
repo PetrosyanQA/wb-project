@@ -56,7 +56,8 @@ def summary(orders_day: float | None = None) -> dict:
     out = {"batches": [], "stock": 0, "cash_out": sum(num(p["rub"]) for p in P)}
     for b in B:
         units = num(b["units"])
-        goods = units * num(b["cny_per_unit"]) * num(b["fx_cny_rub"], 12.43)
+        from src.white_import import CNY, K
+        goods = units * num(b["cny_per_unit"]) * num(b["fx_cny_rub"], K * CNY)   # нет курса в строке → белый ввоз YUAN EXIM (k × курс КП), было ЦБ 12,43
         total = goods + num(b["cargo_rub"]) + num(b["other_rub"])
         out["batches"].append({"id": b["batch_id"], "status": b["status"], "units": units,
                                "unit_cost": round(total / units, 1) if units else None, "total_rub": round(total)})

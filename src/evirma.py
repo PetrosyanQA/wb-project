@@ -72,6 +72,20 @@ def spp_at(r: dict, price: float, model: str = "fbs") -> float | None:
     return None
 
 
+def latest_snapshot(max_age_days: int = 14) -> tuple[str, dict]:
+    """Самый свежий сохранённый снимок data/raw/evirma/<дата>/ranges.json → (дата, {subject(str): полосы}).
+    Старше max_age_days → предупреждение в stderr (обновить: python -m src.evirma snapshot, бесплатно)."""
+    import glob
+    files = sorted(glob.glob(f"{RAW}/*/ranges.json"))
+    if not files:
+        raise FileNotFoundError("нет снимка СПП Evirma: python -m src.evirma snapshot")
+    day = os.path.basename(os.path.dirname(files[-1]))
+    age = (dt.date.today() - dt.date.fromisoformat(day)).days
+    if age > max_age_days:
+        print(f"⚠️ снимок СПП Evirma от {day} ({age} дн.) — обновите: python -m src.evirma snapshot", file=sys.stderr)
+    return day, json.load(open(files[-1], encoding="utf-8"))
+
+
 def snapshot() -> str:
     names = subjects()
     rg = ranges(list(names))

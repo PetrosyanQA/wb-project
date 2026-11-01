@@ -48,6 +48,10 @@ def month_used(u: dict) -> int:
     return sum(v for k, v in u.items() if k.startswith(m))
 
 
+class BudgetStop(SystemExit):
+    """Резерв кредитов исчерпан — вызывающий код НЕ должен глотать (аудит 2026-11-01)."""
+
+
 def spend_one() -> None:
     """Бюджет: BRIGHTDATA_MONTH_CREDITS (5000 бесплатных/мес, обновление 1-го числа) минус резерв BRIGHTDATA_RESERVE (100).
     Решение пользователя 2026-10-18: тратить сколько нужно, но остановиться и сообщить, когда останется 100.
@@ -56,7 +60,7 @@ def spend_one() -> None:
     total, reserve = int(env("BRIGHTDATA_MONTH_CREDITS", "5000")), int(env("BRIGHTDATA_RESERVE", "100"))
     left = total - month_used(u)
     if left <= reserve:
-        raise SystemExit(f"СТОП: по счётчику осталось {left} кредитов (резерв {reserve}) — сообщить пользователю, дальше только с его разрешения")
+        raise BudgetStop(f"СТОП: по счётчику осталось {left} кредитов (резерв {reserve}) — сообщить пользователю, дальше только с его разрешения")
     if u.get(day, 0) >= int(env("BRIGHTDATA_MAX_DAY", "1000")):
         raise SystemExit(f"стоп: дневной потолок {u[day]} запросов")
     u[day] = u.get(day, 0) + 1

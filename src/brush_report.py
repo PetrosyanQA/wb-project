@@ -187,23 +187,28 @@ def reviews(skus: list[int], since: str) -> dict[int, dict]:
 
 
 def econ(buyer: float, spp: float | None) -> dict:
+    """Прибыль на 1 шт при цене покупателя buyer и СПП spp. Без молчаливых подстановок (аудит 2026-11-01):
+    нет СПП / комиссии / себестоимости → в отчёте так и пишем, а не считаем по 21 % / 26 % / 345 ₽."""
+    if spp is None:
+        return {"seller": None, "start": "нет СПП", "norm": "нет СПП", "margin": None}
+    seller = round(buyer / (1 - spp / 100))
     try:
-        return _econ(buyer, spp)
-    except Exception:                                                     # noqa: BLE001 — в облаке нет локальных таблиц тарифов
-        return {"seller": round(buyer / (1 - (spp or 21) / 100)), "start": "—", "norm": "—", "margin": None}
+        return {"seller": seller, **_econ(seller)}
+    except Exception as e:                                                # noqa: BLE001
+        msg = f"ошибка расчёта: {str(e)[:50]}"
+        return {"seller": seller, "start": msg, "norm": msg, "margin": None}
 
 
-def _econ(buyer: float, spp: float | None) -> dict:
-    from src.screen_white import COM, econ as E
-    from src.white_import import yuan_from_cost
-    s = (spp or 21) / 100
-    seller = round(buyer / (1 - s))
-    cost = CFG.get("our_cost_landed") or 345
-    kg, vol, bo = CFG.get("our_kg", 0.25), CFG.get("our_vol_l", 1.0), CFG.get("our_buyout_pct", 83)
-    y = yuan_from_cost(cost, kg, CFG.get("our_batch") or 300)   # ¥ из себестоимости (src/white_import.py)
-    com = COM.get(CFG["niche"]) or 26
-    st_, nm = E(seller, y, vol, kg, com, bo, 15, CFG.get("our_batch") or 300), E(seller, y, vol, kg, com, bo, 8, CFG.get("our_batch") or 300)
-    return {"seller": seller, "start": round(st_["net_profit"]), "norm": round(nm["net_profit"]), "margin": nm["net_margin_pct"]}
+def _econ(seller: float) -> dict:
+    from src.commission import commission
+    from src.unit_econ import load_scheme, unit_economics
+    cost = CFG["our_cost_landed"]                                         # нет в конфиге → KeyError → видно в отчёте
+    com = CFG.get("our_commission_pct") or commission(CFG["niche"])
+    kw = dict(with_breakeven=False, buyout_pct=CFG.get("our_buyout_pct", 83), commission_pct=com)
+    cfg = load_scheme("am_fbs")
+    st_ = unit_economics(seller, cost, CFG.get("our_vol_l", 1.0), cfg, ad_share_of_revenue_pct=15, **kw)
+    nm = unit_economics(seller, cost, CFG.get("our_vol_l", 1.0), cfg, ad_share_of_revenue_pct=8, **kw)
+    return {"start": round(st_["net_profit"]), "norm": round(nm["net_profit"]), "margin": nm["net_margin_pct"]}
 
 
 def proposals(rec_price: int, buyer: int, soon: list, ads_share: float) -> list[tuple[str, list]]:

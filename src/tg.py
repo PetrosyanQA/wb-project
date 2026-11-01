@@ -44,16 +44,37 @@ def api(method: str, **payload) -> dict | None:
         return None
 
 
+def _chunks(text: str, limit: int = 4000) -> list[str]:
+    """Режем по строкам (не посреди HTML-тега): Telegram принимает ≤ 4 096 символов."""
+    out, cur = [], ""
+    for line in text.split("\n"):
+        while len(line) > limit:                      # одна сверхдлинная строка — режем как есть
+            out.append(line[:limit]); line = line[limit:]
+        if len(cur) + len(line) + 1 > limit:
+            out.append(cur); cur = ""
+        cur = f"{cur}\n{line}" if cur else line
+    return out + ([cur] if cur else [])
+
+
 def send(text: str, html_mode: bool = True, buttons: list[list[dict]] | None = None) -> bool:
+    """[аудит 2026-11-01] длинный текст — несколькими сообщениями (было text[:4096] → обрыв HTML и тихая ошибка 400);
+    HTML не принят → повтор простым текстом. True только если дошли все части."""
     _, chat = creds()
     if not chat:
         return False
-    p = {"chat_id": chat, "text": text[:4096], "disable_web_page_preview": True}
-    if html_mode:
-        p["parse_mode"] = "HTML"
-    if buttons:
-        p["reply_markup"] = {"inline_keyboard": buttons}
-    return bool(api("sendMessage", **p))
+    parts, ok = _chunks(text), True
+    for i, part in enumerate(parts):
+        p = {"chat_id": chat, "text": part, "disable_web_page_preview": True}
+        if html_mode:
+            p["parse_mode"] = "HTML"
+        if buttons and i == len(parts) - 1:
+            p["reply_markup"] = {"inline_keyboard": buttons}
+        r = api("sendMessage", **p)
+        if not r and html_mode:
+            p.pop("parse_mode")
+            r = api("sendMessage", **p)
+        ok = ok and bool(r)
+    return ok
 
 
 def send_photo(jpg: bytes, caption: str) -> bool:

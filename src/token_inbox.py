@@ -81,8 +81,10 @@ def main() -> None:
         exp = info["exp"].strftime("%Y-%m-%d") if info["exp"] else "—"
         ro = "только чтение" if info["readonly"] else "чтение и запись"
         print(f"✅ {key} {act}: {ACC_NAME.get(info['acc'], info['acc'])} | {ro} | {cats} | до {exp}")
-    if items:
-        ENV.write_text(env, encoding="utf-8")
+    if not items:                                              # [аудит 2026-11-01] не удаляем то, что не смогли прочитать
+        print(f"{INBOX.name}: токенов не распознано — файл НЕ удалён; проверьте формат (одна строка = один токен)")
+        return
+    ENV.write_text(env, encoding="utf-8")
     INBOX.write_text("", encoding="utf-8")                     # затираем содержимое до удаления (OneDrive-версии)
     INBOX.unlink()
     print(f"{INBOX.name} затёрт и удалён. Токенов перенесено: {len(used)}."

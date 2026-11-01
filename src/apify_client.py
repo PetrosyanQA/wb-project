@@ -45,15 +45,24 @@ def me() -> dict:
             "used_usd": round(u.get("totalUsageCreditsUsdAfterVolumeDiscount") or u.get("totalUsageCreditsUsdBeforeVolumeDiscount") or 0, 3)}
 
 
+RESERVE_USD = 0.5      # правило пользователя: стоп, когда до конца месячного лимита остаётся < $0,5
+
+
 def run(name: str, actor: str, inp: dict, max_usd: float, timeout_s: int = 300) -> list:
-    """Синхронный запуск актора → элементы датасета. Кэш по имени на сегодня."""
+    """Синхронный запуск актора → элементы датасета. Кэш по имени на сегодня.
+    [аудит 2026-11-01] Проверка остатка — в каждом запуске (было только в main), пустые ответы не кэшируются."""
     path = f"{OUT}/{name}.json"
     if os.path.exists(path):
         return json.load(open(path, encoding="utf-8"))
+    m = me()
+    left = (m.get("credits_usd") or 5.0) - (m.get("used_usd") or 0)
+    if left - max_usd < RESERVE_USD:
+        raise SystemExit(f"Apify: остаток ${left:.2f}, запуск до ${max_usd:.2f} оставит < ${RESERVE_USD} — СТОП, скажите пользователю")
     items = call(f"acts/{actor}/run-sync-get-dataset-items", inp,
                  {"timeout": timeout_s, "maxTotalChargeUsd": max_usd, "memory": 1024}, timeout=timeout_s + 30)
-    os.makedirs(OUT, exist_ok=True)
-    json.dump(items, open(path, "w", encoding="utf-8"), ensure_ascii=False)
+    if items:                                                   # пустой/ошибочный ответ не кэшируем — иначе повтор вернёт пустоту
+        os.makedirs(OUT, exist_ok=True)
+        json.dump(items, open(path, "w", encoding="utf-8"), ensure_ascii=False)
     return items
 
 
@@ -106,11 +115,8 @@ def main() -> None:
     if a.dry_run:
         return
     for name, actor, inp, cap in jobs:
-        if me()["used_usd"] + cap > 4.6:                      # стоп до исчерпания $5
-            print(f"{name}: пропуск — близко к лимиту $5")
-            continue
         try:
-            items = run(name, actor, inp, cap)
+            items = run(name, actor, inp, cap)                  # остаток проверяется внутри run()
             print(f"{name}: {len(items)} шт → {OUT}/{name}.json")
         except Exception as e:                                  # noqa: BLE001 — один актор не должен валить скан
             print(f"{name}: ошибка {str(e)[:160]}")

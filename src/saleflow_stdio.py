@@ -3,18 +3,22 @@
 
     python -m src.saleflow_stdio status
     python -m src.saleflow_stdio call wb_subject '{"subject_id": 1594, "report": "products", ...}' --out file.json
-    python -m src.saleflow_stdio products 1594 937 --d1 2026-07-01 --d2 2026-07-31 --outdir data/raw/saleflow/2026-10-06/fresh
+    python -m src.saleflow_stdio products 1594 937 --d1 2026-07-01 --d2 2026-07-31 --outdir data/raw/saleflow/v3_products500
+    (файл <ниша>.json — его находят datastore.products / screen_white; limit 500, при ошибке — 100)
 """
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import queue
 import subprocess
 import sys
+import threading
 
 sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.join(os.environ.get("LOCALAPPDATA", ""), "Saleflow MCP")
+TIMEOUT_S = int(os.environ.get("SF_TIMEOUT", "240"))   # [аудит 2026-11-01] ответ дольше — ошибка, а не вечное ожидание
 
 
 def _server_cmd() -> list[str]:
@@ -27,6 +31,9 @@ class Client:
     def __init__(self) -> None:
         self.p = subprocess.Popen(_server_cmd(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=open(os.environ.get("SF_ERRLOG", os.devnull), "ab"))
         self.n = 0
+        self.q: queue.Queue = queue.Queue()
+        threading.Thread(target=lambda: [self.q.put(x) for x in iter(self.p.stdout.readline, b"")] + [self.q.put(b"")],
+                         daemon=True).start()
         self.rpc("initialize", {"protocolVersion": "2025-03-26", "capabilities": {},
                                 "clientInfo": {"name": "mpstats-research", "version": "1.0"}})
         self._send({"jsonrpc": "2.0", "method": "notifications/initialized"})
@@ -39,7 +46,10 @@ class Client:
         self.n += 1
         self._send({"jsonrpc": "2.0", "id": self.n, "method": method, "params": params})
         while True:
-            line = self.p.stdout.readline()
+            try:
+                line = self.q.get(timeout=TIMEOUT_S)
+            except queue.Empty:
+                raise RuntimeError(f"Saleflow не ответил за {TIMEOUT_S} с ({method})") from None
             if not line:
                 raise RuntimeError("Saleflow server закрылся")
             msg = json.loads(line)
@@ -86,10 +96,13 @@ def main() -> None:
         else:
             os.makedirs(a.outdir, exist_ok=True)
             for sid in a.rest:
-                f = os.path.join(a.outdir, f"products_{sid}_{a.d1[:7]}.json")
+                f = os.path.join(a.outdir, f"{sid}.json")    # [аудит 2026-11-01] было products_<sid>_<месяц>.json — никто не читал
                 try:
-                    res = c.call("wb_subject", {"subject_id": int(sid), "report": "products", "d1": a.d1, "d2": a.d2,
-                                                "limit": 100})
+                    args = {"subject_id": int(sid), "report": "products", "d1": a.d1, "d2": a.d2}
+                    try:
+                        res = c.call("wb_subject", {**args, "limit": 500})
+                    except RuntimeError:
+                        res = c.call("wb_subject", {**args, "limit": 100})   # limit 500 у Saleflow иногда падает (18.10)
                     json.dump(res, open(f, "w", encoding="utf-8"), ensure_ascii=False)
                     print(f"{sid}: {len(res.get('data', [])) if isinstance(res, dict) else '?'} строк → {f}")
                 except Exception as e:                      # noqa: BLE001 — продолжаем остальные ниши

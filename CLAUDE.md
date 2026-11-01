@@ -29,22 +29,21 @@ Your job: turn MPSTATS data into **one defensible product decision**, not into a
 
 ## Hard rules
 
-1. **Never invent a number.** Every figure in a report must come from an MPSTATS response
-   saved under `data/raw/` or from `src/unit_econ.py`. If data is missing, write `—` and say why.
-2. **Check the API budget first.** Run `python -m src.mpstats_client plan` before any heavy
-   series — it prints the remaining quota and which scenarios fit. Requests are metered by
-   tariff; a 500-row page = 1 request. Typical costs: cheap screen of ~600 sub-niches = ~22,
-   probe = 2/niche, deep scan = 2/niche, 18-month trend = 6/niche, SKU audit = 4/SKU.
+1. **Never invent a number.** Every figure must come from a saved response under `data/raw/` (Saleflow, WB Seller API,
+   Evirma, Bright Data, Apify) or from `src/unit_econ.py` / `src/white_import.py`. Missing → write `—` and say why.
+   Never re-quote old profit numbers from reports — recompute with the current model.
+2. **Check the budget first.** Saleflow: `account_limits` (500/day, keep ≥ 50); Bright Data: stop at 100 credits;
+   Apify: stop when < 0.5 USD left. (MPSTATS token is invalid — do NOT run `mpstats_client plan`.)
 3. **Cache is on by default** (`data/cache/`, TTL 24h). Never bypass it with `force=True`
    unless the user asks for fresh data. Re-running a script must NOT re-burn the limit.
 4. **Secrets:** the token lives in `.env` only. Never print it, never write it into reports,
    never commit it.
-5. **MPSTATS data has error bars** (±10–20% on sales, price outliers, unit mismatches).
+5. **Market data has error bars** (Saleflow after 2026-08 is incomplete ≈ 0.61×; use July 2026 for sales) (±10–20% on sales, price outliers, unit mismatches).
    Flag anomalies instead of presenting them as fact. Cross-check any conclusion that drives
    money with a second angle (e.g. category report + similar items + keyword demand).
 6. **Revenue ≠ profit.** No niche is "good" until `src/unit_econ.py` clears
    `targets.min_net_margin_pct` and `targets.min_roi_on_cost_pct` in `config/unit_economics.yaml`.
-7. Write reports in **Armenian**, keep metric keys and Russian marketplace terms as-is.
+7. Write reports and answers in **Russian** (user decision; the old «Armenian» rule is void).
 
 ## Two data sources — never confuse them
 
@@ -62,7 +61,7 @@ automatically, so a call may block for ~60s. Do not "optimise" by removing the t
 ## MPSTATS pipeline status (2026-10-22)
 `MPSTATS_TOKEN` in `.env` is empty/invalid → `gates`, `discover`, `niche_scan`, `trend_scan`, `sku_audit` (MPSTATS) are
 **not used**; the live pipeline is Saleflow + public WB + WB Seller API (see `docs/PROJECT_GUIDE.md`). The gate logic below
-still applies as a method. Current product: niche 249 TPE pull-up band — `PROJECT_STATE.md`, `reports/economics_249_2026-10-22.md`.
+still applies as a method. Current product: **niche 437 labeled makeup brush set** — `PROJECT_STATE.md`, `reports/brushes_decision_2026-11-01.md` (249 = history).
 SPP of competitors per niche: ALWAYS take from Evirma (`python -m src.evirma show <subject>`).
 USER DECISION 2026-10-22: our AM cabinet gets SPP like everyone → compute margins at the SELLER price (before SPP);
 supply = white import via YUAN EXIM (`docs/suppliers/yuanexim_offer_2026-10-22.md`); tax 10 %. RU VAT art. 174.3: USER 2026-10-22 — not withheld from us (`vat_ru_eaeu_pct: 0`); don't re-raise.
@@ -74,7 +73,7 @@ threshold — never hardcode numbers in code or in your reasoning):
 
 | # | Gate | API cost | Kills the niche when |
 |---|---|---|---|
-| 1 | regulatory | 0 | «Честный знак» / certification required |
+| 1 | regulatory | 0 | magnets only (ЧЗ / certification → label «what to file», not a kill) |
 | 2 | economics | 0 | price outside 1000–2500 ₽, volume >1 L, logistics >25% of price, break-even too close to median |
 | 3 | concentration | 1 | top-10 >40%, top-1 seller >25%, <8 sellers in top-20 |
 | 4 | yoy_peak | 1 | peak month YoY < −5% (explosive >80% = warning, usually one early player) |
@@ -90,7 +89,7 @@ Growing niches are almost always held by one early player; diversified ones are 
 already declining. The target is **plateau + many sellers + a fixable customer complaint**
 (see `docs/STRATEGY.md`). Concretely: slope −1.5…+4 %/month, ≥30 sellers, top-10 ≤40%,
 top-1 ≤25%, median top-20 rating ≤4.75, one complaint theme in ≥12% of negative reviews,
-price 1000–2500 ₽, volume ≤1 L, no marking/certification.
+price 1000–2500 ₽, volume ≤1 L, no magnets (ЧЗ/certification allowed with a paperwork note). [reference only — see top block]
 When you report a niche, always name the complaint you would fix — a niche without a
 fixable complaint is not an entry point, no matter how good the numbers look.
 
@@ -119,7 +118,7 @@ cover the same niche, run `python -m src.saleflow crosscheck` and use the **cons
 
 ## First run in a new environment
 
-Before ANY analysis on a fresh install, run `python -m src.doctor --path "<real path>"`.
+[MPSTATS-only — skipped while the MPSTATS token is invalid.] Before ANY MPSTATS analysis on a fresh install, run `python -m src.doctor --path "<real path>"`.
 It verifies connectivity, permissions and — most importantly — whether the field names this
 code expects actually match what the API returns on the user's tariff. If the doctor reports
 unmapped fields, fix `src/fields.py` ALIASES first; do not proceed and do not silently report
@@ -210,8 +209,8 @@ python -m src.winner_dna market|seo|launch|gaps --niche videonyani   # presets i
 Cross-border rules (verified 2026-10-04): AM-cabinet commissions come from the WB API
 (`commission_source: cabinet`) and are up to +19 p.p. LOWER than the Saleflow/MPStats
 commissions of Russian sellers — never mix them. WB `boxDeliveryBase` already includes the
-warehouse coefficient (`warehouse_coef: 1.0` in `tariffs_auto.yaml`). Via Yerevan, items with a
-median price < 2 000 ₽ fail regardless of weight; target light (≤ 0.4 kg) items ≥ 3 000 ₽.
+warehouse coefficient (`warehouse_coef: 1.0` in `tariffs_auto.yaml`). [The «via Yerevan ≥ 3 000 ₽» rule is obsolete —
+the current scheme is FBS from an RF fulfilment + white import, `config/scheme_am_fbs.yaml`.]
 
 `sync_tariffs --apply` writes `config/tariffs_auto.yaml`, which `unit_econ.load_config()`
 deep-merges over the hand-written base config. Never edit `tariffs_auto.yaml` by hand —
@@ -239,9 +238,8 @@ Outputs: `reports/*.md`, `reports/*.csv`, raw JSON in `data/raw/`.
 
 ## Decision policy
 
-- Discovery output is tiered: 🟢A ≥70, 🟡B 55–69, ⚪️C 40–54, ❌ rejected by hard filters.
-  Present the **whole A+B list with scores** when the user asks for options — do not truncate to
-  three unless they ask for a recommendation. The interactive table is `reports/discovery_*.html`.
+- **While a stop-decision is active (437 until 2026-12-01 / test results) do not re-rank or re-pick the product.**
+- (MPSTATS discovery tiers 🟢A/🟡B/⚪️C — reference only, the discover pipeline is not used.)
 - A niche advances to deep analysis only if `score >= 65` **and** `fails == []`.
 - Then 3–5 competitor SKUs must be audited; if the top-3 are all one seller → drop it.
 - Then unit economics must clear thresholds **at the median price of the niche**, not at a
@@ -254,7 +252,7 @@ Outputs: `reports/*.md`, `reports/*.csv`, raw JSON in `data/raw/`.
 
 - Tables over prose. Numbers with units (₽, %, հատ).
 - Always state the period (`d1 … d2`) under every table.
-- End every report with `Հաջորդ քայլը:` and one concrete action.
+- End every report with `Следующий шаг:` and one concrete action.
 
 ## ⚠️ Շուկայի համատեքստ (ստուգված 2026-10-03)
 

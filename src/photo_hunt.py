@@ -107,7 +107,7 @@ def yandex(spec: str) -> None:
 
 
 def collect(spec: str) -> None:
-    from src.brightdata_client import fetch, offers_1688
+    from src.brightdata_client import BudgetStop, fetch, offers_1688
     S, out = SPECS[spec], []
     for name in S["cn_files"]:
         for p in sorted(glob.glob(str(ROOT / f"data/raw/brightdata/*/1688_{name}.html")))[-1:]:
@@ -123,6 +123,8 @@ def collect(spec: str) -> None:
             if asin and img:
                 out.append(dict(src="Amazon", img=img, alt=g(r'<h2[^>]*aria-label="([^"]+)"') or "", price=g(r'a-offscreen">(\$[\d.,]+)<') or "",
                                 id=asin, url=f"https://www.amazon.com/dp/{asin}"))
+    except BudgetStop:
+        raise
     except SystemExit as e:
         print("Amazon:", e)
     json.dump(out, open(d(spec) / "bright.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)

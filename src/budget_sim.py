@@ -23,11 +23,12 @@ from src.unit_econ import load_scheme, unit_economics
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
-from src.white_import import CNY as CNY_RUB, K as IMPORT_K, USD as USD_RUB  # noqa: E402 — config/landed_cost.yaml
+from src.white_import import CNY as CNY_RUB, K as IMPORT_K, USD as USD_RUB, landed  # noqa: E402,F401 — config/landed_cost.yaml
 
 
 def landed_var(e: dict) -> float:
-    return IMPORT_K * e["yuan"] * CNY_RUB + 1.5 * USD_RUB * e["weight_kg"]
+    """Переменная часть себестоимости (без фикса партии — он добавляется на каждую поставку)."""
+    return landed(e["yuan"], e["weight_kg"], 10**12)
 
 
 def unit(e: dict) -> dict:

@@ -16,7 +16,9 @@ import tempfile
 import unittest
 
 
-class UnitEcon(unittest.TestCase):
+class Legacy777Snapshot(unittest.TestCase):
+    """Снимок 777 (старая модель FBO, src/marketing777) — проверяет воспроизводимость архива, не текущую экономику."""
+
     def test_strategy_777_baseline(self):
         """strategy_777_2026-10-07 §2.4: 1 590 ₽ до СПП, ДРР 15% → ≈ 447 ₽, 28.1%."""
         from src.marketing777 import econ
@@ -196,7 +198,7 @@ class SchemeAmFbs(unittest.TestCase):
         s = load_scheme("am_fbs")
         self.assertAlmostEqual(wb_logistics(0.6, s), 78.2)                # WB API «Свой склад РФ», 1-й литр
         self.assertAlmostEqual(wb_logistics(2.0, s), 78.2 + 23.8)
-        e = unit_economics(1000, 200, 0.6, s, buyout_pct=100, commission_pct=20, with_breakeven=False)
+        e = unit_economics(1000, 200, 0.6, s, buyout_pct=100, commission_pct=20, ad_share_of_revenue_pct=10, with_breakeven=False)
         self.assertAlmostEqual(e["logistics_with_returns"], 78.2 + 30.0)  # + ФФ 30 ₽ до пункта приёма
 
     def test_ads_from_orders_divided_by_buyout(self):
@@ -210,8 +212,8 @@ class SchemeAmFbs(unittest.TestCase):
     def test_fixed_per_unit_lowers_profit_exactly(self):
         from src.unit_econ import load_scheme, unit_economics
         s = load_scheme("am_fbs")
-        a = unit_economics(1500, 250, 0.6, s, buyout_pct=70, commission_pct=28, with_breakeven=False)
-        b = unit_economics(1500, 250, 0.6, s, buyout_pct=70, commission_pct=28, with_breakeven=False, fixed_per_unit_rub=80)
+        a = unit_economics(1500, 250, 0.6, s, buyout_pct=70, commission_pct=28, ad_share_of_revenue_pct=12, with_breakeven=False)
+        b = unit_economics(1500, 250, 0.6, s, buyout_pct=70, commission_pct=28, ad_share_of_revenue_pct=12, with_breakeven=False, fixed_per_unit_rub=80)
         self.assertAlmostEqual(a["net_profit"] - b["net_profit"], 80.0, delta=0.01)
 
     def test_payback_money_not_later_than_strict(self):
@@ -237,11 +239,12 @@ class CargoYuanexim(unittest.TestCase):
         self.assertAlmostEqual(u["cargo_rub"], 87.38 * 83.48 / 140, delta=0.5)
         self.assertAlmostEqual(u["goods_rub"], 20 * 12.43, delta=0.1)
 
-    def test_strategy_uses_cargo_model(self):
+    def test_strategy_uses_white_import(self):
+        """Аудит 2026-11-01: strategy.cost_rub = белый ввоз YUAN EXIM (было карго ¥ × 12,43 / ¥ × 17)."""
         from src import strategy as S
-        cost, cargo = S.cost_rub(20, 0.25, 0.6)
-        self.assertAlmostEqual(cost, 20 * 12.43 + cargo, delta=0.5)
-        self.assertEqual(S.cost_rub(18, 0.3)[0], 18 * 17)                  # без объёма — старая модель (777)
+        from src.white_import import CNY, K, landed
+        self.assertAlmostEqual(S.cost_rub(20, 0.25, 0.6)[0], landed(20, 0.25, 300), delta=0.01)
+        self.assertAlmostEqual(S.rub_per_yuan(), K * CNY, delta=1e-9)
 
 
 class WhiteImportAmFbs(unittest.TestCase):
@@ -265,3 +268,53 @@ class WhiteImportAmFbs(unittest.TestCase):
         e = unit_economics(1390 / 0.82, 306.5, 1.0, CFG, with_breakeven=False, buyout_pct=83,
                            ad_share_of_revenue_pct=15, commission_pct=26, tax_rate_pct=10)
         self.assertAlmostEqual(e["net_profit"], 281, delta=2)
+
+
+class AuditRules20261101(unittest.TestCase):
+    """Полный аудит 2026-11-01: правила, которые не должны снова сломаться."""
+
+    def test_unit_econ_requires_product_inputs(self):
+        from src.unit_econ import load_scheme, unit_economics
+        with self.assertRaises(ValueError):
+            unit_economics(1500, 300, 1.0, load_scheme("am_fbs"), buyout_pct=80, ad_share_of_revenue_pct=10)   # нет комиссии
+
+    def test_unit_econ_default_is_am_fbs(self):
+        from src.unit_econ import unit_economics
+        e = unit_economics(1000, 200, 0.6, buyout_pct=100, commission_pct=20, ad_share_of_revenue_pct=10, with_breakeven=False)
+        self.assertAlmostEqual(e["tax"], 100.0)                           # налог 10 % am_fbs, а не 6 % FBO
+
+    def test_no_silent_spp_guess_in_src(self):
+        import glob
+        import re
+        bad = [f for f in glob.glob("src/*.py") if re.search(r"spp or \d", open(f, encoding="utf-8").read())
+               and not any(s in f for s in ("777", "best_product", "fresh_screen", "dna_rank", "cloud_daily"))]
+        self.assertEqual(bad, [], f"молчаливая подстановка СПП: {bad}")
+
+    def test_no_arena_paths_in_active_modules(self):
+        import glob
+        bad = [f for f in glob.glob("src/*.py") if ".arena/run-" in open(f, encoding="utf-8").read()]
+        self.assertEqual(bad, [], f"временные пути .arena: {bad}")
+
+    def test_products_default_is_july(self):
+        from src.datastore import PRODUCT_DIRS, products
+        self.assertIn("2026-07", PRODUCT_DIRS)
+        rows, meta = products(437)
+        if rows:
+            self.assertEqual(meta["month"], "2026-07")
+
+    def test_magnets_only_hard_ban(self):
+        import yaml
+        reg = yaml.safe_load(open("config/filters.yaml", encoding="utf-8"))["regulatory"]
+        self.assertTrue(reg["allow_marking"] and reg["allow_certification"])
+        self.assertIn("магнит", reg["hard_exclude_keywords"])
+        self.assertNotIn("космет", reg["hard_exclude_keywords"])
+
+    def test_commission_from_cabinet_dump(self):
+        from src.commission import commission
+        self.assertEqual(commission(437), 26.0)                           # FBS kgvpMarketplace, WB API 2026-10-23
+
+    def test_commands_have_no_dollar_placeholders(self):
+        import glob
+        import re
+        bad = [f for f in glob.glob(".claude/commands/*.md") if re.search(r"\$\d", open(f, encoding="utf-8").read())]
+        self.assertEqual(bad, [], f"$1/$2 в командах подставляются аргументами: {bad}")

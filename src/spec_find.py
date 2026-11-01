@@ -108,10 +108,12 @@ def main() -> None:
     top = rows[:a.top]
     det = {}
     if a.cmd == "detail":
-        from src.brightdata_client import detail_1688, fetch
+        from src.brightdata_client import BudgetStop, detail_1688, fetch
         for r in [x for x in top if x["offer_id"]][:a.top]:
             try:
                 d = detail_1688(fetch(f"https://detail.1688.com/offer/{r['offer_id']}.html", f"1688d_{r['offer_id']}"))
+            except BudgetStop:
+                raise
             except SystemExit:
                 continue
             g = [p["g"] for p in d["pack"] if p.get("g")]

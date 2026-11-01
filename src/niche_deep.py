@@ -246,21 +246,18 @@ def seo_block(sid: int, top: int = 15) -> tuple[list[str], dict]:
     return L, dict(queries=len(rows), seo_trend=trend, bad_months=bad, top_deficit=by_def[:5])
 
 
+MONTH = {"value": "2026-07", "warning": None}           # какой месяц реально взят (пишется в отчёт)
+
+
 def products(sid: int):
-    oct_ = ROOT / "data/raw/saleflow/2026-11-01/p500" / f"{sid}.json"          # свежий октябрь (отбор v7), если есть
-    if oct_.exists():
-        d = json.load(open(oct_, encoding="utf-8"))
-        return d.get("data", d) if isinstance(d, dict) else d
-    from src.screen_white import load
-    r = load(sid)
-    if r:
-        return r
-    from src.datastore import latest
-    p = latest(sid, "products500")
-    if not p:
-        return []
-    d = json.load(open(p, encoding="utf-8"))
-    return d.get("data", d) if isinstance(d, dict) else d
+    """Карточки ниши: июль 2026 (надёжный) → иначе октябрь с пометкой «неполные» (аудит 2026-11-01: раньше брался октябрь,
+    а в отчёте писалось «июль»)."""
+    from src.datastore import products as P
+    rows, meta = P(sid, "2026-07")
+    if not rows:
+        rows, meta = P(sid, "2026-10")
+    MONTH.update(value=meta["month"], warning=meta["warning"])
+    return rows or []
 
 
 def format_block(sid: int, include: str | None = None, price: tuple | None = None) -> tuple[list[str], dict]:
@@ -269,7 +266,7 @@ def format_block(sid: int, include: str | None = None, price: tuple | None = Non
             and (not price or price[0] <= P(r) < price[1])]
     rows = [r for r in allr if not BRANDS.search(r.get("name") or "")]
     if not rows:
-        return ["Нет products500 за июль 2026."], {}
+        return [f"Нет карточек ниши (месяц {MONTH['value']})."], {}
     groups = collections.defaultdict(list)
     for r in rows:
         name = r.get("name") or ""
@@ -307,7 +304,7 @@ def leaders_block(sid: int, include: str | None = None) -> tuple[list[str], dict
     if not rows:
         return ["Нет products500."], {}
     link = lambda r: f"[{r['id']}](https://www.wildberries.ru/catalog/{r['id']}/detail.aspx)"
-    L = ["**Упущенная выручка по ценовым полосам** (продажи, которых не было из-за пустого склада, июль 2026):", "",
+    L = [f"**Упущенная выручка по ценовым полосам** (продажи, которых не было из-за пустого склада, {MONTH['value']}):", "",
          "| Цена | Карточек | Выручка, тыс. ₽ | Упущено, тыс. ₽ | Доля упущенного |", "|---|---:|---:|---:|---:|"]
     bands = [(0, 500), (500, 800), (800, 1000), (1000, 1500), (1500, 2000), (2000, 2600), (2600, 3500), (3500, 5000), (5000, 10 ** 6)]
     lost_rows = []
@@ -483,7 +480,7 @@ def report(ids: list[int], include: str | None = None, price: tuple | None = Non
         text = "\n".join([f"# {sid} {name} — 12 месяцев (2025-08 … 2026-07) — {dt.date.today()}", "",
                           f"**Итог:** {', '.join(verdict) or '—'}", "", "## 1. Продажи и предложение по месяцам", *a, "",
                           "## 2. Поисковые запросы по месяцам (дефицит по запросам)", *b, "",
-                          "## 3. Форматы: одиночный или набор (июль 2026)" + (f" — только «{include}»" if include else "") + (f", цена {price[0]}–{price[1]} ₽" if price else ""), *c, "",
+                          f"## 3. Форматы: одиночный или набор ({MONTH['value']})" + (f" {MONTH['warning']}" if MONTH['warning'] else "") + (f" — только «{include}»" if include else "") + (f", цена {price[0]}–{price[1]} ₽" if price else ""), *c, "",
                           "## 4. Лидеры и новички: упущенная выручка, снайпер, уязвимые лидеры, восходящие звёзды", *d, "",
                           "## 5. Ценовые сегменты и монополия (топ-6 продавцов ≤ 60 %)", *e, ""])
         out = ROOT / "reports" / f"niche_deep_{sid}_{dt.date.today()}.md"

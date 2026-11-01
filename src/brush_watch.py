@@ -225,7 +225,15 @@ def spp_line() -> list[str]:
     except Exception as e:                                                # noqa: BLE001
         return [f"💳 СПП: Evirma не ответил ({str(e)[:60]})"]
     buyer = CFG.get("our_price_buyer") or 1390
-    spp = spp_at(r, buyer / 0.79, "fbs")
+    seller = buyer
+    for _ in range(30):                                                   # полоса СПП зависит от цены продавца → итерация (было buyer / 0.79)
+        spp = spp_at(r, seller, "fbs")
+        if spp is None:
+            break
+        nxt = buyer / (1 - spp / 100)
+        if abs(nxt - seller) < 1:
+            break
+        seller = nxt
     f = BASE / "spp.json"
     prev = json.load(open(f, encoding="utf-8")).get("spp") if f.exists() else None
     json.dump({"spp": spp, "date": r.get("date")}, open(f, "w", encoding="utf-8"))

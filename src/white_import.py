@@ -5,8 +5,10 @@ from pathlib import Path
 
 import yaml
 
-_W = yaml.safe_load((Path(__file__).resolve().parents[1] / "config" / "landed_cost.yaml").read_text(encoding="utf-8"))["white_import"]
+_CFG = yaml.safe_load((Path(__file__).resolve().parents[1] / "config" / "landed_cost.yaml").read_text(encoding="utf-8"))
+_W = _CFG["white_import"]
 CNY, USD, K, CUSTOMS, USD_PER_KG = _W["cny_rub"], _W["usd_rub"], _W["k"], _W["customs_per_batch_rub"], _W["usd_per_kg"]
+USD_CBR = _CFG["fx"]["usd_to_rub"]          # курс ЦБ — для пересчёта бюджета в ₽ (не для себестоимости)
 
 
 def landed(yuan: float, kg: float, batch: int) -> float:

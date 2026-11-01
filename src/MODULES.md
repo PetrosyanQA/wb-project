@@ -1,4 +1,20 @@
-# Карта модулей `src/` (обновлено 2026-10-08)
+# Карта модулей `src/` (обновлено 2026-11-01, аудит)
+
+## ✅ Рабочие сейчас (товар — кисти 437)
+| Группа | Модули |
+|---|---|
+| Экономика | `unit_econ` (схема am_fbs по умолчанию), `white_import` (себестоимость — единственный источник), `commission` (комиссия кабинета из WB API), `screen_white`, `monte_carlo`, `budget_sim`, `finplan`, `strategy.cost_rub` |
+| Данные | `datastore` (`products(sid, month)` — единый поиск карточек, июль по умолчанию), `catalog`, `saleflow_stdio`, `evirma` (СПП, `latest_snapshot`), `wb_cdn_card`, `wb_seller`, `wb_facts` |
+| Анализ ниши / товара | `niche_deep`, `niche_inside`, `product_deep`, `niche_requirements` (запрет только магниты), `niche_v7`, `niche_v7_cards`, `wb_risers`, `global_variants` (только идеи — пробел подтверждать `wb_check_rates`) |
+| Поставщики | `brightdata_client` (стоп на резерве — `BudgetStop`), `apify_client` (стоп < 0,5 USD), `spec_find`, `photo_hunt`, `image_find` |
+| Карточка / маркетинг | `mkt`, `gallery_research`, `wb_card` |
+| Мониторинг | `brush_report` + `brush_watch` (`config/watch_437.yaml`, Telegram 10:00), `tg`, `bot_actions` (цена — только при известной СПП), `competitor_pulse`, `weekly_report` (`config/launch.yaml`), `ledger` |
+
+## 🗄 Снимки (цифры по СТАРОЙ модели — не использовать для решений)
+`marketing777`, `strategy777`, `finplan777`, `best_product_report`, `fresh_screen`, `dna_rank`, `niche_dna_xlsx`, `xborder`, `deep_731_249`, `holder777_full`, `knife_*`, `cloud_daily` (249).
+
+---
+# История: карта от 2026-10-08
 
 Запуск всегда через venv: `.venv\Scripts\python.exe -m src.<модуль>`. Тесты: `.venv\Scripts\python.exe -m unittest discover -s tests`.
 

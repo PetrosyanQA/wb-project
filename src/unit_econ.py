@@ -70,9 +70,13 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
     """price — գնորդի վճարած գին (₽), cost — ինքնարժեք առանց first mile-ի.
     overrides: buyout_pct, ad_share_of_revenue_pct, … + commission_pct, fixed_per_unit_rub (ФФ-ի ֆիքսված մասը 1 վաճառքի վրա)։
     operations.ad_basis = "orders" → ДРР-ը WB-ի պես պատվերներից է, 1 վաճառքի վրա՝ ДРР × գին / выкуп."""
-    cfg = cfg or load_config()
+    cfg = cfg or load_scheme("am_fbs")          # [аудит 2026-11-01] было load_config() = FBO/СЦ Ереван, налог 6 %
     ops = dict(cfg["operations"]); ops.update({k: v for k, v in overrides.items() if k in ops})
     commission_pct = overrides.get("commission_pct", cfg["commission_pct"])
+    missing = [k for k, v in (("commission_pct", commission_pct), ("buyout_pct", ops.get("buyout_pct")),
+                              ("ad_share_of_revenue_pct", ops.get("ad_share_of_revenue_pct"))) if v is None]
+    if missing:
+        raise ValueError(f"unit_economics: не заданы {', '.join(missing)} — в схеме am_fbs они зависят от товара, передайте явно")
     fixed = float(overrides.get("fixed_per_unit_rub", 0.0))
     buyout = max(1.0, float(ops["buyout_pct"])) / 100.0
 
@@ -125,19 +129,20 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
         "net_profit": round(net, 2),
         "net_margin_pct": round(net / price * 100, 1) if price else 0.0,
         "roi_on_goods_pct": round(net / goods * 100, 1) if goods else 0.0,
-        "breakeven_price": round(_breakeven(price, cost, volume_l, cfg, ops, commission_pct, fixed), 2)
+        "breakeven_price": round(_breakeven(price, cost, volume_l, cfg, ops, commission_pct, fixed,
+                                                    {k: v for k, v in overrides.items() if k in ("tax_rate_pct", "vat_ru_eaeu_pct")}), 2)
         if with_breakeven else None,
     }
 
 
 def _breakeven(price: float, cost: float, volume_l: float, cfg: dict, ops: dict,
-               commission_pct: float, fixed: float = 0.0) -> float:
+               commission_pct: float, fixed: float = 0.0, extra: dict | None = None) -> float:
     """Նվազագույն գինը, որի դեպքում net = 0 (պարզ բիսեկցիա)."""
     lo, hi = 1.0, max(price * 5, 100.0)
     for _ in range(60):
         mid = (lo + hi) / 2
         res = unit_economics(mid, cost, volume_l, cfg, with_breakeven=False,
-                             commission_pct=commission_pct, fixed_per_unit_rub=fixed, **ops)
+                             commission_pct=commission_pct, fixed_per_unit_rub=fixed, **ops, **(extra or {}))
         if res["net_profit"] >= 0:
             hi = mid
         else:
@@ -148,7 +153,7 @@ def _breakeven(price: float, cost: float, volume_l: float, cfg: dict, ops: dict,
 def cost_ceiling(price: float, volume_l: float, cfg: dict | None = None, **overrides) -> float:
     """Ամենաբարձր ինքնարժեքը (₽, առանց first mile-ի), որի դեպքում դեռ բավարարվում են
     targets.min_net_margin_pct ԵՎ targets.min_roi_on_cost_pct (բիսեկցիա). 0 = չի անցնում նույնիսկ անվճար."""
-    cfg = cfg or load_config()
+    cfg = cfg or load_scheme("am_fbs")
     t = cfg["targets"]
 
     def ok(cost: float) -> bool:
@@ -194,7 +199,9 @@ def main() -> None:
     p.add_argument("--json", action="store_true")
     args = p.parse_args()
 
-    cfg = load_config()
+    cfg = load_scheme("am_fbs")                 # [аудит 2026-11-01] текущая схема; старая FBO — load_config()
+    if None in (args.commission, args.buyout, args.drr):
+        p.error("для схемы am_fbs нужны --commission (WB API кабинета), --buyout и --drr")
     overrides = {}
     if args.commission is not None:
         overrides["commission_pct"] = args.commission

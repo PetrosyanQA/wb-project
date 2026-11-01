@@ -27,7 +27,6 @@ from src.outliers import clean_items
 from src.unit_econ import load_scheme, unit_economics
 
 sys.stdout.reconfigure(encoding="utf-8")
-A = ".arena/run-20261025-153238-s146793/scratch/a001"
 CFG = load_scheme("am_fbs")
 BANDS = [(500, 800), (800, 1000), (1000, 1500), (1500, 2000), (2000, 2600), (2600, 3500), (3500, 5000), (5000, 7000), (7000, 10000)]
 from src.white_import import CNY, CUSTOMS, K, USD, landed  # noqa: E402,F401 — landed() реэкспорт для старых импортов — параметры белого ввоза в config/landed_cost.yaml
@@ -37,9 +36,11 @@ def jl(p):
     return json.load(open(p, encoding="utf-8"))
 
 
-EV = jl(f"{A}/evirma_2026-10-25.json")
-COM = {r["subjectID"]: r["kgvpMarketplace"] for r in jl("data/raw/wb_seller/commission_2026-10-23.json")["report"]}
-REQ = {r["id"]: r for r in jl("data/processed/niche_requirements_2026-10-23.json")}
+from src.evirma import latest_snapshot  # noqa: E402
+EV_DATE, EV = latest_snapshot()      # СПП Evirma: самый свежий снимок data/raw/evirma/<дата>/ranges.json (раньше — временная папка арены)
+from src.commission import all_fbs  # noqa: E402
+COM = all_fbs()                     # комиссия FBS AM-кабинета: самый свежий дамп WB API (src/commission.py)
+REQ = {r["id"]: r for r in jl(sorted(glob.glob("data/processed/niche_requirements_2[0-9][0-9][0-9]-*.json"))[-1])}   # самый свежий справочник
 NC = {r["id"]: r for r in jl("data/processed/niche_nocargo_2026-10-22.json")}
 SEASON = {r["id"]: r["index"] for r in jl("data/processed/all_niches_season_2026-10-11.json")}   # индекс спроса по месяцам, 241 ниша
 BUDGET_GOODS = 100_000   # ₽ на первую партию из $2 000 (остальное — реклама и резерв) [допущение]
@@ -89,7 +90,8 @@ def econ(seller, yuan, vol, kg, com, buyout, drr, batch):
 
 
 def max_yuan(seller, vol, kg, com, buyout, batch, drr=8):
-    ok = lambda y: (lambda e: e["net_margin_pct"] >= 18 and e["roi_on_goods_pct"] >= 60)(econ(seller, y, vol, kg, com, buyout, drr, batch))
+    T = CFG["targets"]                  # пороги из config/unit_economics.yaml (было 18 / 60 в коде)
+    ok = lambda y: (lambda e: e["net_margin_pct"] >= T["min_net_margin_pct"] and e["roi_on_goods_pct"] >= T["min_roi_on_cost_pct"])(econ(seller, y, vol, kg, com, buyout, drr, batch))
     if not ok(0):
         return 0.0
     lo, hi = 0.0, seller / CNY
@@ -100,11 +102,10 @@ def max_yuan(seller, vol, kg, com, buyout, batch, drr=8):
 
 
 def load(sid):
-    for p in (f"data/raw/saleflow/v3_products500/{sid}.json", f"data/raw/saleflow/v3_products100/{sid}.json", f"{A}/p500/{sid}.json"):
-        if os.path.exists(p):
-            d = jl(p)
-            return (d.get("data") if isinstance(d, dict) else d) or []
-    return None
+    """Карточки ниши за июль 2026 (надёжный месяц) — src/datastore.products()."""
+    from src.datastore import products
+    rows, _ = products(sid, month="2026-07")
+    return rows
 
 
 def run(ids, batch, china_pct):
@@ -165,7 +166,7 @@ def main():
     ap.add_argument("--china-pct", type=float, default=11.0)
     a = ap.parse_args()
     ids = sorted({int(os.path.basename(p)[:-5]) for p in glob.glob("data/raw/saleflow/v3_products500/*.json")
-                  + glob.glob("data/raw/saleflow/v3_products100/*.json") + glob.glob(f"{A}/p500/*.json")})
+                  + glob.glob("data/raw/saleflow/v3_products100/*.json") + glob.glob("data/raw/saleflow/2026-07_p500_arena/*.json")})
     ok = [i for i in ids if i in REQ and REQ[i]["verdict"][:1] in ("🟢", "🟡")]
     res = run(ok, a.batch, a.china_pct)
     out = f"data/processed/screen_white_{dt.date.today()}.json"

@@ -25,8 +25,6 @@ from src.niche_v7 import P500, REQ as REQS, _load, req
 from src.outliers import clean_items
 from src.screen_white import BANDS, CNY, COM, NC, VOL_ASSUMED, econ, landed, max_yuan, seller_for
 
-OLD = "data/raw/saleflow/v3_products500"
-ARENA = ".arena/run-20261025-153238-s146793/scratch/a001/p500"   # ещё 1 000+ ниш, июль
 OUT = "data/processed/niche_v7_cards_2026-11-01.json"
 WIN_REV = 150_000
 CHINA_PCT = 11
@@ -35,10 +33,12 @@ BUDGET_GOODS = 100_000
 
 
 def _rows(sid: int) -> tuple[list[dict], str] | tuple[None, None]:
-    for path, per in ((f"{P500}/{sid}.json", "2026-10"), (f"{OLD}/{sid}.json", "2026-07"), (f"{ARENA}/{sid}.json", "2026-07")):
-        if os.path.exists(path):
-            d = json.load(open(path, encoding="utf-8"))
-            return ((d.get("data") if isinstance(d, dict) else d) or []), per
+    """Октябрь (полный топ-500, но продажи FBS неполные) → иначе июль; месяц возвращается и пишется в результат."""
+    from src.datastore import products
+    for month in ("2026-10", "2026-07"):
+        rows, _ = products(sid, month)
+        if rows:
+            return rows, month
     return None, None
 
 
@@ -97,14 +97,10 @@ def _segment(sid: int, seg: list[dict], new: list[dict], china_pct: float) -> di
     buyer = st.median(r["price"] for r in ref)
     exp_sales = round(st.median(r["sales"] for r in new)) if len(new) >= 3 else 0   # P50 новичка сегмента [оценка]
     seller, spp = seller_for(sid, buyer)
-    if seller is None:
-        spp = st.median(r.get("spp_avg") or 0 for r in ref)
-        seller = round(buyer / (1 - spp / 100))
     com_src = "AM"
     com = COM.get(sid)
-    if com is None:
-        com = st.median(r.get("commission_fbs") or 30 for r in ref)
-        com_src = "карточки"
+    if seller is None or com is None:     # [аудит 2026-11-01] без СПП Evirma / комиссии кабинета сегмент не считаем
+        return None                       # (было: СПП и комиссия из карточек Saleflow — у продавцов РФ другие)
     vols = [r["package_length"] * r["package_width"] * r["package_height"] / 1000 for r in ref
             if r.get("package_length") and r.get("package_width") and r.get("package_height")]
     vol = st.median(vols) if len(vols) >= 3 else VOL_ASSUMED

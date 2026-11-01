@@ -621,10 +621,12 @@ def regulatory_check(path: str, s: dict) -> dict:
     allow = reg.get("allow_keywords", [])
     block = _keyword_hits(low, reg.get("block_keywords", []), allow)
     decl = _keyword_hits(low, reg.get("declaration_keywords", []), allow)
-    if block:
+    if block and not reg.get("allow_marking", False):
         return {"step": 0, "verdict": FAIL, "reasons": [f"«Честный знак»: {', '.join(block)}"], "path": path}
     notes = ([f"нужна декларация соответствия (+{reg.get('declaration_extra_rub', 0):,} ₽): {', '.join(decl)}"]
              if decl else [])
+    if block:                                  # [правило пользователя 2026-11-01] ЧЗ разрешён — только пометка, что оформить
+        notes.insert(0, f"нужна маркировка «Честный знак»: {', '.join(block)} — оформить до поставки")
     return {"step": 0, "verdict": PASS, "reasons": [], "notes": notes, "path": path,
             "manual_check": "сверить с честныйзнак.рф — список меняется"}
 

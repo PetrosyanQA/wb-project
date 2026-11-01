@@ -23,7 +23,8 @@ DAY = dt.date.today().isoformat()
 OUT = f"data/processed/global_variants_{DAY}.json"
 RAW = f"data/raw/brightdata/{DAY}"
 P500 = "data/raw/saleflow/2026-11-01/p500"
-OLD = ["data/raw/saleflow/v3_products500", ".arena/run-20261025-153238-s146793/scratch/a001/p500"]
+from src.datastore import PRODUCT_DIRS  # noqa: E402
+OLD = PRODUCT_DIRS["2026-07"]
 
 NICHES = [  # (id ниши WB, название, запрос Amazon)
     (9020, "Корректор осанки / пояс для спины", "posture corrector"),
@@ -75,12 +76,14 @@ FEAT = {  # признак: (regex Amazon, regex WB)
 
 
 def fetch_all() -> None:
-    from src.brightdata_client import fetch
+    from src.brightdata_client import BudgetStop, fetch
     for sid, nm, q in NICHES:
         slug = re.sub(r"[^a-z0-9]+", "_", q.lower()).strip("_")[:40]
         try:
             fetch(f"https://www.amazon.com/s?k={requests.utils.quote(q)}", f"amz_s_{slug}")
             print(f"{sid} {q}: ok")
+        except BudgetStop:
+            raise
         except BaseException as e:                                           # noqa: BLE001 — fetch может вызвать SystemExit
             print(f"{sid} {q}: ошибка {str(e)[:120]}")
 

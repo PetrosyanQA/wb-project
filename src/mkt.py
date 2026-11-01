@@ -65,15 +65,12 @@ def get_img(url: str) -> Image.Image | None:
 # ── WB ──────────────────────────────────────────────────────────────────────────────────────────────────────────
 def top_skus(niche: int, top: int) -> list[dict]:
     from src import datastore as D
-    p = D.latest(niche, "products500")
-    if not p:
-        for cand in (ROOT / "data/raw/saleflow/2026-11-01/p500" / f"{niche}.json",
-                     ROOT / "data/raw/saleflow/v3_products500" / f"{niche}.json", ROOT / "data/raw/saleflow/v3_products100" / f"{niche}.json"):
-            if cand.exists():
-                p = str(cand); break
-    if not p:
+    data, meta = D.products(niche, "2026-10")             # свежий список конкурентов (для выбора карточек, не для продаж)
+    if not data:
+        data, meta = D.products(niche, "2026-07")
+    if not data:
         raise SystemExit(f"нет products500 для {niche}: соберите Saleflow products (src.strategy_collect --step core)")
-    rows = [r for r in D.rows(p) if r.get("sales")]
+    rows = [r for r in data if r.get("sales")]
     seen, out = set(), []
     for r in sorted(rows, key=lambda r: -r["revenue"]):
         imt = r.get("itemid")
@@ -143,7 +140,7 @@ def sheet(rows: list[tuple[str, list[Path]]], path: Path, tw: int = 165, th: int
 
 # ── Amazon ──────────────────────────────────────────────────────────────────────────────────────────────────────
 def amazon(niche: int, query: str, detail: int) -> list[dict]:
-    from src.brightdata_client import fetch
+    from src.brightdata_client import BudgetStop, fetch
     d = raw_dir(niche, "amazon")
     slug = re.sub(r"[^a-z0-9]+", "_", query.lower()).strip("_")[:40]
     html = fetch(f"https://www.amazon.com/s?k={requests.utils.quote(query)}", f"amz_s_{slug}")
@@ -177,6 +174,8 @@ def amazon(niche: int, query: str, detail: int) -> list[dict]:
         for attempt in range(3):                                # Bright Data: «adaptive rate limit» → пауза и повтор
             try:
                 h = fetch(f"https://www.amazon.com/dp/{i['asin']}", f"amz_dp_{i['asin']}"); break
+            except BudgetStop:
+                raise
             except BaseException as e:                          # noqa: BLE001 — fetch может вызвать SystemExit
                 print("   повтор", i["asin"], str(e)[:80]); time.sleep(8 * (attempt + 1))
         urls = list(dict.fromkeys(re.findall(r'"hiRes":"(https://m\.media-amazon\.com/images/I/[^"]+)"', h)))[:10]

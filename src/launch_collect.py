@@ -44,7 +44,7 @@ NICHES = {  # имя + products500 по умолчанию (снимок июл�
 RUNS = {"2026-10-11": ("2026-07-31", {729: ("Поводки", "data/raw/saleflow/2026-10-11/strategy729/products500_2026-07.json")}),
         "2026-10-14": ("2026-07-31", {7640: ("Сумки спортивные", "data/raw/saleflow/2026-10-14/strategy7640/products500_2026-07.json")}),
         "2026-10-15": ("2026-07-31", {52: ("Кошельки", "data/raw/saleflow/2026-10-15/strategy52/products500_2026-07.json")}),
-        "2026-10-29": ("2026-07-31", {437: ("Кисти косметические", ".arena/run-20261025-153238-s146793/scratch/a001/p500/437.json")})}
+        "2026-10-29": ("2026-07-31", {437: ("Кисти косметические", "data/raw/saleflow/2026-07_p500_arena/437.json")})}
 if os.environ.get("LAUNCH_RUN") in RUNS:
     RUN = os.environ["LAUNCH_RUN"]
     D2, NICHES = RUNS[RUN]

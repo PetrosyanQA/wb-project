@@ -40,8 +40,8 @@ WINDOW = ("2026-04-01", "2026-07-31")          # надёжное окно дн�
 COMMENTS_SINCE = "2025-10-06"                  # 365 дней отзывов (как в отчётах 2026-10-06)
 COHORT = ("2025-10-01", "2026-06-30")          # новые карточки для траекторий входа
 YEAR = [f"2025-{m:02d}" for m in range(9, 13)] + [f"2026-{m:02d}" for m in range(1, 9)]
-YUAN_RUB, FX, CARGO_USD_KG, BASE_KG = 17.0, 83.48, 2.0, 0.5   # ¥ × 17 ₽ покрывает товар до 0.5 кг; сверх — $2/кг
-FIXED = 10000                                  # фулфилмент Подмосковье, минимум ₽/мес [со слов пользователя]
+from src.white_import import USD_CBR as FX  # noqa: E402 — бюджет $ → ₽ по ЦБ (config/landed_cost.yaml → fx); себестоимость — cost_rub()
+FIXED = 0                                      # [пользователь 2026-10-16] фиксированной платы ФФ нет (scheme_am_fbs fixed_month_rub); было 10 000
 DRR_BASE, PACK = 15.0, 15.0   # упаковка 15 ₽ [исправлено 2026-10-27, было 50]
 
 # ── 777: словари из src/strategy777.py (без изменений) ──────────────────────────────────────────────────────────
@@ -848,21 +848,16 @@ def barriers(P: dict) -> dict:
                        "reviews_at_10": com_at.get(hit10), "reviews_at_30": com_at.get(hit30), "series_len": len(w)}}
 
 
-def cost_rub(yuan: float, kg: float, vol: float | None = None) -> tuple[float, float]:
-    """→ (себестоимость 1 шт до ФФ ₽, часть «не от ¥»). С объёмом и секцией cargo в схеме — модель карго YUANEXIM (src.cargo):
-    ¥ × курс + коробка карго / шт; иначе старая модель ¥ × 17 (+ $2/кг сверх 0,5 кг)."""
-    c = econ_config().get("cargo") if vol is not None else None
-    if c:
-        from src.cargo import per_unit
-        u = per_unit(yuan, kg, vol, c=c)
-        return u["landed_rub"], u["cargo_rub"]
-    extra = max(0.0, kg - BASE_KG) * CARGO_USD_KG * FX
-    return yuan * YUAN_RUB + extra, extra
+def cost_rub(yuan: float, kg: float, vol: float | None = None, batch: int = 300) -> tuple[float, float]:
+    """→ (себестоимость 1 шт «под ключ» ₽, часть «не от ¥»). Белый ввоз YUAN EXIM — src/white_import.py (аудит 2026-11-01;
+    до этого здесь было карго ¥ × 12,43 / ¥ × 17 — себестоимость занижалась на 35–45 %). vol не влияет — оставлен для старых вызовов."""
+    from src.white_import import landed
+    return landed(yuan, kg, batch), landed(0, kg, batch)
 
 
 def rub_per_yuan() -> float:
-    c = econ_config().get("cargo")
-    return c["cny_to_rub"] * (1 + c.get("agent_pct", 0) / 100) if c else YUAN_RUB
+    from src.white_import import CNY, K
+    return K * CNY
 
 
 def econ_config() -> dict:

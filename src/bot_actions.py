@@ -43,7 +43,9 @@ def set_price(nm: int, buyer: int) -> str:
         spp = json.load(open(SPP_F, encoding="utf-8")).get("spp")
     except Exception:                                                     # noqa: BLE001
         pass
-    seller = round(buyer / (1 - (spp or 21) / 100))
+    if spp is None:                                                       # [аудит 2026-11-01] раньше подставлялось 21 % → реальная цена по догадке
+        return "❌ цена НЕ изменена: нет свежей СПП (spp.json) — сначала обновите отчёт, потом повторите"
+    seller = round(buyer / (1 - spp / 100))
     c = WBSellerClient()
     goods = c.request("GET", "discounts", "/api/v2/list/goods/filter", params={"limit": 10, "filterNmID": nm})
     lst = ((goods or {}).get("data") or {}).get("listGoods") or []

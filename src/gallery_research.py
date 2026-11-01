@@ -34,16 +34,13 @@ def research_dir(niche: int) -> Path:
 
 
 def products(niche: int) -> dict[int, dict]:
-    from src.datastore import latest
-    p = latest(niche, "products500")
-    for alt in (ROOT / "data/raw/saleflow/2026-11-01/p500" / f"{niche}.json",           # свежий октябрь (niche_v7_collect)
-                ROOT / "data/raw/saleflow/v3_products500" / f"{niche}.json", ROOT / "data/raw/saleflow/v3_products100" / f"{niche}.json"):
-        if not p and alt.exists():                       # выгрузки screen_white / niche_deep scan
-            p = str(alt)
-    if not p:
+    from src.datastore import products as P
+    data, _ = P(niche, "2026-10")                        # свежий список конкурентов (для галерей, не для продаж)
+    if not data:
+        data, _ = P(niche, "2026-07")
+    if not data:
         sys.exit(f"нет products500 для ниши {niche}: собрать `python -m src.strategy_collect --niche {niche} --step core`")
-    d = json.load(open(p, encoding="utf-8"))
-    return {r["id"]: r for r in (d["data"] if isinstance(d, dict) else d)}
+    return {r["id"]: r for r in data}
 
 
 def cmd_list(a) -> None:

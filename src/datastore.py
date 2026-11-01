@@ -43,6 +43,28 @@ def latest(niche: int, kind: str) -> str | None:
     return max(F, key=lambda c: (c["date"], c["month"] or "", c["bytes"]))["path"] if F else None
 
 
+# Карточки ниши (products, топ-500) — ЕДИНЫЙ порядок поиска для всех модулей (аудит 2026-11-01).
+# Июль 2026 — последний полный месяц Saleflow; октябрь (2026-11-01/p500) — FBS, продажи занижены ≈ 0,61× → только с пометкой.
+PRODUCT_DIRS = {
+    "2026-07": ["data/raw/saleflow/v3_products500", "data/raw/saleflow/v3_products100", "data/raw/saleflow/2026-07_p500_arena"],
+    "2026-10": ["data/raw/saleflow/2026-11-01/p500"],
+}
+INCOMPLETE = {"2026-10": "⚠️ октябрь 2026: данные Saleflow неполные (FBS, продажи ≈ 0,61× к прошлому году) — для роста и продаж не использовать"}
+
+
+def products(niche: int, month: str = "2026-07") -> tuple[list | None, dict]:
+    """→ (строки карточек ниши, meta {path, month, warning}). month: "2026-07" (по умолчанию, надёжный) или "2026-10".
+    Для другого месяца (или если в папках нет) — самый свежий products500 из каталога с пометкой месяца."""
+    for d in PRODUCT_DIRS.get(month, []):
+        path = os.path.join(d, f"{niche}.json")
+        if os.path.exists(path):
+            return rows_of(path), {"path": path, "month": month, "warning": INCOMPLETE.get(month)}
+    path = latest(niche, "products500")
+    if path:
+        return rows_of(path), {"path": path, "month": "?", "warning": "месяц выгрузки не проверен — смотрите путь"}
+    return None, {"path": None, "month": month, "warning": "нет данных"}
+
+
 def rows(path: str) -> list:
     return rows_of(path)
 
