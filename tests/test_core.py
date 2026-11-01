@@ -318,3 +318,22 @@ class AuditRules20261101(unittest.TestCase):
         import re
         bad = [f for f in glob.glob(".claude/commands/*.md") if re.search(r"\$\d", open(f, encoding="utf-8").read())]
         self.assertEqual(bad, [], f"$1/$2 в командах подставляются аргументами: {bad}")
+
+
+class LearningLoop(unittest.TestCase):
+    def test_prediction_error_and_multiplier(self):
+        import importlib
+        import tempfile
+        from pathlib import Path
+        from src import learning as Lr
+        importlib.reload(Lr)
+        with tempfile.TemporaryDirectory() as d:
+            Lr.PRED = Path(d) / "p.csv"
+
+            class A:
+                key, value, unit, product, source, check = "spp_x", "20", "%", "t", "s", None
+            Lr.predict(A())
+            Lr.fact("spp_x", 15, "test")
+            rows = Lr._rows(Lr.PRED)
+            self.assertEqual(float(rows[0]["error_pct"]), -25.0)
+            self.assertTrue(any("×0.75" in s for s in Lr.review()))
