@@ -337,3 +337,40 @@ class LearningLoop(unittest.TestCase):
             rows = Lr._rows(Lr.PRED)
             self.assertEqual(float(rows[0]["error_pct"]), -25.0)
             self.assertTrue(any("×0.75" in s for s in Lr.review()))
+
+
+class ExternalAuditFixes20261102(unittest.TestCase):
+    """Внешний аудит 02.11: подтверждённые пункты не должны вернуться."""
+
+    def test_niche_scan_collect_accepts_d_year(self):
+        import inspect
+        from src.niche_scan import collect
+        self.assertIn("d_year", inspect.signature(collect).parameters)
+
+    def test_unknown_gate_is_hold_not_pass(self):
+        from src import gates as G
+        f = {"gate_order": ["a", "b"]}
+        old = dict(G.GATES)
+        try:
+            G.GATES.clear()
+            G.GATES.update({"a": lambda c, f: G.GateResult("a", G.PASS, "ok"),
+                            "b": lambda c, f: G.GateResult("b", G.UNKNOWN, "не выполнено")})
+            _, verdict = G.run_gates(None, f)
+            self.assertTrue(verdict.startswith("⏸ HOLD"))
+        finally:
+            G.GATES.clear(); G.GATES.update(old)
+
+    def test_saleflow_digest_uses_full_payload(self):
+        import tempfile
+        from pathlib import Path
+        from src import saleflow as S
+        with tempfile.TemporaryDirectory() as d:
+            S.RAW, S.INDEX = Path(d), Path(d) / "index.json"
+            a = S.save_raw({"x": "A" * 5000 + "1"}, "t")
+            b = S.save_raw({"x": "A" * 5000 + "2"}, "t")
+            self.assertNotEqual(a.name, b.name)              # общий префикс 4 000 символов больше не склеивает файлы
+
+    def test_probe_does_not_show_token_part(self):
+        src = open("src/saleflow.py", encoding="utf-8").read()
+        self.assertNotIn("tok[:4]", src)
+        self.assertNotIn("tok[-4:]", src)

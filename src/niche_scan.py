@@ -89,7 +89,7 @@ def candidates_for(client: MpstatsClient, path: str, mode: str, d1: str, d2: str
     return [(n, k) for n, k, _ in named[:top]]
 
 
-def collect(client: MpstatsClient, name: str, kind: str, d1: str, d2: str, d0: str,
+def collect(client: MpstatsClient, name: str, kind: str, d1: str, d2: str, d0: str, d_year: str,
             max_rows: int, growth: bool) -> tuple[list[dict], list[dict]]:
     if kind == "subject":
         items = rows(client.subject_report(name, "items", d1, d2, limit=500))
@@ -237,11 +237,14 @@ def main() -> None:
             return
 
         RAW.mkdir(parents=True, exist_ok=True)
+        saved = 0
         for name, kind in plan:
             try:
                 items, by_date = collect(client, name, kind, d1, d2, d0, d_year,
                                          args.max_rows, not args.no_growth)
-            except Exception as exc:                      # noqa: BLE001
+            except (TypeError, NameError, AttributeError, KeyError):   # [аудит 2026-11-02] ошибка кода ≠ «пустая ниша» — не глотаем
+                raise
+            except Exception as exc:                      # noqa: BLE001 — сеть/API: пропуск ниши
                 print(f"[skip] {name}: {exc}")
                 continue
             if not items:
@@ -250,6 +253,7 @@ def main() -> None:
             (RAW / f"{tag}_{abs(hash(name))}.json").write_text(
                 json.dumps({"niche": name, "items": items, "by_date": by_date},
                            ensure_ascii=False), encoding="utf-8")
+            saved += 1
             items, clean_rep = clean_items(items, filters_cfg)
             metrics = niche_metrics(items, by_date)
             metrics['_outliers'] = clean_rep
@@ -257,6 +261,8 @@ def main() -> None:
             results.append({"niche": name, "metrics": metrics, **scored})
             print(f"[ok] {name}: score={scored['score']} {scored['verdict']}")
         print(f"[api] calls={client.api_calls} cache_hits={client.cache_hits}")
+        if plan and saved == 0:                               # [аудит 2026-11-02] пустой результат — это сбой, а не «ниш нет»
+            raise SystemExit("FAILED: ни одна ниша не собрана — проверьте токен/доступ/путь, отчёт не строим")
 
     results.sort(key=lambda r: (not r["fails"], r["score"]), reverse=True)
     csv_path, md_path = write_reports(results, cfg, tag)

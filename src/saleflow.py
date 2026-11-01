@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -40,22 +41,29 @@ DEFAULT_TTL_H = 24
 
 # ─────────────────────────────────────────────────────────── պահպանում
 def _sha(*parts: str) -> str:
-    return hashlib.sha1("|".join(parts).encode("utf-8")).hexdigest()[:12]
+    return hashlib.sha256("|".join(parts).encode("utf-8")).hexdigest()[:16]
+
+
+def _atomic_write(path: Path, text: str) -> None:
+    """Запись через временный файл + replace: оборванная запись не портит индекс/ответ."""
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def save_raw(payload: Any, tool: str, note: str = "") -> Path:
     """Պահում է MCP-ի պատասխանը ԱՆՓՈՓՈԽ + գրանցում ինդեքսում."""
     RAW.mkdir(parents=True, exist_ok=True)
     body = json.dumps(payload, ensure_ascii=False, sort_keys=True)
-    digest = _sha(tool, note, body[:4000])
+    digest = _sha(tool, note, body)                     # [аудит 2026-11-02] хэш по ВСЕМУ ответу (было body[:4000] → коллизии)
     path = RAW / f"{tool}_{digest}.json"
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    _atomic_write(path, json.dumps(payload, ensure_ascii=False, indent=1))
 
     index = json.loads(INDEX.read_text(encoding="utf-8")) if INDEX.exists() else {}
     index[digest] = {"tool": tool, "note": note, "file": path.name,
                      "saved_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                      "ts": time.time(), "rows": len(extract_rows(payload))}
-    INDEX.write_text(json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")
+    _atomic_write(INDEX, json.dumps(index, ensure_ascii=False, indent=1))
     return path
 
 
@@ -237,7 +245,7 @@ def probe() -> dict:
     out: dict[str, Any] = {"base": SALEFLOW_BASE, "endpoint": SALEFLOW_MCP}
     try:
         tok = _token()
-        out["token"] = f"{tok[:4]}…{tok[-4:]} ({len(tok)} նիշ)"
+        out["token"] = f"задан ({len(tok)} символов)"          # [аудит 2026-11-02] не показываем даже часть ключа
     except RuntimeError as e:
         out["error"] = str(e)
         return out

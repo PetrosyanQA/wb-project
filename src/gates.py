@@ -355,6 +355,9 @@ def run_gates(ctx: NicheCtx, f: dict | None = None,
         results.append(res)
         if res.status == FAIL and stop_on_fail:
             return results, f"❌ կանգնեց «{name}» դարպասի վրա"
+    unknown = [r.name for r in results if r.status == UNKNOWN]
+    if unknown:                                                    # [аудит 2026-11-02] нет данных ≠ «прошёл»
+        return results, f"⏸ HOLD — нет данных / не выполнено: {', '.join(unknown)} (финальный PASS невозможен)"
     if any(r.status == WARN for r in results):
         return results, "🟡 անցավ, բայց զգուշացումներով"
     return results, "✅ անցավ բոլոր դարպասները"
