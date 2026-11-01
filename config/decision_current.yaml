@@ -1,0 +1,18 @@
+# Режим проекта и статусы ворот текущего товара — читает src/decision.py и /analiz (этап 0).
+# Режимы: DISCOVERY (ищем новое) | VALIDATION (проверяем конкретный товар) | FROZEN_TEST (товар выбран, идеи — только в копилку).
+mode: FROZEN_TEST
+current_product: "Набор кистей с подписями на ручках"
+current_niche: 437
+freeze_until: "2026-12-01"
+
+# Статусы ворот: PASS | FAIL | HOLD | UNKNOWN | SKIPPED; уникальность: SIGNAL_ONLY | SUPPORTED | VERIFIED | REJECT;
+# экономика / поставщик: ESTIMATE | VERIFIED; evidence — где доказательство (файл, отчёт).
+gates:
+  external_demand: {status: PASS, evidence: "reports/brushes_decision_2026-11-01.md — Amazon labeled: BS-MALL 20k+/мес, новинки 800–1 000+/мес"}
+  wb_demand:       {status: PASS, evidence: "ниша 437, новички P25/P50 92/155 шт/мес (июль 2026)"}
+  uniqueness:      {status: SUPPORTED, evidence: "живая выдача 01.11: подписанных наборов с продажами нет; Amazon продаётся; печать на ручке у фабрики — стандартная опция (не подтверждено КП)"}
+  legal:           {status: PASS, evidence: "отказное письмо, ТН ВЭД 9603 30 900 0, без ЧЗ, без магнитов"}
+  supplier:        {status: ESTIMATE, evidence: "КП YUAN EXIM 29.10 306,5 ₽ без печати/добавок; образца нет"}
+  economics:       {status: ESTIMATE, evidence: "src/unit_econ: 281/424 ₽ при СПП 18 %, СПП кабинета не измерена"}
+  sample:          {status: UNKNOWN, evidence: "образец не заказан"}
+  test_sales:      {status: UNKNOWN, evidence: "живой карточки нет"}

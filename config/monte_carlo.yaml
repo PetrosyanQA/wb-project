@@ -1,0 +1,10 @@
+# Диапазоны стресс-теста src/monte_carlo.py (аудит 2026-11-02: вынесены из кода).
+# kind: mult — множитель к базовому значению; add — прибавка (п.п.); abs — абсолютное значение.
+# distribution: uniform (min..max) | triangular (min, mode, max). source: expert | historical — откуда диапазон.
+# Когда learning накопит ≥ 5 фактов по виду, источник меняется на historical (src/learning.calibration_factor).
+price:     {kind: mult, distribution: uniform, min: 0.80, max: 1.00, source: expert, note: "демпинг и акции"}
+spp:       {kind: add,  distribution: uniform, min: -10,  max: 10,   source: expert, note: "Evirma прыгала 4–31 % (10.2026)", clip: [0, 45]}
+yuan:      {kind: mult, distribution: uniform, min: 1.00, max: 1.30, source: expert, note: "рост цены фабрики / доработки"}
+freight:   {kind: mult, distribution: uniform, min: 1.00, max: 1.50, source: expert, note: "доставка $/кг"}
+buyout:    {kind: mult, distribution: uniform, min: 0.85, max: 1.15, source: expert, clip: [30, 98]}
+drr:       {kind: abs,  distribution: uniform, min: 8,    max: 20,   source: expert, note: "ДРР от заказов, %"}

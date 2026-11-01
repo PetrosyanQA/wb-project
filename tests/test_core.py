@@ -256,16 +256,16 @@ class WhiteImportAmFbs(unittest.TestCase):
         self.assertAlmostEqual(yuan_from_cost(landed(9.2, 0.35, 300), 0.35, 300), 9.2, delta=1e-6)
 
     def test_modules_share_parameters(self):
-        from src import budget_sim, monte_carlo, screen_white, white_import as W
-        self.assertEqual((screen_white.CNY, screen_white.K), (W.CNY, W.K))
+        from src import budget_sim, monte_carlo, white_import as W
+        src = open("src/screen_white.py", encoding="utf-8").read()            # screen_white без локальных данных не импортируется
+        self.assertIn("from src.white_import import CNY", src)
         self.assertEqual((monte_carlo.CNY, monte_carlo.USD), (W.CNY, W.USD))
         self.assertEqual(budget_sim.CNY_RUB, W.CNY)
 
     def test_brush_economics_at_known_point(self):
         """Кисти 437: 1 390 ₽, СПП 18 %, себестоимость 306,5 ₽, комиссия 26 %, выкуп 83 %, 1 л → 281 ₽ при ДРР 15 %."""
-        from src.screen_white import CFG
-        from src.unit_econ import unit_economics
-        e = unit_economics(1390 / 0.82, 306.5, 1.0, CFG, with_breakeven=False, buyout_pct=83,
+        from src.unit_econ import load_scheme, unit_economics
+        e = unit_economics(1390 / 0.82, 306.5, 1.0, load_scheme("am_fbs"), with_breakeven=False, buyout_pct=83,
                            ad_share_of_revenue_pct=15, commission_pct=26, tax_rate_pct=10)
         self.assertAlmostEqual(e["net_profit"], 281, delta=2)
 
@@ -309,6 +309,7 @@ class AuditRules20261101(unittest.TestCase):
         self.assertIn("магнит", reg["hard_exclude_keywords"])
         self.assertNotIn("космет", reg["hard_exclude_keywords"])
 
+    @unittest.skipUnless(__import__("glob").glob("data/raw/wb_seller/commission_*.json"), "нет локального дампа WB API (CI)")
     def test_commission_from_cabinet_dump(self):
         from src.commission import commission
         self.assertEqual(commission(437), 26.0)                           # FBS kgvpMarketplace, WB API 2026-10-23
@@ -374,3 +375,51 @@ class ExternalAuditFixes20261102(unittest.TestCase):
         src = open("src/saleflow.py", encoding="utf-8").read()
         self.assertNotIn("tok[:4]", src)
         self.assertNotIn("tok[-4:]", src)
+
+
+class Architecture20261102(unittest.TestCase):
+    """Повторный аудит 02.11: единые решения, диапазоны Монте-Карло, поправки learning."""
+
+    def _g(self, **kw):
+        base = dict(external_demand="PASS", wb_demand="PASS", uniqueness="SUPPORTED", supplier="VERIFIED",
+                    economics="VERIFIED", legal="PASS", sample="PASS", test_sales="PASS")
+        base.update(kw)
+        return {"gates": {k: {"status": v} for k, v in base.items()}}
+
+    def test_decision_rules(self):
+        from src.decision import decide
+        self.assertEqual(decide(self._g())["decision"], "SCALE")
+        self.assertEqual(decide(self._g(test_sales="UNKNOWN"))["decision"], "TEST")
+        self.assertEqual(decide(self._g(sample="UNKNOWN", test_sales="UNKNOWN"))["decision"], "SOURCE")
+        self.assertEqual(decide(self._g(economics="ESTIMATE"))["decision"], "WATCHLIST")
+        self.assertEqual(decide(self._g(uniqueness="SIGNAL_ONLY"))["decision"], "WATCHLIST")
+        self.assertEqual(decide(self._g(wb_demand="UNKNOWN"))["decision"], "HOLD")
+        self.assertEqual(decide(self._g(legal="FAIL"))["decision"], "REJECT")
+
+    def test_current_product_cannot_skip_supplier_evidence(self):
+        from src.decision import decide, load
+        self.assertNotIn(decide(load())["decision"], ("SOURCE", "TEST", "SCALE"))   # КП без печати и образца нет
+
+    def test_monte_carlo_reproducible_and_config_driven(self):
+        from src.monte_carlo import load_ranges, simulate
+        R = load_ranges()
+        self.assertEqual(set(R), {"price", "spp", "yuan", "freight", "buyout", "drr"})
+        a = simulate(1390, 18, 10, 0.3, 1, 26, 83, 300, runs=300, seed=7, ranges=R)
+        b = simulate(1390, 18, 10, 0.3, 1, 26, 83, 300, runs=300, seed=7, ranges=R)
+        self.assertEqual(a, b)
+
+    def test_calibration_needs_five_facts_and_resists_outlier(self):
+        import tempfile
+        from pathlib import Path
+        from src import learning as Lr
+        with tempfile.TemporaryDirectory() as d:
+            Lr.PRED = Path(d) / "p.csv"
+            for i, f in enumerate([80, 82, 78, 81, 300]):                      # 4 факта ≈ 0,8 и один выброс ×3
+                class A:
+                    key, value, unit, product, source, check = f"newcomer_t{i}", "100", "", "t", "s", None
+                Lr.predict(A())
+                Lr.fact(f"newcomer_t{i}", f, "test")
+                if i == 3:
+                    self.assertEqual(Lr.calibration_factor("newcomer")["factor"], 1.0)   # 4 < 5 — без поправки
+            c = Lr.calibration_factor("newcomer")
+            self.assertAlmostEqual(c["factor"], 0.81, delta=0.02)                # выброс не сдвинул медиану

@@ -86,6 +86,38 @@ def review() -> list[str]:
     return out
 
 
+HALF_LIFE_DAYS = 180       # старые факты теряют вес: через полгода — вдвое
+
+
+def calibration_factor(kind: str, min_observations: int = 5) -> dict:
+    """Поправка к прогнозам вида kind (spp, buyout, newcomer, cost, drr, margin…) по проверенным фактам.
+    < min_observations фактов → множитель 1.0 (мало данных); один выброс не двигает модель (взвешенная медиана
+    отношений факт/прогноз); вес факта падает вдвое каждые HALF_LIFE_DAYS дней."""
+    pts = []
+    for r in _rows(PRED):
+        if r["fact"] and r["key"].split("_")[0] == kind and float(r["value"] or 0):
+            age = (TODAY - dt.date.fromisoformat(str(r["fact_date"])[:10])).days
+            pts.append((float(r["fact"]) / float(r["value"]), 0.5 ** (age / HALF_LIFE_DAYS)))
+    n = len(pts)
+    if n < min_observations:
+        return {"kind": kind, "factor": 1.0, "n": n, "confidence": "LOW", "note": f"мало фактов ({n} < {min_observations}) — без поправки"}
+    pts.sort()
+    half, acc, med = sum(w for _, w in pts) / 2, 0.0, pts[-1][0]
+    for ratio, w in pts:                                     # взвешенная медиана — устойчива к одному выбросу
+        acc += w
+        if acc >= half:
+            med = ratio
+            break
+    return {"kind": kind, "factor": round(med, 3), "n": n, "confidence": "HIGH" if n >= 15 else "MEDIUM", "note": "взвешенная медиана факт/прогноз"}
+
+
+def adjust(kind: str, raw: float) -> str:
+    """Готовая строка для отчёта: сырой прогноз → поправка learning → скорректированный."""
+    c = calibration_factor(kind)
+    return (f"Сырой прогноз: {raw:g} | поправка learning: ×{c['factor']} | скорректированный: {raw * c['factor']:.4g} | "
+            f"наблюдений: {c['n']} | уверенность: {c['confidence']} ({c['note']})")
+
+
 def spp_daily() -> list[str]:
     from src.evirma import ranges, spp_at
     hist, out = _rows(SPP_H), []
@@ -161,6 +193,7 @@ def main() -> None:
     p = sp.add_parser("fact"); p.add_argument("--key", required=True); p.add_argument("--value", type=float, required=True)
     p.add_argument("--source", required=True)
     sp.add_parser("review")
+    p = sp.add_parser("adjust"); p.add_argument("kind"); p.add_argument("raw", type=float)
     p = sp.add_parser("daily"); p.add_argument("--tg", action="store_true")
     a = ap.parse_args()
     if a.cmd == "lesson":
@@ -171,6 +204,8 @@ def main() -> None:
         fact(a.key, a.value, a.source)
     elif a.cmd == "review":
         print("\n".join(review()))
+    elif a.cmd == "adjust":
+        print(adjust(a.kind, a.raw))
     else:
         daily(a.tg)
 
