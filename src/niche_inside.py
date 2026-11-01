@@ -31,8 +31,10 @@ ROOT = Path(__file__).resolve().parents[1]
 STOP = set("""для из и в на с со по от до без под над при к ко о об а но или не же как это все всё шт штук штуки предметов предмета
 предмет набор наборы комплект комплекта подарок подарочный подарочная подарочные новый новая новинка 2025 2026 большой большая
 маленький маленькая мини супер premium премиум качественный качественная универсальный универсальная оригинал прочный прочная""".split())
-BANNED = {"батарейки / аккумулятор": r"батаре|аккумул|usb|заряд", "магнит": r"магнит|magsafe",
-          "электрика": r"электр|led|светодиод|ультразвук|пульт|мотор|солнечн", "детское / игрушка (ЧЗ)": r"детск|для детей|игрушк|для девоч|для мальч"}
+BANNED = {"магнит": r"магнит|magsafe"}          # [правило пользователя 2026-11-01] запрет один — магниты
+DOCS = {"батарейки / аккумулятор": r"батаре|аккумул|usb|заряд", "электрика": r"электр|led|светодиод|ультразвук|пульт|мотор|солнечн",
+        "детское / игрушка (ЧЗ 9503?)": r"детск|для детей|игрушк|для девоч|для мальч"}   # можно — пометка «что оформить»
+MIN_CARDS_MONOPOLY = 40                           # на < 40 карточках топ-6 ≈ 100 % всегда — это мало данных, а не монополия
 
 
 def stem(w: str) -> str:
@@ -64,21 +66,24 @@ def stats(seg: list[dict], sid: int, total: int) -> dict:
         p8 = round(econ(seller, y, vol, max(0.1, 0.22 * vol), com, buyout, 8, 200)["net_profit"])
     names = " ".join(r["name"] or "" for r in seg).lower()
     ban = [k for k, rx in BANNED.items() if len(re.findall(rx, names)) >= max(2, len(seg) * 0.3)]
+    docs = [k for k, rx in DOCS.items() if len(re.findall(rx, names)) >= max(2, len(seg) * 0.3)]
     p25 = newp[len(newp) // 4] if newp else 0
     return dict(cards=len(seg), sales=sales, share=round(sales / total * 100, 1), price=round(buyer),
                 new=len(newp), p25=p25, p50=st.median(newp) if newp else 0,
                 top6=round(sum(v for _, v in by.most_common(6)) / sales * 100) if sales else 100,
                 top1=round(by.most_common(1)[0][1] / sales * 100) if sales else 100, sellers=len(by),
                 buyout=buyout, vol=round(vol, 1), vol_assumed=len(vols) < 3, spp=spp, profit8=p8,
-                month=round(p8 * p25) if p8 is not None else None, ban=ban)
+                month=round(p8 * p25) if p8 is not None else None, ban=ban, docs=docs)
 
 
 def verdict(s: dict) -> str:
     if s["ban"]:
         return "❌ " + ", ".join(s["ban"])
     bad = []
-    if s["top6"] > 60:
+    if s["top6"] > 60 and s["cards"] >= MIN_CARDS_MONOPOLY:
         bad.append(f"монополия топ-6 {s['top6']} %")
+    elif s["top6"] > 60:
+        bad.append(f"мало карточек ({s['cards']}) — монополию не оценить")
     if s["new"] < 5:
         bad.append("мало новичков")
     elif s["p25"] < 20:
@@ -87,7 +92,8 @@ def verdict(s: dict) -> str:
         bad.append(f"выкуп {s['buyout']:.0f} %")
     if s["profit8"] is not None and s["profit8"] <= 0:
         bad.append("убыток")
-    return "✅" if not bad else "⚠️ " + "; ".join(bad)
+    note = (" 🟡 оформить: " + ", ".join(s["docs"])) if s.get("docs") else ""
+    return ("✅" if not bad else "⚠️ " + "; ".join(bad)) + note
 
 
 def main() -> None:
@@ -96,8 +102,12 @@ def main() -> None:
     ap.add_argument("--type", help="regex типа товара: разбор одного типа по ценам")
     ap.add_argument("--min-share", type=float, default=2.0)
     ap.add_argument("--top", type=int, default=25)
+    ap.add_argument("--month", default="2026-07", help="2026-07 (надёжный, топ-100/500) или 2026-10 (топ-500, продажи FBS неполные)")
     a = ap.parse_args()
-    rows = load(a.sid)
+    from src.datastore import products
+    rows, meta = products(a.sid, a.month)
+    if meta.get("warning"):
+        print(meta["warning"])
     if not rows:
         sys.exit(f"нет products500 по нише {a.sid}: python -m src.niche_deep scan {a.sid} --products-only")
     for r in rows:
