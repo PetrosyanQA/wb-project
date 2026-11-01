@@ -1,7 +1,7 @@
 # Режим проекта и статусы ворот текущего товара — читает src/decision.py и /analiz (этап 0).
 # Режимы: DISCOVERY (ищем новое) | VALIDATION (проверяем конкретный товар) | FROZEN_TEST (товар выбран, идеи — только в копилку).
 mode: FROZEN_TEST
-current_product: "Набор кистей с подписями на ручках"
+current_product: "Набор кистей с подписями на ручках (основной кандидат — премиум 15–18 шт ≈ 2 690 ₽; запасной — 12 шт 1 390 ₽)"
 current_niche: 437
 freeze_until: "2026-12-01"
 
@@ -12,7 +12,7 @@ gates:
   wb_demand:       {status: PASS, evidence: "ниша 437, новички P25/P50 92/155 шт/мес (июль 2026)"}
   uniqueness:      {status: SUPPORTED, evidence: "живая выдача 01.11: подписанных наборов с продажами нет; Amazon продаётся; печать на ручке у фабрики — стандартная опция (не подтверждено КП)"}
   legal:           {status: PASS, evidence: "отказное письмо, ТН ВЭД 9603 30 900 0, без ЧЗ, без магнитов"}
-  supplier:        {status: ESTIMATE, evidence: "КП YUAN EXIM 29.10 306,5 ₽ без печати/добавок; образца нет"}
-  economics:       {status: ESTIMATE, evidence: "src/unit_econ: 281/424 ₽ при СПП 18 %, СПП кабинета не измерена"}
+  supplier:        {status: ESTIMATE, evidence: "КП YUAN EXIM 29.10 (12 шт) 306,5 ₽ без печати; премиум: 1688 ¥8,8–15 за 15–18 шт (поиск 02.11), КП нет; образца нет"}
+  economics:       {status: ESTIMATE, evidence: "премиум 2 690 ₽ при ¥18 (оценка): 805 / 543 ₽ (СПП 18 / 0 %), партия 300; 1 390 ₽: 202 / 67 ₽ — reports/analiz_best_2026-11-02.md"}
   sample:          {status: UNKNOWN, evidence: "образец не заказан"}
   test_sales:      {status: UNKNOWN, evidence: "живой карточки нет"}
