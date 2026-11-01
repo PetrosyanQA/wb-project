@@ -22,7 +22,7 @@ import statistics as st
 import sys
 from pathlib import Path
 
-from src.brush_watch import BASE, CFG, ROOT, send
+from src.brush_watch import BASE, CFG, ROOT, TITLE, send
 
 sys.stdout.reconfigure(encoding="utf-8")
 NOW = dt.datetime.now()
@@ -61,7 +61,7 @@ class Data:
 
 
 def raw_dir() -> Path:
-    p = ROOT / "data" / "raw" / "saleflow" / "watch437" / NOW.strftime("%Y-%m-%d")
+    p = ROOT / "data" / "raw" / "saleflow" / f"watch{CFG['niche']}" / NOW.strftime("%Y-%m-%d")
     p.mkdir(parents=True, exist_ok=True)
     return p
 
@@ -195,12 +195,14 @@ def econ(buyer: float, spp: float | None) -> dict:
 
 def _econ(buyer: float, spp: float | None) -> dict:
     from src.screen_white import COM, econ as E
+    from src.white_import import yuan_from_cost
     s = (spp or 21) / 100
     seller = round(buyer / (1 - s))
     cost = CFG.get("our_cost_landed") or 345
-    y = (cost - 15800 / (CFG.get("our_batch") or 300) - 1.5 * 0.25 * 92.37) / (1.446 * 13.29)   # ¥ из себестоимости
+    kg, vol, bo = CFG.get("our_kg", 0.25), CFG.get("our_vol_l", 1.0), CFG.get("our_buyout_pct", 83)
+    y = yuan_from_cost(cost, kg, CFG.get("our_batch") or 300)   # ¥ из себестоимости (src/white_import.py)
     com = COM.get(CFG["niche"]) or 26
-    st_, nm = E(seller, y, 1.0, 0.25, com, 83, 15, CFG.get("our_batch") or 300), E(seller, y, 1.0, 0.25, com, 83, 8, CFG.get("our_batch") or 300)
+    st_, nm = E(seller, y, vol, kg, com, bo, 15, CFG.get("our_batch") or 300), E(seller, y, vol, kg, com, bo, 8, CFG.get("our_batch") or 300)
     return {"seller": seller, "start": round(st_["net_profit"]), "norm": round(nm["net_profit"]), "margin": nm["net_margin_pct"]}
 
 
@@ -343,7 +345,7 @@ def build(mode: str, dry: bool) -> None:
     plan_7 = round(plan_m / 30 * 7 * f)
     batch = CFG.get("our_batch") or 300
     R = [f"• Цена: держать {buyer} ₽" + (f" → можно {rec_price} ₽ ({'; '.join(why)})" if rec_price != buyer else (f" ({'; '.join(why)})" if why else " — рынок спокойный")),
-         f"   прибыль с набора при {rec_price} ₽: {e_rec['start']} ₽ на старте / {e_rec['norm']} ₽ потом (СПП {spp} %, цена продавца {e_rec['seller']} ₽)",
+         f"   прибыль с единицы при {rec_price} ₽: {e_rec['start']} ₽ на старте / {e_rec['norm']} ₽ потом (СПП {spp} %, цена продавца {e_rec['seller']} ₽)",
          f"• Реклама: {'ОБЯЗАТЕЛЬНА с первого дня' if ads_share >= 0.6 else 'желательна'} — в топ-30 с рекламой {promo_top30} из {top30_n}; "
          f"бюджет ≈ {round(rec_price * plan_m * 0.15 / 30)} ₽/день (15 % выручки на старте)",
          f"• Остатки у нас: план {plan_7} шт/неделю → партии {batch} шт хватит на ≈{round(batch / max(1, plan_7))} недель; дозаказ при 100 шт",
@@ -364,7 +366,7 @@ def build(mode: str, dry: bool) -> None:
     wk = f"{dm(d7[0])}–{dm(d7[1])}" if d7 else "7 дн"
     pwk = f"{dm(dp[0])}–{dm(dp[1])}" if dp else "прошлые 7 дн"
     mk = (a7 / p7 - 1) * 100 if p7 else 0
-    head = [f"<b>{title} — КИСТИ ДЛЯ МАКИЯЖА</b>",
+    head = [f"<b>{title} — {CFG.get('report_title', 'КИСТИ ДЛЯ МАКИЯЖА')}</b>",
             f"{NOW:%d.%m.%Y %H:%M} · {len(C)} конкурентов · поиск WB, Москва",
             "🧪 <i>Тест-режим: нашего товара ещё нет</i>", "",
             "<b>📈 РЫНОК</b>",
@@ -399,7 +401,7 @@ def build(mode: str, dry: bool) -> None:
     cards = [fmt_card(c, i, RV.get(c["sku"])) for i, c in enumerate(sorted(C, key=lambda c: -c["a7"]), 1)]
     nf = meta.get("_not_found") or []
     tail = [f"❔ Ориентиры не найдены в поиске (нет в первых 500): {h(', '.join(WATCH.get(k, str(k))[:25] for k in nf))}"] if nf else []
-    rep = ROOT / "reports" / "monitor" / "watch437" / f"{NOW:%Y-%m-%d}_{mode}.md"
+    rep = ROOT / "reports" / "monitor" / f"watch{CFG['niche']}" / f"{NOW:%Y-%m-%d}_{mode}.md"
     rep.parent.mkdir(parents=True, exist_ok=True)
     rep.write_text(text1 + "\n\n" + "\n\n".join(cards) + "\n", encoding="utf-8")
     print(text1)

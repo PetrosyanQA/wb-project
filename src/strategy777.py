@@ -226,7 +226,7 @@ def barriers() -> dict:
 
 def econ() -> dict:
     cfg = load_config()
-    kw = dict(buyout_pct=84.6, commission_pct=20.0, ad_share_of_revenue_pct=15.0, packaging_rub=50.0)
+    kw = dict(buyout_pct=84.6, commission_pct=20.0, ad_share_of_revenue_pct=15.0, packaging_rub=15)
     out = {}
     for tag, price, yuan, vol, drr in (("старт ДРР 25%", 1590, 18, 0.4, 25.0), ("база ДРР 15%", 1590, 18, 0.4, 15.0),
                                        ("зрелость ДРР 10%", 1590, 18, 0.4, 10.0), ("цена −15%", 1352, 18, 0.4, 15.0),

@@ -31,7 +31,7 @@ SEASON = [113, 93, 109, 102, 102, 104, 100, 92, 90, 91, 102, 98]     # дек…
 def unit(drr: float, price: float = PRICE) -> dict:
     cfg = load_config()
     e = unit_economics(price, YUAN * 17, VOL, cfg, buyout_pct=BUYOUT, commission_pct=COM,
-                       ad_share_of_revenue_pct=drr, packaging_rub=50.0)
+                       ad_share_of_revenue_pct=drr, packaging_rub=15)
     cash_in = price - e["commission"] - e["logistics_with_returns"] - e["storage"] - e["ads"] - e["tax"]
     return {"profit": e["net_profit"], "goods": e["goods_cost_full"], "cash_in": cash_in}
 

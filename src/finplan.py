@@ -37,7 +37,7 @@ def unit(prod: dict, drr: float, price: float) -> dict:
     cfg = econ_config()
     cost, _ = cost_rub(prod["yuan"], prod.get("kg", 0.3), prod["vol"])
     e = unit_economics(price, cost, prod["vol"], cfg, buyout_pct=prod["buyout"], commission_pct=prod["commission"],
-                       ad_share_of_revenue_pct=drr, packaging_rub=50.0)
+                       ad_share_of_revenue_pct=drr, packaging_rub=15)
     cash_in = price - e["commission"] - e["acquiring"] - e["logistics_with_returns"] - e["storage"] - e["ads"] - e["tax"]
     return {"profit": e["net_profit"], "goods": e["goods_cost_full"], "cash_in": cash_in}
 

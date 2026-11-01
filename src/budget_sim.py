@@ -23,7 +23,7 @@ from src.unit_econ import load_scheme, unit_economics
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
-CNY_RUB, USD_RUB, IMPORT_K = 13.29, 92.37, 1.446
+from src.white_import import CNY as CNY_RUB, K as IMPORT_K, USD as USD_RUB  # noqa: E402 — config/landed_cost.yaml
 
 
 def landed_var(e: dict) -> float:

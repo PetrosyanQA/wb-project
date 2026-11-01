@@ -21,13 +21,13 @@ class UnitEcon(unittest.TestCase):
         """strategy_777_2026-10-07 §2.4: 1 590 ₽ до СПП, ДРР 15% → ≈ 447 ₽, 28.1%."""
         from src.marketing777 import econ
         e = econ(1590, 15)
-        self.assertAlmostEqual(e["net_profit"], 446, delta=3)
-        self.assertAlmostEqual(e["net_margin_pct"], 28.1, delta=0.2)
+        self.assertAlmostEqual(e["net_profit"], 482, delta=3)  # упаковка 15 ₽ (было 50) — 2026-10-27
+        self.assertAlmostEqual(e["net_margin_pct"], 30.3, delta=0.2)
 
     def test_stages(self):
         from src.marketing777 import econ
-        self.assertAlmostEqual(econ(1258, 25)["net_margin_pct"], 9.9, delta=0.2)
-        self.assertAlmostEqual(econ(1417, 18)["net_margin_pct"], 21.3, delta=0.2)
+        self.assertAlmostEqual(econ(1258, 25)["net_margin_pct"], 12.8, delta=0.2)  # упаковка 15 ₽ (было 50) — 2026-10-27
+        self.assertAlmostEqual(econ(1417, 18)["net_margin_pct"], 23.8, delta=0.2)
 
     def test_margin_monotonic(self):
         """Маржа растёт с ценой и падает с ДРР и комиссией."""
@@ -242,3 +242,26 @@ class CargoYuanexim(unittest.TestCase):
         cost, cargo = S.cost_rub(20, 0.25, 0.6)
         self.assertAlmostEqual(cost, 20 * 12.43 + cargo, delta=0.5)
         self.assertEqual(S.cost_rub(18, 0.3)[0], 18 * 17)                  # без объёма — старая модель (777)
+
+
+class WhiteImportAmFbs(unittest.TestCase):
+    """Аудит 2026-11-01: белый ввоз YUAN EXIM + схема am_fbs — одни параметры во всех модулях."""
+
+    def test_landed_matches_quote_formula(self):
+        from src.white_import import landed, yuan_from_cost
+        self.assertAlmostEqual(landed(10, 0.25, 300), 1.446 * 10 * 13.29 + 1.5 * 92.37 * 0.25 + 15800 / 300, delta=0.01)
+        self.assertAlmostEqual(yuan_from_cost(landed(9.2, 0.35, 300), 0.35, 300), 9.2, delta=1e-6)
+
+    def test_modules_share_parameters(self):
+        from src import budget_sim, monte_carlo, screen_white, white_import as W
+        self.assertEqual((screen_white.CNY, screen_white.K), (W.CNY, W.K))
+        self.assertEqual((monte_carlo.CNY, monte_carlo.USD), (W.CNY, W.USD))
+        self.assertEqual(budget_sim.CNY_RUB, W.CNY)
+
+    def test_brush_economics_at_known_point(self):
+        """Кисти 437: 1 390 ₽, СПП 18 %, себестоимость 306,5 ₽, комиссия 26 %, выкуп 83 %, 1 л → 281 ₽ при ДРР 15 %."""
+        from src.screen_white import CFG
+        from src.unit_econ import unit_economics
+        e = unit_economics(1390 / 0.82, 306.5, 1.0, CFG, with_breakeven=False, buyout_pct=83,
+                           ad_share_of_revenue_pct=15, commission_pct=26, tax_rate_pct=10)
+        self.assertAlmostEqual(e["net_profit"], 281, delta=2)

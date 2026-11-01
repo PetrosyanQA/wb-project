@@ -104,7 +104,7 @@ NO_P500 = [
 def econ_block(price, y, kg, vol, bo, com):
     c = per_unit(y, kg, vol)["landed_rub"]
     e = {d: unit_economics(price, c, vol, cfg, with_breakeven=False, buyout_pct=bo, commission_pct=com,
-                           ad_share_of_revenue_pct=d, packaging_rub=50) for d in (15, 10)}
+                           ad_share_of_revenue_pct=d, packaging_rub=15) for d in (15, 10)}
     return c, e
 
 

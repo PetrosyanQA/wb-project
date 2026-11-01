@@ -11,7 +11,7 @@ H = [h for h in D["hyps"] if h["sid"] == 777]
 cfg = load_config()
 m = N[777]
 BUY, SPP, FX = m["buyout"], 37.2, 83.48
-KW = dict(ad_share_of_revenue_pct=15, commission_pct=m["com"], packaging_rub=50)
+KW = dict(ad_share_of_revenue_pct=15, commission_pct=m["com"], packaging_rub=15)
 
 
 def ue(price, yuan, b=BUY):

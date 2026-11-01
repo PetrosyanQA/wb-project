@@ -62,7 +62,7 @@ def commission() -> int:
         cfg = load_scheme("am_fbs")
         for name, price, yuan, kg, vol in (("чёрная 22 мм", 1100, 5.7, 0.23, 0.77), ("фиолетовая 32 мм", 1250, 7.8, 0.33, 0.96)):
             e = unit_economics(price, per_unit(yuan, kg, vol)["landed_rub"], vol, cfg, with_breakeven=False, buyout_pct=82,
-                               commission_pct=now[249]["FBS"], ad_share_of_revenue_pct=15, packaging_rub=50)
+                               commission_pct=now[249]["FBS"], ad_share_of_revenue_pct=15, packaging_rub=15)
             print(f"→ 249 {name} {price} ₽ при комиссии FBS {now[249]['FBS']}% (¥{yuan}, ДРР 15%): прибыль {e['net_profit']} ₽, "
                   f"маржа {e['net_margin_pct']}% (порог 18%)")
     else:

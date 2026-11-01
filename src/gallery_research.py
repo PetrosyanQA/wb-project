@@ -36,6 +36,10 @@ def research_dir(niche: int) -> Path:
 def products(niche: int) -> dict[int, dict]:
     from src.datastore import latest
     p = latest(niche, "products500")
+    for alt in (ROOT / "data/raw/saleflow/2026-11-01/p500" / f"{niche}.json",           # свежий октябрь (niche_v7_collect)
+                ROOT / "data/raw/saleflow/v3_products500" / f"{niche}.json", ROOT / "data/raw/saleflow/v3_products100" / f"{niche}.json"):
+        if not p and alt.exists():                       # выгрузки screen_white / niche_deep scan
+            p = str(alt)
     if not p:
         sys.exit(f"нет products500 для ниши {niche}: собрать `python -m src.strategy_collect --niche {niche} --step core`")
     d = json.load(open(p, encoding="utf-8"))

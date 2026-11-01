@@ -67,7 +67,8 @@ def top_skus(niche: int, top: int) -> list[dict]:
     from src import datastore as D
     p = D.latest(niche, "products500")
     if not p:
-        for cand in (ROOT / "data/raw/saleflow/v3_products500" / f"{niche}.json", ROOT / "data/raw/saleflow/v3_products100" / f"{niche}.json"):
+        for cand in (ROOT / "data/raw/saleflow/2026-11-01/p500" / f"{niche}.json",
+                     ROOT / "data/raw/saleflow/v3_products500" / f"{niche}.json", ROOT / "data/raw/saleflow/v3_products100" / f"{niche}.json"):
             if cand.exists():
                 p = str(cand); break
     if not p:

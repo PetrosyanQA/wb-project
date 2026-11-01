@@ -20,7 +20,7 @@ description: "ФОТО И ДИЗАЙН — полный процесс: спис
 ## Шаги
 | # | Шаг | Чем | Стоимость |
 |---|---|---|---|
-| 1 | **Список конкурентов**: 15–20 карточек нашего типа и цены — лидеры по выручке + новички за год; исключить другие типы | `python -m src.gallery_research list --niche <id> --price <от> <до> --include "<слова>" --exclude "<слова>" --top 18` → проверить список глазами | 0 |
+| 1 | **Список конкурентов**: 15–20 карточек нашего типа и цены — лидеры по выручке + новички за год + **восходящие модели** (`python -m src.niche_deep risers <id> --include … --price …`: кто вырос июнь → июль и как продаётся по неделям); исключить другие типы | `python -m src.gallery_research list --niche <id> --price <от> <до> --include "<слова>" --exclude "<слова>" --top 18` → проверить список глазами | 0 |
 | 2 | **Галереи WB** (фото, rich, видео) | `python -m src.gallery_research fetch --niche <id>` | 0 (CDN WB) |
 | 3 | **Карточки Amazon** по английскому запросу товара | `python -m src.gallery_research amazon --niche <id> --query "<english>" --detail 8` | ≈ 9 кредитов Bright Data (стоп при < 100) |
 | 4 | **Листы-сравнения**: 1 строка = 1 карточка | `python -m src.gallery_research sheets --niche <id>` → открыть `marketing/<id>/research/*.jpg` | 0 |

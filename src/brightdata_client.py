@@ -95,7 +95,13 @@ def offers_1688(html: str) -> list[dict]:
     """Карточки выдачи 1688. Две вёрстки (2026-10): class="titleText--…" и class="title-text";
     в обеих: название → ¥ → целая часть + «.дробь» → «N件» продано → «回头率 N%»."""
     out = []
-    for blk in re.split(r'class="(?:titleText--[^"]*|title-text)"', html)[1:]:
+    parts = re.split(r'class="(?:titleText--[^"]*|title-text)"', html)
+    for k, blk in enumerate(parts[1:], 1):
+        rx_id = r"offer/(\d{9,14})\.html|offerId[\"']?[:=][\"']?(\d{9,14})"
+        nxt = blk[:blk.find("titleText--") if "titleText--" in blk else 3000]
+        own = re.findall(rx_id, nxt)                       # id внутри своего блока надёжнее, чем хвост предыдущего
+        prev = re.findall(rx_id, parts[k - 1][-4000:])
+        oid = (own[0][0] or own[0][1]) if own else ((prev[-1][0] or prev[-1][1]) if prev else None)
         t = [x.strip() for x in re.sub(r"<[^>]+>", "|", blk[:3000]).split("|") if x.strip()]
         if "¥" not in t:
             continue
@@ -108,7 +114,9 @@ def offers_1688(html: str) -> list[dict]:
             continue
         sold = next((x for x in t[i + 1:i + 6] if x.endswith("件")), "")
         rep = next((x[3:] for x in t[i + 1:i + 12] if x.startswith("回头率")), "")
-        out.append({"title": title[:80], "price_cny": price, "sold": sold, "repeat": rep})
+        img = re.findall(r"(https://cbu01\.alicdn\.com/[^\"'\s)]+?\.(?:jpg|png|webp))", parts[k - 1][-4000:] + nxt)
+        out.append({"title": title[:80], "price_cny": price, "sold": sold, "repeat": rep, "offer_id": oid,
+                    "img": img[-1] if img else None})
     return out
 
 
@@ -175,8 +183,8 @@ def main() -> None:
         ps = sorted(r["price_cny"] for r in rows)
         print(f"офферов распознано: {len(rows)}" + (f" | ¥ P25/P50: {ps[len(ps)//4]} / {ps[len(ps)//2]}" if ps else
               " — разметка не распознана, смотрите сохранённый HTML (возможна страница входа)"))
-        for r in rows[:10]:
-            print(f"  ¥{r['price_cny']:>7}  {r['sold']:>9}  {r['title'][:60]}")
+        for r in rows[:int(env("S1688_SHOW", "10"))]:
+            print(f"  ¥{r['price_cny']:>7}  {r['sold']:>9}  {r['repeat']:>4}  {r['offer_id'] or '—':>13}  {r['title'][:60]}")
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ from src.datastore import latest, rows
 from src.unit_econ import load_config, unit_economics
 
 sys.stdout.reconfigure(encoding="utf-8")
-COST, VOL, BUYOUT, COMM, PACK = 306, 0.72, 84.6, 20, 50
+COST, VOL, BUYOUT, COMM, PACK = 306, 0.72, 84.6, 20, 15
 OUT = "wb_algorithm/data/marketing777.json"
 CFG = load_config()
 

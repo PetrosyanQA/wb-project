@@ -69,19 +69,46 @@ LEASH = [  # (имя, актор, вход, потолок $)
 ]
 
 
+TRENDS = [  # 01.11.2026: корректор осанки и кисти для макияжа — уникальные модели и тренды (потолок ≈ $4)
+    ("amazon_posture", "junglee~amazon-crawler",
+     {"categoryOrProductUrls": [{"url": "https://www.amazon.com/s?k=posture+corrector"}], "maxItemsPerStartUrl": 60,
+      "scrapeProductDetails": False, "maxOffers": 0, "scrapeSellers": False, "useCaptchaSolver": False}, 0.40),
+    ("amazon_brushes", "junglee~amazon-crawler",
+     {"categoryOrProductUrls": [{"url": "https://www.amazon.com/s?k=makeup+brush+set"}], "maxItemsPerStartUrl": 60,
+      "scrapeProductDetails": False, "maxOffers": 0, "scrapeSellers": False, "useCaptchaSolver": False}, 0.40),
+    ("tiktok_posture", "clockworks~tiktok-scraper",
+     {"searchQueries": ["posture corrector"], "resultsPerPage": 40, "searchSection": "/video",
+      "shouldDownloadVideos": False, "shouldDownloadCovers": False}, 0.50),
+    ("tiktok_brushes", "clockworks~tiktok-scraper",
+     {"searchQueries": ["makeup brush set"], "resultsPerPage": 40, "searchSection": "/video",
+      "shouldDownloadVideos": False, "shouldDownloadCovers": False}, 0.50),
+    ("instagram_tags", "apify~instagram-hashtag-scraper",
+     {"hashtags": ["posturecorrector", "makeupbrushes"], "resultsLimit": 30}, 0.50),
+    ("gtrends_both", "apify~google-trends-scraper",
+     {"searchTerms": ["posture corrector", "makeup brush set", "корректор осанки", "кисти для макияжа"], "timeRange": "today 5-y",
+      "geo": "", "maxItems": 10}, 0.50),
+    ("pinterest_both", "epctex~pinterest-scraper",
+     {"search": ["posture corrector", "makeup brush set aesthetic"], "maxItems": 40}, 0.50),
+]
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["me", "leash"])
+    ap.add_argument("cmd", choices=["me", "leash", "trends"])
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     if a.cmd == "me":
         print(me())
         return
+    jobs = TRENDS if a.cmd == "trends" else LEASH
     print("до:", me())
-    print(f"потолок скана: ${sum(x[3] for x in LEASH):.2f}")
+    print(f"потолок скана: ${sum(x[3] for x in jobs):.2f}")
     if a.dry_run:
         return
-    for name, actor, inp, cap in LEASH:
+    for name, actor, inp, cap in jobs:
+        if me()["used_usd"] + cap > 4.6:                      # стоп до исчерпания $5
+            print(f"{name}: пропуск — близко к лимиту $5")
+            continue
         try:
             items = run(name, actor, inp, cap)
             print(f"{name}: {len(items)} шт → {OUT}/{name}.json")

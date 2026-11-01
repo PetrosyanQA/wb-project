@@ -38,7 +38,7 @@ def real_yuan() -> dict[int, float]:
 def econ(price, yuan, kg, vol, buyout, com, drr=15.0):
     landed = per_unit(yuan, kg, vol)["landed_rub"]
     return unit_economics(price, landed, vol, CFG, with_breakeven=False, buyout_pct=buyout, commission_pct=com,
-                          ad_share_of_revenue_pct=drr, packaging_rub=50)
+                          ad_share_of_revenue_pct=drr, packaging_rub=15)
 
 
 def max_yuan(price, kg, vol, buyout, com) -> float:

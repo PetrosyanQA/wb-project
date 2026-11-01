@@ -27,7 +27,8 @@ import yaml
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
-CFG = yaml.safe_load((ROOT / "config" / "watch_437.yaml").read_text(encoding="utf-8"))
+CFG = yaml.safe_load((ROOT / "config" / os.environ.get("WATCH_CFG", "watch_437.yaml")).read_text(encoding="utf-8"))   # WATCH_CFG=watch_9020.yaml — осанка
+TITLE = CFG.get("title", "Кисти 437")
 BASE = Path(os.environ.get("WATCH_STATE_DIR") or ROOT / "data" / "processed" / f"watch_{CFG['niche']}")   # в облаке — cloud_state/
 BASE.mkdir(parents=True, exist_ok=True)
 NOW = dt.datetime.now()
@@ -64,9 +65,9 @@ def cmd_status(a) -> None:
     if prev.get("ok") == ok:
         print("статус не изменился:", "работает" if ok else "нет доступа"); return
     if ok:
-        send(f"✅ Кисти 437, {NOW:%d.%m %H:%M}: Saleflow снова отдаёт данные WB — мониторинг включён, отчёты каждый час.", a.dry)
+        send(f"✅ {TITLE}, {NOW:%d.%m %H:%M}: Saleflow снова отдаёт данные WB — мониторинг включён, отчёты каждый час.", a.dry)
     else:
-        send(f"⛔ Кисти 437, {NOW:%d.%m %H:%M}: Saleflow не отдаёт данные WB ({(a.down or '')[:120]}). "
+        send(f"⛔ {TITLE}, {NOW:%d.%m %H:%M}: Saleflow не отдаёт данные WB ({(a.down or '')[:120]}). "
              "Проверьте модуль «Внешняя аналитика WB» в MPSTATS. Сообщу, когда заработает.", a.dry)
 
 
@@ -210,7 +211,7 @@ def cmd_daily(a) -> None:
             f"• Больше всех продаёт: {name(best[2])} — {best[0]} шт за неделю")
     more = ("\n\n🔎 ДОПОЛНИТЕЛЬНО\n" + "\n".join(extra)) if extra else ""
     body = head + more + "\n\n👥 ПО КАЖДОМУ КОНКУРЕНТУ\n\n" + "\n\n".join(L)
-    rep = ROOT / "reports" / "monitor" / "watch437" / f"{NOW:%Y-%m-%d}.md"
+    rep = ROOT / "reports" / "monitor" / f"watch{CFG['niche']}" / f"{NOW:%Y-%m-%d}.md"
     rep.parent.mkdir(parents=True, exist_ok=True)
     rep.write_text(body + "\n", encoding="utf-8")
     send(body + "\n\n(продажи — данные Saleflow, это оценка)", a.dry)
