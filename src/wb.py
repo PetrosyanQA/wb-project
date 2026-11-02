@@ -7,6 +7,8 @@
     python -m src.wb check "<запрос>" ["<запрос2>"] [--sid N]   # живая выдача + ниша изнутри + строка мастер-списка
     python -m src.wb decide                     # решение по текущему товару + срок цикла поиска
     python -m src.wb daily [--tg]               # самообучение: СПП, когорта новичков, прогнозы против факта
+    python -m src.wb analyze <sid> --query … --yuan-kw …   # досье: все источники проекта, ворота, решение
+    python -m src.wb selftest                   # сквозная проверка проекта (офлайн, 0 запросов)
 
 Порядок работы — README.md; правила — CLAUDE.md; сценарий анализа — /analiz.
 """
@@ -154,6 +156,84 @@ def check(queries: list[str], sid: int | None, name: str) -> None:
             print(f"мастер-список: {row['subject']} — {row['status']}; {'; '.join(row['why']) or 'все пороги'} → {row['todo']}")
 
 
+def selftest() -> int:
+    """Сквозная проверка «проект работает» — офлайн, 0 запросов к Saleflow и Bright Data."""
+    from unittest import mock
+    results = []
+
+    def step(name, fn):
+        try:
+            msg = fn() or "ok"
+            results.append(("PASS", name, msg))
+        except Exception as e:                                 # noqa: BLE001 — показать все шаги
+            results.append(("FAIL", name, str(e)[:160]))
+
+    def s_config():
+        from src.project_cfg import get
+        need = ["data_month", "master.rev_min", "pool.new_p50_min", "dossier.loss_max", "budgets.saleflow_reserve", "benchmark.sid"]
+        miss = [k for k in need if get(k) is None]
+        assert not miss, f"нет ключей {miss}"
+        return f"data_month {get('data_month')}"
+
+    def s_files():
+        out = []
+        for pat in ("data/processed/niche_master_*.json", "data/processed/niche_pool_*.json", "data/processed/screen_white_*_all.json"):
+            f = latest(pat)
+            assert f, f"нет {pat} — python -m src.wb screen"
+            out.append(f"{f.name}: {len(json.load(open(f, encoding='utf-8')))}")
+        return "; ".join(out)
+
+    def s_econ():
+        from src import screen_white as sw
+        from src.unit_econ import unit_economics
+        from src.white_import import landed
+        a = sw.econ(2500, 30, 0.6, 0.2, 15, 80, 15, 300)
+        b = unit_economics(2500, landed(30, 0.2, 300), 0.6, sw.CFG, with_breakeven=False, buyout_pct=80,
+                           ad_share_of_revenue_pct=15, commission_pct=15, tax_rate_pct=10)
+        assert abs(a["net_profit"] - b["net_profit"]) < 0.01, "screen_white.econ ≠ unit_economics"
+        return f"прибыль/шт {a['net_profit']:.0f} ₽ совпадает"
+
+    def s_dossier():
+        from src import dossier
+        with mock.patch.object(dossier, "saleflow_blocks", return_value=({}, [], "selftest: Saleflow не вызывается")),              mock.patch.object(dossier, "card_facts", return_value={}):
+            r = dossier.build(1142, ["петличный микрофон"], 30, None)
+        assert r["decision"] in ("HOLD", "WATCHLIST", "REJECT"), f"решение {r['decision']} выше WATCHLIST без уникальности"
+        assert r["bench_month"] > 0, "планка не посчиталась"
+        return f"1142 → {r['decision']}, ≈ {r['month_est']} ₽/мес против планки {r['bench_month']}"
+
+    def s_decision():
+        from src.decision import decide, discovery_warning, load
+        c = load()
+        return f"{decide(c)['decision']}; {discovery_warning(c)}"
+
+    def s_tests():
+        r = subprocess.run([PY, "-m", "unittest", "discover", "-s", "tests"], cwd=ROOT, capture_output=True, text=True)
+        tail = (r.stderr or r.stdout).strip().splitlines()[-1:]
+        assert r.returncode == 0, "тесты упали: " + " ".join(tail)
+        return " ".join(tail)
+
+    def s_saleflow():
+        try:
+            from src.saleflow_stdio import Client
+            c = Client()
+            try:
+                return f"работает, осталось {c.remaining()}"
+            finally:
+                c.close()
+        except Exception as e:                                 # noqa: BLE001 — внешний сервис, не ошибка кода
+            return f"ВНЕШНЕЕ: {str(e)[:90]}"
+
+    for name, fn in (("конфиг config/project.yaml", s_config), ("данные: мастер-список, копилка, сегменты", s_files),
+                     ("экономика = unit_econ", s_econ), ("досье офлайн (1142)", s_dossier), ("решение текущего товара", s_decision),
+                     ("юнит-тесты", s_tests), ("Saleflow (внешний)", s_saleflow)):
+        step(name, fn)
+    for st_, name, msg in results:
+        print(f"  {'✅' if st_ == 'PASS' else '❌'} {name}: {msg}")
+    fails = sum(r[0] == "FAIL" for r in results)
+    print(f"ИТОГ: {len(results) - fails}/{len(results)} шагов PASS")
+    return fails
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Единая точка входа проекта WB")
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -174,7 +254,12 @@ def main() -> None:
     p.add_argument("--yuan", type=float)
     p.add_argument("--price", type=float)
     p.add_argument("--top", type=int, help="досье для N лучших кандидатов копилки")
+    p.add_argument("--yuan-kw", help="ключевые слова офферов 1688 через запятую (фильтр шумной выдачи)")
+    p.add_argument("--offer", type=int, help="конкретный оффер 1688 — цена нужной комплектации (1 кредит, если не скачан)")
+    p.add_argument("--abroad", help="доказательство спроса за рубежом (ссылка + цифра), если нет файла Exa")
+    p.add_argument("--complaints", action="store_true", help="запустить разбор отзывов WB (бесплатно, 5–15 мин)")
     sp.add_parser("decide")
+    sp.add_parser("selftest", help="сквозная проверка проекта (офлайн)")
     p = sp.add_parser("daily")
     p.add_argument("--tg", action="store_true")
     a = ap.parse_args()
@@ -193,11 +278,14 @@ def main() -> None:
         if a.top:
             dossier.batch(a.top)
         elif a.sid:
-            r = dossier.build(a.sid, a.query, a.yuan, a.price)
+            kw = [k.strip() for k in a.yuan_kw.split(",")] if a.yuan_kw else None
+            r = dossier.build(a.sid, a.query, a.yuan, a.price, kw, a.offer, a.abroad, a.complaints)
             print(Path(ROOT / f"reports/dossier_{a.sid}_{dt.date.today()}.md").read_text(encoding="utf-8"))
             print(f"\n→ reports/dossier_{a.sid}_{dt.date.today()}.md; решение {r['decision']}")
         else:
             print("укажите sid или --top N")
+    elif a.cmd == "selftest":
+        sys.exit(1 if selftest() else 0)
     elif a.cmd == "decide":
         run("src.decision")
     else:

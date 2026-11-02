@@ -15,4 +15,7 @@ step "saleflow_eval selftest";"$PY" -m src.saleflow_eval selftest
 step "monte carlo smoke";     "$PY" -m src.monte_carlo --buyer 1390 --spp 18 --yuan 10 --kg 0.3 --vol 1 --com 26 --buyout 83 --runs 300 > /dev/null
 step "learning smoke";        "$PY" -m src.learning review
 step "decision smoke";        "$PY" -m src.decision
+if ls data/processed/niche_master_*.json >/dev/null 2>&1; then
+  step "сквозная проверка (локально, с данными)"; "$PY" -m src.wb selftest
+fi
 echo; echo "✅ все проверки прошли"

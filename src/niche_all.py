@@ -23,8 +23,11 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
-TH = {"rev": 5_000_000, "sellers": 30, "per_seller": 30, "buyout": 60, "price_max": 7000, "price_premium": 700, "margin15": 10}
-CLOTH = ("одежд", "обувь", "белье")
+from src.project_cfg import get as P  # noqa: E402
+_M = P("master")
+TH = {"rev": _M["rev_min"], "sellers": _M["sellers_min"], "per_seller": _M["per_seller_min"], "buyout": _M["buyout_min"],
+      "price_max": _M["price_max"], "price_premium": _M["price_premium"], "margin15": _M["margin15_min"]}
+CLOTH = tuple(P("excluded_roots"))
 FOOD = ("продукт", "корм", "кофе", "чай", "протеин", "витамин", "бад", "спортивное питание", "напитк", "снеки", "сладост")
 MEDICAL = ("линз", "подгузник", "медицин", "лекарств", "ортопед", "тест", "шприц", "бандаж", "тонометр")
 HEAVY = ("шины", "диски", "масла моторные", "шкаф", "комод", "гарнитур", "диван", "кроват", "стеллаж", "обувниц", "унитаз",
@@ -105,7 +108,7 @@ def main() -> None:
     for sid, r in raw.items():
         q = req.get(sid, {})
         root = q.get("root") or r["name"].split(" / ")[0]
-        if any(w in root.lower() for w in CLOTH) or "магнит" in str(q.get("flags")).lower():
+        if any(w in root.lower() for w in CLOTH) or any(b in str(q.get("flags")).lower() for b in P("banned_words")):
             excluded += 1
             continue
         sellers = r.get("sellers_with_sells") or 0
@@ -117,7 +120,7 @@ def main() -> None:
         tr = list(dict.fromkeys(tr))
         margin15, spp, spp_assumed = econ15(sid, m["price"], sw) if m["price"] and m["price"] >= TH["price_premium"] else (None, None, False)
         status, why = classify(m, tr, margin15)
-        has_products = bool(products(sid, "2026-07")[0] or [])
+        has_products = bool(products(sid, P("data_month"))[0] or [])
         p = pool.get(sid)
         if p and p["status"] == "КАНДИДАТ":
             todo = "живая выдача + жалобы + ¥ 1688 (кандидат копилки)"

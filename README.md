@@ -1,19 +1,20 @@
 # WB-проект: поиск и запуск товара (Wildberries, AM-кабинет, FBS, белый ввоз)
 
-Одна страница: как устроен проект и как им пользоваться. Правила — `CLAUDE.md`, сценарий анализа — `/analiz`,
+Одна страница: как устроен проект и как им пользоваться. Версия 1.0 (2026-11-02). Пороги, даты, бюджеты — `config/project.yaml`. Правила — `CLAUDE.md`, сценарий анализа — `/analiz`,
 текущее решение — `PROJECT_STATE.md` и `python -m src.wb decide`.
 
-## 8 команд (всё остальное — внутри них)
+## 9 команд (всё остальное — внутри них)
 ```bash
 .venv/Scripts/python.exe -m src.wb status        # все источники: работает ли, сколько осталось, свежесть данных
 .venv/Scripts/python.exe -m src.wb fbs-check     # полный ли свежий месяц в Saleflow (fbs=1) — 2 запроса
 .venv/Scripts/python.exe -m src.wb collect       # докачать ниши из очереди (стоп при запасе Saleflow 50)
 .venv/Scripts/python.exe -m src.wb screen        # все ниши → сегменты → копилка → мастер-список (0 запросов)
 .venv/Scripts/python.exe -m src.wb check "запрос" --sid 1142   # живая выдача + ниша изнутри + строка мастер-списка
-.venv/Scripts/python.exe -m src.wb analyze 1142 --query "петличный микрофон"   # ДОСЬЕ: все источники проекта в одном анализе
+.venv/Scripts/python.exe -m src.wb analyze 1142 --query "петличный микрофон" --yuan-kw "领夹,麦克风"   # ДОСЬЕ: все источники проекта
 .venv/Scripts/python.exe -m src.wb analyze --top 10   # досье по 10 лучшим кандидатам + сводка
 .venv/Scripts/python.exe -m src.wb decide        # решение по товару + срок цикла поиска (go/no-go)
 .venv/Scripts/python.exe -m src.wb daily         # самообучение: СПП, новички, прогнозы против факта
+.venv/Scripts/python.exe -m src.wb selftest      # сквозная проверка проекта (офлайн, 0 запросов)
 ```
 
 ## Как идёт работа

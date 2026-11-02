@@ -24,7 +24,8 @@ sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.join(os.environ.get("LOCALAPPDATA", ""), "Saleflow MCP")
 TIMEOUT_S = int(os.environ.get("SF_TIMEOUT", "240"))   # [аудит 2026-11-01] ответ дольше — ошибка, а не вечное ожидание
 ROOT = Path(__file__).resolve().parents[1]
-RESERVE = 50                                            # не опускать дневной остаток ниже (CLAUDE.md)
+from src.project_cfg import get as _P  # noqa: E402
+RESERVE = _P("budgets.saleflow_reserve", 50)          # не опускать дневной остаток ниже (config/project.yaml)
 CACHE_TTL_S = 24 * 3600
 FBS_TOOLS = {"wb_subject", "wb_similar", "wb_brand", "wb_category_stats", "wb_compare", "wb_seller", "wb_category"}
 NO_CACHE = {"account_limits", "saleflow_connection_status", "wb_check_rates"}   # живое — всегда свежее

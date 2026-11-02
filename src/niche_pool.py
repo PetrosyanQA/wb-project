@@ -20,6 +20,8 @@ import json
 import sys
 from pathlib import Path
 
+from src.project_cfg import get as P
+
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[1]
 SUMMER = ("палат", "шатр", "беседк", "бассейн", "круги для плав", "сорняк", "защиты растений", "насосы", "ролики", "спальник",
@@ -57,7 +59,7 @@ def notes(r: dict) -> list[str]:
         n.append("жидкость")
     if r["vol_assumed"]:
         n.append("объём — допущение 2 л")
-    if r["top6"] > 60 and r["cards"] >= 40:
+    if r["top6"] > 60 and r["cards"] >= P("pool.monopoly_min_cards"):
         n.append(f"топ-6 {r['top6']} %")
     return n
 
@@ -68,8 +70,9 @@ def score(r: dict) -> int:
 
 def build(src: str, min_month: int) -> tuple[list[dict], list[dict]]:
     seg = json.load(open(src, encoding="utf-8"))
-    good = [r for r in seg if r["ymax_pct"] >= 14.3 and r["new_p50"] >= 30 and r["top1"] <= 35 and r["batch_units"] >= 80
-            and (r["winter"] is None or r["winter"] >= 0.6)]
+    good = [r for r in seg if r["ymax_pct"] >= P("pool.china_pct") * P("pool.ymax_ratio") - 0.001 and r["new_p50"] >= P("pool.new_p50_min")
+            and r["top1"] <= P("pool.top1_max") and r["batch_units"] >= P("pool.batch_min_units")
+            and (r["winter"] is None or r["winter"] >= P("pool.winter_min"))]
     best: dict[int, dict] = {}
     for r in good:
         if score(r) >= min_month and (r["id"] not in best or score(r) > score(best[r["id"]])):
@@ -79,7 +82,7 @@ def build(src: str, min_month: int) -> tuple[list[dict], list[dict]]:
         t = tags(r)
         n = notes(r)
         # документы и «сезон ?» — только метки (решение пользователя: запрет — магниты); в ПРОВЕРИТЬ — монополия и неизвестный объём
-        status = "ЛОВУШКА" if t else ("ПРОВЕРИТЬ" if (r["top6"] > 65 and r["cards"] >= 40) or r["vol_assumed"] else "КАНДИДАТ")
+        status = "ЛОВУШКА" if t else ("ПРОВЕРИТЬ" if (r["top6"] > P("pool.top6_max") and r["cards"] >= P("pool.monopoly_min_cards")) or r["vol_assumed"] else "КАНДИДАТ")
         pool.append({"id": r["id"], "subject": r["subj"], "status": status, "band": r["band"], "buyer": r["buyer"],
                      "cards": r["cards"], "sales": r["sales"], "new": r["new"], "new_p50": r["new_p50"], "top1": r["top1"],
                      "top6": r["top6"], "sellers": r["sellers"], "vol": r["vol"], "spp": r["spp"], "com": r["com"],
@@ -98,7 +101,7 @@ def queue(seg: list[dict]) -> list[dict]:
     for r in req:
         if r["id"] in have or "магнит" in str(r.get("flags")).lower() or any(w in str(r.get("root")).lower() for w in CLOTH_ROOTS):
             continue
-        if not (products(r["id"], "2026-07")[0] or []):
+        if not (products(r["id"], P("data_month"))[0] or []):
             out.append({"id": r["id"], "subject": r["subject"], "root": r.get("root"), "rev_mln": r.get("rev_mln"),
                         "median_price": r.get("median_price"), "verdict": r.get("verdict", "")[:2]})
     return sorted(out, key=lambda x: -(x["rev_mln"] or 0))
@@ -137,7 +140,7 @@ def render(pool: list[dict], q: list[dict], src: str) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--src")
-    ap.add_argument("--min-month", type=int, default=50_000)
+    ap.add_argument("--min-month", type=int, default=P("pool.min_month"))
     a = ap.parse_args()
     src = a.src or sorted(glob.glob(str(ROOT / "data/processed/screen_white_*_all.json")))[-1]
     pool, seg = build(src, a.min_month)
