@@ -258,7 +258,7 @@ Outputs: `reports/*.md`, `reports/*.csv`, raw JSON in `data/raw/`.
 
 ## Decision policy
 
-- **While a stop-decision is active (437 until 2026-12-01 / test results) do not re-rank or re-pick the product.**
+- **Project mode and any stop-decision live only in `config/decision_current.yaml` (FROZEN_TEST = ideas go to the kopilka; DISCOVERY = search allowed).**
 - (MPSTATS discovery tiers 🟢A/🟡B/⚪️C — reference only, the discover pipeline is not used.)
 - A niche advances to deep analysis only if `score >= 65` **and** `fails == []`.
 - Then 3–5 competitor SKUs must be audited; if the top-3 are all one seller → drop it.
