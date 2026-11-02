@@ -247,7 +247,11 @@ def build(sid: int, queries: list[str], yuan_arg: float | None, price_arg: float
     if seg:
         L += [f"✅ {seg['band']} ₽: медиана {seg['buyer']} ₽, карточек {seg['cards']}, продаж {seg['sales']}/мес, новичков {seg['new']} "
               f"(P25/P50 {seg['new_p25']}/{seg['new_p50']} шт/мес), топ-1 {seg['top1']} %, топ-6 {seg['top6']} %, продавцов {seg['sellers']}; "
-              f"статус копилки: {(pool or {}).get('status', '—')}.", ""]
+              f"статус копилки: {(pool or {}).get('status', '—')}."]
+        if seg["new"] < 5 or seg["cards"] < 15:
+            L.append(f"⚠️ Малая выборка: {seg['cards']} карточек, {seg['new']} новичков — P50 новичка и доля топ-6 ненадёжны; "
+                     f"проверить свежим месяцем (fbs-check) или по полному топ-500.")
+        L.append("")
         src_ok.append("сегменты (товары за июль)")
     else:
         L += ["— товары ниши не скачаны (очередь: python -m src.wb collect)", ""]
