@@ -146,6 +146,8 @@ zeros as facts.
 
 ## Commands
 
+**С 2026-11-02 главный вход — `python -m src.wb <команда>`** (status · fbs-check · collect · screen · check · decide · daily), описание — `README.md`. Список ниже — справочный (часть команд — старые сценарии MPSTATS; 40 модулей-снимков перенесены в `src/archive/`).
+
 **Always run scripts through the project virtualenv**, never the bare `python`:
 - Windows: `.venv\Scripts\python.exe -m src.<module> …`
 - macOS/Linux: `.venv/bin/python -m src.<module> …`
