@@ -7,7 +7,7 @@
   reports/niche_pool_<дата>.md                 — таблица кандидатов по статусам (полный текст для чтения)
   data/processed/niche_pool_<дата>.json        — то же для кода
   data/processed/niche_collect_queue_<дата>.json — ниши без товаров за июль (докачать, когда вернётся Saleflow)
-Статусы: КАНДИДАТ — проходит отбор, без ловушек, топ-6 ≤ 65 %, объём известен (метки «сезон ?», «документы» — для сведения);
+Статусы: КАНДИДАТ — проходит отбор, без ловушек, топ-6 ≤ 65 % (монополию оцениваем только при ≥ 40 карточках сегмента), объём известен (метки «сезон ?», «документы» — для сведения);
 ПРОВЕРИТЬ — топ-6 > 65 % или объём — допущение; ЛОВУШКА — летний сезон / громоздкое / брендовая электроника / книги. Цифры — Saleflow июль 2026
 (данным > 30 дней — предварительно) и модель am_fbs с ¥ = 11 % цены [допущение]; прибыль — оценка до проверки ¥ на 1688.
 """
@@ -57,7 +57,7 @@ def notes(r: dict) -> list[str]:
         n.append("жидкость")
     if r["vol_assumed"]:
         n.append("объём — допущение 2 л")
-    if r["top6"] > 60:
+    if r["top6"] > 60 and r["cards"] >= 40:
         n.append(f"топ-6 {r['top6']} %")
     return n
 
@@ -79,7 +79,7 @@ def build(src: str, min_month: int) -> tuple[list[dict], list[dict]]:
         t = tags(r)
         n = notes(r)
         # документы и «сезон ?» — только метки (решение пользователя: запрет — магниты); в ПРОВЕРИТЬ — монополия и неизвестный объём
-        status = "ЛОВУШКА" if t else ("ПРОВЕРИТЬ" if r["top6"] > 65 or r["vol_assumed"] else "КАНДИДАТ")
+        status = "ЛОВУШКА" if t else ("ПРОВЕРИТЬ" if (r["top6"] > 65 and r["cards"] >= 40) or r["vol_assumed"] else "КАНДИДАТ")
         pool.append({"id": r["id"], "subject": r["subj"], "status": status, "band": r["band"], "buyer": r["buyer"],
                      "cards": r["cards"], "sales": r["sales"], "new": r["new"], "new_p50": r["new_p50"], "top1": r["top1"],
                      "top6": r["top6"], "sellers": r["sellers"], "vol": r["vol"], "spp": r["spp"], "com": r["com"],
