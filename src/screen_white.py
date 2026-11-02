@@ -164,22 +164,30 @@ def main():
     ap.add_argument("--top", type=int, default=40)
     ap.add_argument("--batch", type=int, default=400)
     ap.add_argument("--china-pct", type=float, default=11.0)
+    ap.add_argument("--all", action="store_true",
+                    help="все ниши, кроме одежды/обуви и магнитов (ЧЗ и документы — с пометкой); сезон неизвестен — не отсев, а «сезон ?»")
     a = ap.parse_args()
     ids = sorted({int(os.path.basename(p)[:-5]) for p in glob.glob("data/raw/saleflow/v3_products500/*.json")
                   + glob.glob("data/raw/saleflow/v3_products100/*.json") + glob.glob("data/raw/saleflow/2026-07_p500_arena/*.json")})
-    ok = [i for i in ids if i in REQ and REQ[i]["verdict"][:1] in ("🟢", "🟡")]
+    if a.all:                                       # [пользователь 02.11] запрет — только магниты; одежду и обувь не берём
+        cloth = lambda root: any(w in (root or "").lower() for w in ("одежд", "обувь", "белье"))   # noqa: E731
+        ok = [i for i in ids if i in REQ and "магнит" not in str(REQ[i].get("flags")).lower() and not cloth(REQ[i].get("root"))]
+    else:
+        ok = [i for i in ids if i in REQ and REQ[i]["verdict"][:1] in ("🟢", "🟡")]
     res = run(ok, a.batch, a.china_pct)
-    out = f"data/processed/screen_white_{dt.date.today()}.json"
+    out = f"data/processed/screen_white_{dt.date.today()}{'_all' if a.all else ''}.json"
     json.dump(res, open(out, "w", encoding="utf-8"), ensure_ascii=False)
+    season_ok = lambda r: (r["winter"] or 0) >= 0.6 or (a.all and r["winter"] is None)   # noqa: E731
     good = [r for r in res if r["ymax_pct"] >= a.china_pct * 1.3 and r["new_p50"] >= 30 and r["top1"] <= 35
-            and r["winter"] and r["winter"] >= 0.6 and r["batch_units"] >= 80]
-    good.sort(key=lambda r: -r["month8_winter"])
+            and season_ok(r) and r["batch_units"] >= 80]
+    good.sort(key=lambda r: -(r["month8_winter"] if r["month8_winter"] is not None else r["month8"]))
     print(f"ниш {len(ok)}, сегментов {len(res)}; проходят (¥max ≥ {a.china_pct * 1.3:.0f} % цены, новичок P50 ≥ 30, топ-1 ≤ 35 %, "
-          f"зимний спрос ≥ 60 % июля, партия ≥ 80 шт на {BUDGET_GOODS} ₽): {len(good)} → {out}")
+          f"зимний спрос ≥ 60 % июля{' или сезон неизвестен' if a.all else ''}, партия ≥ 80 шт на {BUDGET_GOODS} ₽): {len(good)} → {out}")
     for r in good[:a.top]:
+        month = f"{r['month8_winter']:>8} ₽/мес зимой" if r["month8_winter"] is not None else f"{r['month8']:>8} ₽/мес июль, сезон ?"
         print(f"{r['id']:>5} {str(r['subj'])[:26]:<26} {r['band']:>9} {r['buyer']:>5}₽ СПП{r['spp']:>3} ком{r['com']:>5} выкуп{r['buyout']:>3} "
               f"¥max{r['ymax']:>6} ({r['ymax_pct']:>4}%) маржа8 {r['margin8']:>5}% маржа15 {r['margin15']:>5}% "
-              f"новичок P50 {r['new_p50']:>5} топ1 {r['top1']:>2}% зима×{r['winter']} партия {r['batch_units']} шт → {r['month8_winter']:>8} ₽/мес зимой {r['verdict']}")
+              f"новичок P50 {r['new_p50']:>5} топ1 {r['top1']:>2}% зима×{r['winter']} партия {r['batch_units']} шт → {month} {r['verdict']} {r['flags'] or ''}")
 
 
 if __name__ == "__main__":
