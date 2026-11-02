@@ -223,7 +223,8 @@ def benchmark() -> dict:
 
 
 def build(sid: int, queries: list[str], yuan_arg: float | None, price_arg: float | None, yuan_kw: list[str] | None = None,
-          offer: int | None = None, abroad: str | None = None, complaints: bool = False, vol: float | None = None) -> dict:
+          offer: int | None = None, abroad: str | None = None, complaints: bool = False, vol: float | None = None,
+          use_saleflow: bool = True) -> dict:
     today = dt.date.today()
     master, pool = load_row("data/processed/niche_master_*.json", sid), load_row("data/processed/niche_pool_*.json", sid)
     seg = best_segment(sid, (pool or {}).get("band"))
@@ -268,7 +269,7 @@ def build(sid: int, queries: list[str], yuan_arg: float | None, price_arg: float
     else:
         L += ["— нет данных", ""]
     # 4–7 Saleflow
-    sf, used, err = saleflow_blocks(sid, queries)
+    sf, used, err = saleflow_blocks(sid, queries) if use_saleflow else ({}, [], "Saleflow отключён для этого прогона (--no-saleflow)")
     L += ["## 4. Структура рынка (Saleflow)", ""]
     for rep, title in (("price_segmentation", "Сегменты цены"), ("sellers", "Продавцы"), ("warehouses", "Склады"), ("geography", "Регионы")):
         if rep in sf:
