@@ -54,7 +54,7 @@ def simulate(buyer, spp, yuan, kg, vol, com, buyout, batch=400, runs=10_000, see
         seller = b / (1 - s / 100)
         landed = K * yuan * x("yuan") * CNY + USD_PER_KG * x("freight") * USD * kg + CUSTOMS / batch
         bo = _apply(buyout, R["buyout"], x("buyout"))
-        e = unit_economics(seller, landed, vol, cfg, with_breakeven=False, buyout_pct=bo,
+        e = unit_economics(seller, landed, vol, cfg, with_breakeven=False, buyout_pct=bo, buyer_price=b,
                            ad_share_of_revenue_pct=x("drr"), commission_pct=com, tax_rate_pct=10)
         prof.append(e["net_profit"])
         marg.append(e["net_margin_pct"])

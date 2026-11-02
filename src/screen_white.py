@@ -85,8 +85,8 @@ def seller_for(sid, buyer):
     return round(s2), spp_fbs(sid, s2)
 
 
-def econ(seller, yuan, vol, kg, com, buyout, drr, batch):
-    return unit_economics(seller, landed(yuan, kg, batch), vol, CFG, with_breakeven=False, buyout_pct=buyout,
+def econ(seller, yuan, vol, kg, com, buyout, drr, batch, buyer=None):
+    return unit_economics(seller, landed(yuan, kg, batch), vol, CFG, with_breakeven=False, buyout_pct=buyout, buyer_price=buyer,
                           ad_share_of_revenue_pct=drr, commission_pct=com, tax_rate_pct=10)
 
 
@@ -142,8 +142,8 @@ def run(ids, batch, china_pct):
             kg = (NC.get(sid) or {}).get("kg") or max(0.1, 0.22 * vol)
             ymax = max_yuan(seller, vol, kg, com, buyout, batch)
             yest = buyer * china_pct / 100 / CNY
-            e8 = econ(seller, yest, vol, kg, com, buyout, 8, batch)
-            e15 = econ(seller, yest, vol, kg, com, buyout, 15, batch)
+            e8 = econ(seller, yest, vol, kg, com, buyout, 8, batch, buyer)
+            e15 = econ(seller, yest, vol, kg, com, buyout, 15, batch, buyer)
             p50 = st.median(newp) if newp else 0
             wf = winter_factor(sid)
             unit_cost = landed(yest, kg, batch)

@@ -185,7 +185,7 @@ def economics(seg: dict, buyer: float, yuan: float, sid: int, facts: dict | None
     if not com:
         return ["— нет комиссии кабинета по предмету (обновить дамп: python -m src.wb_seller commission)"], {}
     facts = facts or {}
-    vol_src = "карточки WB" if facts.get("vol") else ("выгрузка Saleflow" if seg and not seg.get("vol_assumed", True) else "допущение")
+    vol_src = (facts.get("vol_src") or "карточки WB") if facts.get("vol") else ("выгрузка Saleflow" if seg and not seg.get("vol_assumed", True) else "допущение")
     vol = facts.get("vol") or (seg or {}).get("vol") or 2.0
     kg = facts.get("kg") or (seg or {}).get("kg") or max(0.1, 0.22 * vol)
     buyout = (seg or {}).get("buyout") or 80
@@ -198,7 +198,7 @@ def economics(seg: dict, buyer: float, yuan: float, sid: int, facts: dict | None
         seller = round(buyer / (1 - spp / 100))
         for y in sorted({round(yuan, 1), round(yuan * P("dossier.yuan_markup_check", 1.3), 1)}):
             for batch in (100, 300):
-                e8, e15 = (sw.econ(seller, y, vol, kg, com, buyout, d, batch) for d in (8, 15))
+                e8, e15 = (sw.econ(seller, y, vol, kg, com, buyout, d, batch, buyer) for d in (8, 15))
                 res[(spp, y, batch)] = e15["net_profit"]
                 marg[(spp, y, batch)] = e15["net_margin_pct"]
                 L.append(f"| {spp} % | {y} | {batch} | {e8['net_profit']:.0f} ₽ ({e8['net_margin_pct']} %) | "
@@ -217,13 +217,13 @@ def benchmark() -> dict:
     seg = next((r for r in segs if int(r["band"].split("-")[0]) <= b["price"] < int(r["band"].split("-")[1])), None)
     if seg is None:
         seg = best_segment(b["sid"], (load_row("data/processed/niche_pool_*.json", b["sid"]) or {}).get("band"))
-    _, e = economics(seg, b["price"], b["yuan"], b["sid"])
+    _, e = economics(seg, b["price"], b["yuan"], b["sid"], {"vol": b.get("vol_l"), "kg": b.get("kg"), "vol_src": "допущение до КП (config)"} if b.get("vol_l") else None)
     month = round((e.get("profit15_spp18_300") or 0) * ((seg or {}).get("new_p50") or 0))
     return {"name": b["name"], "month": month, "p50": (seg or {}).get("new_p50"), "profit": e.get("profit15_spp18_300")}
 
 
 def build(sid: int, queries: list[str], yuan_arg: float | None, price_arg: float | None, yuan_kw: list[str] | None = None,
-          offer: int | None = None, abroad: str | None = None, complaints: bool = False) -> dict:
+          offer: int | None = None, abroad: str | None = None, complaints: bool = False, vol: float | None = None) -> dict:
     today = dt.date.today()
     master, pool = load_row("data/processed/niche_master_*.json", sid), load_row("data/processed/niche_pool_*.json", sid)
     seg = best_segment(sid, (pool or {}).get("band"))
@@ -333,6 +333,8 @@ def build(sid: int, queries: list[str], yuan_arg: float | None, price_arg: float
     # 11–14
     L += ["## 10b. Карточки WB: габариты, ЧЗ, магнит (бесплатно, CDN)", ""]
     facts = card_facts(sid, (seg or {}).get("band")) if seg else {}
+    if vol and not facts.get("vol"):                         # явный объём (КП / допущение пользователя)
+        facts = {**facts, "vol": vol, "kg": facts.get("kg") or round(max(0.1, 0.22 * vol), 2), "vol_src": "задано --vol"}
     if facts.get("cards"):
         L += [f"✅ по {facts['cards']} карточкам топа сегмента: объём {facts['vol'] or '—'} л, вес {facts['kg'] or '—'} кг; "
               f"ЧЗ (need_kiz) у {facts['kiz']}; электроника у {facts['electro']}; упоминание магнита у {facts['magnet']}.", ""]

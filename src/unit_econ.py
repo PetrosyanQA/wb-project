@@ -81,7 +81,8 @@ def unit_economics(price: float, cost: float, volume_l: float, cfg: dict | None 
     buyout = max(1.0, float(ops["buyout_pct"])) / 100.0
 
     commission = price * float(commission_pct) / 100.0
-    acquiring = price * float(cfg.get("acquiring_pct", 0)) / 100.0
+    # [2026-11-02] эквайринг — с суммы, которую платит покупатель (цена после СПП); без buyer_price — от цены продавца (как раньше)
+    acquiring = float(overrides.get("buyer_price") or price) * float(cfg.get("acquiring_pct", 0)) / 100.0
 
     ship = wb_logistics(volume_l, cfg) + float(cfg["logistics"].get("ff_per_order_rub", 0))   # + ФФ до пункта приёма WB
     # 1 վաճառքի հաշվով՝ բոլոր չգնված պատվերների լոգիստիկան նույնպես մերն է

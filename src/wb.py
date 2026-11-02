@@ -258,6 +258,7 @@ def main() -> None:
     p.add_argument("--offer", type=int, help="конкретный оффер 1688 — цена нужной комплектации (1 кредит, если не скачан)")
     p.add_argument("--abroad", help="доказательство спроса за рубежом (ссылка + цифра), если нет файла Exa")
     p.add_argument("--complaints", action="store_true", help="запустить разбор отзывов WB (бесплатно, 5–15 мин)")
+    p.add_argument("--vol", type=float, help="объём упаковки, л (КП/замер), если в карточках WB нет габаритов")
     sp.add_parser("decide")
     sp.add_parser("selftest", help="сквозная проверка проекта (офлайн)")
     p = sp.add_parser("daily")
@@ -279,7 +280,7 @@ def main() -> None:
             dossier.batch(a.top)
         elif a.sid:
             kw = [k.strip() for k in a.yuan_kw.split(",")] if a.yuan_kw else None
-            r = dossier.build(a.sid, a.query, a.yuan, a.price, kw, a.offer, a.abroad, a.complaints)
+            r = dossier.build(a.sid, a.query, a.yuan, a.price, kw, a.offer, a.abroad, a.complaints, a.vol)
             print(Path(ROOT / f"reports/dossier_{a.sid}_{dt.date.today()}.md").read_text(encoding="utf-8"))
             print(f"\n→ reports/dossier_{a.sid}_{dt.date.today()}.md; решение {r['decision']}")
         else:
