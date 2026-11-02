@@ -9,16 +9,60 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
+import hashlib
 import json
 import os
 import queue
 import subprocess
 import sys
 import threading
+import time
+from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.join(os.environ.get("LOCALAPPDATA", ""), "Saleflow MCP")
 TIMEOUT_S = int(os.environ.get("SF_TIMEOUT", "240"))   # [аудит 2026-11-01] ответ дольше — ошибка, а не вечное ожидание
+ROOT = Path(__file__).resolve().parents[1]
+from src.project_cfg import get as _P  # noqa: E402
+RESERVE = _P("budgets.saleflow_reserve", 50)          # не опускать дневной остаток ниже (config/project.yaml)
+CACHE_TTL_S = 24 * 3600
+FBS_TOOLS = {"wb_subject", "wb_similar", "wb_brand", "wb_category_stats", "wb_compare", "wb_seller", "wb_category"}
+NO_CACHE = {"account_limits", "saleflow_connection_status", "wb_check_rates"}   # живое — всегда свежее
+
+
+def prepare_args(tool: str, args: dict) -> dict:
+    """fbs=1 по умолчанию: при fbs=0 с августа 2026 продажи — единицы процентов (описание инструментов Saleflow/MPSTATS)."""
+    a = dict(args)
+    if tool in FBS_TOOLS and "fbs" not in a:
+        a["fbs"] = 1
+    return a
+
+
+def _key(tool: str, args: dict) -> str:
+    return hashlib.sha1(json.dumps([tool, args], ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+
+
+def cache_get(tool: str, args: dict):
+    f = ROOT / "data" / "cache" / "saleflow" / f"{tool}_{_key(tool, args)}.json"
+    if tool in NO_CACHE or not f.exists() or time.time() - f.stat().st_mtime > CACHE_TTL_S:
+        return None
+    return json.loads(f.read_text(encoding="utf-8"))
+
+
+def cache_put(tool: str, args: dict, res) -> None:
+    d = ROOT / "data" / "cache" / "saleflow"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / f"{tool}_{_key(tool, args)}.json").write_text(json.dumps(res, ensure_ascii=False), encoding="utf-8")
+
+
+def save_raw(tool: str, args: dict, res) -> None:
+    """Правило CLAUDE.md: каждый ответ Saleflow — сырой JSON в data/raw/saleflow/<дата>/<инструмент>/."""
+    if tool in ("account_limits", "saleflow_connection_status"):
+        return
+    d = ROOT / "data" / "raw" / "saleflow" / str(dt.date.today()) / tool
+    d.mkdir(parents=True, exist_ok=True)
+    (d / f"{_key(tool, args)}.json").write_text(json.dumps({"args": args, "response": res}, ensure_ascii=False), encoding="utf-8")
 
 
 def _server_cmd() -> list[str]:
@@ -58,15 +102,36 @@ class Client:
                     raise RuntimeError(msg["error"])
                 return msg["result"]
 
-    def call(self, tool: str, args: dict):
+    def call(self, tool: str, args: dict, cache: bool = True):
+        args = prepare_args(tool, args)
+        hit = cache_get(tool, args) if cache else None
+        if hit is not None:
+            return hit
         r = self.rpc("tools/call", {"name": tool, "arguments": args})
         text = "".join(c.get("text", "") for c in r.get("content", []) if c.get("type") == "text")
         if r.get("isError"):
+            if "401" in text:
+                raise RuntimeError("Saleflow 401: токен недействителен — перевыпустите токен в кабинете saleflow.pro "
+                                   "и вставьте в конфиг Claude Desktop (saleflow_universal, AUTH_HEADER) и .env")
             raise RuntimeError(text[:300])
         try:
-            return json.loads(text)
+            res = json.loads(text)
         except json.JSONDecodeError:
-            return text
+            res = text
+        save_raw(tool, args, res)
+        if cache and tool not in NO_CACHE:
+            cache_put(tool, args, res)
+        return res
+
+    def remaining(self) -> int | None:
+        r = self.call("account_limits", {}, cache=False)
+        return r.get("remaining") if isinstance(r, dict) else None
+
+    def guard(self, need: int) -> None:
+        """Стоп, если после `need` запросов останется меньше резерва (CLAUDE.md: держать ≥ 50)."""
+        left = self.remaining()
+        if left is not None and left - need < RESERVE:
+            raise RuntimeError(f"Saleflow: осталось {left}, нужно {need}, резерв {RESERVE} — стоп")
 
     def close(self) -> None:
         self.p.stdin.close()

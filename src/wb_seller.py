@@ -452,11 +452,12 @@ def main() -> None:
         data = c.tariffs_box()
         whs = (data.get("response", {}).get("data", {}).get("warehouseList", []))
         whs = [w for w in whs if args.warehouse.lower() in str(w.get("warehouseName", "")).lower()]
-        print(f"{'Պահեստ':<28}{'1լ ₽':>8}{'+1լ ₽':>8}{'коэф%':>8}{'պահեստ. ₽/լ/օր':>16}")
+        # [аудит 2026-11-02] FBO-колонки (boxDelivery*) и FBS-колонки (boxDeliveryMarketplace*) — раньше FBS не показывались (нули)
+        print(f"{'Պահեստ':<28}{'FBO 1л':>8}{'+1л':>7}{'FBS 1л':>8}{'+1л':>7}{'FBS коэф%':>10}{'хран. ₽/л/д':>12}")
         for w in whs[:40]:
-            print(f"{str(w.get('warehouseName'))[:27]:<28}{rub(w.get('boxDeliveryBase')):>8.1f}"
-                  f"{rub(w.get('boxDeliveryLiter')):>8.1f}{rub(w.get('boxDeliveryCoefExpr')):>8.0f}"
-                  f"{rub(w.get('boxStorageLiter')):>16.3f}")
+            print(f"{str(w.get('warehouseName'))[:27]:<28}{rub(w.get('boxDeliveryBase')):>8.1f}{rub(w.get('boxDeliveryLiter')):>7.1f}"
+                  f"{rub(w.get('boxDeliveryMarketplaceBase')):>8.1f}{rub(w.get('boxDeliveryMarketplaceLiter')):>7.1f}"
+                  f"{rub(w.get('boxDeliveryMarketplaceCoefExpr')):>10.0f}{rub(w.get('boxStorageLiter')):>12.3f}")
     elif args.cmd == "commission":
         data = c.tariffs_commission()
         rowset = data.get("report", data.get("data", []))

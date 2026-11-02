@@ -1,370 +1,87 @@
-# CLAUDE.md — MPSTATS product research workspace (Wildberries)
+# CLAUDE.md — WB-проект: поиск и запуск товара (версия 1.0, 2026-11-02)
 
-You are a marketplace analyst working for a **beginner WB seller with a ~$2,000 launch budget**.
-Your job: turn MPSTATS data into **one defensible product decision**, not into a pile of numbers.
+Ты — аналитик маркетплейса для начинающего продавца Wildberries (кабинет в Армении, схема FBS, белый ввоз через YUAN EXIM,
+налог 10 %, бюджет ≈ 2 000 USD). Задача — **одно обоснованное решение по товару**, а не гора цифр.
+Ответы и отчёты — **по-русски**, полный текст в чат (файлы — копия). Прежняя версия файла: `docs/archive/CLAUDE_2026-11-02.md`.
 
-## ГЛАВНАЯ ЦЕЛЬ — УНИКАЛЬНОСТЬ (решение пользователя 2026-11-01, обязательно)
-Продаём только **уникальное**:
-1. товар, которого нет на WB или там он слабый; или
-2. обычный товар, но **в комплекте есть то, чего нет у конкурентов на WB**, при этом за рубежом это доказанно продаётся (Amazon, TikTok, Etsy — через Apify).
+## Главная цель — уникальность (решение пользователя 2026-11-01)
+Продаём только уникальное: товара нет на WB / он там слабый, **или** обычный товар с тем, чего нет у конкурентов на WB, —
+и это доказанно продаётся за рубежом (Amazon, TikTok, Etsy) **и** на WB есть спрос. Копия лидера — не ответ.
 
-Копия лидера или «нашли фабрику лидера» — **не ответ**: у лидеров тысячи отзывов, такой товар не обгонит.
+## Правила (не нарушать)
+1. **Запрет — только магниты.** «Честный знак», декларации, электроника, аккумуляторы — разрешены с пометкой «оформить» (цена и срок).
+2. **Цифра без источника → «—» и почему.** Источники: сохранённые ответы `data/raw/`, `src/unit_econ.py`, `src/white_import.py`.
+   Старые цифры прибыли из отчётов не цитировать — пересчитать текущей моделью.
+3. **Экономика всегда при СПП 18 / 10 / 0 %** (СПП нашего кабинета не измерена); маржа — по цене продавца; комиссия и тарифы —
+   только из WB Seller API (`src/commission.py`); себестоимость — только `config/landed_cost.yaml → white_import`.
+4. **Пороги, даты, бюджеты, планка — только `config/project.yaml`.** Внутри цикла не менять; новый цикл — с уроком в `learning/LESSONS.md`.
+5. **Решение — только через `src/decision.py`** (досье `src.wb analyze`). Цикл поиска кончается `discovery_until` — тогда решение go/no-go.
+   Процесс: 4 проверки → стоп-решение → КП и образец → тестовая партия 50–100 → живая карточка → kill-критерии (`config/launch.yaml`).
+6. **Данные продаж Saleflow — `data_month` (июль 2026)**; старше 30 дней → вывод «предварительный». `src.wb fbs-check` покажет,
+   полные ли свежие месяцы при fbs=1.
+7. **Лимиты:** Saleflow — держать ≥ 50 из 500/день; Bright Data — стоп при 100; Apify — стоп < 0,5 USD. Перед платным — сказать расход.
+   Кэш не обходить (`force`/`cache=False` — только по просьбе).
+8. **«Да» пользователя** — на деньги, письма поставщикам (их отправляет пользователь), цены и изменения в кабинете WB, публикации,
+   платные генерации, push в GitHub, изменения аккаунта MPSTATS (`wb_shelves_project`).
+9. **Ключи — только в `.env`** (и в конфиге Claude Desktop для Saleflow). Никогда не печатать, не писать в отчёты и git, не просить в чат.
+   Попал в чат — сказать отозвать. WB-токен 401 — сказать перевыпустить, не обходить. Капчи и блокировки не обходить.
 
-Порядок работы:
-1. Найти уникальность за рубежом через **Apify**.
-2. Проверить отсутствие на WB **живой выдачей** (`wb_check_rates`). Совпадение названий в топ-500 одной ниши не считается доказательством.
-3. Только после этого — 1688 и экономика.
-
-**Не тратить лимиты зря.** Сначала бесплатные источники (кэш, скачанные данные), затем точечные платные запросы; перед большим сбором оценивать расход.
-
-## ПРОЦЕСС И ТЕКУЩИЙ ТОВАР (аудит 2026-11-01, обязательно)
-- **Текущий товар: набор кистей с подписями, ниша 437** — `PROJECT_STATE.md`, `reports/brushes_decision_2026-11-01.md`. Упоминания «249» ниже — история.
-- Процесс: найти → 4 проверки (живая выдача WB, реальный ¥ 1688, экономика по медиане ниши, документы/магниты) →
-  **стоп-решение на 30 дней** → образец → тестовая партия 50–100 шт → живая карточка → kill-критерии.
-  Пока идёт тест — новые идеи только в «копилку», текущее решение не меняем (за октябрь товар менялся 10+ раз без единого образца).
-- Отчёты и ответы пользователю — **на русском** (правило «на армянском» ниже устарело).
-- Себестоимость белого ввоза — только `config/landed_cost.yaml → white_import` через `src/white_import.py`; не вписывать курсы в код.
-- СПП нашего AM-кабинета не измерена: любую экономику показывать при СПП 18 / 10 / 0 %.
-- Фильтры MPSTATS и «Target product profile» ниже — справочные, рабочие правила отбора — в разделе «ГЛАВНАЯ ЦЕЛЬ».
-
-## Hard rules
-
-1. **Never invent a number.** Every figure must come from a saved response under `data/raw/` (Saleflow, WB Seller API,
-   Evirma, Bright Data, Apify) or from `src/unit_econ.py` / `src/white_import.py`. Missing → write `—` and say why.
-   Never re-quote old profit numbers from reports — recompute with the current model.
-2. **Check the budget first.** Saleflow: `account_limits` (500/day, keep ≥ 50); Bright Data: stop at 100 credits;
-   Apify: stop when < 0.5 USD left. (MPSTATS token is invalid — do NOT run `mpstats_client plan`.)
-3. **Cache is on by default** (`data/cache/`, TTL 24h). Never bypass it with `force=True`
-   unless the user asks for fresh data. Re-running a script must NOT re-burn the limit.
-4. **Secrets:** the token lives in `.env` only. Never print it, never write it into reports,
-   never commit it.
-5. **Market data has error bars** (Saleflow after 2026-08 is incomplete ≈ 0.61×; use July 2026 for sales) (±10–20% on sales, price outliers, unit mismatches).
-   Flag anomalies instead of presenting them as fact. Cross-check any conclusion that drives
-   money with a second angle (e.g. category report + similar items + keyword demand).
-6. **Revenue ≠ profit.** No niche is "good" until `src/unit_econ.py` clears
-   `targets.min_net_margin_pct` and `targets.min_roi_on_cost_pct` in `config/unit_economics.yaml`.
-7. Write reports and answers in **Russian** (user decision; the old «Armenian» rule is void).
-
-## Two data sources — never confuse them
-
-| Source | Answers | Token |
-|---|---|---|
-| **MPSTATS** (external analytics) | what the *market* does: competitors, niches, demand | `MPSTATS_TOKEN` |
-| **WB Seller API** (the user's own cabinet) | what things *actually cost* and what *actually happens* to us: tariffs, commission, buyout, funnel, ad spend | `WB_SELLER_TOKEN`, read-only |
-
-Rule: **a fact from WB Seller API always overrides an assumption in a config file.**
-When you use a WB fact, say which assumption it replaced. WB tokens are read-only and expire
-after 180 days — if a call returns 401, tell the user to reissue, never work around it.
-WB rate limits are brutal (commission and statistics = 1 request/minute); the client throttles
-automatically, so a call may block for ~60s. Do not "optimise" by removing the throttle.
-
-## MPSTATS pipeline status (2026-10-22)
-`MPSTATS_TOKEN` in `.env` is empty/invalid → `gates`, `discover`, `niche_scan`, `trend_scan`, `sku_audit` (MPSTATS) are
-**not used**; the live pipeline is Saleflow + public WB + WB Seller API (see `docs/PROJECT_GUIDE.md`). The gate logic below
-still applies as a method. Current product: **niche 437 labeled makeup brush set** — `PROJECT_STATE.md`, `reports/brushes_decision_2026-11-01.md` (249 = history).
-SPP of competitors per niche: ALWAYS take from Evirma (`python -m src.evirma show <subject>`).
-USER DECISION 2026-10-22: our AM cabinet gets SPP like everyone → compute margins at the SELLER price (before SPP);
-supply = white import via YUAN EXIM (`docs/suppliers/yuanexim_offer_2026-10-22.md`); tax 10 %. RU VAT art. 174.3: USER 2026-10-22 — not withheld from us (`vat_ru_eaeu_pct: 0`); don't re-raise.
-
-## Filter order — ALWAYS cheapest first
-
-Run gates in this order and STOP at the first failure (`config/filters.yaml` holds every
-threshold — never hardcode numbers in code or in your reasoning):
-
-| # | Gate | API cost | Kills the niche when |
-|---|---|---|---|
-| 1 | regulatory | 0 | magnets only (ЧЗ / certification → label «what to file», not a kill) |
-| 2 | economics | 0 | price outside 1000–2500 ₽, volume >1 L, logistics >25% of price, break-even too close to median |
-| 3 | concentration | 1 | top-10 >40%, top-1 seller >25%, <8 sellers in top-20 |
-| 4 | yoy_peak | 1 | peak month YoY < −5% (explosive >80% = warning, usually one early player) |
-| 5 | profile | 0 | not a plateau, <30 sellers, top-20 median rating ≥4.75 |
-| 6 | audit | 20 | only reached by survivors |
-
-`python -m src.gates --path "<path>" --volume <L>` runs exactly this.
-Never spend audit requests on a niche that has not passed gates 1–5.
-
-## Target product profile (replaces "find a growing niche")
-
-Growing niches are almost always held by one early player; diversified ones are usually
-already declining. The target is **plateau + many sellers + a fixable customer complaint**
-(see `docs/STRATEGY.md`). Concretely: slope −1.5…+4 %/month, ≥30 sellers, top-10 ≤40%,
-top-1 ≤25%, median top-20 rating ≤4.75, one complaint theme in ≥12% of negative reviews,
-price 1000–2500 ₽, volume ≤1 L, no magnets (ЧЗ/certification allowed with a paperwork note). [reference only — see top block]
-When you report a niche, always name the complaint you would fix — a niche without a
-fixable complaint is not an entry point, no matter how good the numbers look.
-
-## Data hygiene
-
-- Always clean rows through `src.outliers.clean_items` before computing metrics: it drops
-  price ≫/≪ median (комплекты, аксессуары), one-day sales spikes, and foreign `subject_id`.
-  Report how much was dropped; >40% means the path is wrong.
-- Use **YoY by peak month**, never month-over-month growth, when judging direction.
-
-## Secrets
-
-Never ask the user to paste a token into the chat, and never write one into a project file.
-Tokens live only in the local `.env` (MPStats, WB) or in the Claude Desktop MCP config
-(Saleflow). If a token appears in the conversation anyway: tell the user to revoke it
-immediately, do not store it, and continue with `python -m src.wb_seller decode` /
-`python -m src.doctor --share`, which reveal everything needed without exposing secrets.
-
-## Saleflow (MCP) rule
-
-Saleflow is an MCP server, so the data arrives in your context, not in the cache. Every time
-you call a Saleflow tool: write the raw JSON to `data/raw/saleflow/`, then run
-`python -m src.saleflow ingest <file> --tool <name> --note "<niche>"`. When both sources
-cover the same niche, run `python -m src.saleflow crosscheck` and use the **conservative**
-(lower) revenue figure for decisions. Never write any token into project files.
-
-## First run in a new environment
-
-[MPSTATS-only — skipped while the MPSTATS token is invalid.] Before ANY MPSTATS analysis on a fresh install, run `python -m src.doctor --path "<real path>"`.
-It verifies connectivity, permissions and — most importantly — whether the field names this
-code expects actually match what the API returns on the user's tariff. If the doctor reports
-unmapped fields, fix `src/fields.py` ALIASES first; do not proceed and do not silently report
-zeros as facts.
-
-## Commands
-
-**Always run scripts through the project virtualenv**, never the bare `python`:
-- Windows: `.venv\Scripts\python.exe -m src.<module> …`
-- macOS/Linux: `.venv/bin/python -m src.<module> …`
-
-If the venv is missing, tell the user to run `setup.bat` / `bash setup.sh` — do not pip-install
-into the system Python.
-
-```bash
-# ── MPSTATS ────────────────────────────────────────────────────────────
-python -m src.doctor --path "Дом/Кухня"               # RUN THIS FIRST on a new install
-python -m src.gates --path "<niche>" --volume 0.8     # ordered cheap-first filters
-python -m src.gates --demo
-python -m src.saleflow list                           # what MCP data is cached
-python -m src.wb_seller decode                        # token rights, offline (no request)
-python -m src.mpstats_client limit                    # remaining API quota
-python -m src.mpstats_client plan                     # what fits in the remaining quota
-python -m src.mpstats_client categories "чехл"        # find EXACT category path
-python -m src.mpstats_client raw items/12345678/keywords --param d1=2026-08-01 --param d2=2026-08-31
-
-python -m src.niche_scan --path "Дом/Кухня" --children categories --top 12 --dry-run
-python -m src.niche_scan --path "Дом/Кухня" --children categories --top 12
-python -m src.niche_scan --demo                       # offline smoke test, no API
-
-python -m src.discover --depth 2 --top 20 --dry-run    # START HERE when no niche is chosen
-python -m src.discover --depth 2 --probe 25 --growth-top 10   # ~25 scored niches
-python -m src.discover --depth 2 --probe 40 --max-requests 90 # wide sweep
-python -m src.niche_scan --from-csv reports/discovery_<date>.csv --tiers A,B --limit-niches 10
-python -m src.discover --demo
-
-python -m src.trend_scan --path "Автотовары/Органайзеры" --days 540 --snapshots 4 --dry-run
-python -m src.trend_scan --path "Автотовары/Органайзеры" --days 540 --snapshots 4
-python -m src.trend_scan --demo                       # offline smoke test
-
-python -m src.mkt wb --niche 249 --top 12            # маркетинг: WB/Amazon визуальная разведка, audit, gen (Photo Editor), compose — marketing/README.md, /kartochka
-python -m src.wb_help_sync                          # справочный центр WB → docs/wb_help/ (+ OFFER_full.md)
-python -m src.brightdata_client s1688 "狗玩具 耐咬" --name 731   # 1688 prices via Bright Data (cap 20/day, docs/BRIGHTDATA.md)
-python -m src.sku_audit --sku 12345678 --days 30 --cost 380 --volume 0.6
-python -m src.unit_econ --price 1490 --cost 380 --volume 0.5 --buyout 82 --drr 15
-
-# ── WB SELLER API (read-only token) ────────────────────────────────────
-python -m src.wb_seller check                         # which categories the token unlocks
-python -m src.wb_seller box --warehouse "Коледино"    # real logistics + storage per warehouse
-python -m src.wb_seller commission --subject "Ножи"   # real commission FBO/FBS/DBS
-python -m src.wb_seller acceptance --free-only        # free supply slots
-python -m src.wb_seller subjects "нож"                # subjectID + parent category
-python -m src.sync_tariffs --warehouse "Коледино" --subject "Ножи кухонные" --apply
-python -m src.wb_facts buyout --days 30               # REAL buyout %, per SKU
-python -m src.wb_facts funnel --days 30 --nm 123456789
-python -m src.wb_facts regions --days 30
-
-# ── SALEFLOW FUNNEL (offline, reads saved Saleflow JSON) ───────────────
-python -m src.saleflow_eval selftest
-python -m src.saleflow_eval --niche termos reg "Спорт/Туризм.Походы/Походная кухня/Термос"
-python -m src.saleflow_eval --niche termos sellers <sellers.json> [--total-revenue 224000000]
-python -m src.saleflow_eval --niche termos items <items.json> --commission 19.5
-python -m src.saleflow_eval --niche termos econ --price 1200 --volume 1.0 --commission 19.5
-python -m src.saleflow_eval --niche termos trends <subject_trends.json|csv>   # step 4, ACTUAL monthly series
-# `yoy` (wb_analytics forecast/trend) is DEPRECATED for verdicts: it is a model, its last year does not match
-# actuals (thermos Dec-2025: model −2.6% vs actual +32…+64%).
-python -m src.saleflow_eval --niche termos comments <c1.json> <c2.json>
-python -m src.saleflow_eval --niche termos summary
-python -m src.niche_rank [YYYY-MM-DD]                 # rank niches from saved saleflow_eval outputs
-python -m src.subject_screen --date 2026-10-04 --top 40   # screen wb_subjects_list dumps
-python -m src.segments --niche termos --months 6      # top-100 segments by attributes
-python -m src.build_xlsx 2026-10-03                   # Excel summary of saved niches
-
-# ── CROSS-BORDER (weight decides; scenarios in config/scenarios.yaml) ────
-python -m src.subject_screen --mode xborder --aov-min 1000 --aov-max 5000   # light goods allowed
-python -m src.xborder screen --top 60                 # 0 requests: weight budget per scenario
-python -m src.xborder products <saved wb_subject products files…>   # dims, country, concentration
-python -m src.xborder refine --weights data/raw/saleflow/<date>/xborder/weights.json   # max ¥, k
-python -m src.xborder selftest
-
-# ── WINNER DNA (needs monthly/, seo/, winners/<sku>/by_period.json saved from Saleflow) ──
-python src/niche_top100.py videonyani 2026-10-04      # 12-month top-100 trajectories (also: masturb)
-python -m src.winner_dna market|seo|launch|gaps --niche videonyani   # presets in PRESETS: videonyani, masturb
-```
-`wb_sku by_period` returns DAILY rows incl. `in_ads`, `search_words_in_ad`, `search_position_avg`,
-`in_action`, `balance`, `comments` — the only source for competitors' ad/price/stock history.
-
-Cross-border rules (verified 2026-10-04): AM-cabinet commissions come from the WB API
-(`commission_source: cabinet`) and are up to +19 p.p. LOWER than the Saleflow/MPStats
-commissions of Russian sellers — never mix them. WB `boxDeliveryBase` already includes the
-warehouse coefficient (`warehouse_coef: 1.0` in `tariffs_auto.yaml`). [The «via Yerevan ≥ 3 000 ₽» rule is obsolete —
-the current scheme is FBS from an RF fulfilment + white import, `config/scheme_am_fbs.yaml`.]
-
-`sync_tariffs --apply` writes `config/tariffs_auto.yaml`, which `unit_econ.load_config()`
-deep-merges over the hand-written base config. Never edit `tariffs_auto.yaml` by hand —
-regenerate it. Keys starting with `_` are metadata and are ignored by the merge.
-
-Outputs: `reports/*.md`, `reports/*.csv`, raw JSON in `data/raw/`.
-
-## Analysis pipeline (follow in order)
-
-| Stage | Question | MPSTATS endpoint (base `analytics/v1/wb`) | Tool here |
-|---|---|---|---|
-| −1 | **No niche in mind at all** | `category/list` + `category/categories` aggregates | `discover` |
-| 0 | Which exact path? | `POST category/list` | `mpstats_client categories` |
-| 1 | Which sub-niches exist? | `POST category/categories`, `category/subjects` | `niche_scan --children` |
-| 2 | Is money distributed or monopolised? | `POST category/items` (sort revenue, 500 rows) | `niche_scan` |
-| 3 | Growing or dying? | `POST category/by_date` (60d) | `niche_scan` growth |
-| 3b | **Long-run dynamics**: trend, YoY, seasonality, saturation | `category/by_date` 540d + 4× `category/items` snapshots | `trend_scan` |
-| 4 | Which price segment earns? | `POST category/price_segmentation` | manual / raw |
-| 5 | Seasonality risk? | `GET category/season_effects/annual`, `category/forecast/trend` | `trend_scan` + raw |
-| 6 | Can a new card break in? | `start_date` of top-50 in `category/items` | `new_sku_success_pct` |
-| 7 | Who exactly do we fight? | `POST similar/items`, `GET items/{sku}/*` | `sku_audit` |
-| 8 | What do buyers hate? | `GET items/{sku}/comments` | `sku_audit` + manual read |
-| 9 | Demand in search? | `GET items/{sku}/keywords`, `POST category/keywords` | `sku_audit` |
-| 10 | Does it make money? | — | `unit_econ` |
-
-## Decision policy
-
-- **While a stop-decision is active (437 until 2026-12-01 / test results) do not re-rank or re-pick the product.**
-- (MPSTATS discovery tiers 🟢A/🟡B/⚪️C — reference only, the discover pipeline is not used.)
-- A niche advances to deep analysis only if `score >= 65` **and** `fails == []`.
-- Then 3–5 competitor SKUs must be audited; if the top-3 are all one seller → drop it.
-- Then unit economics must clear thresholds **at the median price of the niche**, not at a
-  dream price.
-- Final answer format: **1 recommended product + 2 alternates**, each with: niche metrics,
-  why it beats the alternatives, unit economics table, first-batch plan, top 3 risks,
-  and the exact "kill criteria" that would make us abandon it after 30 days.
-
-## Style
-
-- Tables over prose. Numbers with units (₽, %, հատ).
-- Always state the period (`d1 … d2`) under every table.
-- End every report with `Следующий шаг:` and one concrete action.
-
-## ⚠️ Շուկայի համատեքստ (ստուգված 2026-10-03)
-
-Կաբինետը **ԱՊՀ cross-border** է՝ `currency: AMD`, 22 պահեստ՝ **0 ռուսական**, ԱՁ Հայաստանում։
-2026-04-20-ից ՌԴ մաքսային նոր կանոններով հայկական վաճառողների քարտերը ՌԴ-ում սահմանափակվել են;
-վերականգնումը փուլային է՝ հայկական արտադրանք → ԵԱՏՄ → ԵԱՏՄ-ից դուրս (Չինաստան՝ վերջին)։
-**MPStats-ը ցույց է տալիս WB Russia** — ուստի մինչև թիրախ շուկայի որոշումը
-`gates.py`/`discover.py`-ի արդյունքները կիրառելի են միայն ՌԴ սցենարի համար։
-Մանրամասն՝ `reports/market_reality_20261003.md`։
-
-## WB թոքեններ՝ բազմա-թոքեն երթուղղում
-
-`.env`-ում կարող են լինել `WB_SELLER_TOKEN` և/կամ ցանկացած `WB_TOKEN_*`։
-Գործարկման պահին կոդը ապակոդավորում է ամեն թոքենի JWT bitmask-ը և հարցումն
-ուղարկում ԱՅՆ թոքենով, որն ունի պահանջվող կատեգորիան՝ **ամենաքիչ իրավունքով**։
-
-| Հոսթ | Պահանջվող բիթ | Կատեգորիա |
-|---|---|---|
-| `common` (Тарифы) | — | ցանկացած թոքեն |
-| `content` | 1 | Контент |
-| `analytics` | 2 | Аналитика |
-| `stats` | 5 | Статистика |
-| `advert` | 6 | Продвижение |
-| `feedbacks` | 7 | Вопросы и отзывы |
-| `supplies` | 10 | Поставки |
-
-```bash
-python3 -m src.wb_seller decode   # բոլոր թոքենները + երթուղղման քարտեզ, 0 հարցում
-python3 -m src.wb_seller check    # ո՞ր կատեգորիան է իրոք աշխատում (live)
-```
-
-**Թոքենի տիպերը** (`acc` դաշտը)՝ 1=Base, 2=Test, 3=Personal, 4=Service։
-⚠️ **Base-ի դեպքում** որոշ մեթոդներ (sales-funnel, acceptance) սահմանափակված են
-**1 հարցում/ժամ** → 429։ **Personal**-ով՝ 6/րոպե։ Օգտագործիր Personal։
-
-**Հայտնի WB-կողմի խնդիր**՝ `acceptance/coefficients`-ը ժամանակավոր անջատված է
-(release-notes id=570) երկու հոսթի վրա էլ — ոչ թե թոքենի խնդիր։
-
-## Saleflow Analytics (saleflow.pro)
-
-Մարկետփլեյսների վերլուծություն՝ նիշաներ, մրցակիցներ, մարժա։ **MCP over HTTP**, ոչ REST։
-
-| Պարամետր | Արժեք |
+## Выбор инструмента для каждой задачи (обязательно, одной строкой в ответе: «Инструмент: … — потому что …»)
+| Задача | Инструмент |
 |---|---|
-| Endpoint | `https://saleflow.pro/api/mcp` |
-| Պրոտոկոլ | JSON-RPC 2.0 (`initialize`, `tools/list`, `tools/call`) |
-| Auth | `Authorization: Bearer <token>` — **միայն այս ձևը**; մնացածը վերադարձնում են login HTML |
+| Рынок WB: ниши, карточки, продажи, сегменты, динамика, сезон | Saleflow (данные MPSTATS) через `src/saleflow_stdio.py` или MCP |
+| Живая выдача WB, аналоги, реклама в топе | `src/radar.py` (Saleflow `wb_check_rates`) |
+| Наши комиссии, тарифы, выкуп, воронка, финансы | WB Seller API (`src/wb_seller.py`, `src/wb_facts.py`) — только чтение, 1 запрос/мин |
+| СПП конкурентов | Evirma (`src/evirma.py`) |
+| Цены 1688, карточки Amazon | Bright Data (`src/brightdata_client.py`) |
+| Тренды и хиты за рубежом, законы, ЧЗ, новости | Exa |
+| Отзывы и карточки WB (габариты, ЧЗ) | публичный WB / CDN (`src/product_deep.py`, `src/wb_cdn_card.py`) — бесплатно |
+| Сайты без API (SellerMoon и т. п.) | встроенный браузер |
+| Документы, доска, дизайн | Google Drive, Notion, Canva |
+Сначала бесплатное (кэш, `data/raw`, CDN WB, Exa), потом платное; второй источник — только для перекрёстной проверки денег.
+Факт WB Seller API всегда важнее допущения в конфиге — назвать, какое допущение заменено.
 
-**Կարգավիճակի ախտորոշում** (զոնդավորված 2026-10-03).
-
-| Թոքեն | Պատասխան | Նշանակություն |
-|---|---|---|
-| վավեր, API-ն անջատված | `403 {"error":"API token auth not enabled for this user"}` | թոքենը ՃԻՇՏ է, հաշվի վրա միացնել է պետք |
-| սխալ թոքեն | `401 Invalid API token` | թոքենը սխալ է |
-| առանց թոքենի | `200` + HTML | դարպասը չի ակտիվացել |
-
-403-ը **գլոբալ middleware** է ամբողջ `/api/*`-ի վրա (ստուգված 19 path) — path-ի խնդիր չէ։
-
+## Команды
+Всегда через venv: `.venv/Scripts/python.exe -m src.<модуль>` (нет venv — сказать запустить `setup.bat`).
 ```bash
-python3 -m src.saleflow probe     # ստուգել հասանելիությունը + քաշել tools/list
+python -m src.wb status            # все источники, лимиты, свежесть, текущее решение
+python -m src.wb fbs-check         # полные ли свежие месяцы Saleflow (2 запроса)
+python -m src.wb collect           # докачка ниш из очереди (стоп при запасе 50)
+python -m src.wb screen            # все ниши → сегменты → копилка → мастер-список (0 запросов)
+python -m src.wb analyze <ниша> --query "…" --yuan-kw "…"   # ДОСЬЕ: все источники, ворота, решение
+python -m src.wb analyze --top 10  # досье по 10 лучшим кандидатам + сводка
+python -m src.wb check "запрос" --sid N    # живая выдача + ниша изнутри
+python -m src.wb decide            # решение по товару + срок цикла
+python -m src.wb daily             # самообучение (СПП, новички, прогнозы против факта)
+python -m src.wb selftest          # сквозная проверка проекта
+python -m unittest discover -s tests       # после любых правок расчётов
 ```
+Скиллы: **`/analiz`** — главный сценарий (ниша → досье → решение); `/zakupka` — КП, образцы, партия; `/kartochka`, `/foto-dizain` —
+карточка и дизайн; `/prodazhi` — запуск и контроль; `/poisk-po-foto` — поиск товара по описанию/фото.
+Перед выводом — `docs/ANALYSIS_CHECKLIST.md`. Архив старых команд — `docs/archive/commands/`.
 
-Միացնելուց հետո Claude Code-ում՝ `.mcp.json`-ը արդեն պատրաստ է (թոքենը վերցվում է
-`${SALEFLOW_TOKEN}` միջավայրից, ոչ թե պահվում ֆայլում).
+## Где что лежит
+| Что | Где |
+|---|---|
+| Текущее состояние и решение | `PROJECT_STATE.md`, `config/decision_current.yaml` (обновлять после больших задач) |
+| Как устроен проект | `README.md`, `src/MODULES.md`; снимки по старым моделям — `src/archive/` (не для решений) |
+| Все ниши / сегменты / досье | `reports/niche_master_<дата>.md`, `reports/niche_pool_<дата>.md`, `reports/dossier_<ниша>_<дата>.md` |
+| Saleflow: что используем и не пробовали | `docs/SALEFLOW_TOOLS.md` |
+| Уроки и прогнозы | `learning/LESSONS.md`, `learning/predictions.csv` |
+| Копилка идей | `docs/kopilka.md` |
+| Справка WB | `docs/wb_help/` |
+Saleflow-клиент сам сохраняет каждый ответ в `data/raw/saleflow/<дата>/<инструмент>/` и кэширует 24 ч; ответы MCP в чате — сохранять
+вручную (`python -m src.radar ingest <файл> --name <тема>` для живой выдачи). Сырые файлы в `data/raw/` не перемещать.
 
-```bash
-set -a; source .env; set +a      # թոքենը միջավայր
-claude                            # .mcp.json-ը ավտոմատ բարձրանում է
-```
+## Факты, которые не пересматривать
+AM-кабинет может продавать и получает СПП как все (решение 2026-10-22, маржа по цене продавца). НДС РФ ст. 174.3 не удерживается
+(`vat_ru_eaeu_pct: 0`). Комиссия AM-кабинета из WB API до +19 п.п. ниже, чем у российских продавцов в Saleflow — не смешивать.
+WB `boxDeliveryBase` уже включает коэффициент склада. Токены WB: тип Personal (6/мин), Base ограничен (1/час на части методов).
+Финотчёт WB — `finance-api /api/finance/v1/sales-reports/detailed` (бит 13 «Финансы»).
 
-MCP-ի պատասխանները պահել հում տեսքով՝ `python3 -m src.saleflow ingest resp.json --tool items`,
-հետո՝ `crosscheck` MPStats-ի հետ։
+## Git
+Коммитить код, конфиги, md-отчёты. Никогда: `.env`, `.mcp.json`, `data/raw`, `token_inbox.txt`, PDF поставщиков, фото конкурентов.
+Push — только после «да». Коммит: в конце строка `Co-Authored-By`, если её требует напоминание системы.
 
-### Saleflow-ի գործնական ուղին (երբ sandbox-ը չի հասնում)
-
-Saleflow-ը աշխատում է **Claude Desktop**-ում (mcp-remote + `AUTH_HEADER`)։
-Հարցումն անում ենք այնտեղ, պատասխանը բերում այստեղ.
-
-```bash
-python3 -m src.saleflow ingest - --tool items --note "Дом/Хранение 30д"   # stdin
-```
-
-`ingest`-ը հանդուրժում է markdown-ցանկապատ, շուրջբոլորի տեքստ և MCP-ի
-`content[].text` փաթեթավորումը։ Պատրաստի հուշումներ՝ `docs/SALEFLOW_BRIDGE.md`։
-
-## Навигация по проекту (с 2026-10-08)
-
-- `PROJECT_STATE.md` — текущее решение, цифры, статус, следующий шаг. **Обновлять после каждой большой задачи.**
-- `reports/INDEX.md` — актуальные отчёты и архив (`reports/archive/<тема>/`). Устаревшие отчёты переносить туда и
-  дописывать причину в INDEX; `src/export_pdf.py` находит их и в архиве.
-- `wb_algorithm/` — как работает алгоритм WB по данным (`python -m src.wb_algo`) + маркетинг-калькулятор 777
-  (`python -m src.marketing777`). Новые выводы об алгоритме дописывать туда, в «Փոփոխությունների պատմություն».
-- `src/MODULES.md` — карта модулей (рабочие / исследование / снимки / архив). Тесты: `python -m unittest discover -s tests` —
-  запускать после любых правок расчётов.
-- Сопровождение: `wb_watch commission` (ежемесячно), `fresh_collect --watch` + `competitor_watch`, `weekly_report`, `ledger`,
-  `backup` (еженедельно; задачи в «Scheduled»). Saleflow с 2026-08 отдаёт неполные продажи/остатки — использовать ≤ 2026-07-31.
-- Финотчёт WB: старый `/api/v5/supplier/reportDetailByPeriod` отключён → `finance-api /api/finance/v1/sales-reports/detailed`
-  (токен категории «Финансы», бит 13).
-- Git: коммитить код/конфиги/md-отчёты; `.env`, `.mcp.json`, `data/raw` — никогда.
-- `docs/TOOLS.md` — карта всех инструментов (Saleflow, MPSTATS, WB API, Bright Data, Exa, Apify, браузер, фото): что решает и сколько стоит. Выбирать самый дешёвый рабочий.
-- `docs/DATA_CATALOG.md` — что сохранено по каждой нише. После нового сбора: `python -m src.catalog`.
-- В новом коде брать данные через `src/datastore.py` (`files(777, "daily")`, `latest(777, "products500")`,
-  `daily(sku)`), а не жёсткими путями. Сырые файлы в `data/raw/saleflow/<дата>/…` не перемещать — на них ссылается старый код.
-
-## Команды (с 2026-10-26) — 5 этапов, инструкции внутри на русском
-- **Самообучение** (`learning/`, `src/learning.py`): уроки `learning/LESSONS.md` (читать перед анализом, пополнять после), прогнозы против факта `learning/predictions.csv` (`review` → поправочные множители), ежедневно бесплатно `learning daily` (СПП-история, когорта новичков 437) → Telegram 11:09.
-- **`/analiz` — ГЛАВНЫЙ сценарий («сделай анализ»)**: 6 этапов с воротами (уникальность → 4 проверки → глубокая проверка → решение → самопроверка → ответ по шаблону) и таблица уроков прошлых ошибок. Остальные команды — его части.
-- `/vybor-tovara` — ВЫБОР ТОВАРА: все ниши → ниша → СПП → товар → конкуренты → жалобы → экономика → 1 + 2 запасных (если товар назван — проверка).
-- `/vnutri-nishi` — ВНУТРИ НИШИ: ниша выбрана → типы товара в ней (`src/niche_inside.py`), цена без монополии, растущие модели, жалобы, 1688 → конкретный товар.
-- `/zakupka` — ЗАКУПКА: КП, образцы и тест, таможня/документы, цена «под ключ», размер партии, 3 условия до оплаты.
-- `/kartochka` — КАРТОЧКА: разбор лидеров WB/Amazon, позиционирование, SEO, фото и инфографика.
-- `/foto-dizain` — ФОТО И ДИЗАЙН: съёмка образца, обработка, фотосессия, 10 слайдов инфографики, rich, видео.
-- `/prodazhi` — ЗАПУСК И ПРОДАЖИ: цена/СПП, реклама, отзывы, остатки, план против факта, kill-критерии.
-- `/poisk-po-foto` — ПОИСК ПО ОПИСАНИЮ И ФОТО: по описанию сам находит картинки товара (1688, Amazon, Pinterest, AliExpress, WB, Ozon, Я.Маркет) → лист → выбор → та же модель: где продаётся, цены, фабрика (`src/photo_hunt.py`, `src/image_find.py`).
-Перед любым выводом — `docs/ANALYSIS_CHECKLIST.md`. Старые команды — `docs/archive/commands/`; личные скиллы arena, duel, photo-editor и др. — `~/.claude/skills_archive/`.
+## Стиль
+Таблицы вместо прозы, числа с единицами, период данных под таблицей, в конце — «Следующий шаг:» и одно действие.

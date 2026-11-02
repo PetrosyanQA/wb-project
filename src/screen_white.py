@@ -24,6 +24,7 @@ import statistics as st
 import sys
 
 from src.outliers import clean_items
+from src.project_cfg import get as P
 from src.unit_econ import load_scheme, unit_economics
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -84,8 +85,8 @@ def seller_for(sid, buyer):
     return round(s2), spp_fbs(sid, s2)
 
 
-def econ(seller, yuan, vol, kg, com, buyout, drr, batch):
-    return unit_economics(seller, landed(yuan, kg, batch), vol, CFG, with_breakeven=False, buyout_pct=buyout,
+def econ(seller, yuan, vol, kg, com, buyout, drr, batch, buyer=None):
+    return unit_economics(seller, landed(yuan, kg, batch), vol, CFG, with_breakeven=False, buyout_pct=buyout, buyer_price=buyer,
                           ad_share_of_revenue_pct=drr, commission_pct=com, tax_rate_pct=10)
 
 
@@ -104,7 +105,7 @@ def max_yuan(seller, vol, kg, com, buyout, batch, drr=8):
 def load(sid):
     """Карточки ниши за июль 2026 (надёжный месяц) — src/datastore.products()."""
     from src.datastore import products
-    rows, _ = products(sid, month="2026-07")
+    rows, _ = products(sid, month=P("data_month"))
     return rows
 
 
@@ -124,7 +125,7 @@ def run(ids, batch, china_pct):
             if len(seg) < 5:
                 continue
             sales = sum(r["sales"] for r in seg)
-            newp = sorted(r["sales"] for r in seg if "2025-08-01" <= (r.get("sku_first_date") or "") <= "2026-06-15")
+            newp = sorted(r["sales"] for r in seg if P("newcomer_from") <= (r.get("sku_first_date") or "") <= P("newcomer_to"))
             bysel = collections.Counter()
             for r in seg:
                 bysel[r.get("seller")] += r["sales"]
@@ -141,8 +142,8 @@ def run(ids, batch, china_pct):
             kg = (NC.get(sid) or {}).get("kg") or max(0.1, 0.22 * vol)
             ymax = max_yuan(seller, vol, kg, com, buyout, batch)
             yest = buyer * china_pct / 100 / CNY
-            e8 = econ(seller, yest, vol, kg, com, buyout, 8, batch)
-            e15 = econ(seller, yest, vol, kg, com, buyout, 15, batch)
+            e8 = econ(seller, yest, vol, kg, com, buyout, 8, batch, buyer)
+            e15 = econ(seller, yest, vol, kg, com, buyout, 15, batch, buyer)
             p50 = st.median(newp) if newp else 0
             wf = winter_factor(sid)
             unit_cost = landed(yest, kg, batch)
@@ -163,23 +164,31 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--top", type=int, default=40)
     ap.add_argument("--batch", type=int, default=400)
-    ap.add_argument("--china-pct", type=float, default=11.0)
+    ap.add_argument("--china-pct", type=float, default=P("pool.china_pct"))
+    ap.add_argument("--all", action="store_true",
+                    help="все ниши, кроме одежды/обуви и магнитов (ЧЗ и документы — с пометкой); сезон неизвестен — не отсев, а «сезон ?»")
     a = ap.parse_args()
     ids = sorted({int(os.path.basename(p)[:-5]) for p in glob.glob("data/raw/saleflow/v3_products500/*.json")
                   + glob.glob("data/raw/saleflow/v3_products100/*.json") + glob.glob("data/raw/saleflow/2026-07_p500_arena/*.json")})
-    ok = [i for i in ids if i in REQ and REQ[i]["verdict"][:1] in ("🟢", "🟡")]
+    if a.all:                                       # [пользователь 02.11] запрет — только магниты; одежду и обувь не берём
+        cloth = lambda root: any(w in (root or "").lower() for w in P("excluded_roots"))   # noqa: E731
+        ok = [i for i in ids if i in REQ and not any(b in str(REQ[i].get("flags")).lower() for b in P("banned_words")) and not cloth(REQ[i].get("root"))]
+    else:
+        ok = [i for i in ids if i in REQ and REQ[i]["verdict"][:1] in ("🟢", "🟡")]
     res = run(ok, a.batch, a.china_pct)
-    out = f"data/processed/screen_white_{dt.date.today()}.json"
+    out = f"data/processed/screen_white_{dt.date.today()}{'_all' if a.all else ''}.json"
     json.dump(res, open(out, "w", encoding="utf-8"), ensure_ascii=False)
-    good = [r for r in res if r["ymax_pct"] >= a.china_pct * 1.3 and r["new_p50"] >= 30 and r["top1"] <= 35
-            and r["winter"] and r["winter"] >= 0.6 and r["batch_units"] >= 80]
-    good.sort(key=lambda r: -r["month8_winter"])
+    season_ok = lambda r: (r["winter"] or 0) >= P("pool.winter_min") or (a.all and r["winter"] is None)   # noqa: E731
+    good = [r for r in res if r["ymax_pct"] >= a.china_pct * P("pool.ymax_ratio") and r["new_p50"] >= P("pool.new_p50_min")
+            and r["top1"] <= P("pool.top1_max") and season_ok(r) and r["batch_units"] >= P("pool.batch_min_units")]
+    good.sort(key=lambda r: -(r["month8_winter"] if r["month8_winter"] is not None else r["month8"]))
     print(f"ниш {len(ok)}, сегментов {len(res)}; проходят (¥max ≥ {a.china_pct * 1.3:.0f} % цены, новичок P50 ≥ 30, топ-1 ≤ 35 %, "
-          f"зимний спрос ≥ 60 % июля, партия ≥ 80 шт на {BUDGET_GOODS} ₽): {len(good)} → {out}")
+          f"зимний спрос ≥ 60 % июля{' или сезон неизвестен' if a.all else ''}, партия ≥ 80 шт на {BUDGET_GOODS} ₽): {len(good)} → {out}")
     for r in good[:a.top]:
+        month = f"{r['month8_winter']:>8} ₽/мес зимой" if r["month8_winter"] is not None else f"{r['month8']:>8} ₽/мес июль, сезон ?"
         print(f"{r['id']:>5} {str(r['subj'])[:26]:<26} {r['band']:>9} {r['buyer']:>5}₽ СПП{r['spp']:>3} ком{r['com']:>5} выкуп{r['buyout']:>3} "
               f"¥max{r['ymax']:>6} ({r['ymax_pct']:>4}%) маржа8 {r['margin8']:>5}% маржа15 {r['margin15']:>5}% "
-              f"новичок P50 {r['new_p50']:>5} топ1 {r['top1']:>2}% зима×{r['winter']} партия {r['batch_units']} шт → {r['month8_winter']:>8} ₽/мес зимой {r['verdict']}")
+              f"новичок P50 {r['new_p50']:>5} топ1 {r['top1']:>2}% зима×{r['winter']} партия {r['batch_units']} шт → {month} {r['verdict']} {r['flags'] or ''}")
 
 
 if __name__ == "__main__":

@@ -36,7 +36,8 @@
 | Կարծիքներ Ozon | Saleflow `ozon_sku` | — (Bright Data-ն արգելափակված է) |
 | ЧЗ / сертификация / ТН ВЭД | **Exa web_search** (КонсультантПлюс, Честный знак) | WebSearch |
 | Շուկայի նորություններ, թրենդներ RU | **Exa web_search** | WebSearch |
-| Միջազգային թրենդներ | Apify (Amazon/TikTok) | Bright Data Amazon (պետք է պարսեր) |
+| Միջազգային թրենդներ | **Exa web_search** (TokConnect, FastMoss, AMZScout, Etsy) — /analiz 1.0 | Apify (Amazon/TikTok) |
+| Живая выдача WB, уникальность | **`python -m src.radar check`** (Saleflow `wb_check_rates`, сырой JSON сохраняется, кросс-бордер отдельно) | MCP `wb_check_rates` |
 | Իրական ծախսեր և выкуп | WB Seller API | config-ի ենթադրություններ |
 | Քարտի ֆոտո | Photo editor | — |
 | Մշտական վերահսկում | Scheduled tasks + Telegram | — |

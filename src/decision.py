@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import sys
 from pathlib import Path
@@ -50,9 +51,24 @@ def decide(c: dict) -> dict:
     return _out(c, g, "SCALE", "HIGH", [], "основная партия по config/launch.yaml")
 
 
+def discovery_warning(c: dict, today: dt.date | None = None) -> str:
+    """Поиск без даты окончания = бесконечный анализ (исследование ИИ-агентов 02.11): цикл DISCOVERY обязан кончиться решением."""
+    if c.get("mode") != "DISCOVERY":
+        return ""
+    until = c.get("discovery_until")
+    if not until:
+        return "⚠️ режим DISCOVERY без discovery_until — задайте дату решения go/no-go"
+    until = until if isinstance(until, dt.date) else dt.date.fromisoformat(str(until))
+    left = (until - (today or dt.date.today())).days
+    if left < 0:
+        return f"⛔ цикл поиска закончился {until}: принять решение go/no-go по лучшему кандидату, новый поиск не начинать"
+    return f"цикл поиска до {until} (осталось {left} дн.), затем решение go/no-go"
+
+
 def _out(c, g, decision, conf, blocked, nxt) -> dict:
     return {"product": c.get("current_product"), "niche": c.get("current_niche"), "mode": c.get("mode"),
-            "decision": decision, "confidence": conf, "gates": g, "blocked_by": blocked, "next_action": nxt}
+            "decision": decision, "confidence": conf, "gates": g, "blocked_by": blocked, "next_action": nxt,
+            "discovery": discovery_warning(c)}
 
 
 def main() -> None:
@@ -65,6 +81,8 @@ def main() -> None:
         print(json.dumps(d, ensure_ascii=False, indent=1))
         return
     print(f"{d['product']} (ниша {d['niche']}), режим {d['mode']}")
+    if d["discovery"]:
+        print(d["discovery"])
     print(f"РЕШЕНИЕ: {d['decision']} (уверенность {d['confidence']})")
     for k, v in d["gates"].items():
         print(f"  {k:<16} {v}")
