@@ -217,7 +217,7 @@ def benchmark() -> dict:
     seg = next((r for r in segs if int(r["band"].split("-")[0]) <= b["price"] < int(r["band"].split("-")[1])), None)
     if seg is None:
         seg = best_segment(b["sid"], (load_row("data/processed/niche_pool_*.json", b["sid"]) or {}).get("band"))
-    _, e = economics(seg, b["price"], b["yuan"], b["sid"], {"vol": b.get("vol_l"), "kg": b.get("kg"), "vol_src": "допущение до КП (config)"} if b.get("vol_l") else None)
+    _, e = economics(seg, b["price"], b["yuan"], b["sid"], {"vol": b.get("vol_l"), "kg": b.get("kg") or round(max(0.1, 0.22 * b["vol_l"]), 2), "vol_src": "допущение до КП (config)"} if b.get("vol_l") else None)
     month = round((e.get("profit15_spp18_300") or 0) * ((seg or {}).get("new_p50") or 0))
     return {"name": b["name"], "month": month, "p50": (seg or {}).get("new_p50"), "profit": e.get("profit15_spp18_300")}
 
