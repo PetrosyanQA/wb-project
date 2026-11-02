@@ -223,3 +223,10 @@
 - Карта модулей: `src/MODULES.md`. Тесты: `.venv\Scripts\python.exe -m unittest discover -s tests` (15 шт.).
 - Git: локальный репозиторий (секреты и `data/raw` исключены). Бэкап данных: `python -m src.backup` → `%USERPROFILE%\wb_backups\`.
 - После создания карточки: заполнить `config/launch.yaml` (nm_ids, launch_date) и `ledger/batches.csv`.
+
+## 2026-11-02 — копилка ниш (ждём Saleflow)
+- Saleflow: токен отклонён (401) везде → новый токен выпускает пользователь.
+- `python -m src.screen_white --all` (все ниши, кроме одежды/обуви/магнитов; сезон «?» — не отсев): 1 412 ниш → 661 сегмент.
+- `python -m src.niche_pool` → `reports/niche_pool_2026-11-02.md`: 188 ниш (КАНДИДАТ 37, ПРОВЕРИТЬ 68, ЛОВУШКА 83) + очередь
+  1 426 ниш без данных (`data/processed/niche_collect_queue_2026-11-02.json`, ≈ 3 дня по 500 запросов).
+- Лучший новый: 1142 петличные микрофоны (¥30 на 1688, ЧЗ нет). Решение «новая ниша или кисти» — до 2026-11-09.
