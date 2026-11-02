@@ -168,6 +168,12 @@ def main() -> None:
     p.add_argument("queries", nargs="*")
     p.add_argument("--sid", type=int)
     p.add_argument("--name", default="check")
+    p = sp.add_parser("analyze", help="досье ниши: все источники проекта в одном анализе")
+    p.add_argument("sid", type=int, nargs="?")
+    p.add_argument("--query", action="append", default=[], help="формулировка для живой выдачи (можно несколько)")
+    p.add_argument("--yuan", type=float)
+    p.add_argument("--price", type=float)
+    p.add_argument("--top", type=int, help="досье для N лучших кандидатов копилки")
     sp.add_parser("decide")
     p = sp.add_parser("daily")
     p.add_argument("--tg", action="store_true")
@@ -182,6 +188,16 @@ def main() -> None:
         screen()
     elif a.cmd == "check":
         check(a.queries, a.sid, a.name)
+    elif a.cmd == "analyze":
+        from src import dossier
+        if a.top:
+            dossier.batch(a.top)
+        elif a.sid:
+            r = dossier.build(a.sid, a.query, a.yuan, a.price)
+            print(Path(ROOT / f"reports/dossier_{a.sid}_{dt.date.today()}.md").read_text(encoding="utf-8"))
+            print(f"\n→ reports/dossier_{a.sid}_{dt.date.today()}.md; решение {r['decision']}")
+        else:
+            print("укажите sid или --top N")
     elif a.cmd == "decide":
         run("src.decision")
     else:
