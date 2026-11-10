@@ -19,7 +19,7 @@ from typing import Any, Iterable
 
 TOKEN_RE = re.compile(r"[а-яёa-z0-9]+", re.IGNORECASE)
 STOPWORDS = set("""
-а без более бы был была были было быть в вам вас весь во вот все всего всех вы где да даже для до его ее если есть ещё же за здесь и из или им их к как ко когда кто ли либо мне может мы на над надо наш не него нее нет ни них но о об один она они оно от по под при про раз с со такой так также те тем то того той только том ты у уже хоть что чтобы эта эти это я
+а без более бы был была были было быть в вам вас весь во вот все всего всех вы где да даже для до его ее если есть ещё же за здесь и из или им их как ко когда кто ли либо мне может мы на над надо наш не него нее нет ни них но о об один она они оно от по под при про раз с со такой так также те тем то того той только том ты у уже хоть что чтобы эта эти это я
 """.split())
 GENERIC = set("""
 товар товаре товару товара покупка купила купил заказ заказала заказал пришел пришла пришло пришли
@@ -75,11 +75,13 @@ def _tokens(text: str) -> list[str]:
 
 
 def _sku(path: Path, row: dict) -> str:
-    for key in ("nmId", "nm_id", "sku", "product_id", "imtId", "id"):
+    # Review IDs are not product IDs; only explicit product fields are authoritative.
+    for key in ("nmId", "nm_id", "sku", "product_id"):
         value = row.get(key)
         if value not in (None, ""):
             return str(value)
-    return path.parent.name or path.stem
+    # Saleflow stores one product per comments/<sku>.json file.
+    return path.stem
 
 
 def analyze_files(files: Iterable[str | Path], *, min_rating: float = 3.0,
@@ -108,7 +110,6 @@ def analyze_files(files: Iterable[str | Path], *, min_rating: float = 3.0,
         rows = _rows(data)
         if rows:
             files_read += 1
-        fallback_sku = path.parent.name or path.stem
         for row in rows:
             rating = _rating(row)
             text = row.get("text") or row.get("textOriginal") or row.get("comment") or ""
@@ -122,7 +123,7 @@ def analyze_files(files: Iterable[str | Path], *, min_rating: float = 3.0,
             if not words:
                 continue
             eligible_reviews += 1
-            sku = _sku(path, row) if any(row.get(k) for k in ("nmId", "nm_id", "sku", "product_id", "imtId", "id")) else fallback_sku
+            sku = _sku(path, row)
             # Count each phrase at most once per review, so repeated wording does not dominate.
             found = set()
             for size in (1, 2, 3):

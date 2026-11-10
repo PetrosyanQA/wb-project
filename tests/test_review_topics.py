@@ -6,6 +6,7 @@ import unittest
 from datetime import date
 from pathlib import Path
 
+from src.dna_reviews import discover_topics
 from src.review_topics import analyze_files, render_markdown
 
 
@@ -35,6 +36,30 @@ class ReviewTopicsTests(unittest.TestCase):
         report = render_markdown(result)
         self.assertNotIn("после недели", report)
         self.assertNotIn("ручка сломалась", report)
+
+    def test_file_stem_is_sku_when_reviews_are_in_shared_comments_folder(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "comments"
+            root.mkdir()
+            files = []
+            for sku in ("sku-1", "sku-2"):
+                path = root / f"{sku}.json"
+                path.write_text(json.dumps([{"valuation": 1, "text": "плохой крепкий пластик",
+                                             "date": "2026-10-29"}], ensure_ascii=False), encoding="utf-8")
+                files.append(path)
+            result = analyze_files(files, min_reviews=2, min_skus=2, today=date(2026, 11, 1))
+            self.assertTrue(any(topic["sku_count"] == 2 for topic in result["topics"]))
+
+    def test_dna_reviews_integration_applies_one_year_window_and_safe_thresholds(self):
+        files = self._files({
+            "sku-a": [{"valuation": 1, "text": "сломался крепкий механизм", "date": "2026-10-29"}],
+            "sku-b": [{"valuation": 2, "text": "сломался крепкий механизм", "date": "2026-10-28"}],
+        })
+        result = discover_topics([str(path) for path in files], date(2026, 11, 1))
+        self.assertTrue(any(topic["phrase"] == "сломался крепкий" for topic in result["topics"]))
+        self.assertEqual(result["filters"]["since_days"], 365)
+        self.assertEqual(result["filters"]["min_reviews"], 3)
+        self.assertEqual(result["filters"]["min_skus"], 2)
 
     def test_since_days_excludes_old_and_undated_reviews(self):
         files = self._files({
